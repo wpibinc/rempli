@@ -3518,3 +3518,8 @@ ul.autocomplete li img
     width: 100%;
     height: 100%;
 }
+
+.av-categories li{
+    float:left;
+    margin: 0 15px;
+}

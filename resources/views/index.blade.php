@@ -5,6 +5,7 @@
 @section('content')
     <h2 class="header_cat"></h2>
     <div class="av-categ-menu"></div>
+    <div style="clear:both"></div>
     <div id="item-wrap-inner" class="products-wrap">
         <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
 
