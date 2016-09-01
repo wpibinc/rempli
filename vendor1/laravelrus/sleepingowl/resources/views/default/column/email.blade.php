@@ -1,0 +1,1 @@
+{!! HTML::mailto($value, $value) !!} {!! $append !!}

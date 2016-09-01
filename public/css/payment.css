@@ -1,0 +1,74 @@
+iframe {
+	/*float: right;*/
+	/*position: absolute;
+	right: 20px;
+	bottom: 20px;*/
+	position: relative;
+	right: -60px;
+	top: -3px;
+}
+
+.paybox {
+	margin: 0 auto;
+	width: 500px;
+
+}
+
+#kwarn {
+	color: #d00;
+	font-size: 20px;
+	line-height: 22px;
+	display: none;
+}
+
+.howtopay {
+	text-align: center;
+	margin-bottom: 70px;
+}
+
+.howpayradio {
+	font-size: 20px;
+	color: #333;
+}
+body {
+	padding-top: 125px;
+}
+.pager {
+	margin-top: 50px;
+	margin-bottom: 0px;
+}
+.form-group {
+	height: 40px;
+	font-weight: 600;
+}
+
+.payRub {
+	font-weight: 500;
+}
+
+.form-horizontal > .form-group{
+	font-size: 23px;
+}
+
+.payLong {
+	position: relative;
+	top: -7px;
+}
+
+.totalPay {
+	font-size: 31px;
+}
+
+.totalPayLaber {
+	font-size: 20px;
+	position: relative;
+	top: 0px;
+}
+
+.payFree {
+	font-size: 22px;
+}
+
+.orderheader {
+	margin-bottom: 0;
+}

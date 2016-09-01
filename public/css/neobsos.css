@@ -1,0 +1,230 @@
+/*
+На самом деле, меня задолбало все это, поэтому часть стилей здесь написаны через одно место и прошлый разработчик obsos, поэтому
+стили в файле необсос.ксс
+*/
+a:hover {
+    color: #111!important;
+}
+header.header {
+    background: url("../img/header.jpg") top center #000000;
+    height: 180px;
+    width: 100%;
+    padding-top:10px;
+}
+div.topline>a.logo>img {
+    height: 30px;
+}
+#dd_btn {
+    float: right;
+}
+button.cart-btn {
+    background: none;
+    border: 1px solid #8a8888;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    color: #fff;
+    text-decoration: none;
+    height: 30px;
+    margin-right:10px;
+}
+button.cart-btn>img {
+    margin-right:10px;
+}
+.clear {
+    clear: both;
+}
+header.header>h1 {
+    color: #ffffff;
+    font-weight:100;
+    text-align: center;
+}
+div.menu-neobsos {
+    background: #000;
+    width: 100%;
+    min-height: 40px;
+}
+div.menu-neobsos>ul {
+    list-style: none;
+    display: inline;
+    text-align: center;
+}
+div.menu-neobsos>ul>li {
+    list-style: none;
+    display: inline;
+    line-height: 38px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+div.menu-neobsos>ul>li:first-child {
+    margin-left: 0;
+}
+
+div.menu-neobsos>ul>li>a {
+    text-decoration: none;
+    color: #fff;
+    line-height: 40px;
+}
+
+div.menu-neobsos>ul>li>a:hover{
+    color: #b2b2b2 !important;
+}
+
+div.menu-neobsos>ul>li>a.active {
+    text-decoration: underline;
+}
+
+input.search-neobsos {
+    background:url("../img/search.png") right no-repeat;
+    padding-left:0;
+    border: none;
+    border-bottom:1px solid #8a8888;
+    color: #fff;
+    max-width: 180px;
+    margin-top: 5px;
+}
+input.search-neobsos:focus {
+    outline: none;
+    border-bottom:1px solid #8a6d3b;
+}
+h2.header_cat {
+    margin-top: 10px !important;
+    font-size:24px;
+    color: #3A3A3A;
+    text-transform: none;
+    top:0 !important;
+}
+footer {
+    background: #000;
+    margin-top: 50px;
+    height:50px;
+    padding-top: 10px;
+}
+footer>a>img {
+    height: 30px !important;
+}
+.footer-copy{
+    font-size: 12px; color: #fff;text-align: center;line-height: 30px;
+}
+.header_cat{
+    display: block;
+}
+@media screen and (min-width: 750px) {
+    .menu-neobsos>br{
+        display: none;
+    }
+    .product .desc .product-title {
+        height: 40px !important;
+    }
+}
+@media screen and (max-width: 750px) {
+    .footer-copy{
+        display: none;
+    }
+    header.header>h1 {
+        font-size: 24px;
+    }
+    .menu-neobsos a {
+        font-size: 10px;
+    }
+    div.menu-neobsos>ul>li {
+        margin-right: 7px;
+        margin-left: 7px;
+    }
+    .search-neobsos{
+        display: none;
+    }
+    .categories {
+        text-align: center;
+    }
+    #cart_white {
+        left:0;
+        width: 100%;
+    }
+    .cart-total, #cart-items {
+        width: 100%;
+    }
+    .product .price, .product .quantity {
+        margin-top: 0 !important;
+        text-align: center !important;
+    }
+}
+#cart_white h2{
+    text-align: center;
+    text-transform: none;
+    font-size: 20px;
+}
+.cart-total {
+    padding: 0;
+}
+.cart-total table {
+    padding: 10px;
+}
+#orderBtn {
+    font-size:18px;
+    font-weight:100;
+    color: #fff;
+    border: none;
+    border-radius: 0px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.product {
+    border: #f2f2f2 1px solid;
+    text-align: center;
+    padding-bottom: 10px;
+    margin-bottom:50px;
+}
+.product>a>img {
+    max-width: 100%;
+    max-height:70%;
+}
+.product .desc .product-title {
+    height: 60px;
+    overflow: hidden;
+}
+.product .desc a {
+    color: #333;
+    font-weight: 500;
+    height: 90px;
+}
+.product .price {
+    text-align: left;
+    font-size: 16px;
+    padding:0;
+    margin-top:10px;
+}
+.product .quantity {
+    margin-top: 13px;
+    height: 20px !important;
+    overflow-y: hidden;
+    text-align: right;
+    font-size: 12px;
+    padding:0;
+}
+.product .buy {
+    background: #ffcc66;
+    color: #333;
+    text-align: center;
+    border: none;
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    left:0px;
+    bottom:-40px;
+}
+.product .buy:hover {
+    background: #ffcc22;
+}
+.product .count {
+    border-radius: 50%;
+    background: #ffcc66;
+    position: absolute;
+    top:20px;
+    right:20px;
+    width: 30px;
+    height: 30px;
+    color: #333;
+    line-height:30px;
+}
