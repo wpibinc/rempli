@@ -55,14 +55,24 @@ class CategoryController extends BaseController
         }
         global $id;
         $id = (int) $request->input('id');
-        $query = "SELECT * FROM products "
-                . "WHERE category_id = $id";
-        $products = DB::select($query);
-        $json = array();
-        if(!empty($products)){
-            foreach($products as $product){
-                $json[] = [
-                    //''=> '',
+        $category = \App\Category::with('avProducts', 'products', 'avcategories')->where('category_id', '=', $id)->first();
+        $category->getRelations();
+        $json = array(
+            'avCategories' => array(),
+            'products' => array(),
+        );
+        if(!empty($category->avcategories)){
+            foreach($category->avcategories as $avCateg){
+                $json['avCategories'][] = array(
+                    'id' => $avCateg->id,
+                    'name' => $avCateg->name
+                );
+            }
+        }
+        
+        if(!empty($category->products)){
+            foreach($category->products as $product){
+                $json['products'][] = [
                     'objectId'      => $product->id,
                     'cvalues'       => explode(",", $product->cvalues),
                     'ctitles'       => explode(",", $product->ctitles),
@@ -77,12 +87,37 @@ class CategoryController extends BaseController
                 ];
             }
         }
-        $query = "SELECT * FROm av_products "
-                . "WHERE category_id = (SELECT id FROM categories "
-                . "WHERE category_id = $id)";
-        $avProduct = DB::select($query);
-        if(!empty($avProduct)){
-            foreach($avProduct as $product){
+        if(!empty($category->avProducts)){
+            foreach($category->avProducts as $product){
+                $json['products'][] = array(
+                    'objectId' => $product->id,
+                    'cvalues' => explode(";", $product->cvalues),
+                    'ctitles' => explode(";", $product->ctitles),
+                    'img_sm' => 'http://av.ru' . $product->image,
+                    'category' => $product->category_id,
+                    'product_name' => $product->name,
+                    'price' => $product->price,
+                    'amount' => 'за ' . $product->original_price_style,
+                    'weight' => $product->original_typical_weight,
+                    'description' => $product->description,
+                    'updatedAt' => $product->updated_at
+                );
+            }
+        }
+        return response()->json($json);
+    }
+    
+    public function getAvCategory(Request $request)
+    {
+        if(!$request->isXmlHttpRequest())
+        {
+            abort(404);
+        }
+        $id = $request->input('id');
+        $products = \App\AvCategory::find($id)->products;
+        $json = array();
+        if(!empty($products)){
+            foreach($products as $product){
                 $json[] = array(
                     'objectId' => $product->id,
                     'cvalues' => explode(";", $product->cvalues),
@@ -98,6 +133,7 @@ class CategoryController extends BaseController
                 );
             }
         }
+        
         return response()->json($json);
     }
 }

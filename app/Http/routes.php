@@ -18,6 +18,7 @@ Route::get('/enter', function () {
 });
 
 Route::get('/category', 'CategoryController@getCategory');
+Route::get('/getavcategory', 'CategoryController@getAvCategory');
 
 //Закрытые роуты
 

@@ -9,8 +9,8 @@ class MainController extends BaseController
 {
     public function index()
     {
-        $categories = \App\Category::all();
-        return view('index', ['categories' => $categories]);
+//        $categories = \App\Category::all();
+        return view('index');
     }
     
     public function price()

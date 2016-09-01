@@ -20,4 +20,9 @@ class AvCategory extends Model
         else
             return $this->name .' '. $this->subtitle;
     }
+    
+    public function products()
+    {
+        return $this->hasMany('\App\AvProduct', 'av_category_id', 'id');
+    }
 }

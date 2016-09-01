@@ -82,6 +82,7 @@ cats.each(function(i){
         $(".inmoscow").empty();
         $(".header_cat").prepend($(this).find("img").attr('alt'));
         $(".products-wrap").empty();
+        $(".av-categ-menu").empty();
         $.ajax({
            url: '/category',
            data: {
@@ -89,7 +90,7 @@ cats.each(function(i){
            },
            dataType: 'json',
            success: function(res){
-                json = res.sort(function(a, b) {
+                var json = res.products.sort(function(a, b) {
                     return parseFloat((new Date(b.updatedAt)).getTime()) - parseFloat((new Date(a.updatedAt)).getTime());
                 });
                 var output = '';
@@ -112,7 +113,58 @@ cats.each(function(i){
                     output  += '<div class="modal fade bs-example-modal-lg" id="idt' + json[i].objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image";> <span class="popup-helper"></span> <img class="popimg" src="' + json[i].img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + json[i].product_name + '</p> <div class="popup-price"> ' + json[i].price + '<span class="kop">00</span> <span class="popup-rub">'+num2word(json[i].price,words)+'</span> </div> <div class="popup-mass"> '+ json[i].amount +'</div> </div> </div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + json[i].description + '</div> </div> <div class="product_card_props f32">'+ consist +' </div> </div> </div> </div> </div>';
 
                 }
+                console.log(res.avCategories);
+                if(res.avCategories){
+                    var categoriesOutput = "<div class='av-categories'><ul>";
+                    for(var i=0; i<res.avCategories.length; i++){
+                        categoriesOutput += "<li><a href='#' data-id='"+res.avCategories[i].id+"'>"+res.avCategories[i].name+"</a></li>";
+                    }
+                    categoriesOutput += "</ul></div>";
+                }
+                
                 $(".products-wrap").prepend(output);
+                $(".av-categ-menu").prepend(categoriesOutput);
+                $('.av-categories a').on('click', function(){
+                    $(".center").show();
+                    $(".bg-shadow").show();
+                    $(".products-wrap").empty();
+                    
+                    var id = $(this).attr("data-id");
+                    $.ajax({
+                        url: '/getavcategory',
+                        data: {
+                            id: id
+                        },
+                        success: function(res){
+                            var json = res.sort(function(a, b) {
+                                return parseFloat((new Date(b.updatedAt)).getTime()) - parseFloat((new Date(a.updatedAt)).getTime());
+                            });
+                            var output = '';
+                            for (i = 0; i < json.length; i++) {
+                                if (Number(sessionStorage[json[i].objectId]) > 0) {
+                                    output += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" data-category="'+json[i].category+'" id="' + json[i].objectId + '"><div class="count item_count visible">' + sessionStorage[json[i].objectId] + '</div><a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '"> <img src="' + json[i].img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '">' + json[i].product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + json[i].price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">' + json[i].amount + '</div><br class="clearfix"></div><button href="javascript:void(0)" data-weight="'+json[i].weight+'" class="increase_count buy">Добавить</button></div>';
+                                } else {
+                                    output += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" data-category="'+json[i].category+'" id="' + json[i].objectId + '"><div class="count item_count hidden">' + sessionStorage[json[i].objectId] + '</div><a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '"> <img src="' + json[i].img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '">' + json[i].product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + json[i].price + ' руб</div><div id="weight_product" class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">' + json[i].amount + '</div><br class="clearfix"></div><button href="javascript:void(0)" data-weight="'+json[i].weight+'" class="increase_count buy">Добавить</button></div>';
+                                }
+                            }
+                            for (i = 0; i < json.length; i++) {
+                                consist = '';
+                                ctitles = json[i].ctitles;
+                                cvalues = json[i].cvalues;
+
+                                for (x = 0; x < ctitles.length; x++) {
+                                    consist+=('<div class="product_card_prop_item mb5"> <div class="product_card_prop_item_title">'+ctitles[x]+'</div> <div class="product_card_prop_item_value">'+cvalues[x]+'</div> <div class="clear"></div> </div>');
+                                }
+
+                                output  += '<div class="modal fade bs-example-modal-lg" id="idt' + json[i].objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image";> <span class="popup-helper"></span> <img class="popimg" src="' + json[i].img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + json[i].product_name + '</p> <div class="popup-price"> ' + json[i].price + '<span class="kop">00</span> <span class="popup-rub">'+num2word(json[i].price,words)+'</span> </div> <div class="popup-mass"> '+ json[i].amount +'</div> </div> </div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + json[i].description + '</div> </div> <div class="product_card_props f32">'+ consist +' </div> </div> </div> </div> </div>';
+
+                            }
+                            $(".products-wrap").prepend(output);
+                            $(".center").hide();
+                            $(".bg-shadow").hide();
+                        }
+                    });
+                });
                 $(".center").hide();
                 $(".bg-shadow").hide();
            }

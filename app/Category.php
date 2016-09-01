@@ -23,10 +23,6 @@ class Category extends Model
         return $this->hasMany('\App\AvProduct', 'category_id', 'id');
     }
     
-    public function avCategory()
-    {
-        return $this->belongsToMany('\App\AvCategory', 'category_avcategory', 'avcategory_id', 'category_id');
-    }
 //    public function getAvcategoriesAttribute()
 //    {
 //       // dd('lol');
