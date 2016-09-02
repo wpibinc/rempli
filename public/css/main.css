@@ -817,7 +817,7 @@ body > footer > div{
 	top: 98px;
 	right: 0;
 	background-color: #fff;
-	display: block;
+	display: none;
 }
 .form-control{
 	border-radius: 0;
