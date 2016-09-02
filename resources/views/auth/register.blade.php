@@ -77,7 +77,7 @@
                             <label for="yes">согласен на хранение персональных данных</label>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn-signin btn btn-primary btn-block" id="loginButton">Зарегистрироваться</button>
+                            <button type="submit" class="btn-signin btn btn-primary btn-block disabled" id="loginButton">Зарегистрироваться</button>
                         </div>
                     </form>
                 </div>
@@ -90,5 +90,12 @@
     jQuery(function($){
         $("#phone").mask("+7 (999) 999-9999");
     });
+    $('#yes').on('click',function () {
+        if($('#yes').prop("checked")){
+            $('.btn-signin').removeClass('disabled');
+        } else {
+            $('.btn-signin').addClass('disabled');
+        }
+    })
 </script>
 @endsection
