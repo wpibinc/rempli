@@ -692,3 +692,11 @@ input:-moz-placeholder {  padding-top: 1px; }
 div.modal-dialog > div > div:nth-child(3){
 	margin-bottom: 42px;
 }
+.product .desc a{
+	height: 20px!important;
+	display: block!important;
+	overflow: hidden!important;
+}
+.product .desc a:hover{
+	overflow: visible!important;
+}
