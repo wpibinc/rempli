@@ -819,3 +819,9 @@ body > footer > div{
 	background-color: #fff;
 	display: none;
 }
+.form-control{
+	border-radius: 0;
+}
+.pager li > a, .pager li > span{
+	border-radius: 0;
+}
