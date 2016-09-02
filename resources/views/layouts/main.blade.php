@@ -49,9 +49,9 @@
                 <a href="#" class="login">Личный кабинет</a>
                 <ul class="my-account">
                     <li><a href="/my-account">Учётная запись</a></li>
-                    <li><a href="#">История заказов</a></li>
-                    <li><a href="#">Адреса</a></li>
-                    <li><a href="#">Правила</a></li>
+                    <li><a href="/my-account?page=orders">История заказов</a></li>
+                    <li><a href="/my-account?page=adress">Адреса</a></li>
+                    <li><a href="/my-account?page=rules">Правила</a></li>
                     <li><a href="/logout">Выход </a></li>
                 </ul>
         @else
@@ -68,6 +68,7 @@
 
     <div id="dd_body">
         <div id="cart_white"><h2>Корзина товаров</h2></div>
+        
         <div class="cart-total">
             <table>
                 <tbody>
@@ -78,14 +79,15 @@
             </table>
             <button class="checkout_button btn btn-primary" id="orderBtn">Заказать <span id="cototal"><span id="cart-price">100</span> руб</span></button>
             <p id="notmin">Извините, минимальная сумма заказа: 200р</p>
-
+            <input placeholder="Поиск" type="text">
         </div>
 
 
         <div class="cart-info dropdown-menu2 cart" id="cart-items">
-
+            
             <table class="table">
                 <thead>
+                
                 </thead>
                 <tbody id="ordered-items">
                 </tbody>

@@ -14,7 +14,9 @@ class UserController extends BaseController
     
     public function myAccount(Request $request)
     {
-        return view('account');
+        $user = Auth::user();
+        $orders = Order::where('user_id', $user->id)->get();
+        return view('account', ['orders' => $orders]);
     }
 }
 

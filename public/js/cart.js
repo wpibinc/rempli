@@ -520,7 +520,7 @@ $("#ordered-items").on('click', '.cart-min', function() {
 		var theId = str.substring(5);
                 var weight = +$(this).parents('tr').find('td.total .weight').text();
 		var thePrice = Number($(this).closest('tr').find('.priceShow').html());
-	if (parseInt(sessionStorage.count) >0 && Number(sessionStorage[theId])>0) {
+	if (parseInt(sessionStorage.count) >1 && Number(sessionStorage[theId])>1) {
 		sessionStorage.count = Number(sessionStorage.count) - 1;
 		$('#cart-number').html(Number(sessionStorage.count));
 		sessionStorage[theId] = Number(sessionStorage[theId]) - 1;

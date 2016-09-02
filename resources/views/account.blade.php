@@ -6,15 +6,33 @@
 <div class="col-md-12">
     <div class="tabs col-md-12">
         <ul class="col-md-2">
-            <li>Первая вкладка</li>
-            <li>Вторая вкладка</li>
-            <li>Третья вкладка</li>
-            <li>4 вкладка</li>
-            <li>5 вкладка</li>
+            <li>Учетная запись</li>
+            <li>История заказов</li>
+            <li>Адреса</li>
+            <li>Правила</li>
+            <li><a href="/logout">Выход</a></li>
         </ul>
         <div class="col-md-10">
-            <div>Первое содержимое</div>
-            <div>Второе содержимое</div>
+            <div class='orders'>Первое содержимое</div>
+            <div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Сумма</th>
+                            <th>Статус</th>
+                        </tr>
+                        <?php $i = 0; ?>
+                        @foreach($orders as $order)
+                            <tr>
+                                <td><?php echo ++$i ?></td>
+                                <td><a class='get-order-details' href='javascript:void(0)'>{{$order->cost}} руб</a></td>
+                                <td>{{$order->status}}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div> 
+            </div>
             <div>Третье содержимое</div>
             <div>4 содержимое</div>
             <div>5 содержимое</div>
@@ -51,6 +69,16 @@
         })(jQuery);
         $(document).ready(function(){
             $(".tabs").lightTabs();
+            switch(window.location.search){
+                case '?page=orders': showPage(1);
+                    break;
+                case '?page=adress': showPage(2);
+                    break;
+                case '?page=rules': showPage(3);
+                    break;
+                default: showPage(0);
+                    break;
+            }
         });
     </script>
 </div>
