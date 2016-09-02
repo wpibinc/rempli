@@ -67,9 +67,14 @@
     <div class="backdrop"></div>
 
     <div id="dd_body">
-        <div id="cart_white"><h2>Корзина товаров</h2></div>
-        
+        <div class="result-serch"></div>
+        <div id="cart_white">
+            <input placeholder="Поиск" type="text">
+            <h2>Корзина товаров</h2>
+        </div>
+
         <div class="cart-total">
+
             <table>
                 <tbody>
                 <th>
@@ -79,7 +84,7 @@
             </table>
             <button class="checkout_button btn btn-primary" id="orderBtn">Заказать <span id="cototal"><span id="cart-price">100</span> руб</span></button>
             <p id="notmin">Извините, минимальная сумма заказа: 200р</p>
-            <input placeholder="Поиск" type="text">
+
         </div>
 
 

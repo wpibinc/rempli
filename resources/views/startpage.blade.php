@@ -36,6 +36,15 @@
             font-weight: normal;
             font-style: normal;
         }
+        @font-face {
+            font-family: 'Helvetica-Black_cyr-Bold';
+            src: url('fonts/Helvetica-Black_cyr-Bold.woff') format('woff'),
+            url('fonts/Helvetica-Black_cyr-Bold.ttf') format('truetype'),
+            url('fonts/Helvetica-Black_cyr-Bold.svg#Helvetica-Black_cyr-Bold') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
 
 
 
@@ -152,9 +161,10 @@
         .logo{
             float: left;
             margin-left: 20px;
-            font-size: 47px;
-            font-family: 'MalgunGothicBold';
+            font-size: 26px;
+            font-family: 'Helvetica-Black_cyr-Bold';
             color: #fff;
+            margin-top: 16px;
         }
         .leng{
             margin-right: 20px;
@@ -221,7 +231,7 @@
             <li id="fifth" class="fifthanimation">
             we are Calliope
             </div>
-            <a href="#" class="start-shop">Start shopping</a>
+            <a href="#" class="start-shop">Shopping now</a>
         </div>
     </div>
     <div id="controls">
