@@ -223,3 +223,5 @@ Route::get('/menu', function () {
 });
 
 Route::get('/mytest', 'TestController@index');
+
+Route::get('startpage', 'MainController@startPage');
