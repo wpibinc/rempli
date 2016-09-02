@@ -698,5 +698,5 @@ div.modal-dialog > div > div:nth-child(3){
 	overflow: hidden!important;
 }
 .product .desc a:hover{
-	overflow: visible;
+	overflow: visible!important;
 }
