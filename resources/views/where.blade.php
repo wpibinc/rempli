@@ -16,14 +16,19 @@
                 </li>
             </ul>
         </nav>
+
     </div>
 
     <style>
         html, body, #map-canvas {
             height: 600px;
+
         }
         .container, #map-canvas {
             margin-top: 40px;
+            width: 700px!important;
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
