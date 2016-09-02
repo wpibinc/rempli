@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('/success', 'OrderController@success');
     
     Route::any('/my-account', 'UserController@myAccount');
+    
+    Route::post('change-user-info', 'UserController@changeInfo');
 
 });
 
