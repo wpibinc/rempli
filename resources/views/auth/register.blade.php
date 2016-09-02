@@ -20,7 +20,7 @@
                         {{--</div>--}}
 
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" placeholder="Телeфон">
+                            <input id="phone " required  type="text" class="form-control" name="phone" value="{{ old('phone') }}" placeholder="Телeфон">
                             @if ($errors->has('phone'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('fname') ? ' has-error' : '' }}">
-                            <input id="fname" type="text" class="form-control" name="fname" value="{{ old('fname') }}" placeholder="Имя">
+                            <input id="fname" required  type="text" class="form-control" name="fname" value="{{ old('fname') }}" placeholder="Имя">
                             @if ($errors->has('fname'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('fname') }}</strong>
@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('sname') ? ' has-error' : '' }}">
-                            <input id="sname" type="text" class="form-control" name="sname" value="{{ old('sname') }}" placeholder="Фамилия">
+                            <input id="sname" required  type="text" class="form-control" name="sname" value="{{ old('sname') }}" placeholder="Фамилия">
                             @if ($errors->has('sname'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('sname') }}</strong>
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                            <input id="email" required  type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('email') }}</strong>
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <input id="password" type="password" class="form-control" name="password"  placeholder="Пароль">
+                            <input id="password" required  type="password" class="form-control" name="password"  placeholder="Пароль">
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -65,14 +65,17 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Пароль повторно">
+                            <input id="password-confirm" required  type="password" class="form-control" name="password_confirmation" placeholder="Пароль повторно">
                             @if ($errors->has('password_confirmation'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password_confirmation') }}</strong>
                                 </span>
                             @endif
                         </div>
-
+                        <div class=form-group"">
+                            <input type="checkbox" name="yes" id="yes">
+                            <label for="yes">согласен на хранение персональных данных</label>
+                        </div>
                         <div class="form-group">
                             <button type="submit" class="btn-signin btn btn-primary btn-block" id="loginButton">Зарегистрироваться</button>
                         </div>
