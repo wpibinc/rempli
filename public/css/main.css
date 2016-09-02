@@ -861,6 +861,7 @@ body > footer > div{
 }
 .result-serch td.quantity{
 	padding-left: 6px!important;
+	font-size: 20px;
 }
 .cart-add-t{
 	font-size: 41px;
