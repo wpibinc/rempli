@@ -67,7 +67,30 @@
     <div class="backdrop"></div>
 
     <div id="dd_body">
-        <div class="result-serch"></div>
+        <div class="result-serch">
+            <table class="table">
+                <thead>
+
+                </thead>
+                <tbody >
+                <tr data-category="5" class="ordered-item" id="cart-32526">
+                    <td class="quantity"> x 1<br>
+                        <a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>
+                        <br><a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>
+                    </td>
+                    <td class="image hidden-xs hidden-sm">
+                        <span class="helper"></span><img src="http://av.ru/images/cms/data/items/220174/card/220174.jpg" alt=""></td>
+                    <td class="name">
+                        <a href="#" data-toggle="modal" data-target="#idt32526">Майонез Слобода на перепелиных яйцах 67% 200 г с дозатором Россия</a></td>
+                    <td class="price">
+                        <span class="priceShow">56.7</span>р</td>
+                    <td class="total">
+                        <span class="weight" style="display:none">200</span><span class="totalShow">57</span>р<a href="#" class="cart-change cart-add-t">+</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <div id="cart_white">
             <input placeholder="Поиск" type="text">
             <h2>Корзина товаров</h2>
