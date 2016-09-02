@@ -140,23 +140,24 @@ $(document).on('click', ".increase_count", function(){
 	} else {
 	    sessionStorage[theId] = 1;
 	}
-
-	// console.log(theId + sessionStorage[theId]);
-	$(this).closest('.product').children('.item_count').html(sessionStorage[theId]);
-
 	newItem = (
 	'<tr data-category="'+category+'" class="ordered-item" id="cart-'+$(this).closest('.product').attr('id')+'"> '+
-	'<td class="image hidden-xs hidden-sm"> <span class="helper"></span>'+ $(this).closest('.product').find('img')[0].outerHTML + '</td>' +
-	'<td class="name">'+$(this).closest('.product').find('.product-title').html()+'</td>'+
-	'<td class="price"><span class="priceShow">'+parseFloat($(this).closest('.product').find('.price').html())+'</span>р</td>' +
 	'<td class="quantity"> x '+Number(sessionStorage[theId])+
 	'<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
 	'<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
 	'</td>' +
+	'<td class="image hidden-xs hidden-sm"> <span class="helper"></span>'+ $(this).closest('.product').find('img')[0].outerHTML + '</td>' +
+	'<td class="name">'+$(this).closest('.product').find('.product-title').html()+'</td>'+
+	'<td class="price"><span class="priceShow">'+parseFloat($(this).closest('.product').find('.price').html())+'</span>р</td>' +
+
 	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (parseFloat($(this).closest('.product').find('.price').html())*parseFloat(Number(sessionStorage[theId]))).toFixed(0)+ '</span>р'+
 	'<a href="#" class="cart-change cart-del">×</a>' +
 	'</td>'+
 	'</tr>');
+
+
+	// console.log(theId + sessionStorage[theId]);
+	$(this).closest('.product').children('.item_count').html(sessionStorage[theId]);
 
 	$('#cart-number').html(Number(sessionStorage.count));
 
@@ -327,13 +328,14 @@ $(document).on('click', ".reduce_count", function(){
 		$('.cart-total').find('th').html(sessionStorage.mass + ' грамм');
 		newItem = (
 		'<tr class="ordered-item" id="cart-' + $(this).closest('.product').attr('id') + '"> ' +
-		'<td class="image hidden-xs hidden-sm"> <span class="helper"></span>' + $(this).closest('.product').find('img')[0].outerHTML + '</td>' +
-		'<td class="name">' + $(this).closest('.product').find('.product-title').html() + '</td>' +
-		'<td class="price"><span class="priceShow">' + parseFloat($(this).closest('.product').find('.price').html()) + '</span>р</td>' +
 		'<td class="quantity"> x ' + Number(sessionStorage[theId]) +
 		'<br>' + '<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>' +
 		'<br>' + '<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
 		'</td>' +
+		'<td class="image hidden-xs hidden-sm"> <span class="helper"></span>' + $(this).closest('.product').find('img')[0].outerHTML + '</td>' +
+		'<td class="name">' + $(this).closest('.product').find('.product-title').html() + '</td>' +
+		'<td class="price"><span class="priceShow">' + parseFloat($(this).closest('.product').find('.price').html()) + '</span>р</td>' +
+
 		'<td class="total"><span class="totalShow">' + (parseFloat($(this).closest('.product').find('.price').html()) * parseFloat(Number(sessionStorage[theId]))).toFixed(0) + '</span>р' +
 		'<a href="#" class="cart-change cart-del">×</a>' +
 		'</td>' +
@@ -596,7 +598,7 @@ function search(word) {
 
 			    }
 
-			    search_results  += '<div class="modal fade bs-example-modal-lg" id="idt' + v.objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image";> <span class="popup-helper"></span> <img class="popimg" src="' + v.img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + v.product_name + '</p> <div class="popup-price"> ' + v.price + ' <span class="popup-rub">'+num2word(Math.floor(v.price),words)+'</span> </div> <div class="popup-mass"> '+ v.amount +'</div> </div> </div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + v.description + '</div> </div> '+v.consist+' </div> </div> </div> </div>'
+			    search_results  += '<div class="modal fade bs-example-modal-lg" id="idt' + v.objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image";> <span class="popup-helper"></span> <img class="popimg" src="' + v.img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + v.product_name + '</p> <div class="popup-price"> ' + v.price + ' <span class="popup-rub">'+num2word(Math.floor(v.price),words)+'</span> </div> <div class="popup-mass"> '+ v.amount +'</div> </div> </div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + v.description + '</div> </div> '+v.consist+'<button href="javascript:void(0)" class="increase_count buy">Добавить</button> </div> </div> </div> </div>'
 
 			    n+=1;
         }
