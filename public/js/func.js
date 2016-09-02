@@ -1,7 +1,16 @@
-//json = json.sort(function(a, b) {
-//    return parseFloat((new Date(b.updatedAt)).getTime()) - parseFloat((new Date(a.updatedAt)).getTime());
-//});
-
+jQuery(document).ready(function($){
+    $(".login").on('click', function(){
+        $(".my-account").show();
+    });
+    
+    $(document).on('click', function(event) {
+        if ($(event.target).closest(".my-account").length||$(event.target).closest(".login").length){
+            return;
+        }
+        $(".my-account").hide();
+        event.stopPropagation();
+    });
+});
 // var fruits = '';
 // var juices = '';
 // var water = '';

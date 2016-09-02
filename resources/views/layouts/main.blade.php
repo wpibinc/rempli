@@ -45,7 +45,15 @@
             <button class="cart-btn"><img src="img/cart.png">Корзина <span id="cart-number">0</span></button>
         </a>
         @if(Auth::user())
-            <a href="/logout" class="login">Выход </a>
+<!--            <a href="/logout" class="login">Выход </a>-->
+                <a href="#" class="login">Личный кабинет</a>
+                <ul class="my-account">
+                    <li><a href="/my-account">Учётная запись</a></li>
+                    <li><a href="#">История заказов</a></li>
+                    <li><a href="#">Адреса</a></li>
+                    <li><a href="#">Правила</a></li>
+                    <li><a href="/logout">Выход </a></li>
+                </ul>
         @else
             <a href="/login" class="login">Вход / Регистрация </a>
         @endif
@@ -91,7 +99,7 @@
         <li><a href="/" {!! (Request::is('/')) ? 'class="active"' : '' !!}>Магазин</a></li>
         <li><a href="/about" {!! (Request::is('about')) ? 'class="active"' : '' !!}>О нас</a></li>
         <li><a href="/where" {!! (Request::is('where')) ? 'class="active"' : '' !!}>Где работаем</a></li>
-        <li><a href="/price" {!! (Request::is('price')) ? 'class="active"' : '' !!}>Сколько стоит</a></li>
+        <li><a href="/price" {!! (Request::is('price')) ? 'class="active"' : '' !!}>Доставка и оплата</a></li>
         <li><a href="/contacts" {!! (Request::is('contacts')) ? 'class="active"' : '' !!}>Контакты</a></li>
     </ul>
     <input type="search" class="col-md-offset-1 col-md-2 search-neobsos" id="search" placeholder="Поиск товаров">

@@ -11,5 +11,10 @@ class UserController extends BaseController
     {
         return view('order', ['user' => $user]);
     }
+    
+    public function myAccount(Request $request)
+    {
+        return view('account');
+    }
 }
 

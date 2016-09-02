@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -66,6 +67,11 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        
+        Mail::send('emails.register', array('fname' => $data['fname']), function($message) use ($data)
+        {
+            $message->to($data['email'], $data['fname'].' '.$data['sname'])->subject('Регистрация прошла успешно');
+        });
         return User::create([
            // 'username' => $data['username'],
             'phone' => $data['phone'],

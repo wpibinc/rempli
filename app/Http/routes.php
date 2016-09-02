@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/payment', 'OrderController@payment');
 
     Route::any('/success', 'OrderController@success');
+    
+    Route::any('/my-account', 'UserController@myAccount');
 
 });
 
@@ -220,10 +222,4 @@ Route::get('/menu', function () {
 
 });
 
-Route::get('/mytest', function(){
-    $user = App\User::find(1);
-    $user->password = bcrypt(1111);
-    $user->save();
-//    $count = $user->ordersCount();
-//    return view('test', ['count' => $count]);
-});
+Route::get('/mytest', 'TestController@index');
