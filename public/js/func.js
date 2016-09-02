@@ -86,11 +86,11 @@ cats.each(function(i){
     $(this).click(function () {
         $(".center").show();
         $(".bg-shadow").show();
-        $(".header_cat").empty();
+        
         var value = $(this).attr('data-id');
         $(".inmoscow").empty();
         $(".header_cat").prepend($(this).find("img").attr('alt'));
-        $(".products-wrap").empty();
+        
         $(".av-categ-menu").empty();
         $.ajax({
            url: '/category',
@@ -122,7 +122,6 @@ cats.each(function(i){
                     output  += '<div class="modal fade bs-example-modal-lg" id="idt' + json[i].objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image";> <span class="popup-helper"></span> <img class="popimg" src="' + json[i].img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + json[i].product_name + '</p> <div class="popup-price"> ' + json[i].price + '<span class="kop">00</span> <span class="popup-rub">'+num2word(json[i].price,words)+'</span> </div> <div class="popup-mass"> '+ json[i].amount +'</div> </div> </div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + json[i].description + '</div> </div> <div class="product_card_props f32">'+ consist +' </div> </div> </div> </div> </div>';
 
                 }
-                console.log(res.avCategories);
                 if(res.avCategories){
                     var categoriesOutput = "<div class='av-categories'><ul>";
                     for(var i=0; i<res.avCategories.length; i++){
@@ -130,13 +129,14 @@ cats.each(function(i){
                     }
                     categoriesOutput += "</ul></div>";
                 }
-                
+                $(".header_cat").empty();
+                $(".products-wrap").empty();
                 $(".products-wrap").prepend(output);
                 $(".av-categ-menu").prepend(categoriesOutput);
                 $('.av-categories a').on('click', function(){
                     $(".center").show();
                     $(".bg-shadow").show();
-                    $(".products-wrap").empty();
+                    
                     
                     var id = $(this).attr("data-id");
                     $.ajax({
@@ -168,6 +168,7 @@ cats.each(function(i){
                                 output  += '<div class="modal fade bs-example-modal-lg" id="idt' + json[i].objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image";> <span class="popup-helper"></span> <img class="popimg" src="' + json[i].img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + json[i].product_name + '</p> <div class="popup-price"> ' + json[i].price + '<span class="kop">00</span> <span class="popup-rub">'+num2word(json[i].price,words)+'</span> </div> <div class="popup-mass"> '+ json[i].amount +'</div> </div> </div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + json[i].description + '</div> </div> <div class="product_card_props f32">'+ consist +' </div> </div> </div> </div> </div>';
 
                             }
+                            $(".products-wrap").empty();
                             $(".products-wrap").prepend(output);
                             $(".center").hide();
                             $(".bg-shadow").hide();

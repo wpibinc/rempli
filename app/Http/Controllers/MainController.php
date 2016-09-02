@@ -32,5 +32,10 @@ class MainController extends BaseController
     {
         return view('contacts');
     }
+    
+    public function startPage()
+    {
+        return view('startpage');
+    }
 }
 
