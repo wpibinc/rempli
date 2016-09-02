@@ -80,7 +80,6 @@ words=Array("рубль", "рубля", "рублей");
 var current;
 
 var cats = $('.cats');
-console.log(sessionStorage);
 cats.each(function(i){
 
     $(this).click(function () {

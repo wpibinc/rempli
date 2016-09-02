@@ -4,6 +4,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Order;
 use Auth;
+use App\Adress;
 
 class UserController extends BaseController
 {
@@ -41,6 +42,32 @@ class UserController extends BaseController
                 break;
         }
         $user->save();
+    }
+    
+    public function addAdress(Request $request)
+    {
+        if(!$request->isXmlHttpRequest()){
+            return abort(404);
+        }
+        $user = Auth::user();
+        $adress = new Adress();
+        $adress->user_id = $user->id;
+        $adress->street = $request->input('street');
+        $adress->home = $request->input('home');
+        $adress->korp = $request->input('korp');
+        $adress->flat = $request->input('flat');
+        $adress->save();
+        return response()->json(['success' => true]);
+    }
+    
+    public function deleteAdress(Request $request)
+    {
+        if(!$request->isXmlHttpRequest()){
+            return abort(404);
+        }
+        $id = $request->input('id');
+        Adress::destroy($id);
+        return response()->json(['success' => true]);
     }
 }
 

@@ -61,7 +61,7 @@
                 </div> 
             </div>
             <div class='adresses'>
-                <div class='add'>
+                <div class='add-form'>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="home-inputt">Адрес </label>
                         <div class="col-sm-9">
@@ -86,14 +86,31 @@
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
+                    <buttod class='btn add-adress'>Добавить</buttod>
                 </div>
-                <div class='all-adresses'>
-                    @foreach($adresses as $adress)
-                    @endforeach
-                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>Улица</th>
+                            <th>Дом</th>
+                            <th>Корпус</th>
+                            <th>Квартира</th>
+                            <th></th>
+                        </tr>
+                        <?php $i = 0; ?>
+                        @foreach($adresses as $adress)
+                            <tr>
+                                <td>{{$adress->street}}</td>
+                                <td>{{$adress->home}}</td>
+                                <td>{{$adress->korp}}</td>
+                                <td>{{$adress->flat}}</td>
+                                <td><a class='adress-del' data-id='{{$adress->id}}' href='javascript:void(0)'>Удалить</a></td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div> 
             </div>
-            <div>4 содержимое</div>
-            <div>5 содержимое</div>
+            <div class='rules'>Правила</div>
         </div>
     </div>
     <script>

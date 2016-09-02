@@ -34,6 +34,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('/my-account', 'UserController@myAccount');
     
     Route::post('change-user-info', 'UserController@changeInfo');
+    
+    Route::post('add-adress', 'UserController@addAdress');
+    Route::post('delete-adress', 'UserController@deleteAdress');
 
 });
 
