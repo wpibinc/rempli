@@ -72,7 +72,10 @@
                                 </span>
                             @endif
                         </div>
-
+                        <div class=form-group"">
+                            <input type="checkbox" name="yes" id="yes">
+                            <label for="yes">согласен на хранение персональных данных</label>
+                        </div>
                         <div class="form-group">
                             <button type="submit" class="btn-signin btn btn-primary btn-block" id="loginButton">Зарегистрироваться</button>
                         </div>
