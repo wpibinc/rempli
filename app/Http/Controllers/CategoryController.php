@@ -72,6 +72,12 @@ class CategoryController extends BaseController
         
         if(!empty($category->products)){
             foreach($category->products as $product){
+                $price = $product->price;
+                $amount = $product->amount;
+                if($product->amount == 'за 1кг'){
+                    $price = $product->price/10;
+                    $amount = 'за 100 гр';
+                }
                 $json['products'][] = [
                     'objectId'      => $product->id,
                     'cvalues'       => explode(",", $product->cvalues),
@@ -79,8 +85,8 @@ class CategoryController extends BaseController
                     'img_sm'        => $product->img,
                     'category'      => $product->category_id,
                     'product_name'  => $product->product_name,
-                    'price'         => $product->price,
-                    'amount'        => $product->amount,
+                    'price'         => $price,
+                    'amount'        => $amount,
                     'weight'        => $product->weight,
                     'description'   => $product->description,
                     'updatedAt'     => (string) $product->updated_at
@@ -89,6 +95,13 @@ class CategoryController extends BaseController
         }
         if(!empty($category->avProducts)){
             foreach($category->avProducts as $product){
+                $price = $product->price;
+                $amount = $product->original_price_style;
+                
+                if($product->original_price_style == '1 кг'){
+                    $price = $product->price/10;
+                    $amount = '100 гр';
+                }
                 $json['products'][] = array(
                     'objectId' => $product->id,
                     'cvalues' => explode(";", $product->cvalues),
@@ -96,8 +109,8 @@ class CategoryController extends BaseController
                     'img_sm' => 'http://av.ru' . $product->image,
                     'category' => $product->category_id,
                     'product_name' => $product->name,
-                    'price' => $product->price,
-                    'amount' => 'за ' . $product->original_price_style,
+                    'price' => $price,
+                    'amount' => 'за ' . $amount,
                     'weight' => $product->original_typical_weight,
                     'description' => $product->description,
                     'updatedAt' => $product->updated_at
@@ -118,6 +131,13 @@ class CategoryController extends BaseController
         $json = array();
         if(!empty($products)){
             foreach($products as $product){
+                $price = $product->price;
+                $amount = $product->original_price_style;
+                
+                if($product->original_price_style == '1 кг'){
+                    $price = $product->price/10;
+                    $amount = '100 гр';
+                }
                 $json[] = array(
                     'objectId' => $product->id,
                     'cvalues' => explode(";", $product->cvalues),
@@ -125,8 +145,8 @@ class CategoryController extends BaseController
                     'img_sm' => 'http://av.ru' . $product->image,
                     'category' => $product->category_id,
                     'product_name' => $product->name,
-                    'price' => $product->price,
-                    'amount' => 'за ' . $product->original_price_style,
+                    'price' => $price,
+                    'amount' => 'за ' . $amount,
                     'weight' => $product->original_typical_weight,
                     'description' => $product->description,
                     'updatedAt' => $product->updated_at

@@ -184,6 +184,62 @@ $(document).on('click', ".increase_count", function(){
 	return newItem;
 });
 
+$(document).on('click', '.add-to-cart', function(e){
+	var theId = $(this).attr('data-id');
+        var weight = +$(this).attr("data-weight");
+        var category = $(this).attr('data-category');
+        var price = $(this).parents(".modal-dialog").find(".popup-price")
+        
+        
+	if (sessionStorage.count) {
+            sessionStorage.count = Number(sessionStorage.count)+1;
+	} else {
+	    sessionStorage.count = 1;
+	}
+	
+	sessionStorage.mass = parseInt(sessionStorage.mass) + weight;
+
+	if (sessionStorage[theId]) {
+            sessionStorage[theId] = Number(sessionStorage[theId])+1;
+	} else {
+	    sessionStorage[theId] = 1;
+	}
+	newItem = (
+	'<tr data-category="'+category+'" class="ordered-item" id="cart-'+theId+'"> '+
+	'<td class="quantity"> x '+Number(sessionStorage[theId])+
+	'<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
+	'<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
+	'</td>' +
+	'<td class="image hidden-xs hidden-sm"> <span class="helper"></span>'+ $(this).parents(".modal-dialog").find(".popup-image").find('img')[0].outerHTML + '</td>' +
+	'<td class="name">'+$(this).parents(".modal-dialog").find(".popup-name").find('.popup-title').html()+'</td>'+
+	'<td class="price"><span class="priceShow">'+parseFloat($(this).parents(".modal-dialog").find(".popup-price").html())+'</span>р</td>' +
+
+	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (parseFloat($(this).parents(".modal-dialog").find(".popup-price").html())*parseFloat(Number(sessionStorage[theId]))).toFixed(0)+ '</span>р'+
+	'<a href="#" class="cart-change cart-del">×</a>' +
+	'</td>'+
+	'</tr>');
+
+	$('#cart-number').html(Number(sessionStorage.count));
+
+	$("#ordered-items").prepend(newItem);
+
+
+	totalCost = totalCost + parseFloat($(this).parents(".modal-dialog").find(".popup-price").html());
+
+	totalCost = Math.round(totalCost);
+
+	$('#cart-price').html(totalCost);
+
+	if (totalCost >= 200) {
+		$('#notmin').css( "display", "none" );
+	}
+	$('.cart-total').find('th').html(sessionStorage.mass + ' грамм');
+	sessionStorage.cart = $("#ordered-items").html();
+	sessionStorage.total = totalCost;
+        $(this).text("Добавлено");
+        $(this).unbind(e);
+	return newItem;
+});
 
 $('#orderBtn2').on({
 	"click":function(e){
