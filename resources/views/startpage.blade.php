@@ -161,10 +161,10 @@
         .logo{
             float: left;
             margin-left: 20px;
-            font-size: 42px;
+            font-size: 26px;
             font-family: 'Helvetica-Black_cyr-Bold';
             color: #fff;
-            margin-top: 9px;
+            margin-top: 16px;
         }
         .leng{
             margin-right: 20px;
