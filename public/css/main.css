@@ -785,3 +785,37 @@ body > footer > div{
 .padding-0{
 	padding: 0;
 }
+.product>a>img{
+	transition: all 0.5s ease;
+	position: relative;
+	left: 0;
+}
+.product:hover>a>img{
+
+	position: relative;
+	left: 0px;
+}
+@media (max-width:1400px){
+	.product:hover>a>img{
+		max-width: 60%!important;
+		position: relative;
+		left: 37px;
+	}
+}
+
+.product .count{
+	z-index: 999;
+}
+.orderlogin{
+	color: #000!important;
+}
+.result-serch{
+	position: absolute;
+	width: 560px;
+	min-height: 30px;
+	z-index: 9999;
+	top: 98px;
+	right: 0;
+	background-color: #fff;
+	display: none;
+}
