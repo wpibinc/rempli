@@ -658,3 +658,37 @@ input:-moz-placeholder {  padding-top: 1px; }
 .alcogol{
 	font-size: 18px;
 }
+.cart-add{
+	left: 35px!important;
+	top: 0;
+}
+.cart-min{
+	left: 35px!important;
+	bottom: 15px;
+}
+.quantity{
+	text-align: center;
+	padding-top: 33px!important;
+	position: relative;
+}
+.cart-total table th{
+	top: -29px!important;
+}
+.cart-del-txt{
+	display: none;
+}
+.product_card_props.f32 > button.increase_count.buy{
+	background: #ffcc66;
+	color: #333;
+	text-align: center;
+	position: absolute;
+	padding: 20px 0;
+	left: 0;
+	bottom: 0;
+	border: 0;
+	width: 100%;
+	border-radius: 0 0 5px 5px;
+}
+div.modal-dialog > div > div:nth-child(3){
+	margin-bottom: 42px;
+}
