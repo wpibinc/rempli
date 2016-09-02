@@ -700,3 +700,63 @@ div.modal-dialog > div > div:nth-child(3){
 .product .desc a:hover{
 	overflow: visible!important;
 }
+.av-categories a{
+	padding: 5px;
+	display: inline-block;
+	border: 1px solid #AFAFAF;
+	margin-bottom: -1px;
+	border-bottom: 1px;
+	background-color: #fff;
+	font-size: 14px;
+	position: relative;
+}
+.av-categories li{
+	margin: 1px!important;
+}
+
+.av-categories a:before {
+	width: 0;
+	content: "";
+	position: absolute;
+	top: -1px;
+	right:-1px;
+	height: 0;
+	border-top: 10px solid whitesmoke;
+	border-left: 10px solid rgb(165, 165, 165);
+
+}
+
+
+.tabs{
+	display:inline-block;
+}
+.tabs > div{
+	padding-top:10px;
+}
+.tabs ul{
+	margin:0px;
+	padding:0px;
+}
+.tabs ul:after{
+	content:"";
+	display:block;
+	clear:both;
+	height:5px;
+	background:#46c765;
+}
+.tabs ul li{
+	margin:0px;
+	padding:0px;
+	cursor:pointer;
+	display:block;
+	padding:10px 15px;
+	background:#e9eaeb;
+	color:#707070;
+}
+.tabs ul li.active, .tabs ul li.active:hover{
+	background:#46c765;
+	color:#fff;
+}
+.tabs ul li:hover{
+	background:#d6d6d7;
+}

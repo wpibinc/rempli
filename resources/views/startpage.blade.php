@@ -24,10 +24,20 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>mb.bgndGallery</title>
+    <title>Start Page</title>
 
     <link href='http://fonts.googleapis.com/css?family=Lekton|Lobster' rel='stylesheet' type='text/css'>
     <style type="text/css">
+        @font-face {
+            font-family: 'MalgunGothicBold';
+            src: url('fonts/MalgunGothicBold.woff') format('woff'),
+            url('fonts/MalgunGothicBold.ttf') format('truetype'),
+            url('fonts/MalgunGothicBold.svg#MalgunGothicBold') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+
 
         body{
             background: #284352;
@@ -117,6 +127,7 @@
             text-decoration: none;
             color: #fff;
                 margin: 30px auto;
+            font-family: 'MalgunGothicBold';
         }
         .start-shop:hover{
             background-color: #f5ae31;
@@ -141,6 +152,9 @@
         .logo{
             float: left;
             margin-left: 20px;
+            font-size: 47px;
+            font-family: 'MalgunGothicBold';
+            color: #fff;
         }
         .leng{
             margin-right: 20px;
@@ -172,7 +186,7 @@
 <body>
 <header class="heder-top">
     <div class="logo">
-        <img src="img/first.png">
+        Rempli
     </div>
     <div class="leng">
     <a href="#" class="rus">
