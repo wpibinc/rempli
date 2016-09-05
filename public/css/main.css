@@ -870,3 +870,18 @@ body > footer > div{
 #cart_white > input[type="text"]{
 	width: 100%;
 }
+.order-details{
+	position: relative;
+	width: 100%;
+	text-align: left;
+}
+.order-details span.count{
+	display: block;
+}
+.order-details img{
+	width: 67px;
+}
+#container-fluid1 > div > div > div > div > div > div.orders > div > table > tbody > tr:nth-child(2) > td:nth-child(4){
+	width: 350px;
+	text-align: center;
+}
