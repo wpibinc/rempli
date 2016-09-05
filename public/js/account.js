@@ -36,7 +36,7 @@ $(document).on('ready', function(){
             },
             success: function(res){
                 if(res.success){
-                    var row = "<tr><td>"+street+"</td><td>"+home+"</td><td>"+korp+"</td><td>"+flat+"</td><td><a class='adress-del' href='javascruipt:void(0)'>Удалить</a></td></tr>";
+                    var row = "<tr><td>"+street+"</td><td>"+home+"</td><td>"+korp+"</td><td>"+flat+"</td><td><a class='adress-del' href='javascript:void(0)'>Удалить</a></td></tr>";
                     $('.adresses tbody').append(row);
                 }
             }
@@ -62,6 +62,24 @@ $(document).on('ready', function(){
             }
         });
         
+    });
+    
+    $(document).on('click', '.order-get-more', function(){
+        console.log(123);
+        var id = $(this).attr('data-id');
+        var row = $(this).parents('tr');
+        $.ajax({
+            url: 'get-order-details',
+            method: 'get',
+            data: {
+                id: id
+            },
+            success: function(res){
+                if(res){
+                    row.find('.order-details').append(res);
+                }
+            }
+        });
     });
     
 });
