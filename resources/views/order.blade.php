@@ -11,7 +11,6 @@
     <div class="container">
         <div class="jumbotron content">
             <div class="orderheader"> Информация для доставки</div>
-
             <div class="form-group">
                 <label for="inputAddress" class="col-sm-0 control-label">
                 </label>
@@ -19,8 +18,28 @@
                     <!-- 	После заполнения информации снизу, вы сможете оплатить заказ по любой банковской карте и мы доставим Ваш заказ меньше чем через 1 час! -->
                 </div>
             </div>
-
-
+            <div class="form-group">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="val-1" checked>
+                        ввести адрес
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="val-2">
+                        выбрать адрес
+                    </label>
+                </div>
+            </div>
+            <div class="form-group" id="val-2">
+                <label for="selectAddress" class="col-sm-3 control-label">Адрес <!-- <span class="red">*</span> -->
+                </label>
+                <select name="selectAddress" id="selectAddress">
+                    <option value="1">1</option>
+                </select>
+            </div>
+            <div class="" id="val-1">
             <div class="form-group">
                 <label for="inputName" class="col-sm-3 control-label">Адрес <!-- <span class="red">*</span> -->
                 </label>
@@ -53,6 +72,7 @@
                     <p class="help-block text-danger"></p>
                 </div>
             </div>
+            </div>
         <!-- 	<div class="form-inline">
 	  <div class="form-group inline">
 	    <label for="exampleInputName2">Name</label>
@@ -65,6 +85,7 @@
 	</div> -->
 
             <div class="form-group">
+
                 <label for="inputAddress" class="col-sm-3 control-label">Ваше имя <!-- <span class="red">*</span> -->
                 </label>
                 <div class="col-sm-9">
@@ -143,4 +164,26 @@
         </div>
     </div>
     </div>
+    <script>
+        $(document).on("ready",function () {
+            if($("#optionsRadios1").prop('checked')){
+                $('#val-1').addClass('activeClassradio').removeClass('radiocustom');
+                $('#val-2').addClass('radiocustom').removeClass('activeClassradio');
+                console.log("sdasdsa");
+            } else{
+                $('#val-2').addClass('activeClassradio').removeClass('radiocustom');
+                $('#val-1').addClass('radiocustom').removeClass('activeClassradio');
+                console.log("sdasdsa2");
+            }
+        });
+        $('.radio input').on("click",function () {
+            if($("#optionsRadios1").prop('checked')){
+                $('#val-1').addClass('activeClassradio').removeClass('radiocustom');
+                $('#val-2').addClass('radiocustom').removeClass('activeClassradio');
+            } else{
+                $('#val-2').addClass('activeClassradio').removeClass('radiocustom');
+                $('#val-1').addClass('radiocustom').removeClass('activeClassradio');
+            }
+        });
+    </script>
 @endsection
