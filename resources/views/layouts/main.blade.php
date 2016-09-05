@@ -156,9 +156,6 @@
     <div class="col-md-10 col-sm-6 col-xs-4 text-center"><span class="footer-copy">{{ Config('rempli.copyright') }}</span> </div>
     <a href="#" class="col-md-1 col-sm-3 col-xs-4"><img src="img/av5.png" alt="rempli"></a>
 </footer>
-
-
-
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/cart.js"></script>
 {{--<script type="text/javascript" src="js/categories.js"></script>--}}
@@ -166,6 +163,10 @@
 <!--<script type="text/javascript" src="/data/categories.json"></script>-->
 <script type="text/javascript" src="/js/func.js"></script>
 <script type="text/javascript" src="/js/func2.js"></script>
+@if(Request::is('my-account'))
+    
+    <script type="text/javascript" src="/js/account.js"></script>
+@endif
 <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
 
 
