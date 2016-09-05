@@ -32,13 +32,26 @@
                     </label>
                 </div>
             </div>
+            @if($user->adresses)
             <div class="form-group" id="val-2">
                 <label for="selectAddress" class="col-sm-3 control-label">Адрес <!-- <span class="red">*</span> -->
                 </label>
                 <select name="selectAddress" id="selectAddress">
-                    <option value="1">1</option>
+                    @foreach($user->adresses as $adress)
+                    <?php 
+                        $addressfull = $adress->street.' '.$adress->home;
+                        if(!empty($adress->korp)){
+                            $addressfull .= ' корп. '.$adress->korp;
+                        }
+                        if(!empty($adress->flat)){
+                            $addressfull .= ' кв. '.$adress->flat;
+                        }
+                    ?>
+                    <option value="{{$adress->id}}"><?php echo $addressfull ?></option>
+                    @endforeach
                 </select>
             </div>
+            @endif
             <div class="" id="val-1">
             <div class="form-group">
                 <label for="inputName" class="col-sm-3 control-label">Адрес <!-- <span class="red">*</span> -->
@@ -173,7 +186,6 @@
             } else{
                 $('#val-2').addClass('activeClassradio').removeClass('radiocustom');
                 $('#val-1').addClass('radiocustom').removeClass('activeClassradio');
-                console.log("sdasdsa2");
             }
         });
         $('.radio input').on("click",function () {

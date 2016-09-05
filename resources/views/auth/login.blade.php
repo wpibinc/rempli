@@ -71,7 +71,7 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn-signin btn btn-primary btn-block" id="loginButton">Вход</button>
-                                {{--<a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>                           --}}
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Забыли пароль?</a>
                         </div>
                     </form>
                 </div>

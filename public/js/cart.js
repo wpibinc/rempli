@@ -9,18 +9,23 @@ function handleParseError(err) {
 }
 
 $(document).ready(function() {
-	$(".popup-num").keydown(function(event) {
-		// Allow only backspace and delete
-		if ( event.keyCode == 46 || event.keyCode == 8 ) {
-			// let it happen, don't do anything
-		}
-		else {
-			// Ensure that it is a number and stop the keypress
-			if (event.keyCode < 48 || event.keyCode > 57 ) {
-				event.preventDefault();
-			}
-		}
-	});
+    $(".popup-num").keydown(function(event) {
+            // Allow only backspace and delete
+            if ( event.keyCode == 46 || event.keyCode == 8 ) {
+                    // let it happen, don't do anything
+            }
+            else {
+                    // Ensure that it is a number and stop the keypress
+                    if (event.keyCode < 48 || event.keyCode > 57 ) {
+                            event.preventDefault();
+                    }
+            }
+    });
+    
+    $("#cart_white .autocomplete").autocomplete('/autocomplete-product-search', {
+        width: 200,
+        max: 3
+    })
 });
 
 
@@ -142,7 +147,7 @@ $(document).on('click', ".increase_count", function(){
 	}
 	newItem = (
 	'<tr data-category="'+category+'" class="ordered-item" id="cart-'+$(this).closest('.product').attr('id')+'"> '+
-	'<td class="quantity"> x '+Number(sessionStorage[theId])+
+	'<td class="quantity"> '+Number(sessionStorage[theId])+
 	'<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
 	'<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
 	'</td>' +
@@ -150,7 +155,7 @@ $(document).on('click', ".increase_count", function(){
 	'<td class="name">'+$(this).closest('.product').find('.product-title').html()+'</td>'+
 	'<td class="price"><span class="priceShow">'+parseFloat($(this).closest('.product').find('.price').html())+'</span>р</td>' +
 
-	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (parseFloat($(this).closest('.product').find('.price').html())*parseFloat(Number(sessionStorage[theId]))).toFixed(0)+ '</span>р'+
+	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (Math.round(parseFloat($(this).closest('.product').find('.price').html()))*parseFloat(Number(sessionStorage[theId])))+ '</span>р'+
 	'<a href="#" class="cart-change cart-del">×</a>' +
 	'</td>'+
 	'</tr>');
@@ -168,11 +173,11 @@ $(document).on('click', ".increase_count", function(){
 
 	$("#ordered-items").prepend(newItem);
 
-
-	totalCost = totalCost + parseFloat($(this).closest('.product').find('.price').html());
-
+        console.log(totalCost);
+	totalCost = totalCost + Math.round(parseFloat($(this).closest('.product').find('.price').html()));
+        
 	totalCost = Math.round(totalCost);
-
+        console.log(totalCost);
 	$('#cart-price').html(totalCost);
 
 	if (totalCost >= 200) {
@@ -481,25 +486,29 @@ $(".cart-del").click(function() {
 });
 
 
-$("#ordered-items").on('click', '.cart-add', function() {
+$("#ordered-items").on('click', '.cart-add', function(e) {
+        
 	var str = $(this).closest('tr').attr('id');
 	var theId = str.substring(5);
 	var thePrice = Number($(this).closest('tr').find('.priceShow').html());
         var weight = +$(this).parents('tr').find('td.total .weight').text();
+        console.log(thePrice * Number(sessionStorage[theId]));
+        
 	sessionStorage.count = Number(sessionStorage.count)+1;
 	$('#cart-number').html(Number(sessionStorage.count));
 	sessionStorage[theId] = Number(sessionStorage[theId])+1;
-	$(this).closest('tr').find('.quantity').html('x ' + sessionStorage[theId]+
+        $(this).closest('tr').find('.totalShow').html(Math.round(thePrice) * Number(sessionStorage[theId]));
+	$(this).closest('tr').find('.quantity').html('' + sessionStorage[theId]+
 	'<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
 	'<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>'
 	);
-	$(this).closest('tr').find('.totalShow').html((thePrice * Number(sessionStorage[theId])));
+        
+	
 
 	//sessionStorage.mass = parseFloat(sessionStorage.mass) + parseFloat($(this).closest('tr').find('.mass').html());
 	sessionStorage.mass = parseInt(sessionStorage.mass) + weight;
-        
-	totalCost = totalCost + thePrice;
-	totalCost = Math.round(totalCost);
+	totalCost = totalCost + Math.round(thePrice);
+	//totalCost = Math.round(totalCost);
 	sessionStorage.total = totalCost;
 	$('.cart-total').find('th').html(sessionStorage.mass + ' грамм');
 	$('#cart-price').html(totalCost);
@@ -524,15 +533,15 @@ $("#ordered-items").on('click', '.cart-min', function() {
 		sessionStorage.count = Number(sessionStorage.count) - 1;
 		$('#cart-number').html(Number(sessionStorage.count));
 		sessionStorage[theId] = Number(sessionStorage[theId]) - 1;
-
-		$(this).closest('tr').find('.quantity').html('x ' + sessionStorage[theId] +
+                $(this).closest('tr').find('.totalShow').html(Math.round(thePrice) * Number(sessionStorage[theId]));
+		$(this).closest('tr').find('.quantity').html('' + sessionStorage[theId] +
 			'<br>' + '<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>' +
 			'<br>' + '<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>'
 		);
-		$(this).closest('tr').find('.totalShow').html((thePrice * Number(sessionStorage[theId])));
+		
 		//sessionStorage.mass = parseFloat(sessionStorage.mass) - parseFloat($(this).closest('tr').find('.mass').html());
 		sessionStorage.mass = parseInt(sessionStorage.mass) - weight;
-		totalCost = totalCost - thePrice;
+		totalCost = totalCost - Math.round(thePrice);
 		totalCost = Math.round(totalCost);
 		sessionStorage.total = totalCost;
 		$('.cart-total').find('th').html(sessionStorage.mass + ' грамм');
@@ -568,7 +577,7 @@ $("#ordered-items").on('click', '.cart-del', function() {
 	//sessionStorage.mass = parseFloat(sessionStorage.mass) - (parseFloat($(this).closest('tr').find('.mass').html() * Number(sessionStorage[theId])));
 	sessionStorage.mass = parseInt(sessionStorage.mass) - weight * Number(sessionStorage[theId]);
 
-	totalCost = totalCost - (thePrice * Number(sessionStorage[theId]));
+	totalCost = totalCost - (Math.round(thePrice) * Number(sessionStorage[theId]));
 	totalCost = Math.round(totalCost);
 	sessionStorage.total = totalCost;
 	$('.cart-total').find('th').html(sessionStorage.mass + ' грамм');

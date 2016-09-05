@@ -4,17 +4,33 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Order;
 use Auth;
+use App\Adress;
 
 class OrderController extends BaseController
 {
     public function index(Request $request)
     {
         if($request->isXmlHttpRequest()){
-            $order=request()->except(['_token','items']);
+            $order=request()->except(['_token','items', 'addressChecked']);
+            $adressChecked = $request->input('addressChecked');
             $user = Auth::user();
             $order['user_id'] = $user->id;
             $items = request()->only('items');
-
+            if(!empty($adressChecked)){
+                $adress = Adress::find($adressChecked);
+                $order['address'] = $adress->street;
+                $order['house'] = $adress->home;
+                $order['korp'] = $adress->korp;
+                $order['flat'] = $adress->flat;
+            }else{
+                $adress = new Adress();
+                $adress->street = $order['address'];
+                $adress->home = $order['house'];
+                $adress->korp = $order['korp'];
+                $adress->flat = $order['flat'];
+                $adress->user_id = $user->id;
+                $adress->save();
+            }
             $order= Order::create($order);
             $order->items()->createMany($items['items']);
     

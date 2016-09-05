@@ -82,11 +82,11 @@ class UserController extends BaseController
             foreach($items as $item){
                 $item->getRelations();
                 if($item->product){
-                    $output .= '<div class="item"><span class="title">'.$item->product->product_name.'</span><span class="count">'.$item->count.'</span><img src="'.$item->product->img.'"></div>';
+                    $output .= '<div class="item"><span class="title">'.$item->product->product_name.'</span><span class="count">'.$item->count.' шт</span><img src="'.$item->product->img.'"></div>';
                     
                 }
                 if($item->avproduct){
-                    $output .= '<div class="item"><span class="title">'.$item->avproduct->name.'</span><span class="count">'.$item->count.'</span><img src="http://av.ru'.$item->avproduct->image.'"></div>';
+                    $output .= '<div class="item"><span class="title">'.$item->avproduct->name.'</span><span class="count">'.$item->count.' шт</span><img src="http://av.ru'.$item->avproduct->image.'"></div>';
                 }
             }
         }

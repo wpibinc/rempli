@@ -1,5 +1,9 @@
 $(document).on('ready', function(){
     $(".change-user-info").on('click', function(){
+        var res = confirm('Вы уверены?');
+        if(!res){
+            return;
+        }
         var param = jQuery(this).siblings('input').attr('name');
         var value = jQuery(this).siblings('input').val();
         var token = jQuery("input[name=_token]").val();
@@ -38,6 +42,7 @@ $(document).on('ready', function(){
                 if(res.success){
                     var row = "<tr><td>"+street+"</td><td>"+home+"</td><td>"+korp+"</td><td>"+flat+"</td><td><a class='adress-del' href='javascript:void(0)'>Удалить</a></td></tr>";
                     $('.adresses tbody').append(row);
+                    $(".adresses .add-form input").val('');
                 }
             }
         });
@@ -65,9 +70,21 @@ $(document).on('ready', function(){
     });
     
     $(document).on('click', '.order-get-more', function(){
-        console.log(123);
         var id = $(this).attr('data-id');
         var row = $(this).parents('tr');
+        var button = $(this);
+        if(button.siblings('.order-details').find('.item').length&&$(this).hasClass('active')){
+            button.siblings('.order-details').hide();
+            button.removeClass('active');
+            button.text('Подробнее');
+            return false;
+        }else if(button.siblings('.order-details').find('.item').length&&!$(this).hasClass('active')){
+            button.siblings('.order-details').show();
+            button.addClass('active');
+            button.text('Скрыть');
+            return true;
+        }
+        
         $.ajax({
             url: 'get-order-details',
             method: 'get',
@@ -77,6 +94,8 @@ $(document).on('ready', function(){
             success: function(res){
                 if(res){
                     row.find('.order-details').append(res);
+                    button.addClass('active');
+                    button.text('Скрыть');
                 }
             }
         });

@@ -12,6 +12,7 @@
     <meta name="description" content="Доставка продуктов в центре Москвы за 1 час. Сходим за Вас в Азбуку Вкуса!">
 
     {{--Style--}}
+    <link rel="stylesheet" type="text/css" href="/js/jquery-ui/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     {{--<link href="css/css" rel="stylesheet" type="text/css">--}}
     <link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -29,7 +30,7 @@
     <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
     <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <script type="text/javascript" src="/js/jquery.maskedinput.min.js"></script>
-
+    <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
 
 </head>
 <body>
@@ -92,7 +93,7 @@
             </table>
         </div>
         <div id="cart_white">
-            <input placeholder="Поиск" type="text">
+            <input class="autocomplete" placeholder="Поиск" type="text">
             <h2>Корзина товаров</h2>
         </div>
 

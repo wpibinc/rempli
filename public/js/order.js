@@ -29,9 +29,16 @@ okplace = 1;
 				// alert(currentUser);
 				user.set("FirstName", document.getElementById('name').value);
 				user.set("phone", document.getElementById('phone').value);
-				user.set("AdressField", document.getElementById('pac-input').value);
-				user.set("house", document.getElementById('house').value);
-				user.set("flat", document.getElementById('flat').value);
+                                if($("#optionsRadios1").prop('checked')){
+                                    user.set("AdressField", document.getElementById('pac-input').value);
+                                    user.set("house", document.getElementById('house').value);
+                                    user.set("flat", document.getElementById('flat').value);
+                                }else{
+                                    var checkedAddr = $("#selectAddress option:checked").val();
+                                    user.set('checkedAdress', checkedAddr);
+                                }
+				
+				
 				user.set("howpay", $("input[name=howpay]:checked").val());
 				user.set("freeDelivery", 0);				
 
@@ -174,8 +181,9 @@ $('input').change(function() {
 });
 
 $( "#toPay" ).click(function( event ) {
-	if ($('#name').val().length * $('#pac-input').val().length * $('#house').val().length * $('#flat').val().length * $('#phone').val().length * okplace > 0) {
-		console.log('click');
+        var checked = $("#optionsRadios1").prop('checked');
+	if (!checked||$('#name').val().length * $('#pac-input').val().length * $('#house').val().length * $('#flat').val().length * $('#phone').val().length * okplace > 0) {
+
 		$( "#toPay" ).css( "opacity", "1" );
 	} else {
 		$( "#toPay" ).css( "opacity", "0.5" );
@@ -206,6 +214,20 @@ $(document).on('click', ".checkout_button", function(){
 
 $(document).ready(function() {
     $(document).on('click', "#toPay", function(){
+                var checked = $("#optionsRadios1").prop('checked');
+                var address = '';
+                var house = '';
+                var korp = '';
+                var flat = '';
+                var adressChecked = '';
+                if(checked){
+                    address = localStorage.AdressField;
+                    house = localStorage.house;
+                    korp = localStorage.korp;
+                    flat = localStorage.flat;
+                }else{
+                    adressChecked = $("#selectAddress").val();
+                }
 		$.ajax({
 			type: 'POST',
 			url: '/order',
@@ -219,14 +241,15 @@ $(document).ready(function() {
 					items: data,
 					name: localStorage.FirstName,
 					phone: localStorage.phone,
-					address: localStorage.AdressField,
-					house: localStorage.house,
-					korp: localStorage.korp,
+					address: address,
+					house: house,
+					korp: korp,
 					comment: localStorage.comment,
-					flat: localStorage.flat,
+					flat: flat,
 					user_id: localStorage.user,
 					mass: sessionStorage.mass,
-					cost: sessionStorage.cost
+					cost: sessionStorage.cost,
+                                        addressChecked: adressChecked
 				}
 			),
 			success: function (data) {

@@ -37,5 +37,10 @@ class MainController extends BaseController
     {
         return view('startpage');
     }
+    
+    public function productSearch()
+    {
+        echo '123';
+    }
 }
 

@@ -39,7 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::post('add-adress', 'UserController@addAdress');
     Route::post('delete-adress', 'UserController@deleteAdress');
-
+    
+    Route::get('autocomplete-product-search', 'MainController@productSearch');
 });
 
 #---------ПАРС--------------------------------

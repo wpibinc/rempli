@@ -21,7 +21,7 @@
                 </div>
                 <div class='password'>                
                     <label>Пароль</label>
-                    <input type='password' name='password' value='{{$user->password}}'>
+                    <input type='password' name='password' value='1111'>
                     <button class='change-user-info'>Изменить</button>
                 </div>
                 <div class='phone'>                
