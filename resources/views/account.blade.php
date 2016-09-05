@@ -48,6 +48,7 @@
                             <th>#</th>
                             <th>Сумма</th>
                             <th>Статус</th>
+                            <th></th>
                         </tr>
                         <?php $i = 0; ?>
                         @foreach($orders as $order)
@@ -55,6 +56,8 @@
                                 <td><?php echo ++$i ?></td>
                                 <td><a class='get-order-details' href='javascript:void(0)'>{{$order->cost}} руб</a></td>
                                 <td>{{$order->status}}</td>
+                                <td><button data-id="{{$order->id}}" class="order-get-more">Подробнее</button><div class="order-details"></div></td>
+
                             </tr>
                         @endforeach
                     </table>

@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::post('change-user-info', 'UserController@changeInfo');
     
+    Route::get('get-order-details', 'UserController@getOrderDetails');
+    
     Route::post('add-adress', 'UserController@addAdress');
     Route::post('delete-adress', 'UserController@deleteAdress');
 

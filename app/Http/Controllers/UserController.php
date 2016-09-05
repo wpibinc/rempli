@@ -69,5 +69,29 @@ class UserController extends BaseController
         Adress::destroy($id);
         return response()->json(['success' => true]);
     }
+    
+    public function getOrderDetails(Request $request)
+    {
+        if(!$request->isXmlHttpRequest()){
+            return abort(404);
+        }
+        $id = $request->input('id');
+        $items = Order::find($id)->items()->get();
+        $output = '';
+        if($items->count()){
+            foreach($items as $item){
+                $item->getRelations();
+                if($item->product){
+                    $output .= '<div class="item"><span class="title">'.$item->product->product_name.'</span><span class="count">'.$item->count.'</span><img src="'.$item->product->img.'"></div>';
+                    
+                }
+                if($item->avproduct){
+                    $output .= '<div class="item"><span class="title">'.$item->avproduct->name.'</span><span class="count">'.$item->count.'</span><img src="http://av.ru'.$item->avproduct->image.'"></div>';
+                }
+            }
+        }
+        echo $output;
+        die();
+    }
 }
 
