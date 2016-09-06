@@ -21,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
         \App\AvCategory::class => \App\Policies\AvCategoryPolicy::class,
         \App\AvProduct::class => \App\Policies\AvProductPolicy::class,
         \App\User::class => \App\Policies\UserPolicy::class,
+        \App\Review::class => \App\Policies\ReviewPolicy::class,
     ];
 
     /**
