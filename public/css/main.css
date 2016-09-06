@@ -876,6 +876,7 @@ body {
 .orderlogin{
 	color: #000!important;
 }
+
 .result-serch{
 	position: fixed;
 	width: 560px;
@@ -951,6 +952,9 @@ body {
 #container-fluid1 > div > div > div > div > div > div.orders > div > table > tbody > tr:nth-child(2) > td:nth-child(4){
 	width: 350px;
 	text-align: center;
+}
+.orders tr{
+	border-bottom: 1px solid #F3F3F3;
 }
 .activeClassradio{
 	display: block;
