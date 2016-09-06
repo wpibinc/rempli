@@ -974,6 +974,9 @@ body {
 	padding-top: 46px;
 	position: relative;
 }
+.ui-widget.ui-widget-content{
+	z-index: 9999;
+}
 .order-get-more{
 	background-color: transparent;
 	border:none;
@@ -987,6 +990,12 @@ body {
 }
 .radiocustom{
 	display: none;
+}
+.adresses th{
+	text-align: center;
+}
+.adresses td{
+	text-align: center;
 }
 .categories a{
 	padding: 0;
