@@ -153,7 +153,7 @@
 <div  id="map-canvas"></div>
 
 
-<footer class="col-md-12 col-xs-12 col-sm-12">
+<footer class="col-md-12 col-xs-12 col-sm-12 navbar-bottom">
     <a href="#" class="logo col-md-1 col-sm-3 col-xs-4"><img src="img/first.png" alt="rempli"></a>
     <div class="col-md-10 col-sm-6 col-xs-4 text-center"><span class="footer-copy">{{ Config('rempli.copyright') }}</span> </div>
     <a href="#" class="col-md-1 col-sm-3 col-xs-4"><img src="img/av5.png" alt="rempli"></a>

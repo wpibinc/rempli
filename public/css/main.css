@@ -839,6 +839,25 @@ body > footer > div{
 	border: none!important;
 	text-decoration: underline!important;
 }
+html {
+	position: relative;
+	min-height: 100%;
+}
+body {
+	/* Margin bottom by footer height */
+	margin-bottom: 60px;
+}
+.navbar-bottom {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+
+}
+.orders th,.orders td{
+	 text-align: center;
+}
 @media (max-width:1400px){
 	.product:hover>a>img{
 		max-width: 60%!important;
@@ -848,7 +867,11 @@ body > footer > div{
 }
 
 .product .count{
-	z-index: 999;
+	z-index: 2;
+}
+.table > tbody > tr > td{
+	padding: 7px 0;
+	margin-left: 5px;
 }
 .orderlogin{
 	color: #000!important;
