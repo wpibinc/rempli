@@ -7,6 +7,15 @@ function handleParseError(err) {
       break;
   }
 }
+$.widget('custom.autocomplete', $.ui.autocomplete, {
+    _renderItem: function( ul, item ) {
+        return $( "<li>" )
+          .attr( "data-value", item.id )
+          .append( item.label )
+          .append("<img src='"+item.image+"'>")
+          .appendTo( ul );
+    }
+});
 
 $(document).ready(function() {
     $(".popup-num").keydown(function(event) {
@@ -22,10 +31,13 @@ $(document).ready(function() {
             }
     });
     
-    // $("#cart_white .autocomplete").autocomplete('/autocomplete-product-search', {
-    //     width: 200,
-    //     max: 3
-    // })
+    
+    
+    $("#cart_white .autocomplete").autocomplete({
+        width: 200,
+        max: 3,
+        source: '/autocomplete-product-search',  
+    });
 });
 
 

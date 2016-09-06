@@ -13,6 +13,8 @@ Route::get('/contacts', 'MainController@contacts');
 
 Route::get('/price', 'MainController@price');
 
+Route::get('autocomplete-product-search', 'MainController@productSearch');
+
 Route::get('/enter', function () {
     return view('auth.enter');
 });
@@ -40,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('add-adress', 'UserController@addAdress');
     Route::post('delete-adress', 'UserController@deleteAdress');
     
-    Route::get('autocomplete-product-search', 'MainController@productSearch');
+    
 });
 
 #---------ПАРС--------------------------------
