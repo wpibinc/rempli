@@ -53,13 +53,21 @@ class MainController extends BaseController
                 ->get();
         $json = array();
         foreach($avProducts as $product){
-            $json[] = $product->name;
+            $json[] = array(
+                'label' => $product->name,
+                'image' => 'http://av.ru'.$product->image,
+                'id' => $product->id,
+            );
         }
         foreach($products as $product){
             if(count($json) >= 5){
                 break;
             }
-             $json[] = $product->product_name;
+            $json[] = array(
+                'label' => $product->product_name,
+                'image' => $product->img,
+                'id' => $product->id
+            );
         }
         return response()->json($json);
     }

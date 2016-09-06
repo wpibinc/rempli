@@ -742,28 +742,39 @@ div.modal-dialog > div > div:nth-child(3){
 	margin:0px;
 	padding:0px;
 }
-.tabs ul:after{
-	content:"";
-	display:block;
-	clear:both;
-	height:5px;
-	background:#46c765;
-}
+
 .tabs ul li{
 	margin:0px;
 	padding:0px;
 	cursor:pointer;
 	display:block;
 	padding:10px 15px;
-	background:#e9eaeb;
+	background:#F5F5F5;
 	color:#707070;
+	border: 1px solid #F0EFEC;
+	transition: all 0.5s ease;
 }
 .tabs ul li.active, .tabs ul li.active:hover{
-	background:#46c765;
+	background:#000000;
 	color:#fff;
 }
 .tabs ul li:hover{
-	background:#d6d6d7;
+	background:#000000;
+	color:#fff;
+}
+.tabs li a {
+	color: #707070;
+	padding: 0;
+	font-family: 'Open Sans', sans-serif;
+	text-transform: inherit;
+	font-size: 14px;
+}
+.tabs li a:hover{
+	color: #fff!important;
+	text-decoration: none;
+}
+.tabs li:hover a{
+	color: #fff;
 }
 .my-account{
 	position: absolute;
@@ -773,6 +784,34 @@ div.modal-dialog > div > div:nth-child(3){
 	width: 137px;
 	padding: 0px 10px;
 	background-color: #fff;
+}
+.wrapper-acaunt input{
+	margin-right: 20px;
+
+}
+.add-form{
+	position: fixed;
+	width: 300px;
+	background: #fff;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	padding: 20px;
+	display: none;
+	z-index: 9999999;
+}
+.add-adress{
+	float: right;
+}
+
+.wrapper-acaunt >div{
+	margin: 10px 0;
+}
+.wrapper-acaunt{
+	padding: 10px 30px 20px;
+	background-color: #fff;
+	border: 1px solid #F0EFEC;
+	margin-bottom: 15px;
 }
 .product .price{
 	position: absolute;
@@ -794,6 +833,11 @@ body > footer > div{
 
 	position: relative;
 	left: 0px;
+}
+.acount-btn-custom{
+	background-color: transparent!important;
+	border: none!important;
+	text-decoration: underline!important;
 }
 @media (max-width:1400px){
 	.product:hover>a>img{
@@ -838,7 +882,7 @@ body > footer > div{
 }
 .categories a{
 	position: relative;
-	height:86px;
+	height:auto;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0.18+29,0.18+71,1+100 */
 	background: -moz-linear-gradient(left,  rgba(0,0,0,1) 0%, rgba(0,0,0,0.18) 29%, rgba(0,0,0,0.18) 71%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(left,  rgba(0,0,0,1) 0%,rgba(0,0,0,0.18) 29%,rgba(0,0,0,0.18) 71%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -890,4 +934,7 @@ body > footer > div{
 }
 .radiocustom{
 	display: none;
+}
+.categories a{
+	padding: 0;
 }
