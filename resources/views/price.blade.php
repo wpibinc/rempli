@@ -32,8 +32,8 @@
                 </div>
 
                 <style>
-                    html, body, #map-canvas {
-                        height: 600px;
+                   #map-canvas {
+                        height: 400px;
 
                     }
                     .container, #map-canvas {
