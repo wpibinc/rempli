@@ -26,21 +26,17 @@ class UserController extends BaseController
         if(!$request->isXmlHttpRequest()){
             return abort(404);
         }
-        $param = $request->input('param');
-        $value = $request->input('value');
         $user = Auth::user();
-        switch($param){
-            case 'email': $user->email = $value;
-                break;
-            case 'password': $user->password = bcrypt($value);
-                break;
-            case 'phone': $user->phone = $value;
-                break;
-            case 'fname': $user->fname = $value;
-                break;
-            case 'sname': $user->sname = $value;
-                break;
+        $action = $request->input('action');
+        if($action == 'changepassword'){
+            $user->password = bcrypt($request->input('pass'));
+        }else{
+            $user->email = $request->input('email');
+            $user->phone = $request->input('phone');
+            $user->fname = $request->input('fname');
+            $user->sname = $request->input('sname');
         }
+
         $user->save();
     }
     

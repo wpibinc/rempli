@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Order;
 use App\Adress;
+use App\Review;
 
 class User extends Authenticatable
 {
@@ -34,5 +35,10 @@ class User extends Authenticatable
     public function adresses()
     {
         return $this->hasMany(Adress::class);
+    }
+    
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

@@ -20,7 +20,7 @@
                         <label class="col-md-2">Пароль</label>
                         <input type='password' name='password' class="col-md-3" value='1111'>
                     </div>
-                    <button class='change-user-info acount-btn-custom'>Изменить</button>
+                    <button class='change-password acount-btn-custom'>Изменить</button>
                 </div>
                 <div class="wrapper-acaunt col-md-12">
                     <h4>ЛИЧНАЯ ИНФОРМАЦИЯ</h4>

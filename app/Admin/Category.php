@@ -9,7 +9,16 @@ AdminSection::registerModel(Category::class, function (ModelConfiguration $model
     $model->enableAccessCheck();
 
     $model->onDisplay(function () {
-        return AdminDisplay::tree()->setValue('name');
+        $display = AdminDisplay::table();
+        $display->paginate(15);
+        return $display->setColumns([
+            AdminColumn::text('name')->setLabel('Название'),
+            AdminColumn::text('alias')->setLabel('Псевдоним'),
+            AdminColumn::text('img')->setLabel('Фотография'),
+            AdminColumn::text('email')->setLabel('E-mail'),
+            AdminColumn::count('orders')->setLabel('Заказы'),
+        ]);
+        //return AdminDisplay::tree()->setValue('name');
     });
 
 

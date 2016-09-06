@@ -21,7 +21,7 @@ AdminSection::registerModel(User::class, function (ModelConfiguration $model) {
             AdminColumn::text('phone')->setLabel('Телефон'),
             AdminColumn::text('email')->setLabel('E-mail'),
             AdminColumn::count('orders')->setLabel('Заказы'),
-        ]);;
+        ]);
     });
 })->addMenuPage(User::class, 0)
     ->setIcon('fa fa-group');

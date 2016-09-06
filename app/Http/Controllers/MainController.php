@@ -6,12 +6,13 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\AvProduct;
 use App\Product;
+use App\Review;
+use Auth;
 
 class MainController extends BaseController
 {
     public function index()
     {
-//        $categories = \App\Category::all();
         return view('index');
     }
     
@@ -20,9 +21,21 @@ class MainController extends BaseController
         return view('price');
     }
     
-    public function where()
+    public function reviews()
     {
-        return view('where');
+        $reviews = Review::all();
+        $userName = '';
+        $userEmail = '';
+        if(Auth::user()){
+            $userName = $user->fname;
+            $userEmail = $user->email;
+        }
+        $user = Auth::user();
+        return view('where', [
+            'reviews' => $reviews, 
+            'userName' => $userName, 
+            'userEmail' =>  $userEmail,             
+        ]);
     }
     
     public function about()
@@ -43,6 +56,9 @@ class MainController extends BaseController
     public function productSearch(Request $request)
     {
         $term = $request->input('term');
+        if(!$term){
+            abort(404);
+        }
         $avProducts = AvProduct::where('name', 'like', $term.'%')
                 ->orderBy('updated_at')
                 ->take(5)

@@ -1,25 +1,49 @@
 $(document).on('ready', function(){
     $(".change-user-info").on('click', function(){
-        var res = confirm('Вы уверены?');
-        if(!res){
-            return;
-        }
-        var param = jQuery(this).siblings('input').attr('name');
-        var value = jQuery(this).siblings('input').val();
-        var token = jQuery("input[name=_token]").val();
+        
+        var token = $("input[name=_token]").val();
+        var email = $(".account .email input").val();
+        var phone = $(".account .phone input").val();
+        var fname = $(".account .fname input").val();
+        var sname = $(".account .sname input").val();
         $.ajax({
             url: '/change-user-info',
             method: 'post',
             data: {
-                param: param,
-                value: value,
-                _token: token
+                email: email,
+                phone: phone,
+                fname: fname,
+                sname: sname,
+                _token: token,
+                action: "changeinfo"
             },
             success: function(res){
                 alert('ok');
             }
         });
     });
+    
+    $(".change-password").on('click', function(){
+        var res = confirm('Вы уверены?');
+        if(!res){
+            return;
+        }
+        var pass = $(".account .password input").val();
+        var token = $("input[name=_token]").val();
+        $.ajax({
+            url: '/change-user-info',
+            method: 'post',
+            data: {
+                pass: pass,
+                action: "changepassword"
+            },
+            success: function(res){
+                alert('ok');
+            }
+        });
+    });
+    
+    $(".")
     
     $(".add-adress").on('click', function(){
         var street = $('#street-input').val();
