@@ -956,6 +956,12 @@ body {
 .orders tr{
 	border-bottom: 1px solid #F3F3F3;
 }
+.adresses tr{
+	border-bottom: 1px solid #F3F3F3;
+}
+.orders th, .orders td{
+	text-align: center;
+}
 .activeClassradio{
 	display: block;
 }
