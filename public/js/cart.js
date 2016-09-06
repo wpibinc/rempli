@@ -22,10 +22,10 @@ $(document).ready(function() {
             }
     });
     
-    $("#cart_white .autocomplete").autocomplete('/autocomplete-product-search', {
-        width: 200,
-        max: 3
-    })
+    // $("#cart_white .autocomplete").autocomplete('/autocomplete-product-search', {
+    //     width: 200,
+    //     max: 3
+    // })
 });
 
 
