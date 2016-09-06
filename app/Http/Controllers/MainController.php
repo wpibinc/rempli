@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\AvProduct;
 use App\Product;
 use App\Review;
 use Auth;
 
-class MainController extends BaseController
+class MainController extends Controller
 {
     public function index()
     {
@@ -21,20 +21,26 @@ class MainController extends BaseController
         return view('price');
     }
     
-    public function reviews()
+    public function reviews(Request $request)
     {
-        $reviews = Review::all();
-        $userName = '';
-        $userEmail = '';
-        if(Auth::user()){
-            $userName = $user->fname;
-            $userEmail = $user->email;
-        }
         $user = Auth::user();
+        if($request->isMethod('POST')){
+            if($user){
+                $this->validate($request, [
+                    'message' => 'required'
+                ]);
+
+                $review = new Review();
+                $review->user_id = $user->id;
+                $review->name = $user->fname;
+                $review->content = $request->input('message');
+                $review->save();
+            }
+        }
+        $reviews = Review::all();
+
         return view('where', [
-            'reviews' => $reviews, 
-            'userName' => $userName, 
-            'userEmail' =>  $userEmail,             
+            'reviews' => $reviews,            
         ]);
     }
     
