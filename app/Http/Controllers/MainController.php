@@ -57,6 +57,9 @@ class MainController extends BaseController
                 'label' => $product->name,
                 'image' => 'http://av.ru'.$product->image,
                 'id' => $product->id,
+                'price' => $product->price,
+                'weight' => $product->original_typical_weight,
+                'category' => $product->category_id,
             );
         }
         foreach($products as $product){
@@ -66,7 +69,10 @@ class MainController extends BaseController
             $json[] = array(
                 'label' => $product->product_name,
                 'image' => $product->img,
-                'id' => $product->id
+                'id' => $product->id,
+                'price' => $price,
+                'weight' => $product->weight,
+                'category' => $product->category_id,
             );
         }
         return response()->json($json);

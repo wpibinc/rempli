@@ -10,10 +10,13 @@ function handleParseError(err) {
 $.widget('custom.autocomplete', $.ui.autocomplete, {
     _renderItem: function( ul, item ) {
         return $( "<li>" )
-          .attr( "data-value", item.id )
-          .append( item.label )
-          .append("<img src='"+item.image+"'>")
-          .appendTo( ul );
+            .attr( "data-id", item.id )
+            .attr("data-price", item.price)
+            .attr("data-weight", item.weight)
+            .attr("data-category", item.category)
+            .append( item.label )
+            .append("<img src='"+item.image+"'>")
+            .appendTo( ul );
     }
 });
 
@@ -36,7 +39,65 @@ $(document).ready(function() {
     $("#cart_white .autocomplete").autocomplete({
         width: 200,
         max: 3,
-        source: '/autocomplete-product-search',  
+        source: '/autocomplete-product-search',
+        select: function( event, ui ) {
+            var theId = ui.item.id;
+            var weight = +ui.item.weight;
+            var category = +ui.item.category;
+            var image = ui.item.image;
+            var title = ui.item.label;
+            var price = ui.item.price;
+            
+            if (sessionStorage.count) {
+                sessionStorage.count = Number(sessionStorage.count)+1;
+            } else {
+                sessionStorage.count = 1;
+            }
+            
+            sessionStorage.mass = parseInt(sessionStorage.mass) + weight;
+
+
+            if (sessionStorage[theId]) {
+                sessionStorage[theId] = Number(sessionStorage[theId])+1;
+            } else {
+                sessionStorage[theId] = 1;
+            }
+            newItem = (
+            '<tr data-category="'+category+'" class="ordered-item" id="cart-'+theId+'"> '+
+            '<td class="quantity"> '+Number(sessionStorage[theId])+
+            '<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
+            '<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
+            '</td>' +
+            '<td class="image hidden-xs hidden-sm"> <span class="helper"></span><img src="'+image+'" ></td>' +
+            '<td class="name">'+title+'</td>'+
+            '<td class="price"><span class="priceShow">'+parseFloat(price)+'</span>р</td>' +
+
+            '<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (Math.round(parseFloat(price))*parseFloat(Number(sessionStorage[theId])))+ '</span>р'+
+            '<a href="#" class="cart-change cart-del">×</a>' +
+            '</td>'+
+            '</tr>');
+
+            $('#cart-number').html(Number(sessionStorage.count));
+
+            var itemId = theId;
+            $("#cart-"+ itemId).remove();
+
+            $("#ordered-items").prepend(newItem);
+
+            totalCost = totalCost + Math.round(parseFloat(price));
+
+            totalCost = Math.round(totalCost);
+            console.log(totalCost);
+            $('#cart-price').html(totalCost);
+
+            if (totalCost >= 200) {
+                    $('#notmin').css( "display", "none" );
+            }
+            $('.cart-total').find('th').html(sessionStorage.mass + ' грамм');
+            sessionStorage.cart = $("#ordered-items").html();
+            sessionStorage.total = totalCost;
+            return newItem;
+        }
     });
 });
 
