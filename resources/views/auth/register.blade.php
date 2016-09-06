@@ -20,7 +20,7 @@
                         {{--</div>--}}
 
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <input id="phone " required  type="text" class="form-control" name="phone" value="{{ old('phone') }}" placeholder="Телeфон">
+                            <input id="phone" required  type="text" class="form-control" name="phone" value="{{ old('phone') }}" placeholder="Телeфон">
                             @if ($errors->has('phone'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
