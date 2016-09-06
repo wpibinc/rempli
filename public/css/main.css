@@ -1130,3 +1130,6 @@ body {
 .btn-link{
 	float: right;
 }
+.add-to-cart:hover{
+	background: #ffcc22;
+}
