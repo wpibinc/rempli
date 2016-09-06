@@ -3428,7 +3428,7 @@ ul.autocomplete li img
 }
 
 .center{
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%,-50%);
@@ -3440,7 +3440,18 @@ ul.autocomplete li img
   position: relative;
 }
 
-
+@media(max-width: 1600px) and (min-width: 1440px){
+	.categories p {
+		font-size: 185%!important;
+		line-height: 16px;
+	}
+}
+@media(max-width: 1440px) and (min-width: 1023px){
+	.categories p {
+		font-size: 110%!important;
+		line-height: 16px;
+	}
+}
 .dotcon{
   display: block;
   float: left;
