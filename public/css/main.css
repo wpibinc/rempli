@@ -965,6 +965,26 @@ body {
 .activeClassradio{
 	display: block;
 }
+.ui-menu-item-wrapper{
+	width: 100px;
+}
+.ui-menu .ui-menu-item{
+	padding-left: 120px;
+	height: 110px;
+	padding-top: 46px;
+	position: relative;
+}
+.order-get-more{
+	background-color: transparent;
+	border:none;
+}
+.ui-menu .ui-menu-item-wrapper {
+	position: absolute;
+	padding: 3px 1em 3px .4em;
+	left: 0;
+	top:50%;
+	transform: translateY(-50%);
+}
 .radiocustom{
 	display: none;
 }
