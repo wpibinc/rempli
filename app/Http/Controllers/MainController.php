@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use App\AvProduct;
+use App\Product;
 
 class MainController extends BaseController
 {
@@ -38,9 +40,28 @@ class MainController extends BaseController
         return view('startpage');
     }
     
-    public function productSearch()
+    public function productSearch(Request $request)
     {
-        echo '123';
+        $term = $request->input('term');
+        $avProducts = AvProduct::where('name', 'like', $term.'%')
+                ->orderBy('updated_at')
+                ->take(5)
+                ->get();
+        $products = Product::where('product_name', 'like', $term.'%')
+                ->orderBy('updated_at')
+                ->take(5)
+                ->get();
+        $json = array();
+        foreach($avProducts as $product){
+            $json[] = $product->name;
+        }
+        foreach($products as $product){
+            if(count($json) >= 5){
+                break;
+            }
+             $json[] = $product->product_name;
+        }
+        return response()->json($json);
     }
 }
 

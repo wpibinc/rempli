@@ -8,6 +8,7 @@ function handleParseError(err) {
   }
 }
 
+
 $(document).ready(function() {
     $(".popup-num").keydown(function(event) {
             // Allow only backspace and delete
@@ -22,9 +23,13 @@ $(document).ready(function() {
             }
     });
     
-    $("#cart_white .autocomplete").autocomplete('/autocomplete-product-search', {
+    
+    
+    $("#cart_white .autocomplete").autocomplete({
         width: 200,
-        max: 3
+        max: 3,
+        source: '/autocomplete-product-search',
+        
     })
 });
 
