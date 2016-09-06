@@ -19,7 +19,7 @@
 
 .logo {
 	/*position: relative;*/
-	height: 30px;ещещ
+	height: 30px;
 /*	margin-top: 30px;
 	left: 500px;*/
 	/*text-align: center;*/
@@ -63,9 +63,7 @@
 	margin-left: 44px;
 	margin-right: 20px;
 }
-.twoad {
-	width: 155px !important;
-}
+
 
 .content {
 	padding-top: 50px;
@@ -92,7 +90,7 @@ label {
 }
 
 .backForth {
-	padding: 12px 20px !important;
+	padding: 12px 20px;
 	font-size: 17px;
 	font-weight: bold;
 }
@@ -105,8 +103,36 @@ label {
 	color: #aaa !important;
 }
 @media(max-width: 768px){
-	.headerOrder {
+	.backForth{
+		font-size: 14px!important;
+	}
+	.b-widget-button_white .b-button .b-button__inner{
+		background-image: url(asd) !important;
+	}
+	.b-widget-button__icon_type_any-card{
 		display: none;
+	}
+	.b-widget-button .b-button .b-button__inner{
+		font-size: 16px;
+	}
+	.pager li > a, .pager li > span{
+		box-shadow: 0 1px 3px #999;
+		background-attachment: scroll;
+		background-clip: border-box;
+		background-color: transparent;
+		background-image: url("https://money.yandex.ru/img/b-widget-button__sprite.png");
+		background-origin: padding-box;
+
+		border-bottom: medium none;
+		border-left: medium none;
+		color: #000;
+		text-shadow: -1px -1px 1px #E7E7E7;
+		background-position: 0 -259px;
+		border-radius: 5px 5px 5px 5px;
+
+	}
+	#toPay{
+		color: #000;
 	}
 }
 
@@ -147,8 +173,46 @@ label {
 	display: none;
 }
 
+.backForth{
+	font-size: 14px!important;
+}
+.b-widget-button_white .b-button .b-button__inner{
+	background-image: url(asd) !important;
+}
+.b-widget-button__icon_type_any-card{
+	display: none;
+}
+.b-widget-button .b-button .b-button__inner{
+	font-size: 16px;
+}
+.pager li > a, .pager li > span{
+	box-shadow: 0 1px 3px #999;
+	background-attachment: scroll;
+	background-clip: border-box;
+	background-color: transparent;
+	background-image: url("https://money.yandex.ru/img/b-widget-button__sprite.png");
+	background-origin: padding-box;
 
+	border-bottom: medium none;
+	border-left: medium none;
+	color: #000;
+	text-shadow: -1px -1px 1px #E7E7E7;
+	background-position: 0 -259px;
+	border-radius: 5px 5px 5px 5px;
 
+}
+#toPay{
+	color: #000;
+}
+#payProducts,#dCostPay,#payTotal{
+	padding-top: 6px;
+}
+.totalPayLaber{
+	padding-left: 0;
+}
+.form-inline .form-control{
+	width: 100%;
+}
 
 /*.orderlogin:hover {
 	text-decoration: underline;

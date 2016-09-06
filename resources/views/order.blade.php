@@ -18,7 +18,7 @@
                     <!-- 	После заполнения информации снизу, вы сможете оплатить заказ по любой банковской карте и мы доставим Ваш заказ меньше чем через 1 час! -->
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group  col-md-9 col-md-offset-3 col-sm-12 col-sm-offset-0">
                 <div class="radio">
                     <label>
                         <input type="radio" name="optionsRadios" id="optionsRadios1" value="val-1" checked>
@@ -33,23 +33,29 @@
                 </div>
             </div>
             @if($user->adresses)
-            <div class="form-group" id="val-2">
-                <label for="selectAddress" class="col-sm-3 control-label">Адрес <!-- <span class="red">*</span> -->
-                </label>
-                <select name="selectAddress" id="selectAddress">
-                    @foreach($user->adresses as $adress)
-                    <?php 
-                        $addressfull = $adress->street.' '.$adress->home;
-                        if(!empty($adress->korp)){
-                            $addressfull .= ' корп. '.$adress->korp;
-                        }
-                        if(!empty($adress->flat)){
-                            $addressfull .= ' кв. '.$adress->flat;
-                        }
-                    ?>
-                    <option value="{{$adress->id}}"><?php echo $addressfull ?></option>
-                    @endforeach
-                </select>
+            <div class="form-group col-md-12" id="val-2">
+                <div class="col-sm-3">
+
+                    <label for="selectAddress" class=" control-label">Адрес <!-- <span class="red">*</span> -->
+                    </label>
+                </div>
+                <div class="col-md-9 col-sm-12 p-l-15">
+                    <select name="selectAddress" id="selectAddress">
+                        @foreach($user->adresses as $adress)
+                            <?php
+                            $addressfull = $adress->street.' '.$adress->home;
+                            if(!empty($adress->korp)){
+                                $addressfull .= ' корп. '.$adress->korp;
+                            }
+                            if(!empty($adress->flat)){
+                                $addressfull .= ' кв. '.$adress->flat;
+                            }
+                            ?>
+                            <option value="{{$adress->id}}"><?php echo $addressfull ?></option>
+                        @endforeach
+                    </select>
+                </div>
+
             </div>
             @endif
             <div class="" id="val-1">
@@ -68,21 +74,24 @@
             <div class="form-group">
                 <label for="inputName"  class="col-sm-3 control-label">
                 </label>
-                <div class="col-sm-9 form-inline">
-                    <!-- <input type="text"  value="" required class="form-control" name="flat" placeholder="" id="flat"> -->
-                    <input type="hidden" id="user" value="{{Auth::user()->id or ''}}">
-                    <div class="form-group inline">
-                        <input type="text" class="form-control twoad" id="house" placeholder="Дом">
+                <div class="col-sm-9 ">
+                    <div class="row">
+                        <!-- <input type="text"  value="" required class="form-control" name="flat" placeholder="" id="flat"> -->
+                        <input type="hidden" id="user" value="{{Auth::user()->id or ''}}">
+                        <div class="form-group inline col-md-4 col-sm-12">
+                            <input type="text" class="form-control twoad" id="house" placeholder="Дом">
+                        </div>
+                        <div class="form-group inline col-md-4 col-sm-12">
+
+                            <input type="text" class="form-control twoad" id="korp" placeholder="Корпус">
+                        </div>
+                        <div class="form-group inline col-md-4 col-sm-12">
+
+                            <input type="text" class="form-control twoad" id="flat" placeholder="Квартира">
+                        </div>
+                        <p class="help-block text-danger"></p>
                     </div>
-                    <div class="form-group inline">
-                        <label for="korp" id="flatlab"></label>
-                        <input type="text" class="form-control twoad" id="korp" placeholder="Корпус">
-                    </div>
-                    <div class="form-group inline">
-                        <label for="exampleInputEmail2" id="flatlab"></label>
-                        <input type="text" class="form-control twoad" id="flat" placeholder="Квартира">
-                    </div>
-                    <p class="help-block text-danger"></p>
+
                 </div>
             </div>
             </div>
