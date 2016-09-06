@@ -75,6 +75,7 @@ $(document).ready(function() {
             '<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (Math.round(parseFloat(price))*parseFloat(Number(sessionStorage[theId])))+ '</span>р'+
             '<a href="#" class="cart-change cart-del">×</a>' +
             '</td>'+
+            '<td><a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i> Добавить комментарий</a></td>'+
             '</tr>');
 
             $('#cart-number').html(Number(sessionStorage.count));
@@ -231,6 +232,7 @@ $(document).on('click', ".increase_count", function(){
 	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (Math.round(parseFloat($(this).closest('.product').find('.price').html()))*parseFloat(Number(sessionStorage[theId])))+ '</span>р'+
 	'<a href="#" class="cart-change cart-del">×</a>' +
 	'</td>'+
+        '<td><a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i> Добавить комментарий</a></td>'+
 	'</tr>');
 
 
@@ -295,6 +297,7 @@ $(document).on('click', '.add-to-cart', function(e){
 	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (parseFloat($(this).parents(".modal-dialog").find(".popup-price").html())*parseFloat(Number(sessionStorage[theId]))).toFixed(0)+ '</span>р'+
 	'<a href="#" class="cart-change cart-del">×</a>' +
 	'</td>'+
+        '<td><a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i> Добавить комментарий</a></td>'+
 	'</tr>');
 
 	$('#cart-number').html(Number(sessionStorage.count));
@@ -473,6 +476,7 @@ $(document).on('click', ".reduce_count", function(){
 		'<td class="total"><span class="totalShow">' + (parseFloat($(this).closest('.product').find('.price').html()) * parseFloat(Number(sessionStorage[theId]))).toFixed(0) + '</span>р' +
 		'<a href="#" class="cart-change cart-del">×</a>' +
 		'</td>' +
+                '<td><a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i> Добавить комментарий</a></td>'+
 		'</tr>');
 
 

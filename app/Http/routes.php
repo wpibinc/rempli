@@ -5,7 +5,7 @@
 //Главная - магазин
 Route::get('/', 'MainController@index');
 
-Route::get('/where', 'MainController@where');
+Route::get('/reviews', 'MainController@reviews');
 
 Route::get('/about', 'MainController@about');
 

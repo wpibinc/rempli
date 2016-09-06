@@ -53,7 +53,7 @@
                     <li><a href="/my-account">Учётная запись</a></li>
                     <li><a href="/my-account?page=orders">История заказов</a></li>
                     <li><a href="/my-account?page=adress">Адреса</a></li>
-                    <li><a href="/my-account?page=rules">Правила</a></li>
+                    <li><a href="/my-account?page=rules">Правила сайта</a></li>
                     <li><a href="/logout">Выход </a></li>
                 </ul>
         @else
@@ -130,7 +130,7 @@
     <ul class="col-md-6 col-md-offset-3 col-sm-8 col-xs-12">
         <li><a href="/" {!! (Request::is('/')) ? 'class="active"' : '' !!}>Магазин</a></li>
         <li><a href="/about" {!! (Request::is('about')) ? 'class="active"' : '' !!}>О нас</a></li>
-        <li><a href="/where" {!! (Request::is('where')) ? 'class="active"' : '' !!}>Где работаем</a></li>
+        <li><a href="/reviews" {!! (Request::is('where')) ? 'class="active"' : '' !!}>Отзывы</a></li>
         <li><a href="/price" {!! (Request::is('price')) ? 'class="active"' : '' !!}>Доставка и оплата</a></li>
         <li><a href="/contacts" {!! (Request::is('contacts')) ? 'class="active"' : '' !!}>Контакты</a></li>
     </ul>
