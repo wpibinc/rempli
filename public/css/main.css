@@ -1133,3 +1133,18 @@ body {
 .add-to-cart:hover{
 	background: #ffcc22;
 }
+.categories a{
+	padding: 0;
+	-webkit-filter: saturate(1);
+	transition: all 0.5s ease;
+}
+.categories a:hover {
+	-webkit-filter: saturate(0.2);
+}
+.categories a p{
+	text-shadow: none;
+	transition: all 0.5s ease;
+}
+.categories a:hover p{
+	text-shadow: 3px 1px 3px rgba(0, 0, 0, 1);
+}
