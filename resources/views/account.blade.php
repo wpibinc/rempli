@@ -18,7 +18,7 @@
                     <h4>ИЗМЕНИТЬ ПАРОЛЬ</h4>
                     <div class='password col-md-12'>
                         <label class="col-md-2">Пароль</label>
-                        <input type='password' name='password' class="col-md-2" value='1111'>
+                        <input type='password' name='password' class="col-md-3" value='1111'>
                     </div>
                     <button class='change-user-info acount-btn-custom'>Изменить</button>
                 </div>
@@ -26,22 +26,22 @@
                     <h4>ЛИЧНАЯ ИНФОРМАЦИЯ</h4>
                     <div class='email col-md-12'>
                         <label class="col-md-2">Email</label>
-                        <input type='text' name='email' class="col-md-2" value='{{$user->email}}'>
+                        <input type='text' name='email' class="col-md-3" value='{{$user->email}}'>
 
                     </div>
                     <div class='phone col-md-12'>
                         <label class="col-md-2">Телефон</label>
-                        <input type='text' name='phone' class="col-md-2" value='{{$user->phone}}'>
+                        <input type='text' name='phone' class="col-md-3" value='{{$user->phone}}'>
 
                     </div>
                     <div class='fname col-md-12'>
                         <label class="col-md-2">Имя</label>
-                        <input type='text' name='fname' class="col-md-2" value='{{$user->fname}}'>
+                        <input type='text' name='fname' class="col-md-3" value='{{$user->fname}}'>
 
                     </div>
                     <div class='sname col-md-12'>
                         <label class="col-md-2">Фамилия</label>
-                        <input type='text' name='sname' class="col-md-2" value='{{$user->sname}}'>
+                        <input type='text' name='sname' class="col-md-3" value='{{$user->sname}}'>
 
                     </div>
                     <button class='change-user-info acount-btn-custom'>Изменить</button>
