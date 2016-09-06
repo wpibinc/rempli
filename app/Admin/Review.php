@@ -3,7 +3,7 @@ use App\Review;
 use SleepingOwl\Admin\Model\ModelConfiguration;
 
 AdminSection::registerModel(Review::class, function (ModelConfiguration $model) {
-    //$model->enableAccessCheck();
+    $model->enableAccessCheck();
     $model->setTitle('Отзывы');
 
     // Display
