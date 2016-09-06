@@ -11,7 +11,6 @@ class MainController extends BaseController
 {
     public function index()
     {
-//        $categories = \App\Category::all();
         return view('index');
     }
     
@@ -43,6 +42,9 @@ class MainController extends BaseController
     public function productSearch(Request $request)
     {
         $term = $request->input('term');
+        if(!$term){
+            abort(404);
+        }
         $avProducts = AvProduct::where('name', 'like', $term.'%')
                 ->orderBy('updated_at')
                 ->take(5)
