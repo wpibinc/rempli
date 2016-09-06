@@ -974,6 +974,9 @@ body {
 	padding-top: 46px;
 	position: relative;
 }
+.ui-widget.ui-widget-content{
+	z-index: 9999;
+}
 .order-get-more{
 	background-color: transparent;
 	border:none;
