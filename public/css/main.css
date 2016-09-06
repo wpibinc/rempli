@@ -659,11 +659,11 @@ input:-moz-placeholder {  padding-top: 1px; }
 	font-size: 18px;
 }
 .cart-add{
-	left: 35px!important;
+	left: 25px!important;
 	top: 0;
 }
 .cart-min{
-	left: 35px!important;
+	left: 25px!important;
 	bottom: 32px;
 }
 .categories a:before{
@@ -1100,4 +1100,24 @@ body {
 }
 .categories a{
 	padding: 0;
+}
+.ordered-item{
+	position: relative;
+}
+.ordered-item > td:last-child{
+	position: relative;
+}
+.ordered-item > td:last-child > a{
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	top: 48px;
+	right: 156px;
+	border-bottom: 0;
+	width: 85px;
+	transition: all 0.5s ease;
+}
+.ordered-item:hover > td:last-child > a{
+	visibility: visible;
+	opacity: 1;
 }
