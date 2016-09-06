@@ -991,6 +991,12 @@ body {
 .radiocustom{
 	display: none;
 }
+.adresses th{
+	text-align: center;
+}
+.adresses td{
+	text-align: center;
+}
 .categories a{
 	padding: 0;
 }
