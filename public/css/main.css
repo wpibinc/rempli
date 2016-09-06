@@ -679,7 +679,13 @@ input:-moz-placeholder {  padding-top: 1px; }
 	background: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0.3) 29%,rgba(0,0,0,0.3) 71%,rgba(0,0,0,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=1 );
 }
-
+.review-item{
+	border: 1px solid #CAC8C8;
+	border-radius: 9px;
+	padding: 20px;
+	margin-bottom: 20px;
+	background-color: #fff;
+}
 .quantity{
 	text-align: center;
 	padding-top: 33px!important;
