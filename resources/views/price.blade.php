@@ -5,11 +5,11 @@
 @section('content')
     <div class="tabs col-md-12">
         <ul class="col-md-2">
-            <li>Оформление заказа</li>
-            <li>Территория доставки </li>
-            <li>Сколько стоит</li>
-            <li>Вопросы/ответы</li>
-            <li>Как мы работаем</li>
+            <li><i class="fa fa-pencil-square" aria-hidden="true"></i> Оформление заказа <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
+            <li><i class="fa fa-map" aria-hidden="true"></i> Территория доставки <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
+            <li><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Сколько стоит <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
+            <li><i class="fa fa-comments-o" aria-hidden="true"></i> Вопросы/ответы <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
+            <li><i class="fa fa-coffee" aria-hidden="true"></i> Как мы работаем <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
         </ul>
         <div class="col-md-10">
             <div >

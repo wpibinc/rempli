@@ -1155,3 +1155,13 @@ body {
 .categories a:hover p{
 	text-shadow: 3px 1px 3px rgba(0, 0, 0, 1);
 }
+.review-item .title{
+	font-size: 16px;
+	color: #B3B2B2;
+}
+#container-fluid1 > div > div > div:nth-child(2) > form > div:nth-child(3){
+	text-align: right;
+}
+textarea{
+	resize: none
+}
