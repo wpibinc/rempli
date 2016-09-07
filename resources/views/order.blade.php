@@ -25,14 +25,16 @@
                         ввести адрес
                     </label>
                 </div>
+                @if(count($user->adresses))
                 <div class="radio">
                     <label>
                         <input type="radio" name="optionsRadios" id="optionsRadios2" value="val-2">
                         выбрать адрес
                     </label>
                 </div>
+                @endif
             </div>
-            @if($user->adresses)
+            @if(count($user->adresses))
             <div class="form-group col-md-12" id="val-2">
                 <div class="col-sm-3">
 

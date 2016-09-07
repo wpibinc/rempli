@@ -21,7 +21,8 @@ class TestController extends BaseController
     {
         $users = User::all();
         foreach ($users as $user){
-            $user->confirmation_code = 1;
+            $user->confirmation_code = null;
+            $user->confirmed = 1;
             $user->save();
         }
         echo "ok";

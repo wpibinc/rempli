@@ -107,7 +107,6 @@ okplace = 1;
 				});
 		};
 		data = id;
-                console.log(data);
 
 				    $(document).on('click', "#toPay", function(){
 
@@ -253,7 +252,7 @@ $(document).ready(function() {
 				}
 			),
 			success: function (data) {
-				window.location.href = "/payment";
+                            window.location.href = "/payment?order=92";
 			},
 			error: function (xhr, textStatus, thrownError) {
 				alert(thrownError);

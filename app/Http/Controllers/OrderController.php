@@ -34,7 +34,7 @@ class OrderController extends BaseController
             $order= Order::create($order);
             $order->items()->createMany($items['items']);
     
-            return ['ok'];
+            return ['orderId' => $order->id];
             die();
         }
         $user = Auth::user();
@@ -68,22 +68,24 @@ class OrderController extends BaseController
             if(null === $request->input('cost')){
                 $cost = $request->input('cost');
             }
-            $apiId = 'BAFD72FC-2E9F-6C9F-77BF-4F2BDEEBD21F';
-            $client = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
-    
-            $phone = '89645805819';
-            $text = "$name. Сумма заказа $cost руб.";
-    
-            $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text);
-    
-            $client->smsSend($sms);
-
+            
             //dd($client->smsStatus($smsId));
 
             //dd($client->myLimit());
             return ['ok'];
         }
+        $apiId = 'BAFD72FC-2E9F-6C9F-77BF-4F2BDEEBD21F';
+        $client = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
+    
+        $phone = '89645805819';
+        $text = "$name. Сумма заказа $cost руб.";
 
+        $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text);
+
+        $client->smsSend($sms);
+
+        $userPhone = $user->phone;
+        $text = 'Ваш заказ на сумму (сумма рублей принят. В ближайшее время мы свяжемся с Вами для подтверждения';
         return view('success');
     }
 }
