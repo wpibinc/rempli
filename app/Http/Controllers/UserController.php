@@ -1,12 +1,16 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Routing\Controller as BaseController;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Order;
 use Auth;
 use App\Adress;
+use App\User;
+use Flash;
 
-class UserController extends BaseController
+
+class UserController extends Controller
 {
     public function index(Request $request)
     {
@@ -29,15 +33,33 @@ class UserController extends BaseController
         $user = Auth::user();
         $action = $request->input('action');
         if($action == 'changepassword'){
+            $pass = $request->input('pass');
+            if(strlen($pass)< 6){
+                return response()->json(['success' => false, 'err' => 'Длинна пароля - мин 6 символов']);
+            }
             $user->password = bcrypt($request->input('pass'));
         }else{
-            $user->email = $request->input('email');
-            $user->phone = $request->input('phone');
+            $email = $request->input('email');
+            $phone = $request->input('phone');
+            if($email != $user->email){
+                $vUser = User::where('email', $request->input('email'));
+                if($vUser){
+                    return response()->json(['success' => false, 'err' => 'email уже занят']);
+                }
+                $user->email = $email;
+            }
+            if($phone != $user->phone){
+                $vUser = User::where('phone', $phone);
+                if($vUser){
+                    return response()->json(['success' => false, 'err' => 'телефон уже занят']);
+                }
+            }
             $user->fname = $request->input('fname');
             $user->sname = $request->input('sname');
         }
 
         $user->save();
+        return response()->json(['success' => true]);
     }
     
     public function addAdress(Request $request)
@@ -88,6 +110,22 @@ class UserController extends BaseController
         }
         echo $output;
         die();
+    }
+    
+    public function confirmCode(Request $request)
+    {
+        if($request->isMethod('POST')){
+            $this->validate($request, [
+                'code' => 'required|min:4|max:4|exists:users,confirmation_code',
+            ]);
+            $user = User::where('confirmation_code', $request->input('code'))->first();
+            $user->confirmed = 1;
+            $user->confirmation_code = null;
+            $user->save();
+            $request->session()->flash('success', 'Код принят. Вы можете войти');
+            return redirect('/login');
+        }
+        return view('auth.confirmcode');
     }
 }
 
