@@ -74,6 +74,9 @@ class OrderController extends BaseController
             //dd($client->myLimit());
             return ['ok'];
         }
+        
+        $order = Order::find($_GET['order']);
+        $cost = $order->cost;
         $apiId = 'BAFD72FC-2E9F-6C9F-77BF-4F2BDEEBD21F';
         $client = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
     
@@ -83,9 +86,11 @@ class OrderController extends BaseController
         $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text);
 
         $client->smsSend($sms);
-
+        
         $userPhone = $user->phone;
-        $text = 'Ваш заказ на сумму (сумма рублей принят. В ближайшее время мы свяжемся с Вами для подтверждения';
+        $text = 'Ваш заказ на сумму '.$cost.' рублей принят. В ближайшее время мы свяжемся с Вами для подтверждения';
+        $sms2 = new \Zelenin\SmsRu\Entity\Sms($userPhone, $text);
+        $client->smsSend($sms2);
         return view('success');
     }
 }
