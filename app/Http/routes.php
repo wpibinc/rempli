@@ -22,6 +22,8 @@ Route::get('/enter', function () {
 Route::get('/category', 'CategoryController@getCategory');
 Route::get('/getavcategory', 'CategoryController@getAvCategory');
 
+Route::any('/confirm-code', 'UserController@confirmCode');
+
 //Закрытые роуты
 
 Route::group(['middleware' => 'auth'], function () {
@@ -235,3 +237,5 @@ Route::get('/menu', function () {
 Route::get('/mytest', 'TestController@index');
 
 Route::get('startpage', 'MainController@startPage');
+
+Route::get('allusersactive', 'TestController@allusersactive');

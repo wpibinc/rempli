@@ -18,7 +18,13 @@ $(document).on('ready', function(){
                 action: "changeinfo"
             },
             success: function(res){
-                alert('ok');
+                if(res.success){
+                    alert('ok');
+                    $(".account p.error").text('');
+                }else{
+                    $(".account p.error").text(res.err);
+                }
+                
             }
         });
     });
@@ -35,10 +41,16 @@ $(document).on('ready', function(){
             method: 'post',
             data: {
                 pass: pass,
+                _token: token,
                 action: "changepassword"
             },
             success: function(res){
-                alert('ok');
+                if(res.success){
+                    $(".account p.error").text('');
+                    alert("ok");
+                }else{
+                    $(".account p.error").text(res.err);
+                }
             }
         });
     });

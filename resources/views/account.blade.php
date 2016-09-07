@@ -14,6 +14,7 @@
         </ul>
         <div class="col-md-10 ">
             <div class='account  col-md-12'>
+                <p class="error"></p>
                 <div class="wrapper-acaunt col-md-12">
                     <h4>ИЗМЕНИТЬ ПАРОЛЬ</h4>
                     <div class='password col-md-12'>
@@ -24,6 +25,7 @@
                 </div>
                 <div class="wrapper-acaunt col-md-12">
                     <h4>ЛИЧНАЯ ИНФОРМАЦИЯ</h4>
+                    
                     <div class='email col-md-12'>
                         <label class="col-md-2">Email</label>
                         <input type='text' name='email' class="col-md-3" value='{{$user->email}}'>
