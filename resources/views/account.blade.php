@@ -74,8 +74,9 @@
                 </div> 
             </div>
             <div class='adresses wrapper-acaunt'>
-                <a href="#" class="add-form-btn btn">Добавить адрес</a>
+                <a href="#" class="add-form-btn"><i class="fa fa-plus" aria-hidden="true"></i> Добавить адрес</a>
                 <div class='add-form'>
+                    <i class="fa fa-times close-form" aria-hidden="true"></i>
                     <div class="form-group">
                         <label class=" control-label" for="home-inputt">Адрес </label>
                         <input id="street-input" class="form-control" type="text" placeholder="Улица" autofocus="" name="street" value="">
