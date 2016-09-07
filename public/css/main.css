@@ -1044,6 +1044,13 @@ body {
 }
 #cart_white > input[type="text"]{
 	width: 100%;
+	height: 40px;
+	padding: 0 10px;
+	border: none;
+	border-bottom: 1px solid #C7C7C7;
+}
+.ui-widget.ui-widget-content{
+	position: fixed;
 }
 .order-details{
 	position: relative;
