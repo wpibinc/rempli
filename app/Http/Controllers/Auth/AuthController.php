@@ -69,10 +69,10 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         
-        Mail::send('emails.register', array('fname' => $data['fname']), function($message) use ($data)
-        {
-            $message->to($data['email'], $data['fname'].' '.$data['sname'])->subject('Регистрация прошла успешно. ');
-        });
+//        Mail::send('emails.register', array('fname' => $data['fname']), function($message) use ($data)
+//        {
+//            $message->to($data['email'], $data['fname'].' '.$data['sname'])->subject('Регистрация прошла успешно. ');
+//        });
         $confCode = rand(999, 9999);
         $smsText = 'Код регистрации rempli.ru:'.$confCode;
         $apiId = 'BAFD72FC-2E9F-6C9F-77BF-4F2BDEEBD21F';

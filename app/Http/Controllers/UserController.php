@@ -123,6 +123,10 @@ class UserController extends Controller
             $user->confirmation_code = null;
             $user->save();
             $request->session()->flash('success', 'Код принят. Вы можете войти');
+            Mail::send('emails.register', array('fname' => $user->fname), function($message) use ($user)
+        {
+            $message->to($user->email, $user->fname.' '.$user->sname)->subject('Регистрация прошла успешно. ');
+        });
             return redirect('/login');
         }
         return view('auth.confirmcode');
