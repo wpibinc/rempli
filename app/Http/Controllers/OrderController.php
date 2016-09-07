@@ -58,24 +58,25 @@ class OrderController extends BaseController
             $user->free_delivery = true;
             $user->save();
         }
+        $order = Order::find($_REQUEST['order']);
+        $name = $order->name;
+        $cost = $order->cost;
+//        if($request->method() === 'POST'){
+//            
+//            if(null === $request->input('name')){
+//                $name = $request->input('name');
+//            }
+//            if(null === $request->input('cost')){
+//                $cost = $request->input('cost');
+//            }
+//            
+//            //dd($client->smsStatus($smsId));
+//
+//            //dd($client->myLimit());
+//            return ['ok'];
+//        }
         
-        if($request->method() === 'POST'){
-            $name = '';
-            $cost = '';
-            if(null === $request->input('name')){
-                $name = $request->input('name');
-            }
-            if(null === $request->input('cost')){
-                $cost = $request->input('cost');
-            }
-            
-            //dd($client->smsStatus($smsId));
-
-            //dd($client->myLimit());
-            return ['ok'];
-        }
         
-        $order = Order::find($_GET['order']);
         $cost = $order->cost;
         $apiId = 'BAFD72FC-2E9F-6C9F-77BF-4F2BDEEBD21F';
         $client = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
