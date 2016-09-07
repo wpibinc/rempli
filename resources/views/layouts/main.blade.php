@@ -204,11 +204,36 @@
         <div class="dotcon dc3">
         <div class="dot"></div>
         </div>
- 
+
   </div>
 </div>
 <div class="bg-shadow" style="display:none">
 </div>
-
+<script>
+    $('.cart-btn').on('click',function () {
+        $('#dd_body').addClass('activeMenu');
+    });
+    $('.backdrop').on('click',function () {
+        $('#dd_body').removeClass('activeMenu');
+    });
+    $('.ordered-item > td.total > a:nth-child(4)').on('click',function () {
+        $(this).removeClass('notActiveComent').removeClass('activeComent');
+        $(this).next().removeClass('activeComent').removeClass('notActiveComent');
+        $(this).addClass('notActiveComent');
+        $(this).next().addClass('activeComent');
+    });
+    $('.not-save-commentt').on('click',function () {
+        $('.ordered-item > td.total > span:nth-child(5)').addClass('notActiveComent').removeClass('activeComent');
+        $('.ordered-item > td.total > a:nth-child(4)').addClass('activeComent').removeClass('notActiveComent');
+    });
+    $('.bg-shadow').on('click',function () {
+        $('.add-form').hide();
+        $('.bg-shadow').hide();
+    });
+    $('.close-form').on('click',function () {
+        $('.add-form').hide();
+        $('.bg-shadow').hide();
+    });
+</script>
 </body>
 </html>

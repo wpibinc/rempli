@@ -3,7 +3,7 @@
 @section('title')
 
 @section('content')
-    <div class="tabs col-md-12">
+        <div class="tabs col-md-12">
         <ul class="col-md-2">
             <li><i class="fa fa-pencil-square" aria-hidden="true"></i> Оформление заказа <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-map" aria-hidden="true"></i> Территория доставки <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
@@ -116,7 +116,8 @@
                 <h1>
                     Как мы работаем
                 </h1>
-
+                <h4>Где работаем</h4>
+                На данный момент мы работаем только в центре Москвы.<br> Но не волнуйтесь – прямо сейчас наши специалисты трудятся над расширением территории доставки, чтобы Вы могли заказывать продукты на дом в любом месте.
             </div>
         </div>
     </div>

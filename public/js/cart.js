@@ -74,8 +74,9 @@ $(document).ready(function() {
 
             '<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (Math.round(parseFloat(price))*parseFloat(Number(sessionStorage[theId])))+ '</span>р'+
             '<a href="#" class="cart-change cart-del">×</a>' +
+			'<a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Добавить комментарий</a>' +
+			'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a href="javascript:void(0)" class="save-comment">Добавить</a><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
             '</td>'+
-            '<td><a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-commenting" aria-hidden="true"></i> Добавить комментарий</a></td>'+
             '</tr>');
 
             $('#cart-number').html(Number(sessionStorage.count));
@@ -231,8 +232,10 @@ $(document).on('click', ".increase_count", function(){
 
 	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (Math.round(parseFloat($(this).closest('.product').find('.price').html()))*parseFloat(Number(sessionStorage[theId])))+ '</span>р'+
 	'<a href="#" class="cart-change cart-del">×</a>' +
+	'<a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Добавить комментарий</a>' +
+	'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a href="javascript:void(0)" class="save-comment">Добавить</a><a href="javascript:void(0)" class="not-save-commentt">Отмена</a></span>'+
 	'</td>'+
-        '<td><a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Добавить комментарий</a></td>'+
+
 	'</tr>');
 
 
@@ -294,10 +297,11 @@ $(document).on('click', '.add-to-cart', function(e){
 	'<td class="name">'+$(this).parents(".modal-dialog").find(".popup-name").find('.popup-title').html()+'</td>'+
 	'<td class="price"><span class="priceShow">'+parseFloat($(this).parents(".modal-dialog").find(".popup-price").html())+'</span>р</td>' +
 
-	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (parseFloat($(this).parents(".modal-dialog").find(".popup-price").html())*parseFloat(Number(sessionStorage[theId]))).toFixed(0)+ '</span>р'+
+	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (parseFloat($(this).parents(".modal-dialog").find(".popup-price").html())*parseFloat(Number(sessionStorage[theId]))).toFixed(0)+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  '</span>р'+
 	'<a href="#" class="cart-change cart-del">×</a>' +
+	'<a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Добавить комментарий</a>' +
+	'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a href="javascript:void(0)" class="save-comment">Добавить</a><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
 	'</td>'+
-        '<td><a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>> Добавить комментарий</a></td>'+
 	'</tr>');
 
 	$('#cart-number').html(Number(sessionStorage.count));
@@ -475,8 +479,9 @@ $(document).on('click', ".reduce_count", function(){
 
 		'<td class="total"><span class="totalShow">' + (parseFloat($(this).closest('.product').find('.price').html()) * parseFloat(Number(sessionStorage[theId]))).toFixed(0) + '</span>р' +
 		'<a href="#" class="cart-change cart-del">×</a>' +
+		'<a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Добавить комментарий</a>' +
+		'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a href="javascript:void(0)" class="save-comment">Добавить</a><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
 		'</td>' +
-                '<td><a сlass="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Добавить комментарий</a></td>'+
 		'</tr>');
 
 

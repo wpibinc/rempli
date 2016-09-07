@@ -31,13 +31,13 @@
 
 
 
-                <div class="form-group col-md-6 padding-0">
-                    <label for="inputPassword3" class="col-sm-4 col-md-6 control-label padding-0" style="font-size: 13px;">Продуктов на </label>
+                <div class="form-group col-md-12">
+                    <label for="inputPassword3" class="col-sm-4 col-md-4 control-label padding-0" style="font-size: 13px;">Продуктов на </label>
                     <div type="text" class="col-sm-8 col-md-6" id="payProducts"></div>
                 </div>
 
-                <div class="form-group col-md-6 padding-0">
-                    <label for="inputPassword3" class="col-sm-4 col-md-6 control-label payLong padding-0" style="font-size: 13px;">Стоимость доставки</label>
+                <div class="form-group col-md-12">
+                    <label for="inputPassword3" class="col-sm-4 col-md-4 control-label payLong padding-0" style="font-size: 13px;">Стоимость доставки</label>
                     @if($freeDelivery)
                     <div type="text" class="col-sm-8 col-md-6 free" id="dCostPay"></div>
                     @else
@@ -46,9 +46,9 @@
                 </div>
 
 
-                <div class="form-group ">
-                    <label for="inputPassword3" class="col-sm-4 control-label payLong totalPayLaber">Итого к оплате </label>
-                    <div type="text" class="col-sm-8 totalPay" id="payTotal"></div>
+                <div class="form-group col-md-12">
+                    <label for="inputPassword3" class="col-sm-4 col-md-4 control-label payLong totalPayLaber">Итого к оплате </label>
+                    <div type="text" class="col-sm-8 col-md-6 totalPay" id="payTotal"></div>
                 </div>
 
 

@@ -196,12 +196,16 @@ footer>a>img {
     margin-top:10px;
 }
 .product .quantity {
-    margin-top: 13px;
     height: 20px !important;
-    overflow-y: hidden;
+    overflow-y: visible;
     text-align: right;
     font-size: 12px;
-    padding:0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 99999999;
+    text-align: center;
+     padding-top: 0px!important;
 }
 .product .buy {
     background: #ffcc66;
