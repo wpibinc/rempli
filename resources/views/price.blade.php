@@ -7,7 +7,7 @@
         <ul class="col-md-2">
             <li><i class="fa fa-pencil-square" aria-hidden="true"></i> Оформление заказа <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-map" aria-hidden="true"></i> Территория доставки <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
-            <li><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Сколько стоит <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
+            <li><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Стоимость доставки <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-comments-o" aria-hidden="true"></i> Вопросы/ответы <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-coffee" aria-hidden="true"></i> Как мы работаем <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
         </ul>
@@ -38,7 +38,7 @@
                     }
                     .container, #map-canvas {
                         margin-top: 40px;
-                        width: 700px!important;
+                        width: 100%!important;
                         margin-left: auto;
                         margin-right: auto;
                     }
@@ -89,7 +89,7 @@
 
                     <div class="">
                         <h1>
-                            Сколько стоит
+                            Стоимость доставки
                         </h1>
                         <p>
                             Мы в Rempli долго думали над тем, как сделать доставку наиболее простой и выгодной для Вас. Для этого мы разработали наиболее прозрачные условия оплаты наших услуг. Вы не переплачиваете за продукты, нет никаких сложных процентов за доставку, все просто:
@@ -110,6 +110,52 @@
                 <h1>
                     Вопросы/ответы
                 </h1>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Как сделать заказ?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            - с помощью сайта,<br>
+                            - через официальное приложение Rempli в AppStore,<br>
+                            - по телефону +7-499-955-26-98.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                Что если в магазине не окажется заказанного товара?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            Все товары на сайте совпадают с реальным ассортиментом магазинов «Азбука Вкуса». Но если какого-либо товара в магазине не окажется, наш курьер позвонит Вам и вежливо уточнит - можно ли купить схожий товар или лучше вернуть Вам деньги.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingSix">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                Как с Вами связаться?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                        <div class="panel-body">
+                            По всем интересующим Вас вопросам Вы можете обращаться по номеру телефона или адресу электронной почты, указанным на странице Контакты.
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
             <div>

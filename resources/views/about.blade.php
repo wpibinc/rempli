@@ -25,61 +25,6 @@
                 Где мы берем продукты:<br>
                 Всю продукцию для доставки курьеры Rempli покупают в магазинах «Азбука Вкуса» рядом с Вами. После получения заказа Ваши продукты собираются в «Азбуке Вкуса» и наш курьер доставляет их до Вас за кратчайшее время.            </p>
         </div>
-<div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Как сделать заказ?
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                    - с помощью сайта,<br>
-- через официальное приложение Rempli в AppStore,<br>
-- по телефону +7-499-955-26-98.
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingTwo">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                        Что если в магазине не окажется заказанного товара?
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body">
-                    Все товары на сайте совпадают с реальным ассортиментом магазинов «Азбука Вкуса». Но если какого-либо товара в магазине не окажется, наш курьер позвонит Вам и вежливо уточнит - можно ли купить схожий товар или лучше вернуть Вам деньги.
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingSix">
-                <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                        Как с Вами связаться?
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
-                <div class="panel-body">
-                    По всем интересующим Вас вопросам Вы можете обращаться по номеру телефона или адресу электронной почты, указанным на странице Контакты.
-                </div>
-            </div>
-        </div>
-
-        <nav>
-            <ul class="pager">
-                <li class="previous"><a id="backToMain" href="/" class="backForth">
-                    <span aria-hidden="true">&larr;</span> На главную</a>
-                </li>
 
 
-            </ul>
-        </nav>
-
-    </div>
 @endsection

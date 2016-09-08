@@ -2,6 +2,15 @@ body {
 	/*padding-top: 60px;*/
 	/*overflow-y:none !important;*/
 }
+@font-face {
+	font-family: "HelveticaLight";
+	src: url("../fonts/HelveticaLight/HelveticaLight.eot");
+	src: url("../fonts/HelveticaLight/HelveticaLight.eot?#iefix")format("embedded-opentype"),
+	url("../fonts/HelveticaLight/HelveticaLight.woff") format("woff"),
+	url("../fonts/HelveticaLight/HelveticaLight.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
 
 .product-wrap {
 	float: left;
@@ -674,9 +683,9 @@ input:-moz-placeholder {  padding-top: 1px; }
 	height: 100%;
 	top:0;
 	left: 0;
-	background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 29%, rgba(0,0,0,0.3) 71%, rgba(0,0,0,1) 100%);
-	background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%,rgba(0,0,0,0.3) 29%,rgba(0,0,0,0.3) 71%,rgba(0,0,0,1) 100%);
-	background: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0.3) 29%,rgba(0,0,0,0.3) 71%,rgba(0,0,0,1) 100%);
+	background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%,rgba(0,0,0,0.5) 40%,rgba(0,0,0,0.5) 64%,rgba(0,0,0,1) 100%);
+	background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%,rgba(0,0,0,0.5) 40%,rgba(0,0,0,0.5) 64%,rgba(0,0,0,1) 100%);
+	background: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0.5) 40%,rgba(0,0,0,0.5) 64%,rgba(0,0,0,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=1 );
 }
 .review-item{
@@ -726,30 +735,36 @@ div.modal-dialog > div > div:nth-child(3){
 	min-height: 40px;
 }
 .av-categories a{
-	padding: 5px;
+	padding: 5px 10px;
 	display: inline-block;
-	border: 1px solid #AFAFAF;
-	margin-bottom: -1px;
-	border-bottom: 1px;
-	background-color: #fff;
+
+
+	color: #000;
+	background-color: #FC6;
 	font-size: 14px;
 	position: relative;
+	transition: all 0.3s ease;
+}
+.av-categories a:hover{
+	text-decoration: none;
+	background-color: #ffcc22;
 }
 .av-categories li{
-	margin: 1px!important;
+	margin: 2px!important;
+	margin-bottom: 10px!important;
 }
 
-.av-categories a:before {
-	width: 0;
-	content: "";
-	position: absolute;
-	top: -1px;
-	right:-1px;
-	height: 0;
-	border-top: 10px solid whitesmoke;
-	border-left: 10px solid rgb(165, 165, 165);
+/*.av-categories a:before {*/
+	/*width: 0;*/
+	/*content: "";*/
+	/*position: absolute;*/
+	/*top: -1px;*/
+	/*right:-1px;*/
+	/*height: 0;*/
+	/*border-top: 10px solid whitesmoke;*/
+	/*border-left: 10px solid rgb(165, 165, 165);*/
 
-}
+/*}*/
 
 
 .tabs{
@@ -773,11 +788,11 @@ div.modal-dialog > div > div:nth-child(3){
 	transition: all 0.5s ease;
 }
 .tabs ul li.active, .tabs ul li.active:hover{
-	background:#000000;
+	background:#ffb547 ;
 	color:#fff;
 }
 .tabs ul li:hover{
-	background:#000000;
+	background:#909090;
 	color:#fff;
 }
 .tabs li a {
@@ -928,6 +943,7 @@ body {
 	border-color: transparent!important;
 }
 .categories a{
+
 	position: relative;
 	height:auto;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0.18+29,0.18+71,1+100 */
@@ -939,7 +955,11 @@ body {
 
 
 }
+.cart-btn{
+	padding: 5px;
+}
 .categories p{
+	font-family: "HelveticaLight";
 	display: table;
 	position: absolute;
 	top: 50%;
@@ -952,7 +972,8 @@ body {
 	font-size: 29px;
 	color: #fff;
 	z-index: 17;
-	text-align: center;
+	text-align: left;
+	padding-left: 31px;
 }
 .add-to-cart.buy{
 	background: #ffcc66;
@@ -1037,9 +1058,7 @@ body {
 	font-size: 24px!important;
 	cursor: pointer;
 }
-.av-categories  li:first-child a{
-	border-left: none;
-}
+
 .result-serch td.quantity{
 	padding-left: 6px!important;
 	font-size: 20px;
@@ -1170,6 +1189,7 @@ td.total > a:nth-child(4){
 	background: #ffcc22;
 }
 .categories a{
+	border: 1px solid #332723;
 	padding: 0;
 	-webkit-filter: saturate(1);
 	-moz-filter: saturate(1);
