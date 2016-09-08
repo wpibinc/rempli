@@ -117,6 +117,7 @@
             <div class='rules wrapper-acaunt'>Правила</div>
         </div>
     </div>
+    <div class="bg-shadows"></div>
     <script>
         (function($){
             jQuery.fn.lightTabs = function(options){
@@ -159,6 +160,7 @@
                     break;
             }
         });
+
         $(".add-form-btn").on('click',function () {
             $('.bg-shadow').show();
             $('.add-form').show();
@@ -166,6 +168,15 @@
         $(".add-adress").on('click',function () {
             $('.bg-shadow').hide();
             $('.add-form').hide();
+        });
+
+        $(".order-get-more").on('click',function () {
+            $('.bg-shadows').show();
+            $(this).next().addClass('activeItems');
+        });
+        $(".bg-shadows").on('click',function () {
+            $('.bg-shadows').hide();
+            $(".order-details").removeClass('activeItems');
         });
     </script>
 </div>

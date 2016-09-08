@@ -811,12 +811,22 @@ div.modal-dialog > div > div:nth-child(3){
 }
 .my-account{
 	position: absolute;
-	right: 140px!important;
+	right: 109px!important;
 	z-index: 20;
 	display: none;
-	width: 137px;
-	padding: 0px 10px;
-	background-color: #fff;
+	padding: 0px;
+	border: 1px solid #BFBFBF;
+	background-color: #F5F5F5;
+}
+.my-account li{
+	padding: 8px 40px;
+	padding-left: 15px;
+}
+.my-account li:last-child{
+	border-top: 1px solid #BFBFBF;
+}
+.my-account li a i{
+	padding-right: 5px;
 }
 .wrapper-acaunt input{
 	margin-right: 20px;
@@ -911,7 +921,29 @@ body {
 .orderlogin{
 	color: #000!important;
 }
-
+.my-account li:hover {
+	background: #909090;
+	color: #fff;
+}
+.my-account li:hover a{
+	color: #fff!important;
+}
+.login:hover{
+	color: #c0c0c0 !important;
+	text-decoration: none;
+}
+.login:focus{
+	text-decoration: none;
+	color: #c0c0c0 !important;
+}
+.login:active{
+	text-decoration: none;
+	color: #c0c0c0 !important;
+}
+.my-account li a:hover{
+	color: #fff!important;
+	text-decoration: none;
+}
 .result-serch{
 	position: fixed;
 	width: 560px;
@@ -1096,15 +1128,40 @@ body {
 	height: 40px;
 	padding: 0 10px;
 	border: none;
-	border-bottom: 1px solid #C7C7C7;
+	border: 1px solid #ffb547;
 }
 .ui-widget.ui-widget-content{
 	position: fixed;
 }
 .order-details{
-	position: relative;
-	width: 100%;
+	position: fixed;
+	width: 300px;
+	top: 50%;
+	left: 50%;
+	background-color: #fff;
+	height: 400px;
+	overflow-y: scroll;
 	text-align: left;
+	transform: translate(-50%,-50%);
+	display: none;
+	z-index: 9999;
+
+}
+.order-details .item{
+	display: table;
+	width: 100%;
+}
+.order-details .info{
+	width: 70%;
+	padding: 5px;
+	float: right;
+	clear: both;
+}
+.order-details .img{
+	float: left;
+}
+.order-details .item{
+	border: 1px solid #CACACA;
 }
 .order-details span.count{
 	display: block;
@@ -1115,6 +1172,8 @@ body {
 #container-fluid1 > div > div > div > div > div > div.orders > div > table > tbody > tr:nth-child(2) > td:nth-child(4){
 	width: 350px;
 	text-align: center;
+	position: relative;
+
 }
 .orders tr{
 	border-bottom: 1px solid #F3F3F3;
@@ -1136,6 +1195,7 @@ body {
 	height: 110px;
 	padding-top: 46px;
 	position: relative;
+	padding-right: 136px;
 }
 .ui-widget.ui-widget-content{
 	z-index: 9999;
@@ -1143,6 +1203,10 @@ body {
 .order-get-more{
 	background-color: transparent;
 	border:none;
+}
+.ui-widget.ui-widget-content{
+	border: 2px solid #F3B547;
+	border-top:0 ;
 }
 .ui-menu .ui-menu-item-wrapper {
 	position: absolute;
@@ -1261,6 +1325,9 @@ visibility: hidden;
 #cart_white,.cart-total,#cart-items{
 	right: -100%;
 	transition: all 0.5s ease;
+}
+.activeItems{
+	display: block;
 }
 .activeMenu #cart_white, .activeMenu .cart-total, .activeMenu #cart-items{
 	right: 0%;
