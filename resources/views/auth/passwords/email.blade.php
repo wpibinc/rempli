@@ -32,8 +32,8 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-envelope"></i> Отправить ссылку на сброс пароля
+                                <button type="submit" class="btn btn-primary btn-custom-reset">
+                                    Восстановить
                                 </button>
                             </div>
                         </div>
