@@ -43,7 +43,7 @@
                         margin-right: auto;
                     }
                 </style>
-                <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+                <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&key=AIzaSyCfY6bVPAKPGnrrlTPVB-HYunHISJTcrAk"></script>
                 <script>
                     var citymap = {};
                     citymap['Moscow'] = {
@@ -58,7 +58,7 @@
                         var mapOptions = {
                             zoom: 10,
                             center: new google.maps.LatLng(55.753854, 37.623539),
-                            // mapTypeId: google.maps.MapTypeId.TERRAIN
+                             //mapTypeId: google.maps.MapTypeId.TERRAIN
                         };
 
                         var map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -82,7 +82,7 @@
                         }
                     }
 
-                    google.maps.event.addDomListener(window, 'load', initialize);
+                   // google.maps.event.addDomListener(window, 'load', initialize);
                 </script>
             </div>
             <div>
@@ -170,6 +170,7 @@
 
 
     <script>
+        var initMap = false;
         (function($){
             jQuery.fn.lightTabs = function(options){
 
@@ -192,6 +193,11 @@
                     });
 
                     $(tabs).children("ul").children("li").click(function(){
+                        console.log($(this).attr("data-page"));
+                        if($(this).attr("data-page")=='1'&&!initMap){
+                            initMap = true;
+                            initialize();
+                        }
                         showPage(parseInt($(this).attr("data-page")));
                     });
                 };
@@ -199,17 +205,18 @@
             };
         })(jQuery);
         $(document).ready(function(){
+            
             $(".tabs").lightTabs();
-            switch(window.location.search){
-                case '?page=orders': showPage(1);
-                    break;
-                case '?page=adress': showPage(2);
-                    break;
-                case '?page=rules': showPage(3);
-                    break;
-                default: showPage(0);
-                    break;
-            }
+//            switch(window.location.search){
+//                case '?page=orders': showPage(1);
+//                    break;
+//                case '?page=adress': showPage(2);
+//                    break;
+//                case '?page=rules': showPage(3);
+//                    break;
+//                default: showPage(0);
+//                    break;
+//            }
         });
     </script>
 @endsection
