@@ -1017,6 +1017,10 @@ body {
 .main-start-page > img{
 	margin-bottom: 25px;
 }
+.error{
+	display: inline-block;
+	padding-top: 0;
+}
 .categories p{
 	font-family: "HelveticaLight";
 	display: table;
