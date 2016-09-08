@@ -990,6 +990,25 @@ body {
 .cart-btn{
 	padding: 5px;
 }
+.main-start-page h4{
+	text-transform: uppercase;
+	color: #000;
+	margin-top: 50%;
+	margin-bottom: 25px;
+	font-family: "HelveticaLight";
+	color: #777;
+	font-size: 25px;
+}
+.main-start-page p{
+	color: #777;
+	font-size: 18px;
+	padding-left: 28px;
+	padding-right: 28px;
+	font-family: "HelveticaLight";
+}
+.main-start-page > img{
+	margin-bottom: 25px;
+}
 .categories p{
 	font-family: "HelveticaLight";
 	display: table;
@@ -1002,7 +1021,7 @@ body {
 	-ms-transform: translate(-50%,-50%);
 	transform: translate(-50%,-50%);
 	font-size: 29px;
-	color: #fff;
+	color: #E6E5E5;
 	z-index: 17;
 	text-align: left;
 	padding-left: 31px;

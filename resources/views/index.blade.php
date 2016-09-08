@@ -7,9 +7,37 @@
     <div class="av-categ-menu"></div>
     <div style="clear:both"></div>
     <div id="item-wrap-inner" class="products-wrap">
-        <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
-            <img src="/img/imgpsh_fullsize.png" alt='main' >
+        <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12 main-start-page">
+            <img src="/img/main_title.png" alt='main' >
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <img src="/img/main_girl.png" alt='main' >
+                </div>
+                <div class="col-md-6">
+                    <h4>1. Выбор продуктов</h4>
+                    <p>В нашем магазине вы можите выбрать из тысяч продуктов</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <h4>1. Выбор продуктов</h4>
+                    <p>В нашем магазине вы можите выбрать из тысяч продуктов</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="/img/main_girl2.png" alt='main' >
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <img src="/img/main_guys.png" alt='main' >
+                </div>
+                <div class="col-md-6">
+                    <h4>1. Выбор продуктов</h4>
+                    <p>В нашем магазине вы можите выбрать из тысяч продуктов</p>
+                </div>
+            </div>
         </div>
+
     </div>
         <script>
             var rubric=[];
