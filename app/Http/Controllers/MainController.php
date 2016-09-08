@@ -116,11 +116,9 @@ class MainController extends Controller
         }
         $avProducts = AvProduct::where('name', 'like', '%'.$word.'%')
                 ->orderBy('updated_at')
-                ->take(3)
                 ->get();
         $products = Product::where('product_name', 'like', '%'.$word.'%')
                 ->orderBy('updated_at')
-                ->take(3)
                 ->get();
         $json = array(
             'success' => true,
@@ -131,26 +129,49 @@ class MainController extends Controller
         }
         if(count($avProducts)){
             foreach($avProducts as $product){
+                $price = $product->price;
+                $amount = $product->original_price_style;
+                
+                if($product->original_price_style == '1 кг'){
+                    $price = $product->price/10;
+                    $amount = '100 гр';
+                }
                 $json['products'][] = array(
-                    'label' => $product->name,
-                    'image' => 'http://av.ru'.$product->image,
-                    'id' => $product->id,
-                    'price' => $product->price,
-                    'weight' => $product->original_typical_weight,
+                    'objectId' => $product->id,
+                    'cvalues' => explode(";", $product->cvalues),
+                    'ctitles' => explode(";", $product->ctitles),
+                    'img_sm' => 'http://av.ru' . $product->image,
                     'category' => $product->category_id,
+                    'product_name' => $product->name,
+                    'price' => $price,
+                    'amount' => 'за ' . $amount,
+                    'weight' => $product->original_typical_weight,
+                    'description' => $product->description,
+                    'updatedAt' => $product->updated_at
                 );
             }
         }
         
         if(count($products)){
             foreach($products as $product){
+                $price = $product->price;
+                $amount = $product->amount;
+                if($product->amount == 'за 1кг'){
+                    $price = $product->price/10;
+                    $amount = 'за 100 гр';
+                }
                 $json['products'][] = array(
-                    'label' => $product->product_name,
-                    'image' => $product->img,
-                    'id' => $product->id,
-                    'price' => $price,
-                    'weight' => $product->weight,
-                    'category' => $product->category_id,
+                    'objectId'      => $product->id,
+                    'cvalues'       => explode(",", $product->cvalues),
+                    'ctitles'       => explode(",", $product->ctitles),
+                    'img_sm'        => $product->img,
+                    'category'      => $product->category_id,
+                    'product_name'  => $product->product_name,
+                    'price'         => $price,
+                    'amount'        => $amount,
+                    'weight'        => $product->weight,
+                    'description'   => $product->description,
+                    'updatedAt'     => (string) $product->updated_at
                 );
             }
         }
