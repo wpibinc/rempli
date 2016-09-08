@@ -993,11 +993,18 @@ body {
 .main-start-page h4{
 	text-transform: uppercase;
 	color: #000;
-	margin-top: 50%;
+	margin-top: 28%;
 	margin-bottom: 25px;
 	font-family: "HelveticaLight";
 	color: #777;
 	font-size: 25px;
+}
+.btn-block{
+	vertical-align: middle;
+	font-size: 22px;
+}
+.custom-style .error{
+	text-align: center;
 }
 .main-start-page p{
 	color: #777;
@@ -1005,6 +1012,7 @@ body {
 	padding-left: 28px;
 	padding-right: 28px;
 	font-family: "HelveticaLight";
+	width: 330px;
 }
 .main-start-page > img{
 	margin-bottom: 25px;
