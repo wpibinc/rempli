@@ -21,7 +21,6 @@ $.widget('custom.autocomplete', $.ui.autocomplete, {
 });
 
 $(document).ready(function() {
-    console.log(sessionStorage);
     $(document).on('click', '.ordered-item > td.total > a:nth-child(4)', function () {
         $(this).removeClass('notActiveComent').removeClass('activeComent');
         $(this).next().removeClass('activeComent').removeClass('notActiveComent');
