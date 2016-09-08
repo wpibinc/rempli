@@ -121,11 +121,6 @@ $(document).on('ready', function(){
             button.removeClass('active');
             button.text('Подробнее');
             return false;
-        }else if(button.siblings('.order-details').find('.item').length&&!$(this).hasClass('active')){
-            button.siblings('.order-details').show();
-            button.addClass('active');
-            button.text('Скрыть');
-            return true;
         }
         
         $.ajax({
@@ -137,8 +132,7 @@ $(document).on('ready', function(){
             success: function(res){
                 if(res){
                     row.find('.order-details').append(res);
-                    button.addClass('active');
-                    button.text('Скрыть');
+
                 }
             }
         });

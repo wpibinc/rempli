@@ -48,13 +48,13 @@
         </a>
         @if(Auth::user())
 <!--            <a href="/logout" class="login">Выход </a>-->
-                <a href="#" class="login">Личный кабинет</a>
+                <a href="#" class="login">Личный кабинет <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                 <ul class="my-account">
-                    <li><a href="/my-account">Учётная запись</a></li>
-                    <li><a href="/my-account?section=orders">История заказов</a></li>
-                    <li><a href="/my-account?section=adress">Адреса</a></li>
-                    <li><a href="/rules">Правила сайта</a></li>
-                    <li><a href="/logout">Выход </a></li>
+                    <li><a href="/my-account"><i class="fa fa-user" aria-hidden="true"></i> Учётная запись</a></li>
+                    <li><a href="/my-account?section=orders"><i class="fa fa-list-alt" aria-hidden="true"></i> История заказов</a></li>
+                    <li><a href="/my-account?section=adress"><i class="fa fa-phone" aria-hidden="true"></i> Адреса</a></li>
+                    <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход </a></li>
+                    <li><a href="/rules"><i class="fa fa-book" aria-hidden="true"></i> Правила сайта</a></li>
                 </ul>
         @else
             <a href="/login" class="login">Вход / Регистрация </a>

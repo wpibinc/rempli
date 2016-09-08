@@ -203,6 +203,7 @@ footer>a>img {
     position: absolute;
     right: 0;
     bottom: 0;
+    width: 50%;
     z-index: 9;
     text-align: center;
      padding-top: 0px!important;

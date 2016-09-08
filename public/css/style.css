@@ -3412,9 +3412,10 @@ ul.autocomplete li img
 .login {
 	float: right;
 	color: #fff;
-	font-size: 18px;
+	font-size: 16px;
 	font-family: sans-serif;
 	padding-right: 10px;
+	padding-top: 6px;
 }
 .login:hover {
 	color: #c0c0c0 !important;
@@ -3448,7 +3449,7 @@ ul.autocomplete li img
 }
 @media(max-width: 1440px) and (min-width: 1023px){
 	.categories p {
-		font-size: 131%!important;
+		font-size: 151%!important;
 		line-height: 16px;
 	}
 }
@@ -3529,7 +3530,16 @@ ul.autocomplete li img
     width: 100%;
     height: 100%;
 }
-
+.bg-shadows{
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 9992;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
 .av-categories li{
     float:left;
     margin: 0 15px;
