@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <input id="email" required  type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                            <input id="email" required  type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-mail">
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('email') }}</strong>
@@ -74,7 +74,7 @@
                         </div>
                         <div class=form-group"">
                             <input type="checkbox" name="yes" id="yes">
-                            <label for="yes">согласен на хранение персональных данных</label>
+                            <label for="yes">Cогласен на хранение персональных данных</label>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn-signin btn btn-primary btn-block disabled" id="loginButton">Зарегистрироваться</button>
