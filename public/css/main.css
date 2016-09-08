@@ -998,6 +998,18 @@ body {
 #tt > iframe{
 	float: right;
 }
+.cart-info.dropdown-menu2 tbody .name {
+	color: #3A3A3A;
+	font-size: 12px!important;
+	font-weight: bold;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
+	border: 0;
+	background: 0;
+}
+.ui-menu-item:hover{
+	background-color: #F5F5F5;
+}
 @media (max-width:768px){
 .categories p{
 	font-size:26px;
