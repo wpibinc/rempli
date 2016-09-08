@@ -12,6 +12,7 @@
             </div>
             @endforeach
         @endif
+        {{$reviews->render()}}
     </div>
     <div class="col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0">
         @if(Auth::user())

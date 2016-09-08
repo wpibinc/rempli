@@ -14,12 +14,13 @@
         </ul>
         <div class="col-md-10 ">
             <div class='account  col-md-12'>
-                <p class="error"></p>
+                
                 <div class="wrapper-acaunt col-md-12">
                     <h4>ИЗМЕНИТЬ ПАРОЛЬ</h4>
                     <div class='password col-md-12'>
                         <label class="col-md-2">Пароль</label>
                         <input type='password' class="col-md-3" value='1111'>
+                        <p class="error"></p>
                     </div>
                     <button class='change-password acount-btn-custom'>Изменить</button>
                 </div>
@@ -29,12 +30,12 @@
                     <div class='email col-md-12'>
                         <label class="col-md-2">Email</label>
                         <input type='text' name='email' class="col-md-3" value='{{$user->email}}'>
-
+                        <p class="error"></p>
                     </div>
                     <div class='phone col-md-12'>
                         <label class="col-md-2">Телефон</label>
                         <input type='text' name='phone' class="col-md-3" value='{{$user->phone}}'>
-
+                        <p class="error"></p>
                     </div>
                     <div class='fname col-md-12'>
                         <label class="col-md-2">Имя</label>
@@ -71,7 +72,8 @@
                             </tr>
                         @endforeach
                     </table>
-                </div> 
+                </div>
+                {{$orders->appends(['section' => 'orders'])->render()}}
             </div>
             <div class='adresses wrapper-acaunt'>
                 <a href="#" class="add-form-btn"><i class="fa fa-plus" aria-hidden="true"></i> Добавить адрес</a>
@@ -150,14 +152,18 @@
         $(document).ready(function(){
             $(".tabs").lightTabs();
             switch(window.location.search){
-                case '?page=orders': showPage(1);
+                case '?section=orders': showPage(1);
                     break;
-                case '?page=adress': showPage(2);
+                case '?section=adress': showPage(2);
                     break;
-                case '?page=rules': showPage(3);
+                case '?section=rules': showPage(3);
                     break;
                 default: showPage(0);
                     break;
+            }
+            if(window.location.search.indexOf('section=orders') > 0){
+                console.log(window.location.search.indexOf('section=orders'));
+                showPage(1);
             }
         });
 

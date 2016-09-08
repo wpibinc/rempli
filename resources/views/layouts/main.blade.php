@@ -51,8 +51,8 @@
                 <a href="#" class="login">Личный кабинет <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                 <ul class="my-account">
                     <li><a href="/my-account"><i class="fa fa-user" aria-hidden="true"></i> Учётная запись</a></li>
-                    <li><a href="/my-account?page=orders"><i class="fa fa-list-alt" aria-hidden="true"></i> История заказов</a></li>
-                    <li><a href="/my-account?page=adress"><i class="fa fa-phone" aria-hidden="true"></i> Адреса</a></li>
+                    <li><a href="/my-account?section=orders"><i class="fa fa-list-alt" aria-hidden="true"></i> История заказов</a></li>
+                    <li><a href="/my-account?section=adress"><i class="fa fa-phone" aria-hidden="true"></i> Адреса</a></li>
                     <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход </a></li>
                     <li><a href="/rules"><i class="fa fa-book" aria-hidden="true"></i> Правила сайта</a></li>
                 </ul>
@@ -160,7 +160,7 @@
 </footer>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/cart.js"></script>
-<script type="text/javascript" src="js/categories.js"></script>
+{{--<script type="text/javascript" src="js/categories.js"></script>--}}
 {{--<script type="text/javascript" src="js/categories2.js"></script>--}}
 <!--<script type="text/javascript" src="/data/categories.json"></script>-->
 <script type="text/javascript" src="/js/func.js"></script>
