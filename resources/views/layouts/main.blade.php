@@ -53,7 +53,7 @@
                     <li><a href="/my-account">Учётная запись</a></li>
                     <li><a href="/my-account?page=orders">История заказов</a></li>
                     <li><a href="/my-account?page=adress">Адреса</a></li>
-                    <li><a href="/my-account?page=rules">Правила сайта</a></li>
+                    <li><a href="/rules">Правила сайта</a></li>
                     <li><a href="/logout">Выход </a></li>
                 </ul>
         @else
@@ -160,7 +160,7 @@
 </footer>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/cart.js"></script>
-{{--<script type="text/javascript" src="js/categories.js"></script>--}}
+<script type="text/javascript" src="js/categories.js"></script>
 {{--<script type="text/javascript" src="js/categories2.js"></script>--}}
 <!--<script type="text/javascript" src="/data/categories.json"></script>-->
 <script type="text/javascript" src="/js/func.js"></script>
@@ -216,16 +216,7 @@
     $('.backdrop').on('click',function () {
         $('#dd_body').removeClass('activeMenu');
     });
-    $('.ordered-item > td.total > a:nth-child(4)').on('click',function () {
-        $(this).removeClass('notActiveComent').removeClass('activeComent');
-        $(this).next().removeClass('activeComent').removeClass('notActiveComent');
-        $(this).addClass('notActiveComent');
-        $(this).next().addClass('activeComent');
-    });
-    $('.not-save-commentt').on('click',function () {
-        $('.ordered-item > td.total > span:nth-child(5)').addClass('notActiveComent').removeClass('activeComent');
-        $('.ordered-item > td.total > a:nth-child(4)').addClass('activeComent').removeClass('notActiveComent');
-    });
+    
     $('.bg-shadow').on('click',function () {
         $('.add-form').hide();
         $('.bg-shadow').hide();

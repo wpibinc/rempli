@@ -67,11 +67,11 @@ class MainController extends Controller
         }
         $avProducts = AvProduct::where('name', 'like', $term.'%')
                 ->orderBy('updated_at')
-                ->take(5)
+                ->take(3)
                 ->get();
         $products = Product::where('product_name', 'like', $term.'%')
                 ->orderBy('updated_at')
-                ->take(5)
+                ->take(3)
                 ->get();
         $json = array();
         foreach($avProducts as $product){
@@ -85,7 +85,7 @@ class MainController extends Controller
             );
         }
         foreach($products as $product){
-            if(count($json) >= 5){
+            if(count($json) >= 3){
                 break;
             }
             $json[] = array(
@@ -98,6 +98,11 @@ class MainController extends Controller
             );
         }
         return response()->json($json);
+    }
+    
+    public function rules(Request $request)
+    {
+        return view('rules');
     }
 }
 

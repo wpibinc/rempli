@@ -71,7 +71,7 @@ okplace = 1;
 	});
 				    
 
-	    
+	 
 	} else { //person not logged
 
 		if (localStorage.FirstName != undefined) {
@@ -91,7 +91,7 @@ okplace = 1;
 		    	document.getElementById('flat').value = localStorage.flat;
 		}
 		var id = [];
-                console.log(sessionStorage);
+                var comments = JSON.parse(sessionStorage.getItem("comments"));
 		for (var i = 0; i < sessionStorage.length; i++) {
                     
 			//console.log(sessionStorage.getItem(sessionStorage.key(i)));
@@ -99,15 +99,17 @@ okplace = 1;
 			key = sessionStorage.key(i);
 			//key= key.split('_')[1];
                         
-			if (parseFloat(Number(key)))
+			if (parseFloat(Number(key))){
 				id.push({
 					//objectId   : sessionStorage.key(i),
 					objectId   : key,
-					count: sessionStorage.getItem(sessionStorage.key(i))
+					count: sessionStorage.getItem(sessionStorage.key(i)),
+                                        comment: comments[key]
 				});
+                        }
 		};
+                   
 		data = id;
-
 				    $(document).on('click', "#toPay", function(){
 
 				// alert(currentUser);
@@ -170,6 +172,7 @@ window.setInterval(function(){
 		$( "#toPay" ).css( "opacity", "0.5" );
 	}
 }, 100);
+
 
 $('input').change(function() {
 	if ($('#name').val().length * $('#pac-input').val().length * $('#house').val().length * $('#flat').val().length * $('#phone').val().length * okplace > 0) {
