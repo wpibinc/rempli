@@ -227,38 +227,39 @@ $(document).ready(function() {
                 }else{
                     adressChecked = $("#selectAddress").val();
                 }
-		$.ajax({
-			type: 'POST',
-			url: '/order',
-			contentType: 'application/json',
-			dataType: 'json',
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			},
-			data: JSON.stringify(
-				{
-					items: data,
-					name: localStorage.FirstName,
-					phone: localStorage.phone,
-					address: address,
-					house: house,
-					korp: korp,
-					comment: localStorage.comment,
-					flat: flat,
-					user_id: localStorage.user,
-					mass: sessionStorage.mass,
-					cost: sessionStorage.cost,
-                                        addressChecked: adressChecked
-				}
-			),
-			success: function (data) {
-                            console.log(data);
-                            window.location.href = "/payment?order="+data.orderId;
-			},
-			error: function (xhr, textStatus, thrownError) {
-				alert(thrownError);
-			}
-		});
+                console.log(data);
+//		$.ajax({
+//			type: 'POST',
+//			url: '/order',
+//			contentType: 'application/json',
+//			dataType: 'json',
+//			headers: {
+//				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//			},
+//			data: JSON.stringify(
+//				{
+//					items: data,
+//					name: localStorage.FirstName,
+//					phone: localStorage.phone,
+//					address: address,
+//					house: house,
+//					korp: korp,
+//					comment: localStorage.comment,
+//					flat: flat,
+//					user_id: localStorage.user,
+//					mass: sessionStorage.mass,
+//					cost: sessionStorage.cost,
+//                                        addressChecked: adressChecked
+//				}
+//			),
+//			success: function (data) {
+//                            console.log(data);
+//                            window.location.href = "/payment?order="+data.orderId;
+//			},
+//			error: function (xhr, textStatus, thrownError) {
+//				alert(thrownError);
+//			}
+//		});
 
         $("#submit_order_data").click();
     });

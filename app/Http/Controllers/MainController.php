@@ -99,5 +99,10 @@ class MainController extends Controller
         }
         return response()->json($json);
     }
+    
+    public function rules(Request $request)
+    {
+        return view('rules');
+    }
 }
 

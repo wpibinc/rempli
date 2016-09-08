@@ -24,6 +24,7 @@ Route::get('/getavcategory', 'CategoryController@getAvCategory');
 
 Route::any('/confirm-code', 'UserController@confirmCode');
 
+Route::get('/rules', 'MainController@rules');
 //Закрытые роуты
 
 Route::group(['middleware' => 'auth'], function () {
