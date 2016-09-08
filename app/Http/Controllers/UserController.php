@@ -8,7 +8,7 @@ use Auth;
 use App\Adress;
 use App\User;
 use Flash;
-
+use Mail;
 
 class UserController extends Controller
 {

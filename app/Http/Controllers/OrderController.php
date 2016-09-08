@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use Auth;
 use App\Adress;
+use Mail;
 
 class OrderController extends BaseController
 {
@@ -77,7 +78,6 @@ class OrderController extends BaseController
 //        }
         
         
-        $cost = $order->cost;
         $apiId = 'BAFD72FC-2E9F-6C9F-77BF-4F2BDEEBD21F';
         $client = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
     

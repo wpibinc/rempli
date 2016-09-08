@@ -252,7 +252,8 @@ $(document).ready(function() {
 				}
 			),
 			success: function (data) {
-                            window.location.href = "/payment?order=92";
+                            console.log(data);
+                            window.location.href = "/payment?order="+data.orderId;
 			},
 			error: function (xhr, textStatus, thrownError) {
 				alert(thrownError);
