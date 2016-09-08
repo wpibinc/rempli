@@ -760,32 +760,71 @@ $(document).on('click', ".backdrop", function(){
 });
 
 
-search_results = '';
+var search_results = '';
 function search(word) {
 	$(".header_cat").empty();
 	$(".header_cat").prepend('Результаты поиска');
 	word = word.toLowerCase();
-	n = 0;
+	var n = 0;
 	search_results = '';
-	$.each(json, function(i, v) {
-        if (v.product_name.toLowerCase().indexOf(word) >= 0) {
-        		if (Number(sessionStorage[v.objectId]) > 0) {
-			    search_results  += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + v.objectId + '"><div class="count item_count visible">'+sessionStorage[v.objectId]+'</div><a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '"> <img src="' + v.img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '">' + v.product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + v.price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">'+ v.amount +'</div><br class="clearfix"></div><button href="javascript:void(0)" class="increase_count buy">Добавить</button></div>';
+        
+        $.ajax({
+            url: '/search',
+            dataType: 'json',
+            data: {
+                word: word
+            },
+            success: function(res){
+                if(!res.success){
+                    search_results = '<div id="nosearch"> <h2>К сожалению по Вашему запросу ничего не найдено</h2> <h3>Попробуйте ввести другое или более короткое слово</h3> </div>'
+                }else{
+                    var json = res.output.products.sort(function(a, b) {
+                        return parseFloat((new Date(b.updatedAt)).getTime()) - parseFloat((new Date(a.updatedAt)).getTime());
+                    });
+                    var output = '';
+                    for (i = 0; i < json.length; i++) {
+                        if (Number(sessionStorage[json[i].objectId]) > 0) {
+                            output += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" data-category="'+json[i].category+'" id="' + json[i].objectId + '"><div class="count item_count visible">' + sessionStorage[json[i].objectId] + '</div><a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '"> <img src="' + json[i].img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '">' + json[i].product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + json[i].price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">' + json[i].amount + '</div><br class="clearfix"></div><button href="javascript:void(0)" data-weight="'+json[i].weight+'" class="increase_count buy">Добавить</button></div>';
+                        } else {
+                            output += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" data-category="'+json[i].category+'" id="' + json[i].objectId + '"><div class="count item_count hidden">' + sessionStorage[json[i].objectId] + '</div><a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '"> <img src="' + json[i].img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '">' + json[i].product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + json[i].price + ' руб</div><div id="weight_product" class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">' + json[i].amount + '</div><br class="clearfix"></div><button href="javascript:void(0)" data-weight="'+json[i].weight+'" class="increase_count buy">Добавить</button></div>';
+                        }
+                    }
+                    for (i = 0; i < json.length; i++) {
+                        consist = '';
+                        ctitles = json[i].ctitles;
+                        cvalues = json[i].cvalues;
 
-			    } else {
-			    search_results  += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + v.objectId + '"><div class="count item_count hidden">'+sessionStorage[v.objectId]+'</div><a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '"> <img src="' + v.img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '">' + v.product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + v.price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">'+ v.amount +'</div><br class="clearfix"></div><button href="javascript:void(0)" class="increase_count buy">Добавить</button></div>';
+                        for (x = 0; x < ctitles.length; x++) {
+                            consist+=('<div class="product_card_prop_item mb5"> <div class="product_card_prop_item_title">'+ctitles[x]+'</div> <div class="product_card_prop_item_value">'+cvalues[x]+'</div> <div class="clear"></div> </div>');
+                        }
 
-			    }
+                        output  += '<div class="modal fade bs-example-modal-lg" id="idt' + json[i].objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"><i class="fa fa-times close-popups close" aria-hidden="true"  data-dismiss="modal" aria-label="Close"></i> <div class="popup-image";> <span class="popup-helper"></span> <img class="popimg" src="' + json[i].img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + json[i].product_name + '</p> <div class="popup-price"> ' + json[i].price + '<span class="kop">00</span> <span class="popup-rub">'+num2word(json[i].price,words)+'</span> </div> <div class="popup-mass"> '+ json[i].amount +'</div><button href="javascript:void(0)" data-id="'+json[i].objectId+'" data-category="'+json[i].category+'" data-weight="'+json[i].weight+'" class="add-to-cart buy">Добавить</button> </div> </div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + json[i].description + '</div> </div> <div class="product_card_props f32">'+ consist +' </div> </div> </div> </div> </div>';
 
-			    search_results  += '<div class="modal fade bs-example-modal-lg" id="idt' + v.objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image";> <span class="popup-helper"></span> <img class="popimg" src="' + v.img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + v.product_name + '</p> <div class="popup-price"> ' + v.price + ' <span class="popup-rub">'+num2word(Math.floor(v.price),words)+'</span> <button href="javascript:void(0)" class="increase_count buy">Добавить</button> </div> <div class="popup-mass"> '+ v.amount +'</div> </div> </div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + v.description + '</div> </div> '+v.consist+'</div> </div> </div> </div>'
-
-			    n+=1;
-        }
+                    }
+                }
+                
+            }
         });
+        
+//	$.each(json, function(i, v) {
+//        if (v.product_name.toLowerCase().indexOf(word) >= 0) {
+//        		if (Number(sessionStorage[v.objectId]) > 0) {
+//			    search_results  += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + v.objectId + '"><div class="count item_count visible">'+sessionStorage[v.objectId]+'</div><a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '"> <img src="' + v.img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '">' + v.product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + v.price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">'+ v.amount +'</div><br class="clearfix"></div><button href="javascript:void(0)" class="increase_count buy">Добавить</button></div>';
+//
+//			    } else {
+//			    search_results  += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + v.objectId + '"><div class="count item_count hidden">'+sessionStorage[v.objectId]+'</div><a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '"> <img src="' + v.img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '">' + v.product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + v.price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">'+ v.amount +'</div><br class="clearfix"></div><button href="javascript:void(0)" class="increase_count buy">Добавить</button></div>';
+//
+//			    }
+//
+//			    search_results  += '<div class="modal fade bs-example-modal-lg" id="idt' + v.objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image";> <span class="popup-helper"></span> <img class="popimg" src="' + v.img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + v.product_name + '</p> <div class="popup-price"> ' + v.price + ' <span class="popup-rub">'+num2word(Math.floor(v.price),words)+'</span> <button href="javascript:void(0)" class="increase_count buy">Добавить</button> </div> <div class="popup-mass"> '+ v.amount +'</div> </div> </div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + v.description + '</div> </div> '+v.consist+'</div> </div> </div> </div>'
+//
+//			    n+=1;
+//        }
+//        });
 
-		if (n == 0) {
-		search_results = '<div id="nosearch"> <h2>К сожалению по Вашему запросу ничего не найдено</h2> <h3>Попробуйте ввести другое или более короткое слово</h3> </div>'
-		}
+//		if (n == 0) {
+//		search_results = '<div id="nosearch"> <h2>К сожалению по Вашему запросу ничего не найдено</h2> <h3>Попробуйте ввести другое или более короткое слово</h3> </div>'
+//		}
 
 
         $(".products-wrap").empty();
@@ -814,7 +853,8 @@ function search(word) {
 $("#search").keyup(function(event){
     if(event.keyCode == 13){
     	if (document.getElementById('search').value != ''){
-    		word = document.getElementById('search').value;
+    		var word = document.getElementById('search').value;
+                console.log(word);
         	search(word);
     	}
     }

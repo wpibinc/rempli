@@ -13,7 +13,9 @@ Route::get('/contacts', 'MainController@contacts');
 
 Route::get('/price', 'MainController@price');
 
-Route::get('autocomplete-product-search', 'MainController@productSearch');
+Route::get('autocomplete-product-search', 'MainController@productAutocompleteSearch');
+
+Route::get('search', 'MainController@mainSearch');
 
 Route::get('/enter', function () {
     return view('auth.enter');

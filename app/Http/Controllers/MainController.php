@@ -59,8 +59,16 @@ class MainController extends Controller
         return view('startpage');
     }
     
-    public function productSearch(Request $request)
+    public function rules(Request $request)
     {
+        return view('rules');
+    }
+    
+    public function productAutocompleteSearch(Request $request)
+    {
+        if(!$request->isXmlHttpRequest()){
+            abort(404);
+        }
         $term = $request->input('term');
         if(!$term){
             abort(404);
@@ -100,9 +108,55 @@ class MainController extends Controller
         return response()->json($json);
     }
     
-    public function rules(Request $request)
+    public function mainSearch(Request $request)
     {
-        return view('rules');
+        $word = $request->input('word');
+        if(!$word){
+            return response()->json(['success' => false]);
+        }
+        $avProducts = AvProduct::where('name', 'like', '%'.$word.'%')
+                ->orderBy('updated_at')
+                ->take(3)
+                ->get();
+        $products = Product::where('product_name', 'like', '%'.$word.'%')
+                ->orderBy('updated_at')
+                ->take(3)
+                ->get();
+        $json = array(
+            'success' => true,
+            'products' => array(),
+        );
+        if(!count($avProducts)&&!count($products)){
+            return response()->json(['success' => false]);
+        }
+        if(count($avProducts)){
+            foreach($avProducts as $product){
+                $json['products'][] = array(
+                    'label' => $product->name,
+                    'image' => 'http://av.ru'.$product->image,
+                    'id' => $product->id,
+                    'price' => $product->price,
+                    'weight' => $product->original_typical_weight,
+                    'category' => $product->category_id,
+                );
+            }
+        }
+        
+        if(count($products)){
+            foreach($products as $product){
+                $json['products'][] = array(
+                    'label' => $product->product_name,
+                    'image' => $product->img,
+                    'id' => $product->id,
+                    'price' => $price,
+                    'weight' => $product->weight,
+                    'category' => $product->category_id,
+                );
+            }
+        }
+        
+        return response()->json($json);
     }
+    
 }
 

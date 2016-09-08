@@ -19,7 +19,7 @@
                     <h4>ИЗМЕНИТЬ ПАРОЛЬ</h4>
                     <div class='password col-md-12'>
                         <label class="col-md-2">Пароль</label>
-                        <input type='password' name='password' class="col-md-3" value='1111'>
+                        <input type='password' class="col-md-3" value='1111'>
                     </div>
                     <button class='change-password acount-btn-custom'>Изменить</button>
                 </div>

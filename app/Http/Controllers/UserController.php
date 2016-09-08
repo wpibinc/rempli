@@ -100,11 +100,11 @@ class UserController extends Controller
             foreach($items as $item){
                 $item->getRelations();
                 if($item->product){
-                    $output .= '<div class="item"><span class="title">'.$item->product->product_name.'</span><span class="count">'.$item->count.' шт</span><img src="'.$item->product->img.'"></div>';
+                    $output .= '<div class="item"><div class="info"><span class="title">'.$item->product->product_name.'</span><span class="count">'.$item->count.' шт</span><spav class="price">'.$item->product->price.'</span></div><div class="img"><img src="'.$item->product->img.'"></div></div>';
                     
                 }
                 if($item->avproduct){
-                    $output .= '<div class="item"><span class="title">'.$item->avproduct->name.'</span><span class="count">'.$item->count.' шт</span><img src="http://av.ru'.$item->avproduct->image.'"></div>';
+                    $output .= '<div class="item"><div class="info"><span class="title">'.$item->avproduct->name.'</span><span class="count">'.$item->count.' шт</span><spav class="price">'.$item->avproduct->price.'</span></div><div class="img"><img src="http://av.ru'.$item->avproduct->image.'"></div></div>';
                 }
             }
         }

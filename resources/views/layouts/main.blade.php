@@ -134,7 +134,7 @@
         <li><a href="/price" {!! (Request::is('price')) ? 'class="active"' : '' !!}>Доставка и оплата</a></li>
         <li><a href="/contacts" {!! (Request::is('contacts')) ? 'class="active"' : '' !!}>Контакты</a></li>
     </ul>
-    <input type="search" class="col-md-offset-1 col-md-2 search-neobsos" id="search" placeholder="Поиск товаров">
+    <input type="text" name="site-search" class="col-md-offset-1 col-md-2 search-neobsos" id="search" placeholder="Поиск товаров">
 </div>
 
 
