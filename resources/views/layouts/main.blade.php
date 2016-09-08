@@ -51,8 +51,8 @@
                 <a href="#" class="login">Личный кабинет</a>
                 <ul class="my-account">
                     <li><a href="/my-account">Учётная запись</a></li>
-                    <li><a href="/my-account?page=orders">История заказов</a></li>
-                    <li><a href="/my-account?page=adress">Адреса</a></li>
+                    <li><a href="/my-account?section=orders">История заказов</a></li>
+                    <li><a href="/my-account?section=adress">Адреса</a></li>
                     <li><a href="/rules">Правила сайта</a></li>
                     <li><a href="/logout">Выход </a></li>
                 </ul>
@@ -160,7 +160,7 @@
 </footer>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/cart.js"></script>
-<script type="text/javascript" src="js/categories.js"></script>
+{{--<script type="text/javascript" src="js/categories.js"></script>--}}
 {{--<script type="text/javascript" src="js/categories2.js"></script>--}}
 <!--<script type="text/javascript" src="/data/categories.json"></script>-->
 <script type="text/javascript" src="/js/func.js"></script>

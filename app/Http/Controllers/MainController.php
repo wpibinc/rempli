@@ -8,6 +8,7 @@ use App\AvProduct;
 use App\Product;
 use App\Review;
 use Auth;
+use DB;
 
 class MainController extends Controller
 {
@@ -37,7 +38,7 @@ class MainController extends Controller
                 $review->save();
             }
         }
-        $reviews = Review::all();
+        $reviews = DB::table('reviews')->paginate(10);
 
         return view('where', [
             'reviews' => $reviews,            

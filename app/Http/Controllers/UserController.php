@@ -20,7 +20,7 @@ class UserController extends Controller
     public function myAccount(Request $request)
     {
         $user = Auth::user();
-        $orders = Order::where('user_id', $user->id)->get();
+        $orders = Order::where('user_id', $user->id)->simplePaginate(15);
         $adresses = $user->adresses;
         return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses]);
     }
@@ -35,7 +35,7 @@ class UserController extends Controller
         if($action == 'changepassword'){
             $pass = $request->input('pass');
             if(strlen($pass)< 6){
-                return response()->json(['success' => false, 'err' => 'Длинна пароля - мин 6 символов']);
+                return response()->json(['success' => false, 'message' => 'Длинна пароля - мин 6 символов']);
             }
             $user->password = bcrypt($request->input('pass'));
         }else{
@@ -44,14 +44,14 @@ class UserController extends Controller
             if($email != $user->email){
                 $vUser = User::where('email', $request->input('email'));
                 if($vUser){
-                    return response()->json(['success' => false, 'err' => 'email уже занят']);
+                    return response()->json(['success' => false, 'err'=> 'email', 'message' => 'email уже занят']);
                 }
                 $user->email = $email;
             }
             if($phone != $user->phone){
                 $vUser = User::where('phone', $phone);
                 if($vUser){
-                    return response()->json(['success' => false, 'err' => 'телефон уже занят']);
+                    return response()->json(['success' => false, 'err'=> 'phone', 'message' => 'телефон уже занят']);
                 }
             }
             $user->fname = $request->input('fname');

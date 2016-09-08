@@ -22,7 +22,16 @@ $(document).on('ready', function(){
                     alert('ok');
                     $(".account p.error").text('');
                 }else{
-                    $(".account p.error").text(res.err);
+                    switch(res.err){
+                        case 'email': 
+                            $(".account p.error").text('');
+                            $(".account .email p.error").text(res.message); console.log(res.message);
+                            break
+                        case 'phone': 
+                            $(".account p.error").text('');
+                            $(".account .phone p.error").text(res.message); console.log(res.message);
+                            break;
+                    }
                 }
                 
             }
@@ -46,10 +55,10 @@ $(document).on('ready', function(){
             },
             success: function(res){
                 if(res.success){
-                    $(".account p.error").text('');
+                    $(".account .password p.error").text('');
                     alert("ok");
                 }else{
-                    $(".account p.error").text(res.err);
+                    $(".account .password p.error").text(res.message);
                 }
             }
         });
