@@ -63,7 +63,7 @@
                         <a href="/order" id="backToOrder" class="backForth"><span aria-hidden="true">&larr;</span> Назад</a>
                     </li>
                     <li id="tt" class="next">
-                        <iframe style="float: right" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=l&button-color=white&targets=expfood&default-sum=123&successURL=http://rempli.ru/success" width="195" height="54"></iframe>
+                        <iframe style="float: right" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=l&button-color=white&targets=expfood&default-sum=123&successURL=http://rempli/payment?order="<?php echo $_GET['order'] ?> width="195" height="54"></iframe>
                     </li>
                 </ul>
             </nav>

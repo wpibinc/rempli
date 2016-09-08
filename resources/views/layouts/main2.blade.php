@@ -28,10 +28,10 @@
 
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
-
+    <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&region=RU"></script>
     <script type="text/javascript" src="js/gmaps.js"></script>
-
+    
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 

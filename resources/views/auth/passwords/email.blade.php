@@ -13,19 +13,18 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mai</label>
+                            <label for="phone" class="col-md-4 control-label">Телефон</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('email') }}">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('phone') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -44,4 +43,9 @@
         </div>
     </div>
 </div>
+<script>
+jQuery(function($){
+        $("#phone").mask("+7 (999) 999-9999");
+    });
+</script>
 @endsection

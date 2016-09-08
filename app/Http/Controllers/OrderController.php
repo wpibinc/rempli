@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use Auth;
 use App\Adress;
+use Mail;
 
 class OrderController extends BaseController
 {
@@ -34,7 +35,7 @@ class OrderController extends BaseController
             $order= Order::create($order);
             $order->items()->createMany($items['items']);
     
-            return ['ok'];
+            return ['orderId' => $order->id];
             die();
         }
         $user = Auth::user();
@@ -58,32 +59,39 @@ class OrderController extends BaseController
             $user->free_delivery = true;
             $user->save();
         }
+        $order = Order::find($_REQUEST['order']);
+        $name = $order->name;
+        $cost = $order->cost;
+//        if($request->method() === 'POST'){
+//            
+//            if(null === $request->input('name')){
+//                $name = $request->input('name');
+//            }
+//            if(null === $request->input('cost')){
+//                $cost = $request->input('cost');
+//            }
+//            
+//            //dd($client->smsStatus($smsId));
+//
+//            //dd($client->myLimit());
+//            return ['ok'];
+//        }
         
-        if($request->method() === 'POST'){
-            $name = '';
-            $cost = '';
-            if(null === $request->input('name')){
-                $name = $request->input('name');
-            }
-            if(null === $request->input('cost')){
-                $cost = $request->input('cost');
-            }
-            $apiId = 'BAFD72FC-2E9F-6C9F-77BF-4F2BDEEBD21F';
-            $client = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
+        
+        $apiId = 'BAFD72FC-2E9F-6C9F-77BF-4F2BDEEBD21F';
+        $client = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
     
-            $phone = '89645805819';
-            $text = "$name. Сумма заказа $cost руб.";
-    
-            $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text);
-    
-            $client->smsSend($sms);
+        $phone = '89645805819';
+        $text = "$name. Сумма заказа $cost руб.";
 
-            //dd($client->smsStatus($smsId));
+        $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text);
 
-            //dd($client->myLimit());
-            return ['ok'];
-        }
-
+        $client->smsSend($sms);
+        
+        $userPhone = $user->phone;
+        $text = 'Ваш заказ на сумму '.$cost.' рублей принят. В ближайшее время мы свяжемся с Вами для подтверждения';
+        $sms2 = new \Zelenin\SmsRu\Entity\Sms($userPhone, $text);
+        $client->smsSend($sms2);
         return view('success');
     }
 }

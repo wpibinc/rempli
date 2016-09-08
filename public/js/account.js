@@ -55,8 +55,6 @@ $(document).on('ready', function(){
         });
     });
     
-    $(".")
-    
     $(".add-adress").on('click', function(){
         var street = $('#street-input').val();
         var home = $('#house').val();
