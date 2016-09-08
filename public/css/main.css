@@ -998,6 +998,11 @@ body {
 #tt > iframe{
 	float: right;
 }
+.cart-info.dropdown-menu2 tbody .name {
+	color: #3A3A3A;
+	font-size: 12px!important;
+	font-weight: bold;
+}
 @media (max-width:768px){
 .categories p{
 	font-size:26px;
