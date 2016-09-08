@@ -42,15 +42,15 @@ class UserController extends Controller
             $email = $request->input('email');
             $phone = $request->input('phone');
             if($email != $user->email){
-                $vUser = User::where('email', $request->input('email'));
-                if($vUser){
+                $vUser = User::where('email', $email)->get();
+                if(count($vUser)){
                     return response()->json(['success' => false, 'err'=> 'email', 'message' => 'email уже занят']);
                 }
                 $user->email = $email;
             }
             if($phone != $user->phone){
-                $vUser = User::where('phone', $phone);
-                if($vUser){
+                $vUser = User::where('phone', $phone)->get();
+                if(count($vUser)){
                     return response()->json(['success' => false, 'err'=> 'phone', 'message' => 'телефон уже занят']);
                 }
             }
