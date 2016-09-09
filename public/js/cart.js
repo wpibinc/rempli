@@ -33,10 +33,15 @@ $(document).ready(function() {
         $(this).siblings("textarea").val('');
     });
 	$(document).on('click', '.ssave-comment', function () {
-		$(this).parent().addClass('savesComent').removeClass('editComent');
+            if(!$(this).siblings("textarea").val()){
+                return false;
+            }
+            $(this).siblings("textarea").addClass('has-comment');
+            $(this).parent().addClass('savesComent').removeClass('editComent');
 	});
 	$(document).on('click', '.special-instructions-box,.editComents', function () {
 		$(this).parent().addClass('editComent');
+                $(this).siblings("textarea").removeClass('has-comment');
 	});
 	
 
@@ -443,6 +448,9 @@ $('#orderBtn').on({
         $("#ordered-items textarea.special-instructions-box").each(function(){
             var id = $(this).closest('tr').attr('id').substring(5);
             var comment = $(this).val();
+            if(!$(this).hasClass('has-comment')){
+                comment = '';
+            }
             comments[id] = comment;
         });
         comments = JSON.stringify(comments);
