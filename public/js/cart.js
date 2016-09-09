@@ -273,6 +273,12 @@ $(document).on('click', ".increase_count", function(){
 	$('.cart-total').find('th').html(sessionStorage.mass + ' грамм');
 	sessionStorage.cart = $("#ordered-items").html();
 	sessionStorage.total = totalCost;
+        
+        $(".modal").each(function(){
+            if($(this).attr('id')=='idt'+theId){
+                $(this).find('.item_count').removeClass('hidden').addClass('visible').text(sessionStorage[theId]);
+            }
+        });
 	return newItem;
 });
 
