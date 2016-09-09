@@ -1378,7 +1378,21 @@ visibility: hidden;
 		display: block!important;
 	}
 }
-
+.tabs ul li{
+	font-size: 10px;
+}
+.modal-content .item_count{
+	position: absolute;
+	z-index: 99;
+	top: 13px;
+	right: 90px;
+	background-color: #FC6;
+	border-radius: 60em;
+	padding: 10px 15px;
+}
+.popup-image{
+	position: relative;
+}
 .special-instructions-box{
 	width: 236px;
 	font-size: 11px;
