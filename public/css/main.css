@@ -1380,11 +1380,11 @@ visibility: hidden;
 }
 
 .special-instructions-box{
-	width: 150px;
+	width: 236px;
 	font-size: 11px;
 	line-height: 11px;
 	resize: none;
-	height: 52px;
+	height: 32px;
 	border: 1px solid #e5edec;
 	-moz-border-radius-topleft: 5px !important;
 	-moz-border-radius-topright: 5px !important;
@@ -1404,7 +1404,7 @@ visibility: hidden;
 	position: absolute;
 	right: 128px;
 	height: 77px;
-	top: 38px;
+	top: 61px;
 }
 .activeComent{
 	display: block!important;
