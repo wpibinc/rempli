@@ -1393,6 +1393,41 @@ visibility: hidden;
 .popup-image{
 	position: relative;
 }
+.ssave-comment{
+	padding-right: 10px;
+}
+.savesComent .not-save-comment,.savesComent .ssave-comment{
+	display: none;
+}
+.savesComent .special-instructions-box{
+	border: none;
+}
+.editComent .not-save-comment,.editComent .ssave-comment{
+	display: inline-block;
+}
+.editComent .special-instructions-box{
+	border: 1px solid #e5edec;
+}
+/*.ssaves-comment{*/
+	/*display: none;*/
+/*}*/
+/*.editComent .ssaves-comment{*/
+	/*display: table;*/
+	/*position: absolute;*/
+	/*right:0;*/
+	/*left: 0;*/
+/*}*/
+.editComents{
+	right: -1px;
+	width: auto;
+	display: none;
+}
+.savesComent .editComents{
+	display: table;
+}
+.editComent .editComents{
+	display: none;
+}
 .special-instructions-box{
 	width: 236px;
 	font-size: 11px;

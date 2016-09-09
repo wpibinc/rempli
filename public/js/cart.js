@@ -32,8 +32,14 @@ $(document).ready(function() {
         $(this).parent().siblings('a').removeClass('notActiveComent');
         $(this).siblings("textarea").val('');
     });
-    
-    
+	$(document).on('click', '.ssave-comment', function () {
+		$(this).parent().addClass('savesComent').removeClass('editComent');
+	});
+	$(document).on('click', '.special-instructions-box,.editComents', function () {
+		$(this).parent().addClass('editComent');
+	});
+	
+
     $(".popup-num").keydown(function(event) {
             // Allow only backspace and delete
             if ( event.keyCode == 46 || event.keyCode == 8 ) {
@@ -85,10 +91,10 @@ $(document).ready(function() {
             '<td class="name">'+title+'</td>'+
             '<td class="price"><span class="priceShow">'+parseFloat(price)+'</span>р</td>' +
 
-            '<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (Math.round(parseFloat(price))*parseFloat(Number(sessionStorage[theId])))+ '</span>р'+
+            '<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (Math.round(parseFloat(price))*parseFloat(Number(sessionStorage[theId])))+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            '</span>р'+
             '<a href="#" class="cart-change cart-del">×</a>' +
 			'<a class="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Добавить комментарий</a>' +
-			'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
+			'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a class="editComents" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true">  </i> Редактировать</a><a href="javascript:void(0)" class="ssave-comment">Сохранить</a><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
             '</td>'+
             '</tr>');
 
@@ -243,10 +249,10 @@ $(document).on('click', ".increase_count", function(){
 	'<td class="name">'+$(this).closest('.product').find('.product-title').html()+'</td>'+
 	'<td class="price"><span class="priceShow">'+parseFloat($(this).closest('.product').find('.price').html())+'</span>р</td>' +
 
-	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (Math.round(parseFloat($(this).closest('.product').find('.price').html()))*parseFloat(Number(sessionStorage[theId])))+ '</span>р'+
+	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (Math.round(parseFloat($(this).closest(                                                                                                            '.product').find('.price').html()))*parseFloat(Number(sessionStorage[theId])))+ '</span>р'+
 	'<a href="#" class="cart-change cart-del">×</a>' +
 	'<a class="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Добавить комментарий</a>' +
-	'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
+	'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a class="editComents" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true">  </i> Редактировать</a><a href="javascript:void(0)" class="ssave-comment">Сохранить</a><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
 	'</td>'+
 
 	'</tr>');
@@ -313,10 +319,10 @@ $(document).on('click', '.add-to-cart', function(e){
 	'<td class="name">'+$(this).parents(".modal-dialog").find(".popup-name").find('.popup-title').html()+'</td>'+
 	'<td class="price"><span class="priceShow">'+parseFloat($(this).parents(".modal-dialog").find(".popup-price").html())+'</span>р</td>' +
 
-	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (parseFloat($(this).parents(".modal-dialog").find(".popup-price").html())*parseFloat(Number(sessionStorage[theId]))).toFixed(0)+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  '</span>р'+
+	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (parseFloat($(this).parents(                                                                                                            ".modal-dialog").find(".popup-price").html())*parseFloat(Number(sessionStorage[theId]))).toFixed(0)+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  '</span>р'+
 	'<a href="#" class="cart-change cart-del">×</a>' +
 	'<a class="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Добавить комментарий</a>' +
-	'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
+	'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a class="editComents" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true">  </i> Редактировать</a><a href="javascript:void(0)" class="ssave-comment">Сохранить</a><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
 	'</td>'+
 	'</tr>');
 
@@ -513,10 +519,10 @@ $(document).on('click', ".reduce_count", function(){
 		'<td class="name">' + $(this).closest('.product').find('.product-title').html() + '</td>' +
 		'<td class="price"><span class="priceShow">' + parseFloat($(this).closest('.product').find('.price').html()) + '</span>р</td>' +
 
-		'<td class="total"><span class="totalShow">' + (parseFloat($(this).closest('.product').find('.price').html()) * parseFloat(Number(sessionStorage[theId]))).toFixed(0) + '</span>р' +
+		'<td class="total"><span class="totalShow">' + (parseFloat($(this).closest('.product').find('.price').html()) * parseFloat(Number(sessionStorage[theId]))).toFixed(0) +                                                                                                             '</span>р' +
 		'<a href="#" class="cart-change cart-del">×</a>' +
 		'<a class="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Добавить комментарий</a>' +
-		'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
+		'<span><textarea rows="10" cols="45" name="text" class="special-instructions-box"></textarea><a class="editComents" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true">  </i> Редактировать</a><a href="javascript:void(0)" class="ssave-comment">Сохранить</a><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
 		'</td>' +
 		'</tr>');
 
