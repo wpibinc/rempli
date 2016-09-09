@@ -335,6 +335,7 @@ $(document).on('click', '.add-to-cart', function(e){
 //        $(this).text("Добавлено");
 //        $(this).unbind(e);
 	return newItem;
+
 });
 
 $('#orderBtn2').on({

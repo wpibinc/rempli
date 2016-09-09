@@ -11,7 +11,15 @@ body {
 	font-style: normal;
 	font-weight: normal;
 }
-
+a{
+	font-family: "HelveticaLight"!important;
+}
+button {
+	font-family: "HelveticaLight"!important;
+}
+input{
+	font-family: "HelveticaLight"!important;
+}
 .product-wrap {
 	float: left;
 }
@@ -838,6 +846,7 @@ div.modal-dialog > div > div:nth-child(3){
 	background: #fff;
 	left: 50%;
 	top: 50%;
+	border-radius: 6px;
 	transform: translate(-50%,-50%);
 	-webkit-transform: translate(-50%,-50%);
 	-moz-transform: translate(-50%,-50%);
@@ -1169,6 +1178,7 @@ body {
 	width: 300px;
 	top: 50%;
 	left: 50%;
+	border-radius: 5px;
 	background-color: #fff;
 	height: 400px;
 	overflow-y: scroll;
@@ -1370,11 +1380,11 @@ visibility: hidden;
 }
 
 .special-instructions-box{
-	width: 150px;
+	width: 236px;
 	font-size: 11px;
 	line-height: 11px;
 	resize: none;
-	height: 52px;
+	height: 32px;
 	border: 1px solid #e5edec;
 	-moz-border-radius-topleft: 5px !important;
 	-moz-border-radius-topright: 5px !important;
@@ -1394,7 +1404,7 @@ visibility: hidden;
 	position: absolute;
 	right: 128px;
 	height: 77px;
-	top: 38px;
+	top: 61px;
 }
 .activeComent{
 	display: block!important;
