@@ -296,7 +296,7 @@ $(document).on('click', '.add-to-cart', function(e){
 	} else {
 	    sessionStorage[theId] = 1;
 	}
-        $(this).closest('.modal').children('.item_count').removeClass( "hidden" ).addClass( "visible" ).html(sessionStorage[theId]);
+        $(this).closest('.modal').find('.item_count').removeClass( "hidden" ).addClass( "visible" ).html(sessionStorage[theId]);
 	newItem = (
 	'<tr data-category="'+category+'" class="ordered-item" id="cart-'+theId+'"> '+
 	'<td class="quantity"> x '+Number(sessionStorage[theId])+
