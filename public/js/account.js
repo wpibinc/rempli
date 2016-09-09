@@ -116,10 +116,7 @@ $(document).on('ready', function(){
         var id = $(this).attr('data-id');
         var row = $(this).parents('tr');
         var button = $(this);
-        if(button.siblings('.order-details').find('.item').length&&$(this).hasClass('active')){
-            button.siblings('.order-details').hide();
-            button.removeClass('active');
-            button.text('Подробнее');
+        if(button.siblings('.order-details').find('.item').length){
             return false;
         }
         
@@ -132,7 +129,6 @@ $(document).on('ready', function(){
             success: function(res){
                 if(res){
                     row.find('.order-details').append(res);
-
                 }
             }
         });
