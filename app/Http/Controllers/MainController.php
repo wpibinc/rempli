@@ -38,7 +38,9 @@ class MainController extends Controller
                 $review->save();
             }
         }
-        $reviews = DB::table('reviews')->paginate(10);
+        $reviews = DB::table('reviews')
+                ->orderBy('created_at', 'DESC')
+                ->paginate(10);
 
         return view('where', [
             'reviews' => $reviews,            

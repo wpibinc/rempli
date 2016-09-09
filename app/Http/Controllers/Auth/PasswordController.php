@@ -34,7 +34,7 @@ class PasswordController extends Controller
     
     protected function validateSendResetLinkEmail(Request $request)
     {
-        $this->validate($request, ['phone' => 'required']);
+        $this->validate($request, ['phone' => 'required|exists:users,phone']);
     }
     
     protected function getSendResetLinkEmailCredentials(Request $request)

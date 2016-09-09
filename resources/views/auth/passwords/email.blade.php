@@ -16,11 +16,14 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                            @foreach($errors->get('phone') as $message)
+                                <p class="error">{{$message}}</p>
+                            @endforeach
                             <label for="phone" class="col-md-4 control-label">Телефон</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('email') }}">
+                                <input id="phone" type="text" class="form-control" name="phone" value="">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
