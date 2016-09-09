@@ -336,7 +336,21 @@ $(document).on('click', '.add-to-cart', function(e){
 	sessionStorage.total = totalCost;
         $(this).text("Добавлено");
         $(this).unbind(e);
+
+
+	$( ".product" ).each(function( index ) {
+		var theId = $(this).attr('id');
+		$(this).find('.item_count').html(sessionStorage[theId]);
+		if (sessionStorage[theId] > 0) {
+			$(this).find('.reduce_count').removeClass( "hidden" ).addClass( "visible" );
+			$(this).find('.item_count').removeClass( "hidden" ).addClass( "visible" );
+		} else {
+			$(this).find('.reduce_count').removeClass( "visible" ).addClass( "hidden" );
+			$(this).find('.item_count').removeClass( "visible" ).addClass( "hidden" );
+		}
+	});
 	return newItem;
+
 });
 
 $('#orderBtn2').on({
