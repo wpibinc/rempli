@@ -808,7 +808,7 @@ div.modal-dialog > div > div:nth-child(3){
 	padding: 0;
 	font-family: 'Open Sans', sans-serif;
 	text-transform: inherit;
-	font-size: 14px;
+	font-size: 10px;
 }
 .tabs li a:hover{
 	color: #fff!important;
@@ -1451,9 +1451,9 @@ visibility: hidden;
 .ordered-item td.total > span:nth-child(5){
 	display: none;
 	position: absolute;
-	right: 128px;
+	right: 120px;
 	height: 77px;
-	top: 61px;
+	bottom: -20px;
 }
 .activeComent{
 	display: block!important;
@@ -1494,6 +1494,12 @@ visibility: hidden;
 	padding: 30px;
 	display: none;
 	text-align: center;
+}
+.yessopen{
+	font-weight: bold;
+	color: #888;
+	font-size: 12px;
+	line-height: 18px;
 }
 .yesPopup p{
 	text-align: left;
