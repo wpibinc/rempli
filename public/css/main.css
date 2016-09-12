@@ -1472,3 +1472,35 @@ visibility: hidden;
 .close-form:hover{
 	color: #000;
 }
+.btn.disableds{
+	pointer-events: none;
+	cursor: not-allowed;
+	filter: alpha(opacity=65);
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	opacity: .65;
+}
+.yesPopup{
+	width: 300px;
+	z-index: 999999;
+	position: fixed;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+	-moz-transform: translate(-50%,-50%);
+	background-color: #fff;
+	border-radius: 6px;
+	padding: 30px;
+	display: none;
+	text-align: center;
+}
+.yesPopup p{
+	text-align: left;
+	font-size: 12px;
+	margin: 0;
+	line-height: 20px;
+}
+.yesPopup a{
+	margin-top: 10px;
+}
