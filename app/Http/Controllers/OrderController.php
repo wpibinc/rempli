@@ -82,15 +82,16 @@ class OrderController extends BaseController
         $client = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
     
         $phone = '89645805819';
-        $text = "$name. Сумма заказа $cost руб.";
+        $text1 = "$name. Сумма заказа $cost руб.";
 
-        $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text);
-
-        $client->smsSend($sms);
+        
         
         $userPhone = $user->phone;
-        $text = 'Ваш заказ на сумму '.$cost.' рублей принят. В ближайшее время мы свяжемся с Вами для подтверждения';
-        $sms2 = new \Zelenin\SmsRu\Entity\Sms($userPhone, $text);
+        $text2 = 'Ваш заказ на сумму '.$cost.' рублей принят. В ближайшее время мы свяжемся с Вами для подтверждения';
+        $sms2 = new \Zelenin\SmsRu\Entity\Sms($userPhone, $text2);
+        $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text1);
+
+        $client->smsSend($sms);
         $client->smsSend($sms2);
         return view('success');
     }
