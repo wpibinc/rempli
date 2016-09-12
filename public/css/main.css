@@ -1510,3 +1510,11 @@ visibility: hidden;
 .yesPopup a{
 	margin-top: 10px;
 }
+.yessopen {
+	font-weight: bold;
+	color: #888;
+	font-size: 12px;
+	line-height: 18px;
+	display: inline-block;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif!important;
+}
