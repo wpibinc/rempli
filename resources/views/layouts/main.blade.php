@@ -220,6 +220,7 @@
     $('.bg-shadow').on('click',function () {
         $('.add-form').hide();
         $('.bg-shadow').hide();
+        $('.yesPopup').fadeOut();
     });
     $('.close-form').on('click',function () {
         $('.add-form').hide();

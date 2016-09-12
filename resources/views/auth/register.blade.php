@@ -73,11 +73,15 @@
                             @endif
                         </div>
                         <div class=form-group"">
+                            <input type="checkbox" name="yess" id="yess">
+                            <a href="javascript:void(0)" class="yessopen">Ознакомлен с правилами сайта</a>
+                        </div>
+                        <div class=form-group"">
                             <input type="checkbox" name="yes" id="yes">
                             <label for="yes">Cогласен на хранение персональных данных</label>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn-signin btn btn-primary btn-block disabled" id="loginButton">Зарегистрироваться</button>
+                            <button type="submit" class="btn-signin btn btn-primary btn-block disabled disableds" id="loginButton">Зарегистрироваться</button>
                         </div>
                     </form>
                 </div>
@@ -85,7 +89,17 @@
         </div>
     </div>
 </div>
-
+<div class="yesPopup">
+    <div class="col-md-12">
+        <p>
+            правила
+        </p>
+        <p>
+           еще правила
+        </p>
+        <a href="javascript:void(0)" class="btn btn-primary ok-chekbox">Согласен</a>
+    </div>
+</div>
 <script type="text/javascript">
     jQuery(function($){
         $("#phone").mask("+7 (999) 999-9999");
@@ -96,6 +110,29 @@
         } else {
             $('.btn-signin').addClass('disabled');
         }
-    })
+    });
+    $('#yess').on('click',function () {
+        if($('#yess').prop("checked")){
+            $('.btn-signin').removeClass('disableds');
+        } else {
+            $('.btn-signin').addClass('disableds');
+        }
+    });
+    $('.yessopen').on('click',function () {
+        $('.yesPopup').fadeIn();
+        $('.bg-shadow').fadeIn();
+    });
+
+
+    $('.ok-chekbox').on('click',function () {
+        $('#yess').prop("checked",true);
+        $('.yesPopup').fadeOut();
+        $('.bg-shadow').fadeOut();
+        if($('#yess').prop("checked")){
+            $('.btn-signin').removeClass('disableds');
+        } else {
+            $('.btn-signin').addClass('disableds');
+        }
+    });
 </script>
 @endsection
