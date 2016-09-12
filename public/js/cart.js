@@ -794,6 +794,8 @@ function search(word) {
                 word: word
             },
             success: function(res){
+                $(".main-block").empty();
+                var content = '<h2 class="header_cat">Результаты поиска</h2>';
                 if(!res.success){
                     search_results = '<div id="nosearch"> <h2>К сожалению по Вашему запросу ничего не найдено</h2> <h3>Попробуйте ввести другое или более короткое слово</h3> </div>'
                 }else{
@@ -821,8 +823,11 @@ function search(word) {
                         }
                         search_results  += '<div class="modal fade bs-example-modal-lg" id="idt' + json[i].objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"><div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image"><div class="count item_count '+vis+'">' + sessionStorage[json[i].objectId] + '</div><span class="popup-helper"></span> <img class="popimg" src="' + json[i].img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + json[i].product_name + '</p> <div class="popup-price"> ' + json[i].price + ' <span class="popup-rub">'+num2word(Math.floor(json[i].price),words)+'</span> <button href="javascript:void(0)" data-id="'+json[i].objectId+'" data-category="'+json[i].category+'" data-weight="'+json[i].weight+'" data-weight="'+json[i].weight+'" class="add-to-cart buy">Добавить</button> </div> <div class="popup-mass"> '+ json[i].amount +'</div> </div> </div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + json[i].description + '</div> </div><div class="product_card_props f32"> '+consist+'</div></div> </div> </div> </div>';
                     }
-                    $(".products-wrap").empty();
-                    $(".products-wrap").prepend(search_results);
+                    
+                    
+                    
+                    
+                   // $(".products-wrap").prepend(search_results);
 
                     $( ".product" ).each(function( index ) {
                           var theId = $(this).attr('id');
@@ -838,6 +843,8 @@ function search(word) {
 
                     current = 'searchvar';
                 }
+                content += search_results;
+                $(".main-block").prepend(content);
                 
             }
         });

@@ -85,7 +85,7 @@ cats.each(function(i){
     $(this).click(function () {
         $(".center").show();
         $(".bg-shadow").show();
-        
+        $(".header_cat").empty();
         var value = $(this).attr('data-id');
         $(".inmoscow").empty();
         $(".header_cat").prepend($(this).find("img").attr('alt'));
@@ -131,7 +131,6 @@ cats.each(function(i){
                     }
                     categoriesOutput += "</ul></div>";
                 }
-                $(".header_cat").empty();
                 $(".products-wrap").empty();
                 $(".products-wrap").prepend(output);
                 $(".av-categ-menu").prepend(categoriesOutput);
