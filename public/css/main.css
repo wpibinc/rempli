@@ -676,11 +676,11 @@ input:-moz-placeholder {  padding-top: 1px; }
 	font-size: 18px;
 }
 .cart-add{
-	left: 35px!important;
+	left: 11px!important;
 	top: 0;
 }
 .cart-min{
-	left: 35px!important;
+	left: 11px!important;
 	bottom: 32px;
 }
 .categories a:before{
@@ -1280,19 +1280,19 @@ body {
 	visibility: hidden;
 	opacity: 0;
 	position: absolute;
-	top: 48px;
-	right: 0px;
+	top: 19px;
+	right: 48px;
 	border-bottom: 0;
-	width: 85px;
+	/*width: 85px;*/
 	transition: all 0.5s ease;
 }
 
 td.total > a:nth-child(4){
-	right: 100px!important;
+	right: 95px!important;
 	visibility: hidden;
 	opacity: 0;
 	position: absolute;
-	top:62px;
+	top: 40px;
 	border-bottom: 0;
 	width: 85px;
 	transition: all 0.5s ease;
@@ -1433,7 +1433,8 @@ visibility: hidden;
 	font-size: 11px;
 	line-height: 11px;
 	resize: none;
-	height: 32px;
+	height: 48px;
+	margin-top: 10px;
 	border: 1px solid #e5edec;
 	-moz-border-radius-topleft: 5px !important;
 	-moz-border-radius-topright: 5px !important;
@@ -1447,6 +1448,12 @@ visibility: hidden;
 	border-top-right-radius: 5px !important;
 	border-bottom-right-radius: 5px !important;
 	border-bottom-left-radius: 5px !important;
+}
+.savesComent .special-instructions-box{
+	height: auto;
+}
+.editComent .special-instructions-box{
+	height: 48px;
 }
 .ordered-item td.total > span:nth-child(5){
 	display: none;
@@ -1522,4 +1529,14 @@ header.header>h3{
 	color:#fff;
 	text-align: center;
 	font-size: 18px;
+}
+.ordered-item > td:first-child{
+	max-width: 20px;
+}
+.cart-info.dropdown-menu2 tbody .name{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.name span{
+	display: none;
 }
