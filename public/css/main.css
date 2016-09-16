@@ -681,7 +681,7 @@ input:-moz-placeholder {  padding-top: 1px; }
 }
 .cart-min{
 	left: 11px!important;
-	bottom: 32px;
+	top: 61px;
 }
 .categories a:before{
 	content: " ";
