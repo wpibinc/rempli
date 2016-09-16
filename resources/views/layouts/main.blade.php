@@ -32,7 +32,12 @@
     <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <script type="text/javascript" src="/js/jquery.maskedinput.min.js"></script>
     <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
-
+    @if (session('order'))
+    <script>
+        sessionStorage.clear();
+        localStorage.clear();
+    </script>
+@endif
 </head>
 <body>
 <div class="popup-alcogol col-md-12">
@@ -227,8 +232,13 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+@if (session('order'))
+    <script>
+        $('.success-modal').modal('show');
+    </script>
+@endif
 <script>
-    $('.success-modal').modal('show');
+    //$('.success-modal').modal('show');
     $('.cart-btn').on('click',function () {
         $('#dd_body').addClass('activeMenu');
     });

@@ -93,7 +93,7 @@ class OrderController extends BaseController
 
         $client->smsSend($sms);
         $client->smsSend($sms2);
-        return view('success');
+        return redirect('/')->with('order', 'success');
     }
 }
 
