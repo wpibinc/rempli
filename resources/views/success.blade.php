@@ -8,6 +8,7 @@
 @endsection
 
 @section('content')
+    
     <div class="container">
 
         <div class="jumbotron content">
@@ -17,4 +18,8 @@
             <h2  id="successinfo">Ваш заказ был нами успешно получен. В ближайшие несколько минут, мы позвоним Вам для уточнения информации.</h2>
         </div>
     </div>
+<script>
+    sessionStorage.clear();
+    localStorage.clear();
+</script>
 @endsection
