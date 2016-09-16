@@ -62,6 +62,7 @@
     </div>
     <br class="clear">
     <h1 class="col-md-8 col-md-offset-2">Доставка продуктов за 1 час в центре Москвы</h1>
+    <h3 class="col-md-8 col-md-offset-2">Первая	доставка бесплатно</h3>
 </header>
 
 
@@ -138,6 +139,7 @@
 </div>
 
 
+
 <div id="container-fluid1" class="container-fluid content">
     <div class="row">
 
@@ -209,7 +211,24 @@
 </div>
 <div class="bg-shadow" style="display:none">
 </div>
+<div class="modal fade success-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Спасибо за заказ!</h4>
+            </div>
+            <div class="modal-body">
+                <p>Ваш заказ был нами успешно получен. В ближайшие несколько минут, мы позвоним Вам для уточнения информации.</p>
+            </div>
+            <div class="modal-footer" style="text-align: center">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script>
+    $('.success-modal').modal('show');
     $('.cart-btn').on('click',function () {
         $('#dd_body').addClass('activeMenu');
     });

@@ -1518,3 +1518,8 @@ visibility: hidden;
 	display: inline-block;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif!important;
 }
+header.header>h3{
+	color:#fff;
+	text-align: center;
+	font-size: 18px;
+}
