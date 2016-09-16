@@ -1540,3 +1540,6 @@ header.header>h3{
 .name span{
 	display: none;
 }
+.name {
+	max-width: 200px!important;
+}
