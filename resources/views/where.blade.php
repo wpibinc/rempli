@@ -7,8 +7,11 @@
         @if(!empty($reviews))
             @foreach($reviews as $review)
             <div class="review-item">
+                
                 <span class="title">{{$review->name}}</span>
+                <span class="date">{{$review->created_at}}</date>
                 <p class="content">{{$review->content}}</p>
+                
             </div>
             @endforeach
         @endif
