@@ -1565,3 +1565,8 @@ header.header>h3{
 .name {
 	max-width: 200px!important;
 }
+.date{
+	display: block;
+	font-size: 10px;
+	color: #B3B2BB;
+}
