@@ -1,6 +1,9 @@
 $(document).on('ready', function(){
     $(".change-user-info").on('click', function(){
-        
+        var res = confirm('Изменить личные данные?');
+        if(!res){
+            return;
+        }
         var token = $("input[name=_token]").val();
         var email = $(".account .email input").val();
         var phone = $(".account .phone input").val();
@@ -19,7 +22,7 @@ $(document).on('ready', function(){
             },
             success: function(res){
                 if(res.success){
-                    alert('ok');
+                    alert('Личные данные изменены');
                     $(".account p.error").text('');
                 }else{
                     switch(res.err){
@@ -39,7 +42,7 @@ $(document).on('ready', function(){
     });
     
     $(".change-password").on('click', function(){
-        var res = confirm('Вы уверены?');
+        var res = confirm('Изменить пароль?');
         if(!res){
             return;
         }
@@ -56,7 +59,7 @@ $(document).on('ready', function(){
             success: function(res){
                 if(res.success){
                     $(".account .password p.error").text('');
-                    alert("ok");
+                    alert("Пароль изменен");
                 }else{
                     $(".account .password p.error").text(res.message);
                 }

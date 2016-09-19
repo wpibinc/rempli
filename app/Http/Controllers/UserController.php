@@ -53,6 +53,7 @@ class UserController extends Controller
                 if(count($vUser)){
                     return response()->json(['success' => false, 'err'=> 'phone', 'message' => 'телефон уже занят']);
                 }
+                $user->phone = $phone;
             }
             $user->fname = $request->input('fname');
             $user->sname = $request->input('sname');
