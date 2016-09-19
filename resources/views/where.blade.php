@@ -9,7 +9,7 @@
             <div class="review-item">
                 
                 <span class="title">{{$review->name}}</span>
-                <span class="date">{{$review->created_at}}</date>
+                <span class="date">{{$review->created_at}}</span>
                 <p class="content">{{$review->content}}</p>
                 
             </div>
