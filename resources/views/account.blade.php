@@ -13,7 +13,7 @@
             <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход</a> <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
         </ul>
         <div class="col-md-10 ">
-            <div class='account  col-md-12'>
+            <div class='account '>
                 
                 <div class="wrapper-acaunt col-md-12">
                     <h4>ИЗМЕНИТЬ ПАРОЛЬ</h4>
@@ -34,7 +34,7 @@
                     </div>
                     <div class='phone col-md-12'>
                         <label class="col-md-2">Телефон</label>
-                        <input type='text' name='phone' class="col-md-3" value='{{$user->phone}}'>
+                        <input type='text' name='phone' class="col-md-3 phone-input" value='{{$user->phone}}'>
                         <p class="error"></p>
                     </div>
                     <div class='fname col-md-12'>
@@ -183,6 +183,9 @@
         $(".bg-shadows").on('click',function () {
             $('.bg-shadows').hide();
             $(".order-details").removeClass('activeItems');
+        });
+        jQuery(function($){
+            $(".phone-input").mask("+7 (999) 999-9999");
         });
     </script>
 </div>
