@@ -10,7 +10,7 @@
                 
                 <span class="title">{{$review->name}}</span>
                 <span class="date">{{$review->created_at}}</span>
-                <p class="content">{{$review->content}}</p>
+                <p class="content">{!! nl2br($review->content) !!}</p>
                 
             </div>
             @endforeach
