@@ -35,7 +35,7 @@ class UserController extends Controller
         if($action == 'changepassword'){
             $pass = $request->input('pass');
             if(strlen($pass)< 6){
-                return response()->json(['success' => false, 'message' => 'Длинна пароля - мин 6 символов']);
+                return response()->json(['success' => false, 'message' => 'минимальная	длина	пароля	–	6	символов']);
             }
             $user->password = bcrypt($request->input('pass'));
         }else{
@@ -44,14 +44,14 @@ class UserController extends Controller
             if($email != $user->email){
                 $vUser = User::where('email', $email)->get();
                 if(count($vUser)){
-                    return response()->json(['success' => false, 'err'=> 'email', 'message' => 'email уже занят']);
+                    return response()->json(['success' => false, 'err'=> 'email', 'message' => 'E-mail занят']);
                 }
                 $user->email = $email;
             }
             if($phone != $user->phone){
                 $vUser = User::where('phone', $phone)->get();
                 if(count($vUser)){
-                    return response()->json(['success' => false, 'err'=> 'phone', 'message' => 'телефон уже занят']);
+                    return response()->json(['success' => false, 'err'=> 'phone', 'message' => 'телефон занят']);
                 }
                 $user->phone = $phone;
             }
