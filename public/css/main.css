@@ -1550,6 +1550,7 @@ header.header>h3{
 	color:#fff;
 	text-align: center;
 	font-size: 18px;
+	font-weight: 500;
 }
 .ordered-item > td:first-child{
 	max-width: 20px;
