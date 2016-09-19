@@ -63,7 +63,6 @@ div.menu-neobsos>ul>li:first-child {
 }
 
 div.menu-neobsos>ul>li>a {
-    text-decoration: none;
     color: #fff;
     line-height: 40px;
 }
