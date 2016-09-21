@@ -27,8 +27,7 @@ body {
 
 .header h1,
 .header h3{
-	font-family: 'Conv_helveticaneuecyr-ultralight';
-	font-weight: 500!important;
+	font-family: 'Open Sans', sans-serif;
 }
 .add-adress{
 	font-family: "HelveticaLight";
