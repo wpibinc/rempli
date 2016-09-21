@@ -21,9 +21,9 @@
     <link rel="stylesheet" type="text/css" href="css/signin.css">
     @endif
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
     <link href="/css/neobsos.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
     @yield('style')
 
     {{--Js--}}
