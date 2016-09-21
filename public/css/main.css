@@ -684,13 +684,13 @@ input:-moz-placeholder {  padding-top: 1px; }
 }
 .cart-add{
 	left: 50%;
-	top: 18%;
+	top: 21px;
 	transform: translateX(-50%);
 }
 .cart-min{
 	left: 50%;
 	transform: translateX(-50%);
-	top: 51%;
+	top: 59px;
 
 }
 .success-modal .modal-footer{
@@ -1312,7 +1312,7 @@ header.header{
 	transition: all 0.5s ease;
 }
 .cart-info.dropdown-menu2 > table td.quantity{
-	vertical-align: middle;
+	padding-top: 43px!important;
 }
 td.total > a:nth-child(4){
 	right: 95px!important;
