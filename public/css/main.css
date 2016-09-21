@@ -1379,7 +1379,7 @@ td.total > a:nth-child(4){
 	transition: all 0.5s ease;
 }
 .categories a:hover p{
-	text-shadow: 3px 1px 3px rgba(0, 0, 0, 1);
+	/*text-shadow: 3px 1px 3px rgba(0, 0, 0, 1);*/
 }
 .review-item .title{
 	font-size: 16px;
