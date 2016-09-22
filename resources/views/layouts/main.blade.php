@@ -136,7 +136,7 @@
     <ul class="col-md-6 col-md-offset-3 col-sm-8 col-xs-12">
         <li><a href="/" {!! (Request::is('/')) ? 'class="active"' : '' !!}>Магазин</a></li>
         <li><a href="/about" {!! (Request::is('about')) ? 'class="active"' : '' !!}>О нас</a></li>
-        <li><a href="/reviews" {!! (Request::is('where')) ? 'class="active"' : '' !!}>Отзывы</a></li>
+        <li><a href="/reviews" {!! (Request::is('reviews')) ? 'class="active"' : '' !!}>Отзывы</a></li>
         <li><a href="/price" {!! (Request::is('price')) ? 'class="active"' : '' !!}>Доставка и оплата</a></li>
         <li><a href="/contacts" {!! (Request::is('contacts')) ? 'class="active"' : '' !!}>Контакты</a></li>
     </ul>
@@ -221,10 +221,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Спасибо за заказ!</h4>
+                <h4 class="modal-title">Готово!</h4>
             </div>
             <div class="modal-body">
-                <p>Ваш заказ был нами успешно получен. В ближайшие несколько минут, мы позвоним Вам для уточнения информации.</p>
+                <p>Мы получили Ваш заказ. В ближайшее время мы свяжемся с Вами для подтверждения.</p>
             </div>
             <div class="modal-footer" style="text-align: center">
                 <button type="button" class="btn btn-default" data-dismiss="modal" >Закрыть</button>
