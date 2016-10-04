@@ -49,6 +49,9 @@ class OrderController extends BaseController
         if($user->free_delivery){
             $freeDelivery = false;
         }
+        if($user->free_delivery_manually){
+            $freeDelivery = true;
+        }
         return view('payment', ['freeDelivery' => $freeDelivery]);
     }
     
