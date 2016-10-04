@@ -14,13 +14,14 @@ AdminSection::registerModel(User::class, function (ModelConfiguration $model) {
         $display->paginate(15);
         $display->with('orders');
         return $display->setColumns([
-            
+
             AdminColumn::text('fname')->setLabel('Имя'),
             AdminColumn::text('sname')->setLabel('Фамилия'),
             AdminColumn::text('phone')->setLabel('Телефон'),
             AdminColumn::text('email')->setLabel('E-mail'),
             AdminColumn::text('confirmed')->setLabel('Активный'),
             AdminColumn::count('orders')->setLabel('Заказы'),
+
         ]);
     });
     
@@ -28,9 +29,9 @@ AdminSection::registerModel(User::class, function (ModelConfiguration $model) {
         return $form = AdminForm::panel()->addBody(
             AdminFormElement::text('fname')->setLabel('Имя')->required(),
             AdminFormElement::text('sname')->setLabel('Фамилия')->required(),
-            AdminFormElement::text('confirmed')->setLabel('Активный')->required()
+            AdminFormElement::text('confirmed')->setLabel('Активный')->required(),
+            AdminFormElement::checkbox('free_delivery_manually')->setLabel('Бесплатная Доставка')
         );
-        return $form;
 
     });
 })->addMenuPage(User::class, 0)
