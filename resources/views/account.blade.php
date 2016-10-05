@@ -124,7 +124,7 @@
                     <p class="costSubscription"><span>450</span> руб</p>
                     <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="4"/>
                     <p class="finalPriceSubscription"><span>0</span> руб</p>
-                    <button type="button" class="buySubscription btn btn-default">Купить</button>
+                    <button type="button" class="buySubscription btn btn-default" >Купить</button>
                 </div>
                 <div class="trueSubscription hideDiv">
                     <h3>Подписка</h3>
@@ -146,7 +146,11 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td colspan="1"><button class="btn btn-default editSubscription" type="button">изменить условия</button> </td>
+                            <td colspan="1">
+                                <button class="btn btn-default editSubscription" type="button">изменить условия</button>
+                                <input id="ex2" data-slider-id='ex1Slider'  type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="4"/></br>
+                                <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
+                            </td>
                             <td></td>
                         </tr>
                         </tbody>
@@ -161,8 +165,17 @@
 
     <script>
         $(document).on('click','.editSubscription',function () {
-            $('.trueSubscription').addClass('hideDiv');
-            $('.falseSubscription').removeClass('hideDiv')
+            $('.slider-horizontal').addClass('showDiv');
+            $('.editSubscription').addClass('hideDiv');
+            $('.editsSubscription').removeClass('hideDiv');
+        });
+        $(document).on('click','.editsSubscription',function () {
+            $('.slider-horizontal').removeClass('showDiv');
+            $('.editSubscription').removeClass('hideDiv');
+            $('.editsSubscription').addClass('hideDiv');
+            var countDelivery = $('#ex2').val();
+            $('.countDeliveryAll').html(countDelivery);
+            $('.countDelivery').html(countDelivery);
         });
         $(document).on('click','.buySubscription',function () {
             var countDelivery = $('#ex1').val();
@@ -194,6 +207,7 @@
             $('.finalPriceSubscription span').html(finalPriceSubscription);
             var costSubscription = parseInt($('.costSubscription span').text());
             $("input#ex1").bootstrapSlider();
+            $("input#ex2").bootstrapSlider();
             $(".tabs").lightTabs();
             switch(window.location.search){
                 case '?section=orders': showPage(1);

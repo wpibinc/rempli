@@ -1648,6 +1648,13 @@ header.header>h1{
 .hideDiv{
 	display: none;
 }
+
 .table-striped td, .table-striped th{
 	padding: 10px;
+}
+td #ex1Slider{
+	display: none;
+}
+.showDiv{
+	display: block!important;
 }
