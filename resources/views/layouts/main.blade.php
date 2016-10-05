@@ -24,6 +24,7 @@
     <link href="/css/neobsos.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+    <link href="/js/bootstrap-slider-master/css/bootstrap-slider.min.css" rel="stylesheet">
     @yield('style')
 
     {{--Js--}}
@@ -32,7 +33,8 @@
     <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <script type="text/javascript" src="/js/jquery.maskedinput.min.js"></script>
     <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
-    @if (session('order'))
+    <script type="text/javascript" src="/js/bootstrap-slider-master/bootstrap-slider.min.js"></script>
+@if (session('order'))
     <script>
         sessionStorage.clear();
         localStorage.clear();

@@ -9,6 +9,7 @@
             <li><i class="fa fa-user" aria-hidden="true"></i> Учетная запись <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-list-alt" aria-hidden="true"></i> История заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-phone" aria-hidden="true"></i> Адреса <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
+            <li><i class="fa fa-bullhorn" aria-hidden="true"></i> Подписка <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-book" aria-hidden="true"></i> Правила <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход</a> <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
         </ul>
@@ -116,11 +117,91 @@
                     </table>
                 </div> 
             </div>
+            <div class='subscription wrapper-acaunt'>
+                <input type="hidden" value="0" class="subscriptionHide">
+                <div class="falseSubscription">
+                    <h3>Подписка</h3>
+                    <p class="costSubscription"><span>10</span> руб</p>
+                    <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="4"/>
+                    <p class="finalPriceSubscription"><span>0</span> руб</p>
+                    <button type="button" class="buySubscription btn btn-default">Купить</button>
+                </div>
+                <div class="trueSubscription hideDiv">
+                    <h3>Подписка</h3>
+                    <table class="table-striped ">
+                        <tbody>
+                        <tr>
+                            <td><span>количество доставок всего</span> </td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td><span>количество оставшихся доставок</span> </td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> автопродление подписки
+                                    </label>
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1"><button class="btn btn-default editSubscription" type="button">изменить условия</button> </td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
             <div class='rules wrapper-acaunt'>Правила</div>
         </div>
     </div>
     <div class="bg-shadows"></div>
+
     <script>
+        $(document).on('click','.editSubscription',function () {
+            $('.trueSubscription').addClass('hideDiv');
+            $('.falseSubscription').removeClass('hideDiv')
+        });
+        $(document).on('click','.buySubscription',function () {
+            $('.falseSubscription').addClass('hideDiv');
+            $('.trueSubscription').removeClass('hideDiv');
+        });
+        $(document).ready(function(){
+            if($('.subscriptionHide').val() == 0){
+                $('.trueSubscription').addClass('hideDiv');
+                $('.falseSubscription').removeClass('hideDiv');
+            } else {
+                $('.falseSubscription').addClass('hideDiv');
+                $('.trueSubscription').removeClass('hideDiv');
+            }
+            var costSubscription = parseInt($('.costSubscription span').text());
+            var finalPriceSubscription = costSubscription;
+            $('.finalPriceSubscription span').html(finalPriceSubscription);
+
+            $("input#ex1").bootstrapSlider();
+            $(".tabs").lightTabs();
+            switch(window.location.search){
+                case '?section=orders': showPage(1);
+                    break;
+                case '?section=adress': showPage(2);
+                    break;
+                case '?section=rules': showPage(3);
+                    break;
+                case '?section=subscription': showPage(4);
+                    break;
+                default: showPage(0);
+                    break;
+            }
+            if(window.location.search.indexOf('section=orders') > 0){
+                console.log(window.location.search.indexOf('section=orders'));
+                showPage(1);
+            }
+        });
         (function($){
             jQuery.fn.lightTabs = function(options){
 
@@ -149,23 +230,8 @@
                 return this.each(createTabs);
             };
         })(jQuery);
-        $(document).ready(function(){
-            $(".tabs").lightTabs();
-            switch(window.location.search){
-                case '?section=orders': showPage(1);
-                    break;
-                case '?section=adress': showPage(2);
-                    break;
-                case '?section=rules': showPage(3);
-                    break;
-                default: showPage(0);
-                    break;
-            }
-            if(window.location.search.indexOf('section=orders') > 0){
-                console.log(window.location.search.indexOf('section=orders'));
-                showPage(1);
-            }
-        });
+
+
 
         $(".add-form-btn").on('click',function () {
             $('.bg-shadow').show();
