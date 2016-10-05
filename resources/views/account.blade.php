@@ -173,10 +173,9 @@
         });
         $(document).on('change','#ex1',function () {
             var countDelivery = parseInt($('#ex1').val());
-            var priceOneDelivery = 500;
             var costSubscription = parseInt($('.costSubscription').text());
             var finalPriceSubscription = 0;
-            finalPriceSubscription = (priceOneDelivery * countDelivery ) + costSubscription;
+            finalPriceSubscription = countDelivery * costSubscription;
             $('.finalPriceSubscription span').html(finalPriceSubscription);
         });
 
@@ -189,10 +188,9 @@
                 $('.trueSubscription').removeClass('hideDiv');
             }
             var countDelivery = 4;
-            var priceOneDelivery = 500;
             var costSubscription = parseInt($('.costSubscription').text());
             var finalPriceSubscription = 0;
-            finalPriceSubscription = (priceOneDelivery * countDelivery ) + costSubscription;
+            finalPriceSubscription = countDelivery * costSubscription;
             $('.finalPriceSubscription span').html(finalPriceSubscription);
             var costSubscription = parseInt($('.costSubscription span').text());
             $("input#ex1").bootstrapSlider();
