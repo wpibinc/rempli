@@ -148,7 +148,7 @@
                         <tr>
                             <td colspan="1">
                                 <button class="btn btn-default editSubscription" type="button">изменить условия</button>
-                                <input id="ex2" data-slider-id='ex1Slider'  type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="4"/></br>
+                                <input id="ex2" data-slider-id='ex2Slider'  type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="4"/></br>
                                 <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
                             </td>
                             <td></td>
