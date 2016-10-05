@@ -7,7 +7,7 @@ use App\Order;
 use App\Adress;
 use App\Review;
 
-class User extends Authenticatable
+class Subscription extends Authenticatable
 {
     /**
      * The attributes that are mass assignable.
@@ -15,18 +15,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password' , 'fname', 'sname', 'phone', 'confirmation_code', 'free_delivery_manually'
+        'user_id', 'quantity', 'price'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-    
     public function orders()
     {
         return $this->hasMany(Order::class);
@@ -42,8 +33,8 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
-    public function subscription()
+    public function user()
     {
-        return $this->hasOne(Subscription::class);
+        return $this->belongsTo(User::class);
     }
 }

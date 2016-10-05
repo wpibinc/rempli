@@ -119,9 +119,11 @@
             </div>
             <div class='subscription wrapper-acaunt'>
                 <input type="hidden" value="0" class="subscriptionHide">
+                <input type="hidden" value="{{$user->id}}">
                 <div class="falseSubscription">
                     <h3>Подписка</h3>
-                    <p class="costSubscription"><span>450</span> руб</p>
+                    <div>Текст Подписки</div>
+                    <p class="costSubscription"><span>500</span> руб</p>
                     <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="4"/>
                     <p class="finalPriceSubscription"><span>0</span> руб</p>
                     <button type="button" class="buySubscription btn btn-default">Купить</button>
