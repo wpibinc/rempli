@@ -119,11 +119,10 @@
             </div>
             <div class='subscription wrapper-acaunt'>
                 <input type="hidden" value="0" class="subscriptionHide">
-                <input type="hidden" value="{{$user->id}}">
+                <input type="hidden" value="{{$user->id}}" class="userId">
                 <div class="falseSubscription">
                     <h3>Подписка</h3>
-                    <div>Текст Подписки</div>
-                    <p class="costSubscription"><span>500</span> руб</p>
+                    <p class="costSubscription"><span>450</span> руб</p>
                     <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="4"/>
                     <p class="finalPriceSubscription"><span>0</span> руб</p>
                     <button type="button" class="buySubscription btn btn-default" >Купить</button>
@@ -276,6 +275,28 @@
         });
         jQuery(function($){
             $(".phone-input").mask("+7 (999) 999-9999");
+        });
+        $(document).ready(function(){
+            $(document).on('click','.buySubscription',function() { //устанавливаем событие отправки для формы с id=form
+                $_token = "{!! csrf_token() !!}";
+                var user_id = $('.userId').val();
+                var price = $('.finalPriceSubscription span').text();
+                var quantity = $('#ex1').val();
+                $.ajax({
+                    type: "POST", //Метод отправки
+                    url: "/subscription/create", //путь до php фаила отправителя
+                    data: {
+                        'user_id':user_id,
+                        '$_token':$_token,
+                        'quantity':quantity,
+                        'price':price,
+                    },
+                    success: function() {
+                        //код в этом блоке выполняется при успешной отправке сообщения
+                        alert("Ваше сообщение отпрвлено!");
+                    }
+                    });
+            });
         });
     </script>
 </div>
