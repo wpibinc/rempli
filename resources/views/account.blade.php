@@ -131,13 +131,10 @@
                     <table class="table-striped ">
                         <tbody>
                         <tr>
-                            <td><span>количество доставок всего</span> </td>
-                            <td>4</td>
+                            <td><span>количество оставшихся доставок/количество доставок всего</span> </td>
+                            <td><span class="countDelivery"></span>/<span class="countDeliveryAll"></span></td>
                         </tr>
-                        <tr>
-                            <td><span>количество оставшихся доставок</span> </td>
-                            <td>4</td>
-                        </tr>
+
                         <tr>
                             <td colspan="1">
                                 <div class="checkbox">
@@ -168,9 +165,21 @@
             $('.falseSubscription').removeClass('hideDiv')
         });
         $(document).on('click','.buySubscription',function () {
+            var countDelivery = $('#ex1').val();
             $('.falseSubscription').addClass('hideDiv');
             $('.trueSubscription').removeClass('hideDiv');
+            $('.countDeliveryAll').html(countDelivery);
+            $('.countDelivery').html(countDelivery);
         });
+        $(document).on('change','#ex1',function () {
+            var countDelivery = parseInt($('#ex1').val());
+            var priceOneDelivery = 500;
+            var costSubscription = parseInt($('.costSubscription').text());
+            var finalPriceSubscription = 0;
+            finalPriceSubscription = (priceOneDelivery * countDelivery ) + costSubscription;
+            $('.finalPriceSubscription span').html(finalPriceSubscription);
+        });
+
         $(document).ready(function(){
             if($('.subscriptionHide').val() == 0){
                 $('.trueSubscription').addClass('hideDiv');
@@ -179,10 +188,13 @@
                 $('.falseSubscription').addClass('hideDiv');
                 $('.trueSubscription').removeClass('hideDiv');
             }
-            var costSubscription = parseInt($('.costSubscription span').text());
-            var finalPriceSubscription = costSubscription;
+            var countDelivery = 4;
+            var priceOneDelivery = 500;
+            var costSubscription = parseInt($('.costSubscription').text());
+            var finalPriceSubscription = 0;
+            finalPriceSubscription = (priceOneDelivery * countDelivery ) + costSubscription;
             $('.finalPriceSubscription span').html(finalPriceSubscription);
-
+            var costSubscription = parseInt($('.costSubscription span').text());
             $("input#ex1").bootstrapSlider();
             $(".tabs").lightTabs();
             switch(window.location.search){
@@ -202,6 +214,7 @@
                 showPage(1);
             }
         });
+
         (function($){
             jQuery.fn.lightTabs = function(options){
 
@@ -230,9 +243,6 @@
                 return this.each(createTabs);
             };
         })(jQuery);
-
-
-
         $(".add-form-btn").on('click',function () {
             $('.bg-shadow').show();
             $('.add-form').show();
