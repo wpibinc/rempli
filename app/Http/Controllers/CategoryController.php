@@ -97,10 +97,16 @@ class CategoryController extends BaseController
             foreach($category->avProducts as $product){
                 $price = $product->price;
                 $amount = $product->original_price_style;
-                
+
                 if($product->original_price_style == '1 кг'){
                     $price = $product->price/10;
                     $amount = '100 гр';
+                } elseif ($product->price_style == '100 г'){
+                    $amount = $product->price_style;
+                } elseif ($product->original_typical_weight == '0') {
+                    $amount = $product->price_style;
+                } else {
+                    $amount = $product->price_style . '. (' . $product->original_typical_weight . ' г.)';
                 }
                 $json['products'][] = array(
                     'objectId' => $product->id,
