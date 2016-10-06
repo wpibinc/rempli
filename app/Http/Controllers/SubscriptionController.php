@@ -12,7 +12,6 @@ class SubscriptionController extends Controller
     public function create(Request $request)
     {
         Subscription::create($request->all());
-        return redirect()->back()
-            ->with('success_message', 'Подписка оформлена');
+//        return redirect()->back()->with('success_message', 'Подписка оформлена.');
     }
 }

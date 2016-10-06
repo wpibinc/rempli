@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Subscription;
 use Illuminate\Http\Request;
 use App\Order;
 use Auth;
@@ -20,9 +21,10 @@ class UserController extends Controller
     public function myAccount(Request $request)
     {
         $user = Auth::user();
+        $subscription = Subscription::where('user_id', '=',$user->id)->first();
         $orders = Order::where('user_id', $user->id)->simplePaginate(15);
         $adresses = $user->adresses;
-        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses]);
+        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'subscription' => $subscription]);
     }
     
     public function changeInfo(Request $request)
