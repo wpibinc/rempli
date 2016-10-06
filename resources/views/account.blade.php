@@ -129,6 +129,7 @@
                 </div>
                 <div class="trueSubscription">
                     @if(isset($subscription))
+                    <input type="hidden" name="subscription_id" value="{{$subscription->id}}">
                     <h3>Подписка</h3>
                     <table class="table-striped ">
                         <tbody>
@@ -141,7 +142,7 @@
                             <td colspan="1">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="auto_subscription" class="auto_subscription" value="1"> автопродление подписки
+                                        <input type="checkbox" name="auto_subscription" @if($subscription->auto_subscription == 1) checked @endif class="auto_subscription" value="1"> автопродление подписки
                                     </label>
                                 </div>
                             </td>
@@ -318,6 +319,7 @@
 
             $(document).on('click','.editsSubscription',function() { //устанавливаем событие отправки для формы с id=form
                 $_token = "{!! csrf_token() !!}";
+                var subscription_id = $('input[name="subscription_id"]').val();
                 var user_id = $('.userId').val();
                 var price = $('.finalPriceSubscriptions span').text();
                 var quantity = $('#ex2').val();
@@ -331,6 +333,7 @@
                     url: "/subscription/update", //путь до php фаила отправителя
                     data: {
                         'user_id':user_id,
+                        'id':subscription_id,
                         '_token':$_token,
                         'current_quantity':quantity,
                         'total_quantity':quantity,
@@ -339,7 +342,7 @@
                     },
                     success: function() {
                         //код в этом блоке выполняется при успешной отправке сообщения
-                        location.reload();
+//                        location.reload();
 //                        alert("Подписка оформлена!");
                     }
                 });

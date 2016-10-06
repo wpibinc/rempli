@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('delete-adress', 'UserController@deleteAdress');
 
     Route::post('/subscription/create', 'SubscriptionController@create');
+    Route::post('/subscription/update', 'SubscriptionController@update');
 });
 
 #---------ПАРС--------------------------------
