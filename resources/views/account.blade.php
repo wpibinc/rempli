@@ -127,7 +127,7 @@
                     <p class="finalPriceSubscription"><span>0</span> руб</p>
                     <button type="button" class="buySubscription btn btn-default" >Купить</button>
                 </div>
-                <div class="trueSubscription1 hideDiv1">
+                <div class="trueSubscription">
                     @if(isset($subscription))
                     <h3>Подписка</h3>
                     <table class="table-striped ">
@@ -141,7 +141,7 @@
                             <td colspan="1">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="auto_subscription" value="1"> автопродление подписки
+                                        <input type="checkbox" name="auto_subscription" class="auto_subscription" value="1"> автопродление подписки
                                     </label>
                                 </div>
                             </td>
@@ -149,8 +149,9 @@
                         </tr>
                         <tr>
                             <td colspan="1">
+                                <input id="ex2" data-slider-id='ex2Slider'  type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="{{$subscription->current_quantity}}"/></br>
+                                <p class="finalPriceSubscriptions"><span>0</span> руб</p>
                                 <button class="btn btn-default editSubscription" type="button">изменить условия</button>
-                                <input id="ex2" data-slider-id='ex2Slider'  type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="4"/></br>
                                 <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
                             </td>
                             <td></td>
@@ -172,6 +173,7 @@
             $('.editSubscription').addClass('hideDiv');
             $('.editsSubscription').removeClass('hideDiv');
         });
+
         $(document).on('click','.editsSubscription',function () {
             $('.slider-horizontal').removeClass('showDiv');
             $('.editSubscription').removeClass('hideDiv');
@@ -194,8 +196,19 @@
             finalPriceSubscription = countDelivery * costSubscription;
             $('.finalPriceSubscription span').html(finalPriceSubscription);
         });
-
+        $(document).on('change','#ex2',function () {
+            var countDelivery2 = parseInt($('#ex2').val());
+            var costSubscription2 = parseInt($('.costSubscription').text());
+            var finalPriceSubscription2 = 0;
+            finalPriceSubscription2 = countDelivery2 * costSubscription2;
+            $('.finalPriceSubscriptions span').html(finalPriceSubscription2);
+        });
         $(document).ready(function(){
+            $("input#ex2").bootstrapSlider();
+            var ex2 = $('#ex2').val();
+            console.log(ex2);
+            var finalPriceSubscriptions = 500 * ex2;
+            $('.finalPriceSubscriptions span').html(finalPriceSubscriptions);
             if($('.subscriptionHide').val() == 0){
                 $('.trueSubscription').addClass('hideDiv');
                 $('.falseSubscription').removeClass('hideDiv');
@@ -210,7 +223,7 @@
             $('.finalPriceSubscription span').html(finalPriceSubscription);
             var costSubscription = parseInt($('.costSubscription span').text());
             $("input#ex1").bootstrapSlider();
-            $("input#ex2").bootstrapSlider();
+
             $(".tabs").lightTabs();
             switch(window.location.search){
                 case '?section=orders': showPage(1);
@@ -300,6 +313,36 @@
 //                        alert("Подписка оформлена!");
                     }
                     });
+            });
+
+
+            $(document).on('click','.editsSubscription',function() { //устанавливаем событие отправки для формы с id=form
+                $_token = "{!! csrf_token() !!}";
+                var user_id = $('.userId').val();
+                var price = $('.finalPriceSubscriptions span').text();
+                var quantity = $('#ex2').val();
+                var checkboxs = 0;
+                if($('.auto_subscription').prop('checked') == true){
+                    checkboxs = 1;
+                }
+                var auto_subscription = checkboxs;
+                $.ajax({
+                    type: "POST", //Метод отправки
+                    url: "/subscription/update", //путь до php фаила отправителя
+                    data: {
+                        'user_id':user_id,
+                        '_token':$_token,
+                        'current_quantity':quantity,
+                        'total_quantity':quantity,
+                        'price':price,
+                        'auto_subscription':auto_subscription
+                    },
+                    success: function() {
+                        //код в этом блоке выполняется при успешной отправке сообщения
+                        location.reload();
+//                        alert("Подписка оформлена!");
+                    }
+                });
             });
         });
     </script>
