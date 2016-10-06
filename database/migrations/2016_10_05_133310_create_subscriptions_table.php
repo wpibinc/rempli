@@ -18,6 +18,7 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('current_quantity');
             $table->integer('total_quantity');
             $table->integer('price');
+            $table->tinyInteger('auto_subscription', 1)->nullable()->default(0);
             $table->timestamps();
         });
     }

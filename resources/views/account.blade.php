@@ -141,7 +141,7 @@
                             <td colspan="1">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox"> автопродление подписки
+                                        <input type="checkbox" name="auto_subscription" value="1"> автопродление подписки
                                     </label>
                                 </div>
                             </td>
