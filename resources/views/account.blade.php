@@ -119,11 +119,7 @@
             </div>
             <div class='subscription wrapper-acaunt'>
                 <input type="hidden" value="{{$user->id}}" class="userId">
-                @if(isset($subscription))
-                <input type="hidden" value="{{$subscription->quantity}}" class="subscriptionHide">
-                @else
-                <input type="hidden" value="0" class="subscriptionHide">
-                @endif
+                <input type="hidden" value="{{isset($subscription) ? $subscription->current_quantity : 0}}" class="subscriptionHide">
                 <div class="falseSubscription">
                     <h3>Подписка</h3>
                     <p class="costSubscription"><span>500</span> руб</p>
@@ -145,7 +141,7 @@
                             <td colspan="1">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox"> автопродление подписки
+                                        <input type="checkbox" name="auto_subscription" value="1"> автопродление подписки
                                     </label>
                                 </div>
                             </td>
