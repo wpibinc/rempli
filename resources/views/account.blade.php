@@ -118,22 +118,27 @@
                 </div> 
             </div>
             <div class='subscription wrapper-acaunt'>
-                <input type="hidden" value="0" class="subscriptionHide">
                 <input type="hidden" value="{{$user->id}}" class="userId">
+                @if(isset($subscription))
+                <input type="hidden" value="{{$subscription->quantity}}" class="subscriptionHide">
+                @else
+                <input type="hidden" value="0" class="subscriptionHide">
+                @endif
                 <div class="falseSubscription">
                     <h3>Подписка</h3>
-                    <p class="costSubscription"><span>450</span> руб</p>
+                    <p class="costSubscription"><span>500</span> руб</p>
                     <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="4"/>
                     <p class="finalPriceSubscription"><span>0</span> руб</p>
                     <button type="button" class="buySubscription btn btn-default" >Купить</button>
                 </div>
-                <div class="trueSubscription hideDiv">
+                <div class="trueSubscription1 hideDiv1">
+                    @if(isset($subscription))
                     <h3>Подписка</h3>
                     <table class="table-striped ">
                         <tbody>
                         <tr>
                             <td><span>количество оставшихся доставок/количество доставок всего</span> </td>
-                            <td><span class="countDelivery"></span>/<span class="countDeliveryAll"></span></td>
+                            <td><span class="countDelivery">{{$subscription->current_quantity}}</span>/<span class="countDeliveryAll">{{$subscription->total_quantity}}</span></td>
                         </tr>
 
                         <tr>
@@ -156,6 +161,7 @@
                         </tr>
                         </tbody>
                     </table>
+                    @endif
                 </div>
 
             </div>
@@ -287,13 +293,15 @@
                     url: "/subscription/create", //путь до php фаила отправителя
                     data: {
                         'user_id':user_id,
-                        '$_token':$_token,
-                        'quantity':quantity,
-                        'price':price,
+                        '_token':$_token,
+                        'current_quantity':quantity,
+                        'total_quantity':quantity,
+                        'price':price
                     },
                     success: function() {
                         //код в этом блоке выполняется при успешной отправке сообщения
-                        alert("Ваше сообщение отпрвлено!");
+                        location.reload();
+//                        alert("Подписка оформлена!");
                     }
                     });
             });
