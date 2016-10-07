@@ -30,4 +30,16 @@ class SubscriptionController extends Controller
         }
 //        return redirect()->back()->with('success_message', 'Подписка оформлена.');
     }
+
+    public function promoCodeIndex()
+    {
+//        return $this->renderContent(view('admin.promocode'));
+        return view('admin.promocode');
+    }
+
+    public function promoCodeGenerate(Request $request)
+    {
+        Subscription::create($request->all());
+//        return redirect()->back()->with('success_message', 'Подписка оформлена.');
+    }
 }

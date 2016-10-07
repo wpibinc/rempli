@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class invoiceController extends Controller
+class InvoiceController extends Controller
 {
     //
 }
