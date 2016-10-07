@@ -397,7 +397,7 @@
                 $_token = "{!! csrf_token() !!}";
                 var subscription_id = $('input[name="subscription_id"]').val();
                 var user_id = $('.userId').val();
-                var price = $('.finalPriceSubscriptions span').text();
+                var price = $('.dop-price').text();
                 var quantity = $('.input-dop').val();
                 var checkboxs = 0;
                 if($('.auto_subscription').prop('checked') == true){
