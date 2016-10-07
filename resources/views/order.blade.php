@@ -142,9 +142,12 @@
                         <input type="radio" id="date-later" value="set-time" name="check-date" class="check-date">
                         Выбрать время
                     </label>
-                    <input style="display:none" type="text" name="order-date" class="order-date" value="{{$date->addHour()}}" />
-                    <script type="text/javascript">
+                            <input style="display:none" type="text" name="order-date" class="order-date" value="{{$date->addHour()}}" />
 
+
+
+                    <script type="text/javascript">
+                        $('.order-date').datetimepicker();
 //                        function date() {
 //                            var d = new Date();
 //                            var h = d.getHours() + 1;
@@ -221,6 +224,6 @@
                 $('#val-1').addClass('radiocustom').removeClass('activeClassradio');
             }
         });
-        $( ".order-date" ).datepicker();
+
     </script>
 @endsection

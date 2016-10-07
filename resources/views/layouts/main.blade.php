@@ -34,6 +34,7 @@
     <script type="text/javascript" src="/js/jquery.maskedinput.min.js"></script>
     <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap-slider-master/bootstrap-slider.min.js"></script>
+
 @if (session('order'))
     <script>
         sessionStorage.clear();

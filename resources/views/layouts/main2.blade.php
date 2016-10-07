@@ -24,7 +24,7 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link href="css/neobsos.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/order.css">
-
+    <link rel="stylesheet" type="text/css" href="/js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
 
         {{--Js--}}
 
@@ -32,8 +32,8 @@
     <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
     <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&region=RU"></script>
-    <script type="text/javascript" src="js/gmaps.js"></script>
-    
+    <script type="text/javascript" src="/js/gmaps.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 
