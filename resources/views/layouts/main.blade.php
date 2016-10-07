@@ -116,6 +116,7 @@
                 </th>
                 </tbody>
             </table>
+            <button class="btn btn-primary checkout_button" >Добавить в список заказов</button>
             <button class="checkout_button btn btn-primary" id="orderBtn">Заказать <span id="cototal"><span id="cart-price">100</span> руб</span></button>
             <p id="notmin">Извините, минимальная сумма заказа: 200р</p>
 
