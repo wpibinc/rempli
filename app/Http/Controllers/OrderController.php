@@ -33,6 +33,7 @@ class OrderController extends BaseController
                 $adress->user_id = $user->id;
                 $adress->save();
             }
+            
             $order= Order::create($order);
             $order->items()->createMany($items['items']);
     
@@ -42,13 +43,14 @@ class OrderController extends BaseController
         $user = Auth::user();
         $date = Carbon::now('Europe/Moscow');
         $orderNow = true;
-        if($date->hour > 20){
+        if($date->hour >= 14){
             $orderNow = false;
         }
+        $orderDate = substr($date->addHour(), 0, -3);
 
         return view('order', [
             'user' => $user, 
-            'date' => $date,
+            'date' => $orderDate,
             'orderNow' => $orderNow
         ]);
     }

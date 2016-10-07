@@ -142,7 +142,11 @@
                         <input type="radio" id="date-later" value="set-time" name="check-date" class="check-date">
                         Выбрать время
                     </label>
-                            <input style="display:none" type="text" name="order-date" class="order-date" value="{{$date->addHour()}}" />
+                    @if($orderNow)
+                        <input style="display:none" type="text" name="order-date" class="order-date" value="{{$date}}" />
+                    @else
+                        <input required type="text" name="order-date" class="order-date" />
+                    @endif
 
 
 

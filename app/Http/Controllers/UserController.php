@@ -21,10 +21,10 @@ class UserController extends Controller
     public function myAccount(Request $request)
     {
         $user = Auth::user();
-        $subscription = Subscription::where('user_id', '=',$user->id)->first();
+//        $subscription = Subscription::where('user_id', '=',$user->id)->first();
         $orders = Order::where('user_id', $user->id)->simplePaginate(15);
         $adresses = $user->adresses;
-        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'subscription' => $subscription]);
+        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses/*, 'subscription' => $subscription*/]);
     }
     
     public function changeInfo(Request $request)

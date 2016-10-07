@@ -36,7 +36,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
                     })->setWidth('50px')->setHtmlAttribute('class', 'text-center')->setOrderable(false),
                 AdminColumn::link('name')->setLabel('Имя'),
                 AdminColumn::link('phone')->setLabel('Телефон'),
-                AdminColumn::datetime('created_at')->setLabel('Дата')->setFormat('d.m.Y H:m'),
+                AdminColumn::datetime('date')->setLabel('Дата')->setFormat('d.m.Y H:m'),
 //                AdminColumn::text('status')->setLabel('Статус'),
             ]
         );
