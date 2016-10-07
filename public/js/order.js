@@ -267,11 +267,14 @@ $(document).ready(function() {
     });
 });
 
-
-
-
-
-
+$('.check-date').on('change', function(){
+    if($(this).attr('id')=='date-now'){
+        $("input[name=order-date]").hide();
+    }else{
+        $("input[name=order-date]").show();
+    }
+    console.log('click');
+});
 
 $(document).on('click', "#backToMain", function(){
 	$('.page-container').html(mainBack);

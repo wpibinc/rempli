@@ -132,13 +132,24 @@
                 <label for="inputName"  class="col-sm-3 control-label">Время доставки
                 </label>
                 <div class="col-sm-9">
+                    @if($orderNow)
+                    <label for="date-now">
+                        Сейчас
+                        <input type="radio" checked="checked" id="date-now" value="now" name="check-date" class="check-date">
+                    </label>
+                    @endif
+                    <label for="date-later">
+                        Выбрать время
+                        <input type="radio" id="date-later" value="set-time" name="check-date" class="check-date">
+                    </label>
+                    <input style="display:none" type="text" name="order-date" value="{{$date->addHour()}}" />
                     <script type="text/javascript">
-                        function date() {
-                            var d = new Date();
-                            var h = d.getHours() + 1;
-                            var m = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
-                            document.write('<b>' + h + ':' + m + '</b>');
-                        } date();
+//                        function date() {
+//                            var d = new Date();
+//                            var h = d.getHours() + 1;
+//                            var m = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+//                            document.write('<b>' + h + ':' + m + '</b>');
+//                        } date();
                     </script>
                     <p class="help-block text-danger"></p>
                 </div>

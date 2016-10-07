@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFreeDeliveryManuallyToUsersTable extends Migration
+class AddDateToOrder extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AddFreeDeliveryManuallyToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('free_delivery_manually');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dateTime('date');
         });
     }
 
@@ -24,8 +24,8 @@ class AddFreeDeliveryManuallyToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('free_delivery_manually');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn('date');
         });
     }
 }

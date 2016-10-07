@@ -6,6 +6,7 @@ use App\Order;
 use Auth;
 use App\Adress;
 use Mail;
+use Carbon\Carbon;
 
 class OrderController extends BaseController
 {
@@ -39,7 +40,17 @@ class OrderController extends BaseController
             die();
         }
         $user = Auth::user();
-        return view('order', ['user' => $user]);
+        $date = Carbon::now('Europe/Moscow');
+        $orderNow = true;
+        if($date->hour > 20){
+            $orderNow = false;
+        }
+
+        return view('order', [
+            'user' => $user, 
+            'date' => $date,
+            'orderNow' => $orderNow
+        ]);
     }
     
     public function payment(Request $request)

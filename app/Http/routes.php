@@ -225,14 +225,17 @@ Route::get('/test', function () {
 //    $p = App\Product::findOrFail(6291);
 //
 //    $pg=$p->category;
-
-    $path = resource_path() . '/json/';
-    $categories = 'categories2.json';
-    $json = File::get($path . $categories);
-    $data = json_decode($json, true);
-
-
-    dd(implode(", ", $data[0]['cvalues']));
+    $poststring = ['page_23' => 3];
+    $ch = curl_init();
+    curl_setopt( $ch, CURLOPT_URL, 'http://shop.lamaree.ru/catalog/zhivaya-produktciya/?page_23=3' );
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_FAILONERROR, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $poststring);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+    curl_setopt($ch, CURLOPT_REFERER, "http://shop.lamaree.ru/catalog/zhivaya-produktciya/");
+    $result = curl_exec( $ch );
+    echo $result;
 });
 
 
