@@ -158,9 +158,17 @@
                         <tbody>
                         <tr>
                             <td><span>количество оставшихся доставок/количество доставок всего</span> </td>
-                            <td><span class="countDelivery">{{$subscription->current_quantity}}</span>/<span class="countDeliveryAll">{{$subscription->total_quantity}}</span></td>
-                        </tr>
+                            <td><span class="countDelivery">{{$subscription->current_quantity}}</span>/<span class="countDeliveryAll">{{$subscription->total_quantity}}</span></br>
 
+                            </td>
+                        </tr>
+                        <tr class="dop-wrapper hideDiv">
+                            <td colspan="2">
+                                <span>Количество доставок израсходовано</span></br>
+                                <span><input min="1" type="number" neme="input-dop" class="input-dop" value="1"><buttod class='btn buy-dop'>купить доп. Доставку</buttod></span></br>
+                                Цена: <span class="dop-price">450руб</span>
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="1">
                                 <div class="checkbox">
@@ -227,7 +235,22 @@
             finalPriceSubscription2 = countDelivery2 * costSubscription2;
             $('.finalPriceSubscriptions span').html(finalPriceSubscription2);
         });
+        $(document).on('click','.buy-dop',function () {
+            var dopBuy = $('.input-dop').val();
+            var bopPrice = dopBuy * 450;
+            $('.countDeliveryAll').html(dopBuy);
+            $('.countDelivery').html(dopBuy);
+        });
+        $(document).on('input','.input-dop',function () {
+            var dopBuy = $('.input-dop').val();
+            var bopPrice = dopBuy * 450;
+            $('.dop-price').html(bopPrice+'руб');
+        });
         $(document).ready(function(){
+            var dopCount = $('.countDelivery').text();
+            if(parseInt(dopCount) == 0){
+                $('.dop-wrapper').removeClass('hideDiv');
+            }
             $("input#ex2").bootstrapSlider();
             var ex2 = $('#ex2').val();
             console.log(ex2);
@@ -346,6 +369,36 @@
                 var user_id = $('.userId').val();
                 var price = $('.finalPriceSubscriptions span').text();
                 var quantity = $('#ex2').val();
+                var checkboxs = 0;
+                if($('.auto_subscription').prop('checked') == true){
+                    checkboxs = 1;
+                }
+                var auto_subscription = checkboxs;
+                $.ajax({
+                    type: "POST", //Метод отправки
+                    url: "/subscription/update", //путь до php фаила отправителя
+                    data: {
+                        'user_id':user_id,
+                        'id':subscription_id,
+                        '_token':$_token,
+                        'current_quantity':quantity,
+                        'total_quantity':quantity,
+                        'price':price,
+                        'auto_subscription':auto_subscription
+                    },
+                    success: function() {
+                        //код в этом блоке выполняется при успешной отправке сообщения
+//                        alert("Подписка оформлена!");
+                    }
+                });
+            });
+
+            $(document).on('click','.buy-dop',function() { //устанавливаем событие отправки для формы с id=form
+                $_token = "{!! csrf_token() !!}";
+                var subscription_id = $('input[name="subscription_id"]').val();
+                var user_id = $('.userId').val();
+                var price = $('.dop-price').text();
+                var quantity = $('.input-dop').val();
                 var checkboxs = 0;
                 if($('.auto_subscription').prop('checked') == true){
                     checkboxs = 1;
