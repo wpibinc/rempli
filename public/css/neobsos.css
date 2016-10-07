@@ -240,7 +240,7 @@ footer>a>img {
     color: #333;
     line-height:30px;
 }
-@media (min-width: 987px) and (max-width: 1200px){
+@media (min-width: 987px) and (max-width: 1250px){
     .product .price{
         font-size: 13px;
     }
