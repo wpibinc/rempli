@@ -184,7 +184,7 @@ $('input').change(function() {
 
 $( "#toPay" ).click(function( event ) {
         var checked = $("#optionsRadios1").prop('checked');
-	if (!checked||$('#name').val().length * $('#pac-input').val().length * $('#house').val().length * $('#flat').val().length * $('#phone').val().length * okplace > 0) {
+	if (!checked||$('#name').val().length * $('#pac-input').val().length * $('#house').val().length * $('#flat').val().length * $('#phone').val().length * okplace > 0*$("input[name=order-date]").val().length) {
 
 		$( "#toPay" ).css( "opacity", "1" );
 	} else {
@@ -222,6 +222,7 @@ $(document).ready(function() {
                 var korp = '';
                 var flat = '';
                 var adressChecked = '';
+                var orderDate = $("input[name=order-date]").val();
                 if(checked){
                     address = localStorage.AdressField;
                     house = localStorage.house;
@@ -251,11 +252,11 @@ $(document).ready(function() {
 					user_id: localStorage.user,
 					mass: sessionStorage.mass,
 					cost: sessionStorage.cost,
-                                        addressChecked: adressChecked
+                                        addressChecked: adressChecked,
+                                        date: orderDate
 				}
 			),
 			success: function (data) {
-                            console.log(data);
                             window.location.href = "/payment?order="+data.orderId;
 			},
 			error: function (xhr, textStatus, thrownError) {
@@ -267,13 +268,14 @@ $(document).ready(function() {
     });
 });
 
+var orderDate = $("input[name=order-date]").val();
 $('.check-date').on('change', function(){
     if($(this).attr('id')=='date-now'){
-        $("input[name=order-date]").hide();
+        $("input[name=order-date]").val(orderDate).hide();    
     }else{
         $("input[name=order-date]").show();
     }
-    console.log('click');
+    
 });
 
 $(document).on('click', "#backToMain", function(){
