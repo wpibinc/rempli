@@ -26,6 +26,12 @@ $menu = [
         'priority' => 0
     ],
     [
+        'title' => 'Промо коды',
+        'icon'  => 'fa fa-dashboard',
+        'url'   => 'admin/promo-code',
+        'priority' => 8
+    ],
+    [
         'title' => 'Продукты по категориям',
         'icon' => 'fa fa-group',
         'pages' => $submenu,
