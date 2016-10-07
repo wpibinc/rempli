@@ -22,6 +22,10 @@ Route::get('cache', ['as' => 'admin.cache', function () {
     return AdminSection::view($content, 'Кеш');
 }]);
 
+//Generate promo code index
+Route::get('promo-code', ['as' => 'admin.promocodeindex', 'uses' => '\App\Http\Controllers\SubscriptionController@promoCodeIndex']);
+Route::post('promo-code/codegenerate', ['as' => 'admin.promocode', 'uses' => '\App\Http\Controllers\SubscriptionController@promoCodeGenerate']);
+
 //Панель парса
 Route::get('parser', ['as' => 'admin.parser', 'uses' => '\App\Http\Controllers\ParseController@admin']);
 
