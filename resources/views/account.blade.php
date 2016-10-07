@@ -8,6 +8,7 @@
         <ul class="col-md-2">
             <li><i class="fa fa-user" aria-hidden="true"></i> Учетная запись <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-list-alt" aria-hidden="true"></i> История заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
+            <li><i class="fa fa-usd" aria-hidden="true"></i> Страница Счета  <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-phone" aria-hidden="true"></i> Адреса <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-bullhorn" aria-hidden="true"></i> Подписка <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-book" aria-hidden="true"></i> Правила <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
@@ -15,7 +16,6 @@
         </ul>
         <div class="col-md-10 ">
             <div class='account '>
-                
                 <div class="wrapper-acaunt col-md-12">
                     <h4>ИЗМЕНИТЬ ПАРОЛЬ</h4>
                     <div class='password col-md-12'>
@@ -69,13 +69,36 @@
                                 <td><a class='get-order-details' href='javascript:void(0)'>{{$order->cost}} руб</a></td>
                                 <td>{{$order->status}}</td>
                                 <td><button data-id="{{$order->id}}" class="order-get-more">Подробнее</button><div class="order-details"></div></td>
-
                             </tr>
                         @endforeach
                     </table>
                 </div>
                 {{$orders->appends(['section' => 'orders'])->render()}}
             </div>
+
+            <div class='orders wrapper-acaunt'>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>номер счета</th>
+                            <th>дата выставления счета</th>
+                            <th>назначение</th>
+                            <th></th>
+                        </tr>
+                        <?php $i = 0; ?>
+                        @foreach($orders as $order)
+                            <tr>
+                                <td><?php echo ++$i ?></td>
+                                <td><a class='get-order-details' href='javascript:void(0)'>{{$order->cost}} руб</a></td>
+                                <td>{{$order->status}}</td>
+                                <td><button type="button" class="btn buy-bill">оплатить</button></td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+
+            </div>
+
             <div class='adresses wrapper-acaunt'>
                 <a href="#" class="add-form-btn"><i class="fa fa-plus" aria-hidden="true"></i> Добавить адрес</a>
                 <div class='add-form'>
