@@ -134,16 +134,17 @@
                 <div class="col-sm-9">
                     @if($orderNow)
                     <label for="date-now">
-                        Сейчас
                         <input type="radio" checked="checked" id="date-now" value="now" name="check-date" class="check-date">
-                    </label>
+                        Сейчас
+                    </label></br>
                     @endif
                     <label for="date-later">
-                        Выбрать время
                         <input type="radio" id="date-later" value="set-time" name="check-date" class="check-date">
+                        Выбрать время
                     </label>
-                    <input style="display:none" type="text" name="order-date" value="{{$date->addHour()}}" />
+                    <input style="display:none" type="text" name="order-date" class="order-date" value="{{$date->addHour()}}" />
                     <script type="text/javascript">
+
 //                        function date() {
 //                            var d = new Date();
 //                            var h = d.getHours() + 1;
@@ -199,6 +200,7 @@
         </div>
     </div>
     </div>
+
     <script>
         $(document).on("ready",function () {
             if($("#optionsRadios1").prop('checked')){
@@ -219,5 +221,6 @@
                 $('#val-1').addClass('radiocustom').removeClass('activeClassradio');
             }
         });
+        $( ".order-date" ).datepicker();
     </script>
 @endsection

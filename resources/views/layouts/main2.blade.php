@@ -11,6 +11,8 @@
     <meta name="description" content="Доставка продуктов в центре Москвы за 1 час. Сходим за Вас в Азбуку Вкуса!">
 
     {{--Style--}}
+    <link rel="stylesheet" type="text/css" href="/js/jquery-ui/jquery-ui.min.css">
+
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     {{--<link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">--}}
     {{--<link href="css/css" rel="stylesheet" type="text/css">--}}
