@@ -96,13 +96,13 @@ class CategoryController extends BaseController
         if(!empty($category->avProducts)){
             foreach($category->avProducts as $product){
                 $price = $product->price;
-                $amount = $product->original_price_style;
+                $amount = $product->price_style;
 
-                if($product->original_price_style == '1 кг'){
+                if($product->price_style == '1 кг'){
                     $price = $product->price/10;
                     $amount = '100 гр';
-                } elseif ($product->original_price_style == '100 г'){
-                    $amount = $product->original_price_style;
+                } elseif ($product->price_style == '100 г'){
+                    $amount = $product->price_style;
                 } elseif ($product->original_typical_weight == '0') {
                     $amount = $product->price_style;
                 } /*else {
