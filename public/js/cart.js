@@ -71,6 +71,7 @@ $(document).ready(function() {
             var image = ui.item.image;
             var title = ui.item.label;
             var price = ui.item.price;
+            var shop = ui.item.shop;
             
             if (sessionStorage.count) {
                 sessionStorage.count = Number(sessionStorage.count)+1;
@@ -87,7 +88,7 @@ $(document).ready(function() {
                 sessionStorage[theId] = 1;
             }
             newItem = (
-            '<tr data-category="'+category+'" class="ordered-item" id="cart-'+theId+'"> '+
+            '<tr data-category="'+category+'" class="ordered-item" id="cart-'+theId+'" data-shop="'+shop+'"> '+
             '<td class="quantity"> '+Number(sessionStorage[theId])+
             '<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
             '<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
@@ -223,6 +224,7 @@ if (sessionStorage.count) {
 
 $(document).on('click', ".increase_count", function(){
 	var theId = $(this).closest('.product').attr('id');
+        var shop = $(this).closest('.product').attr('data-shop');
         var weight = +$(this).attr("data-weight");
         var category = $(this).parent().attr('data-category');
         
@@ -247,7 +249,7 @@ $(document).on('click', ".increase_count", function(){
 	    sessionStorage[theId] = 1;
 	}
 	newItem = (
-	'<tr data-category="'+category+'" class="ordered-item" id="cart-'+$(this).closest('.product').attr('id')+'"> '+
+	'<tr data-category="'+category+'" class="ordered-item" id="cart-'+$(this).closest('.product').attr('id')+'" data-shop="'+shop+'"> '+
 	'<td class="quantity"> '+Number(sessionStorage[theId])+
 	'<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
 	'<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
@@ -301,7 +303,7 @@ $(document).on('click', '.add-to-cart', function(e){
         var weight = +$(this).attr("data-weight");
         var category = $(this).attr('data-category');
         var price = $(this).parents(".modal-dialog").find(".popup-price")
-        
+        var shop = $(this).closest('.modal').attr('data-shop');
         
 	if (sessionStorage.count) {
             sessionStorage.count = Number(sessionStorage.count)+1;
@@ -318,7 +320,7 @@ $(document).on('click', '.add-to-cart', function(e){
 	}
         $(this).closest('.modal').find('.item_count').removeClass( "hidden" ).addClass( "visible" ).html(sessionStorage[theId]);
 	newItem = (
-	'<tr data-category="'+category+'" class="ordered-item" id="cart-'+theId+'"> '+
+	'<tr data-category="'+category+'" class="ordered-item" id="cart-'+theId+'" data-shop="'+shop+'"> '+
 	'<td class="quantity"> x '+Number(sessionStorage[theId])+
 	'<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
 	'<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
@@ -809,10 +811,10 @@ function search(word) {
                     });
                     for (i = 0; i < json.length; i++) {
                         if (Number(sessionStorage[json[i].objectId]) > 0) {
-			    search_results  += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + json[i].objectId + '" data-category="'+json[i].category+'"><div class="count item_count visible">'+sessionStorage[json[i].objectId]+'</div><a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '"> <img src="' + json[i].img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '">' + json[i].product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + json[i].price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">'+ json[i].amount +'</div><br class="clearfix"></div><button href="javascript:void(0)" data-weight="'+json[i].weight+'" class="increase_count buy">Добавить</button></div>';
+			    search_results  += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + json[i].objectId + '" data-category="'+json[i].category+'" data-shop="'+json[i].shop+'"><div class="count item_count visible">'+sessionStorage[json[i].objectId]+'</div><a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '"> <img src="' + json[i].img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '">' + json[i].product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + json[i].price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">'+ json[i].amount +'</div><br class="clearfix"></div><button href="javascript:void(0)" data-weight="'+json[i].weight+'" class="increase_count buy">Добавить</button></div>';
 
 			} else {
-			    search_results  += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + json[i].objectId + '" data-category="'+json[i].category+'"><div class="count item_count hidden">'+sessionStorage[json[i].objectId]+'</div><a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '"> <img src="' + json[i].img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '">' + json[i].product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + json[i].price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">'+ json[i].amount +'</div><br class="clearfix"></div><button href="javascript:void(0)" data-weight="'+json[i].weight+'" class="increase_count buy">Добавить</button></div>';
+			    search_results  += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + json[i].objectId + '" data-category="'+json[i].category+'" data-shop="'+json[i].shop+'"><div class="count item_count hidden">'+sessionStorage[json[i].objectId]+'</div><a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '"> <img src="' + json[i].img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '">' + json[i].product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + json[i].price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">'+ json[i].amount +'</div><br class="clearfix"></div><button href="javascript:void(0)" data-weight="'+json[i].weight+'" class="increase_count buy">Добавить</button></div>';
 
 			}
                         var consist = '';
@@ -826,7 +828,7 @@ function search(word) {
                         if(Number(sessionStorage[json[i].objectId]) > 0){
                             vis = "visible";
                         }
-                        search_results  += '<div class="modal fade bs-example-modal-lg" id="idt' + json[i].objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"><div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image"><div class="count item_count '+vis+'">' + sessionStorage[json[i].objectId] + '</div><span class="popup-helper"></span> <img class="popimg" src="' + json[i].img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + json[i].product_name + '</p> <div class="popup-price"> ' + json[i].price + ' <span class="popup-rub">'+num2word(Math.floor(json[i].price),words)+'</span>  </div> <div class="popup-mass"> '+ json[i].amount +'</div> </div> </div><div class="row" style="text-align: right"> <button href="javascript:void(0)" data-id="'+json[i].objectId+'" data-category="'+json[i].category+'" data-weight="'+json[i].weight+'" data-weight="'+json[i].weight+'" class="add-to-cart buy" aria-hidden="true" data-dismiss="modal" aria-label="Close">Добавить</button></div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + json[i].description + '</div> </div><div class="product_card_props f32"> '+consist+'</div></div> </div> </div> </div>';
+                        search_results  += '<div class="modal fade bs-example-modal-lg" id="idt' + json[i].objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-shop="'+json[i].shop+'"><div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image"><div class="count item_count '+vis+'">' + sessionStorage[json[i].objectId] + '</div><span class="popup-helper"></span> <img class="popimg" src="' + json[i].img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + json[i].product_name + '</p> <div class="popup-price"> ' + json[i].price + ' <span class="popup-rub">'+num2word(Math.floor(json[i].price),words)+'</span>  </div> <div class="popup-mass"> '+ json[i].amount +'</div> </div> </div><div class="row" style="text-align: right"> <button href="javascript:void(0)" data-id="'+json[i].objectId+'" data-category="'+json[i].category+'" data-weight="'+json[i].weight+'" data-weight="'+json[i].weight+'" class="add-to-cart buy" aria-hidden="true" data-dismiss="modal" aria-label="Close">Добавить</button></div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + json[i].description + '</div> </div><div class="product_card_props f32"> '+consist+'</div></div> </div> </div> </div>';
                     }
                     
                     
@@ -897,3 +899,26 @@ $(document).on('click', ".glyphicon-search", function(){
     	}
 });
 
+$(document).on('click', '#add-to-order-list', function(){
+    var ids = [];
+    $("#ordered-items tr").each(function(){
+        var id = $(this).attr('id').substring(5);
+        var shop = $(this).attr('data-shop');
+        ids.push({id: id, shop: shop});
+    });
+    var json = JSON.stringify(ids);
+    
+    $.ajax({
+        url: '/add-to-order-list',
+        method: 'POST',
+        data: {
+            json: json
+        },
+        success: function(){
+            sessionStorage.clear();
+            localStorage.clear();
+            $("#ordered-items").html('');
+            alert('добавлено');
+        }
+    });
+});

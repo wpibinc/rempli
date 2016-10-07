@@ -12,7 +12,7 @@
             <li><i class="fa fa-phone" aria-hidden="true"></i> Адреса <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-bullhorn" aria-hidden="true"></i> Подписка <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-book" aria-hidden="true"></i> Правила <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
-            <li><i class="fa fa-list-alt" aria-hidden="true"></i> список заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
+            <li><i class="fa fa-list-alt" aria-hidden="true"></i> Cписок заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход</a> <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
         </ul>
         <div class="col-md-10 ">
@@ -210,7 +210,7 @@
                             <td></td>
                         </tr>
                 </table>
-                <button href="javascript:void(0)" data-weight="70" class="btn">Добавить в карзину</button>
+                <button href="javascript:void(0)" data-weight="70" class="btn">Добавить в корзину</button>
             </div>
         </div>
     </div>
@@ -297,6 +297,8 @@
                 case '?section=rules': showPage(3);
                     break;
                 case '?section=subscription': showPage(4);
+                    break;
+                case '?section=order-list': showPage(6);
                     break;
                 default: showPage(0);
                     break;

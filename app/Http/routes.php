@@ -49,6 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/subscription/create', 'SubscriptionController@create');
     Route::post('/subscription/update', 'SubscriptionController@update');
+    
+    Route::post('add-to-order-list', 'UserController@addToOrderList');
 });
 
 #---------ПАРС--------------------------------

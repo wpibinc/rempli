@@ -93,6 +93,7 @@ class MainController extends Controller
                 'price' => $product->price,
                 'weight' => $product->original_typical_weight,
                 'category' => $product->category_id,
+                'shop' => 'Av',
             );
         }
         foreach($products as $product){
@@ -106,6 +107,7 @@ class MainController extends Controller
                 'price' => $price,
                 'weight' => $product->weight,
                 'category' => $product->category_id,
+                'shop' => ''
             );
         }
         return response()->json($json);
@@ -150,7 +152,8 @@ class MainController extends Controller
                     'amount' => 'за ' . $amount,
                     'weight' => $product->original_typical_weight,
                     'description' => $product->description,
-                    'updatedAt' => $product->updated_at
+                    'updatedAt' => $product->updated_at,
+                    'shop' => 'Av',
                 );
             }
         }
@@ -174,7 +177,8 @@ class MainController extends Controller
                     'amount'        => $amount,
                     'weight'        => $product->weight,
                     'description'   => $product->description,
-                    'updatedAt'     => (string) $product->updated_at
+                    'updatedAt'     => (string) $product->updated_at,
+                    'shop' => '',
                 );
             }
         }

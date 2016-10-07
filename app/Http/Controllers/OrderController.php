@@ -43,7 +43,7 @@ class OrderController extends BaseController
         $user = Auth::user();
         $date = Carbon::now('Europe/Moscow');
         $orderNow = true;
-        if($date->hour >= 14){
+        if($date->hour >= 20){
             $orderNow = false;
         }
         $orderDate = substr($date->addHour(), 0, -3);

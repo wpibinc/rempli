@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Order;
 use App\Adress;
 use App\Review;
+use App\ListProduct;
 
 class User extends Authenticatable
 {
@@ -45,5 +46,10 @@ class User extends Authenticatable
     public function subscription()
     {
         return $this->hasOne(Subscription::class);
+    }
+    
+    public function listProducts()
+    {
+        return $this->hasMany(ListProduct::class);
     }
 }

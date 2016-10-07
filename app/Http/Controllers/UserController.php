@@ -10,6 +10,7 @@ use App\Adress;
 use App\User;
 use Flash;
 use Mail;
+use App\ListProduct;
 
 class UserController extends Controller
 {
@@ -133,6 +134,26 @@ class UserController extends Controller
             return redirect('/login');
         }
         return view('auth.confirmcode');
+    }
+    
+    public function addToOrderList(Request $request)
+    {
+        if(!$request->ajax()){
+            abort(404);
+        }
+        $products = json_decode($request->input('json'));
+        $user = Auth::user();
+        foreach($products as $product){
+            $shop = '';
+            if(isset($product->shop)){
+                $shop = $product->shop;
+            }
+            ListProduct::firstOrCreate([
+                'user_id' => $user->id,
+                'shop' => $shop,
+                'product_id' => $product->id
+            ]);
+        }
     }
 }
 

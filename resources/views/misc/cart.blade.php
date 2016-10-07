@@ -7,7 +7,7 @@
         $avp = \App\AvProduct::where('id', $item->objectId)->first();
         $p = \App\Product::where('id', $item->objectId)->first();
         ?>
-        @if($avp == null)
+        @if($p)
             <tr>
                 <td>{{ $p->price * $item->count }} руб.</td>
                 <td><img src="{{ $p->img }}" alt="" width="100px"></td>
@@ -15,7 +15,7 @@
                 <td>{{ $item->count }} шт.</td>
                 <td>Комментарий:<br> {{$item->comment}}</td>
             </tr>
-        @else
+        @elseif($avp)
                 <tr>
                     <td>{{ $item->count }} шт.</td>
                     <td><img src="http://av.ru{{ $avp->image }}" alt="" width="100px"></td>

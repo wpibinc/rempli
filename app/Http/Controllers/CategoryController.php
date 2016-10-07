@@ -89,7 +89,8 @@ class CategoryController extends BaseController
                     'amount'        => $amount,
                     'weight'        => $product->weight,
                     'description'   => $product->description,
-                    'updatedAt'     => (string) $product->updated_at
+                    'updatedAt'     => (string) $product->updated_at,
+                    'shop' => ''
                 ];
             }
         }
@@ -119,7 +120,8 @@ class CategoryController extends BaseController
                     'amount' => 'за ' . $amount,
                     'weight' => $product->original_typical_weight,
                     'description' => $product->description,
-                    'updatedAt' => $product->updated_at
+                    'updatedAt' => $product->updated_at,
+                    'shop' => 'Av'
                 );
             }
         }
@@ -138,9 +140,9 @@ class CategoryController extends BaseController
         if(!empty($products)){
             foreach($products as $product){
                 $price = $product->price;
-                $amount = $product->original_price_style;
+                $amount = $product->price_style;
                 
-                if($product->original_price_style == '1 кг'){
+                if($product->price_style == '1 кг'){
                     $price = $product->price/10;
                     $amount = '100 гр';
                 }
@@ -155,7 +157,8 @@ class CategoryController extends BaseController
                     'amount' => 'за ' . $amount,
                     'weight' => $product->original_typical_weight,
                     'description' => $product->description,
-                    'updatedAt' => $product->updated_at
+                    'updatedAt' => $product->updated_at,
+                    'shop' => 'Av'
                 );
             }
         }

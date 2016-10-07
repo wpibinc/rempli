@@ -34,7 +34,13 @@
     <script type="text/javascript" src="/js/jquery.maskedinput.min.js"></script>
     <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap-slider-master/bootstrap-slider.min.js"></script>
-
+    <script>
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    </script>
 @if (session('order'))
     <script>
         sessionStorage.clear();
@@ -61,6 +67,8 @@
                     <li><a href="/my-account"><i class="fa fa-user" aria-hidden="true"></i> Учётная запись</a></li>
                     <li><a href="/my-account?section=orders"><i class="fa fa-list-alt" aria-hidden="true"></i> История заказов</a></li>
                     <li><a href="/my-account?section=adress"><i class="fa fa-phone" aria-hidden="true"></i> Адреса</a></li>
+                    <li><a href="/my-account?section=subscription"><i class="fa fa-bullhorn" aria-hidden="true"></i> Подписка</a></li>
+                    <li><a href="/my-account?section=order-list"><i class="fa fa-list-alt" aria-hidden="true"></i> Cписок заказов</a></li>
                     <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход </a></li>
                     <li><a href="/rules"><i class="fa fa-book" aria-hidden="true"></i> Правила сайта</a></li>
                 </ul>
@@ -106,7 +114,7 @@
             <input class="autocomplete" placeholder="Поиск" type="text">
             <h2>Корзина товаров</h2>
         </div>
-
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <div class="cart-total">
 
             <table>
@@ -116,7 +124,7 @@
                 </th>
                 </tbody>
             </table>
-            <button class="btn btn-primary checkout_button" >Добавить в список заказов</button>
+            <button id="add-to-order-list" class="btn btn-primary checkout_button" >Добавить в список заказов</button>
             <button class="checkout_button btn btn-primary" id="orderBtn">Заказать <span id="cototal"><span id="cart-price">100</span> руб</span></button>
             <p id="notmin">Извините, минимальная сумма заказа: 200р</p>
 
@@ -259,6 +267,10 @@
         $('.add-form').hide();
         $('.bg-shadow').hide();
     });
+    /*
+     * 
+     */
+    
 </script>
 </body>
 </html>
