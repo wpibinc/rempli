@@ -8,16 +8,16 @@ use App\Order;
 use App\Adress;
 use App\Review;
 
-class Subscription extends Authenticatable
+class Invoices extends Authenticatable
 {
-    protected $table = 'subscriptions';
+    protected $table = 'invoices';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id', 'current_quantity', 'total_quantity', 'price', 'auto_subscription'
+        'title'
     ];
 
     public function user()
