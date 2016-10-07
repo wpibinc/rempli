@@ -800,7 +800,7 @@ function search(word) {
             },
             success: function(res){
                 $(".main-block").empty();
-                var content = '<h2 class="header_cat">Результаты поиска</h2>';
+                var content = '<h2 class="header_cat">Результаты поиска</h2><div class="av-categ-menu"></div><div style="clear:both"></div><div id="item-wrap-inner" class="products-wrap">';
                 if(!res.success){
                     search_results = '<div id="nosearch"> <h2>К сожалению по Вашему запросу ничего не найдено</h2> <h3>Попробуйте ввести другое или более короткое слово</h3> </div>'
                 }else{
@@ -849,6 +849,7 @@ function search(word) {
                     current = 'searchvar';
                 }
                 content += search_results;
+                content += "</div>";
                 $(".main-block").prepend(content);
                 
             }

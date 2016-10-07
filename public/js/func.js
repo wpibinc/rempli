@@ -131,6 +131,7 @@ cats.each(function(i){
                     }
                     categoriesOutput += "</ul></div>";
                 }
+                console.log(output);
                 $(".products-wrap").empty();
                 $(".products-wrap").prepend(output);
                 $(".av-categ-menu").prepend(categoriesOutput);
