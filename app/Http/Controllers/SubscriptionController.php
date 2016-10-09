@@ -12,30 +12,19 @@ class SubscriptionController extends Controller
     public function create(Request $request)
     {
         Subscription::create($request->all());
-//        return redirect()->back()->with('success_message', 'Подписка оформлена.');
+        return response()->json(['status' => true]);
     }
     public function update(Request $request)
     {
-        $subscription = Subscription::find($request->id);
-        foreach ($request->all() as $key => $value) {
-            if (in_array($key, $subscription->getColumnNames())) {
-                $subscription->{$key} = trim($value);
-            }
-        }
-
-        try {
-            $subscription->save();
-        } catch (\Exception $e) {
-            return $e;
-        }
-//        return redirect()->back()->with('success_message', 'Подписка оформлена.');
+        Subscription::create($request->all());
+        return response()->json(['status' => true]);
     }
 
-    public function promoCodeIndex()
-    {
-//        return $this->renderContent(view('admin.promocode'));
-        return view('admin.promocode');
-    }
+//    public function promoCodeIndex()
+//    {
+////        return $this->renderContent(view('admin.promocode'));
+//        return view('admin.promocode');
+//    }
 
     public function promoCodeGenerate(Request $request)
     {
