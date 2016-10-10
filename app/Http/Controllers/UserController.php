@@ -22,7 +22,7 @@ class UserController extends Controller
     public function myAccount(Request $request)
     {
         $user = Auth::user();
-//        $subscription = Subscription::where('user_id', '=',$user->id)->first();
+//        $subscriptions = $user->subscriptions()->where('current_quantity', '>', 0)->first();
         $orders = Order::where('user_id', $user->id)->simplePaginate(15);
         $listProducts = ListProduct::where('user_id', $user->id)->simplePaginate(15);
         $adresses = $user->adresses;
