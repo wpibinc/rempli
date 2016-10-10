@@ -302,7 +302,7 @@ $(document).on('click', '.add-to-cart', function(e){
 	var theId = $(this).attr('data-id');
         var weight = +$(this).attr("data-weight");
         var category = $(this).attr('data-category');
-        var price = $(this).parents(".modal-dialog").find(".popup-price")
+        var price = $(this).parents(".modal-dialog").find(".popup-price");
         var shop = $(this).closest('.modal').attr('data-shop');
         
 	if (sessionStorage.count) {
@@ -919,6 +919,80 @@ $(document).on('click', '#add-to-order-list', function(){
             localStorage.clear();
             $("#ordered-items").html('');
             alert('добавлено');
+        }
+    });
+});
+$('.add-to-cart-from-list').on('click', function(){
+    var products = [];
+    $(".product-list").each(function(){
+        var weight = +$(this).attr("data-weight");
+        var category = $(this).attr('data-category');
+        var price = $(this).children("td:nth-child(2)").text();
+        var theId = $(this).attr('data-id');
+        var shop = $(this).attr('data-shop');
+        var img = $(this).children("td:nth-child(1)").html();
+        var name = $(this).children("td:nth-child(3)").html();
+        
+        if (sessionStorage.count) {
+            sessionStorage.count = Number(sessionStorage.count)+1;
+	} else {
+	    sessionStorage.count = 1;
+	}
+	
+	sessionStorage.mass = parseInt(sessionStorage.mass) + weight;
+        
+        if (sessionStorage[theId]) {
+            sessionStorage[theId] = Number(sessionStorage[theId])+1;
+	} else {
+	    sessionStorage[theId] = 1;
+	}
+        
+        newItem = (
+	'<tr data-category="'+category+'" class="ordered-item" id="cart-'+theId+'" data-shop="'+shop+'"> '+
+	'<td class="quantity"> x '+Number(sessionStorage[theId])+
+	'<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
+	'<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
+	'</td>' +
+	'<td class="image hidden-xs hidden-sm"> <span class="helper"></span>'+ img + '</td>' +
+	'<td class="name">'+name+
+	'<span><textarea name="text" class="special-instructions-box"></textarea><a class="editComents" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true">  </i> Редактировать</a><a href="javascript:void(0)" class="ssave-comment">Сохранить</a><a href="javascript:void(0)" class="not-save-comment">Отмена</a></span>'+
+	'</td>'+
+	'<td class="price"><span class="priceShow">'+parseFloat(price)+'</span>р</td>' +
+
+	'<td class="total"><span class="weight" style="display:none">'+weight+'</span><span class="totalShow">'+ (parseFloat(price)*parseFloat(Number(sessionStorage[theId]))).toFixed(0)+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  '</span>р'+
+	'<a href="#" class="cart-change cart-del">×</a>' +
+	'<a class="add-product-comment" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Добавить комментарий</a>' +
+	'</td>'+
+	'</tr>');
+
+        $('#cart-number').html(Number(sessionStorage.count));
+        var itemId = theId;
+        $("#cart-"+ itemId).remove();
+	$("#ordered-items").prepend(newItem);
+        
+        totalCost = totalCost + parseFloat(price);
+
+	totalCost = Math.round(totalCost);
+
+	$('#cart-price').html(totalCost);
+        
+        if (totalCost >= 200) {
+		$('#notmin').css( "display", "none" );
+	}
+        
+        $('.cart-total').find('th').html(sessionStorage.mass + ' грамм');
+	sessionStorage.cart = $("#ordered-items").html();
+	sessionStorage.total = totalCost;
+    });
+    $.ajax({
+        url: '/clear-product-list',
+        method: 'post',
+        dataType: 'json',
+        success: function(res){
+            if(res.success){
+                $(".product-list").remove();
+                alert(res.message);
+            }
         }
     });
 });

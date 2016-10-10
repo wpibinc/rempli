@@ -19,6 +19,6 @@ class ListProduct extends Model
     public function product()
     {
         $shop = $this->shop;
-        return $this->belongsTo('App\\'.$this->shop.'Product', 'id', 'product_id');
+        return $this->belongsTo('App\\'.$this->shop.'Product', 'product_id', 'id');
     }
 }

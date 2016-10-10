@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/subscription/update', 'SubscriptionController@update');
     
     Route::post('add-to-order-list', 'UserController@addToOrderList');
+    
+    Route::post('clear-product-list', 'UserController@clearProductList');
 });
 
 #---------ПАРС--------------------------------

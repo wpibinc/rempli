@@ -24,8 +24,9 @@ class UserController extends Controller
         $user = Auth::user();
 //        $subscription = Subscription::where('user_id', '=',$user->id)->first();
         $orders = Order::where('user_id', $user->id)->simplePaginate(15);
+        $listProducts = ListProduct::where('user_id', $user->id)->simplePaginate(15);
         $adresses = $user->adresses;
-        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses/*, 'subscription' => $subscription*/]);
+        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts/*, 'subscription' => $subscription*/]);
     }
     
     public function changeInfo(Request $request)
@@ -143,6 +144,9 @@ class UserController extends Controller
         }
         $products = json_decode($request->input('json'));
         $user = Auth::user();
+        if(!$user){
+            die();
+        }
         foreach($products as $product){
             $shop = '';
             if(isset($product->shop)){
@@ -152,6 +156,21 @@ class UserController extends Controller
                 'user_id' => $user->id,
                 'shop' => $shop,
                 'product_id' => $product->id
+            ]);
+        }
+    }
+    
+    public function clearProductList(Request $request)
+    {
+        if(!$request->ajax()){
+            abort(404);
+        }
+        $user = Auth::user();
+        $productLists = ListProduct::where('user_id', $user->id)->delete();
+        if($productLists){
+            return response()->json([
+                'success' => true,
+                'message' => 'Продукты добавлены в корзину'
             ]);
         }
     }

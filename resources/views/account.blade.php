@@ -204,13 +204,42 @@
                         <th>цена</th>
                         <th>название</th>
                     </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                    @if(count($listProducts))
+                        @foreach($listProducts as $product)
+                        <?php 
+                           switch($product->shop){
+                                case 'Av':
+                                    $title = $product->product->name;
+                                    $img = 'http://av.ru'.$product->product->image;
+                                    $price = $product->product->price;
+                                    if($product->product->price_style == '1 кг'){
+                                        $price = $product->product->price/10;
+                                    }
+                                    $weight = $product->product->original_typical_weight;
+                                break;
+                                default:
+                                    $title = $product->product->product_name;
+                                    $img = $product->product->img;
+                                    $price = $product->product->price;
+                                    if($product->product->price_style == 'за 1кг'){
+                                        $price = $product->product->price/10;
+                                    }
+                                    $weight = $product->product->weight;
+                                break;
+                            }
+                        ?>
+                        <tr class="product-list" data-shop="{{$product->shop}}" data-id="{{$product->product_id}}" data-weight="{{$weight}}" data-category="{{$product->product->category_id}}">
+                            <td><img src="{{$img}}" alt="product"></td>
+                            <td>{{$price}}</td>
+                            <td>{{$title}}</td>
                         </tr>
+                        @endforeach
+                    @endif
                 </table>
-                <button href="javascript:void(0)" data-weight="70" class="btn">Добавить в корзину</button>
+                 @if(count($listProducts))
+                    {{$listProducts->appends(['section' => 'order-list'])->render()}}
+                 @endif
+                <button href="javascript:void(0)" data-weight="70" class="btn add-to-cart-from-list">Добавить в корзину</button>
             </div>
         </div>
     </div>
@@ -270,7 +299,6 @@
             }
             $("input#ex2").bootstrapSlider();
             var ex2 = $('#ex2').val();
-            console.log(ex2);
             var finalPriceSubscriptions = 500 * ex2;
             $('.finalPriceSubscriptions span').html(finalPriceSubscriptions);
             if($('.subscriptionHide').val() == 0){
@@ -304,8 +332,10 @@
                     break;
             }
             if(window.location.search.indexOf('section=orders') > 0){
-                console.log(window.location.search.indexOf('section=orders'));
                 showPage(1);
+            }
+            if(window.location.search.indexOf('section=order-list') > 0){
+                showPage(6);
             }
         });
 
