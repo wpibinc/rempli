@@ -184,7 +184,7 @@
                             <td colspan="1">
                                 <input id="ex2" data-slider-id='ex2Slider'  type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="{{$subscription->current_quantity}}"/></br>
                                 <p class="finalPriceSubscriptions"><span>0</span> руб</p>
-                                <button class="btn btn-default editSubscription" type="button">изменить условия</button>
+                                <button class="btn btn-default editSubscription" disabled type="button">изменить условия</button>
                                 <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
                             </td>
                             <td></td>
@@ -280,6 +280,14 @@
             var finalPriceSubscription2 = 0;
             finalPriceSubscription2 = countDelivery2 * costSubscription2;
             $('.finalPriceSubscriptions span').html(finalPriceSubscription2);
+        });
+        $(document).on('click','.auto_subscription',function () {
+            var $el = $(this);
+            if($el.prop('checked') == true){
+                $('.editSubscription').removeAttr('disabled');
+            } else {
+                $('.editSubscription').attr('disabled','disabled');
+            }
         });
         $(document).on('click','.buy-dop',function () {
             var dopBuy = $('.input-dop').val();

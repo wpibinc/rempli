@@ -22,11 +22,11 @@ class UserController extends Controller
     public function myAccount(Request $request)
     {
         $user = Auth::user();
-//        $subscriptions = $user->subscriptions()->where('current_quantity', '>', 0)->first();
+        $subscriptions = $user->subscriptions()->where('current_quantity', '>', 0)->first();
         $orders = Order::where('user_id', $user->id)->simplePaginate(15);
         $listProducts = ListProduct::where('user_id', $user->id)->simplePaginate(15);
         $adresses = $user->adresses;
-        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts/*, 'subscription' => $subscription*/]);
+        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions]);
     }
     
     public function changeInfo(Request $request)
