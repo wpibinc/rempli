@@ -497,7 +497,10 @@
                     'promocode': promocode,
                     '_token':$_token
                 },
-                success: function() {
+                success: function(data) {
+                    if(!data.status) {
+                        alert('Введён неправильный промо-код!');
+                    }
                     return false;
                 }
             });

@@ -33,7 +33,9 @@ class SubscriptionController extends Controller
     {
 
         $subscription = Subscription::where('promocode', $request->promocode)->first();
-
+        if ($subscription->start_promocode != null) {
+            return response()->json(['status' => false]);
+        }
         foreach ($request->all() as $key => $value) {
             if (in_array($key, $subscription->getColumnNames())) {
                 $subscription->{$key} = trim($value);
