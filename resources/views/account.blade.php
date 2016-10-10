@@ -229,7 +229,7 @@
                             }
                         ?>
                         <tr class="product-list" data-shop="{{$product->shop}}" data-id="{{$product->product_id}}" data-weight="{{$weight}}" data-category="{{$product->product->category_id}}">
-                            <td><img src="{{$img}}" alt="product"></td>
+                            <td><img width="100" height="100" src="{{$img}}" alt="product"></td>
                             <td>{{$price}}</td>
                             <td>{{$title}}</td>
                         </tr>
