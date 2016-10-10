@@ -29,12 +29,26 @@
         </div>
     </div>
 </form>
-<div class="col-md-12">
-    @foreach($subscriptions as $subscription)
-    <div>Срок действия, месяцев {{$subscription->duration}}</div><br>
-    <div>Количество доставок в месяц, шт. {{$subscription->total_quantity}}</div><br>
-    <div>Промо код {{$subscription->promocode}}</div><br>
-    @endforeach
+<div class='promoCode wrapper-acaunt'>
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>Срок действия, мес.</th>
+                <th>Количество доставок в месяц, шт.</th>
+                <th>Промо-код</th>
+            </tr>
+            <?php $i = 0; ?>
+            @foreach($subscriptions as $subscription)
+                <tr>
+                    <td><?php echo ++$i ?></td>
+                    <td>{{$subscription->duration}}</td>
+                    <td>{{$subscription->total_quantity}}</td>
+                    <td>{{$subscription->promocode}}</td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
 </div>
 <script>
     $(function() {

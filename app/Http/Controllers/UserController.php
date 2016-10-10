@@ -23,10 +23,11 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $subscriptions = $user->subscriptions()->where('current_quantity', '>', 0)->first();
+        $promocodes = $user->subscriptions()->where('user_id', $user->id)->get();
         $orders = Order::where('user_id', $user->id)->simplePaginate(15);
         $listProducts = ListProduct::where('user_id', $user->id)->simplePaginate(15);
         $adresses = $user->adresses;
-        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions]);
+        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions, 'promocodes' => $promocodes]);
     }
     
     public function changeInfo(Request $request)

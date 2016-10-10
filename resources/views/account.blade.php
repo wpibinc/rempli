@@ -98,7 +98,6 @@
                         @endforeach
                     </table>
                 </div>
-
             </div>
 
             <div class='adresses wrapper-acaunt'>
@@ -196,7 +195,10 @@
                 </div>
 
             </div>
-            <div class='promoCode wrapper-acaunt'>Промо-коды</div>
+            <div class='promoCode wrapper-acaunt'>
+                <input type="text" name="promocode">
+                <a href="#" class="activate-promocode btn btn-default">Активировать</a>
+            </div>
             <div class='rules wrapper-acaunt'>Правила</div>
             <div class='lists wrapper-acaunt'>
                 Список заказов
@@ -480,6 +482,27 @@
 //                        alert("Подписка оформлена!");
                     }
                 });
+            });
+        });
+
+        $(document).on('click','.activate-promocode',function() { //устанавливаем событие отправки для формы с id=form
+            $_token = "{!! csrf_token() !!}";
+            var promocode = $('input[name="promocode"]').val();
+            var user_id = $('.userId').val();
+            $.ajax({
+                type: "POST", //Метод отправки
+                url: "/promo-code/activate", //путь до php фаила отправителя
+                data: {
+                    'user_id':user_id,
+                    'promocode': promocode,
+                    '_token':$_token
+                },
+                success: function(data) {
+                    if(!data.status) {
+                        alert('Введён неправильный промо-код!');
+                    }
+                    return false;
+                }
             });
         });
     </script>

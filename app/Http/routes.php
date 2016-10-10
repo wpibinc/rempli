@@ -49,7 +49,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/subscription/create', 'SubscriptionController@create');
     Route::post('/subscription/update', 'SubscriptionController@update');
-    
+    Route::post('promo-code/activate', [
+        'as' => 'admin.promocodeactivate',
+        'uses' => 'SubscriptionController@promoCodeActivate'
+    ]);
+
     Route::post('add-to-order-list', 'UserController@addToOrderList');
     
     Route::post('clear-product-list', 'UserController@clearProductList');
