@@ -14,14 +14,14 @@ class CreateSubscriptionsTable extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('current_quantity');
-            $table->integer('total_quantity');
-            $table->integer('price');
+            $table->integer('user_id')->nullable();
+            $table->integer('current_quantity')->nullable();
+            $table->integer('total_quantity')->nullable();
+            $table->integer('price')->nullable();
             $table->string('promocode')->nullable();
             $table->string('duration')->nullable();
-            $table->datetime('start_promocode')->nullable();
-            $table->datetime('end_promocode')->nullable();
+            $table->dateTime('start_promocode')->nullable();
+            $table->dateTime('end_promocode')->nullable();
             $table->tinyInteger('auto_subscription')->nullable()->default(0);
             $table->timestamps();
         });
