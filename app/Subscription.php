@@ -17,7 +17,7 @@ class Subscription extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_id', 'current_quantity', 'total_quantity', 'price', 'auto_subscription'
+        'user_id', 'current_quantity', 'total_quantity', 'price', 'promocode', 'duration', 'start_promocode', 'promocode', 'auto_subscription'
     ];
 
     public function user()

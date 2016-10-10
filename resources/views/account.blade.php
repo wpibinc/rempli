@@ -11,6 +11,7 @@
             <li><i class="fa fa-usd" aria-hidden="true"></i> Страница Счета  <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-phone" aria-hidden="true"></i> Адреса <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-bullhorn" aria-hidden="true"></i> Подписка <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
+            <li><i class="fa fa-barcode" aria-hidden="true"></i> Промо-коды <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-book" aria-hidden="true"></i> Правила <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-list-alt" aria-hidden="true"></i> Cписок заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход</a> <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
@@ -184,7 +185,7 @@
                             <td colspan="1">
                                 <input id="ex2" data-slider-id='ex2Slider'  type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="{{$subscription->current_quantity}}"/></br>
                                 <p class="finalPriceSubscriptions"><span>0</span> руб</p>
-                                <button class="btn btn-default editSubscription" type="button">изменить условия</button>
+                                <button class="btn btn-default editSubscription" disabled type="button">изменить условия</button>
                                 <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
                             </td>
                             <td></td>
@@ -195,6 +196,7 @@
                 </div>
 
             </div>
+            <div class='promoCode wrapper-acaunt'>Промо-коды</div>
             <div class='rules wrapper-acaunt'>Правила</div>
             <div class='lists wrapper-acaunt'>
                 Список заказов
@@ -280,6 +282,14 @@
             var finalPriceSubscription2 = 0;
             finalPriceSubscription2 = countDelivery2 * costSubscription2;
             $('.finalPriceSubscriptions span').html(finalPriceSubscription2);
+        });
+        $(document).on('click','.auto_subscription',function () {
+            var $el = $(this);
+            if($el.prop('checked') == true){
+                $('.editSubscription').removeAttr('disabled');
+            } else {
+                $('.editSubscription').attr('disabled','disabled');
+            }
         });
         $(document).on('click','.buy-dop',function () {
             var dopBuy = $('.input-dop').val();
