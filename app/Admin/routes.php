@@ -54,6 +54,10 @@ Route::get('parser/status', ['as' => 'admin.parser.status', 'uses' => '\App\Http
 //Очистка кеша
 Route::get('parser/clear', ['as' => 'admin.parser.clear', 'uses' => '\App\Http\Controllers\ParseController@clear']);
 
+Route::get('parser-la', '\App\Http\Controllers\LaParseController@index');
+
+Route::get('la-get-products', ['as' => 'admin.la_get_products', 'uses' => '\App\Http\Controllers\LaParseController@getProducts']);
+Route::get('la-get-categories', ['as' => 'admin.la_get_categories', 'uses' => '\App\Http\Controllers\LaParseController@getCategories']);
 //Users
 //Route::get('/users', ['as' => 'admin.users', 'uses' => '\App\Http\Controllers\UserController@index']);
 

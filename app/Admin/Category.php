@@ -38,6 +38,9 @@ AdminSection::registerModel(Category::class, function (ModelConfiguration $model
                                 ->setModelForOptions(new \App\AvCategory)
                                 ->setDisplay('name'),
                                 //->required(),
+                             AdminFormElement::multiselect('lacategories', 'Категории АВ')
+                                ->setModelForOptions(new \App\LaCategory)
+                                ->setDisplay('name'),
                         ];
                     }
                 )->addColumn(function ()

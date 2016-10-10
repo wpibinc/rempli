@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\AvCategory;
+use App\LaCategories;
 
 class Category extends Model
 {
@@ -23,6 +25,10 @@ class Category extends Model
         return $this->hasMany('\App\AvProduct', 'category_id', 'id');
     }
     
+    public function laCategories()
+    {
+        return $this->belongsToMany(LaCategory::class, 'category_lacategory', 'category_id', 'lacategory_id');
+    }
 //    public function getAvcategoriesAttribute()
 //    {
 //       // dd('lol');

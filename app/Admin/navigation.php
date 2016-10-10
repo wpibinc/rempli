@@ -65,9 +65,24 @@ $menu = [
                 ->setTitle('Продукты АВ')
                 ->setPriority(1),
             [
-                'title' => 'Парсер',
+                'title' => 'Парсер AB',
                 'icon' => 'fa fa-plus',
-                'url' => '/admin/parser'
+                'url' => '/admin/parser',
+                'priority' => 2
+            ],
+            (new Page(\App\LaCategory::class))
+                ->setIcon('fa fa-plus')
+                ->setTitle('Категории La maree')
+                ->setPriority(3),
+            (new Page(\App\LaProduct::class))
+                ->setIcon('fa fa-plus')
+                ->setTitle('Продукты La maree')
+                ->setPriority(4),
+            [
+                'title' => 'Парсер La maree',
+                'icon' => 'fa fa-plus',
+                'url' => '/admin/parser-la',
+                'priority' => 5
             ],
         ],
         'priority' => 11,
