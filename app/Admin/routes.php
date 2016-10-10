@@ -24,7 +24,7 @@ Route::get('cache', ['as' => 'admin.cache', function () {
 
 //Generate promo code index
 Route::get('promo-code', ['as' => 'admin.promo-code', function () {
-    $subscriptions = \App\Subscription::where('user_id', '0')->get();
+    $subscriptions = \App\Subscription::all();
     $content = view('admin.promocode', compact('subscriptions'));
 	return AdminSection::view($content, 'Промо Коды');
 }]);
