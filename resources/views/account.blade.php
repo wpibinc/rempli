@@ -3,6 +3,9 @@
 @section('title')
 
 @section('content')
+{{--    @if(!Auth::user()->isPaid())--}}
+        {{--here remember block--}}
+    {{--@endif--}}
 <div class="col-md-12">
     <div class="tabs col-md-12">
         <ul class="col-md-2">
@@ -225,6 +228,7 @@
 
             </div>
             <div class='promoCode wrapper-acaunt'>
+                <div id="message"></div>
                 <input type="text" name="promocode">
                 <a href="#" class="activate-promocode btn btn-default">Активировать</a>
             </div>
@@ -580,6 +584,9 @@
         $(document).on('click','.activate-promocode',function() { //устанавливаем событие отправки для формы с id=form
             $_token = "{!! csrf_token() !!}";
             var promocode = $('input[name="promocode"]').val();
+            if(promocode.length) {
+                $('#message').html('');
+            }
             var user_id = $('.userId').val();
             $.ajax({
                 type: "POST", //Метод отправки
@@ -590,9 +597,20 @@
                     '_token':$_token
                 },
                 success: function(data) {
+                    var alert_class = '';
                     if(!data.status) {
-                        alert('Введён неправильный промо-код!');
+                        alert_class = 'warning';
+                    } else {
+                        alert_class = 'success';
                     }
+                    $('#message').html(
+                            '<div class="alert alert-' + alert_class + ' alert-message">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                    '<span aria-hidden="true">×</span>' +
+                                '</button>' +
+                                data.msg+
+                            '</div>'
+                    );
                     return false;
                 }
             });

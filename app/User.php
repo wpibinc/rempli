@@ -52,4 +52,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(ListProduct::class);
     }
+    
+    public function isPaid()
+    {
+//        if($this->subscriptions > 3 days) {
+//            return false;
+//        }
+//        return true;
+    }
 }
