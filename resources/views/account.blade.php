@@ -158,7 +158,10 @@
                     <table class="table-striped ">
                         <tbody>
                         <tr>
-                            <td><span>количество оставшихся доставок/количество доставок всего</span> </td>
+                            <td><span>Срок действия подписки до: {{\Carbon\Carbon::parse($subscription->end_subscription)->format('d-m-Y')}}</span> </td>
+                        </tr>
+                        <tr>
+                            <td><span>Количество оставшихся доставок/количество доставок всего</span> </td>
                             <td><span class="countDelivery">{{$subscription->current_quantity}}</span>/<span class="countDeliveryAll">{{$subscription->total_quantity}}</span></br>
 
                             </td>

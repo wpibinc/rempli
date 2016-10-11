@@ -20,9 +20,10 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('price')->nullable();
             $table->string('promocode')->nullable();
             $table->string('duration')->nullable();
-            $table->dateTime('start_promocode')->nullable();
-            $table->dateTime('end_promocode')->nullable();
+            $table->dateTime('start_subscription')->nullable();
+            $table->dateTime('end_subscription')->nullable();
             $table->tinyInteger('auto_subscription')->nullable()->default(0);
+            $table->tinyInteger('is_free')->nullable()->default(0);
             $table->timestamps();
         });
     }

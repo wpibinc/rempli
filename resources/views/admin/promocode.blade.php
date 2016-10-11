@@ -2,6 +2,7 @@
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="user_id" value="0">
     <input type="hidden" name="auto_subscription" value="1">
+    <input type="hidden" name="is_free" value="1">
     <input type="hidden" name="current_quantity">
     <input type="hidden" name="promocode">
     <div class="row">
@@ -48,6 +49,7 @@
                 </tr>
             @endforeach
         </table>
+        <div>{{$subscriptions->render() }}</div>
     </div>
 </div>
 <script>
