@@ -61,7 +61,7 @@ class SubscriptionController extends Controller
         $subscription = Subscription::where('promocode', $request->promocode)->first();
         if (isset($subscription)) {
             if ($subscription->start_subscription != null) {
-                return response()->json(['status' => false]);
+                return response()->json(['status' => false, 'msg' => 'Введён неправильный промо-код!']);
             }
             foreach ($request->all() as $key => $value) {
                 if (in_array($key, $subscription->getColumnNames())) {
@@ -87,9 +87,9 @@ class SubscriptionController extends Controller
             }
 
 
-            return response()->json(['status' => true]);
+            return response()->json(['status' => true, 'msg' => 'Промо-код активирован.']);
         } else {
-            return response()->json(['status' => false]);
+            return response()->json(['status' => false, 'msg' => 'Введён неправильный промо-код!']);
         }
 
 //        return redirect()->back()->with('success_message', 'Подписка оформлена.');
