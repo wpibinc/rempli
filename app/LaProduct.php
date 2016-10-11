@@ -8,7 +8,11 @@ use App\LaCategory;
 
 class LaProduct extends Model
 {
+    protected $primaryKey = 'articul';
+    
     protected $table = 'la_products';
+    
+    protected $guarded = ['created_at', 'updated_at'];
     
     public function category()
     {

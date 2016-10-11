@@ -17,7 +17,6 @@ class AddLaCategoriesTable extends Migration
             $table->string('name');
             $table->string('link');
             $table->integer('parent_id');
-            $table->integer('order');
             $table->timestamps();
         });
     }

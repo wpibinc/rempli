@@ -16,11 +16,9 @@ class AddLaProductTable extends Migration
             $table->string('articul');
             $table->string('name');
             $table->string('link');
-            $table->integer('category_id');
             $table->integer('la_category_id');
             $table->decimal('original_price', 10, 2);
             $table->decimal('price', 10, 2);
-            $table->decimal('weight', 10, 2)->nullable();
             $table->string('image')->nullable();
             $table->string('price_style');
             $table->text('description')->nullable();
