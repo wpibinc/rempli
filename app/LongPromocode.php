@@ -8,23 +8,17 @@ use App\Order;
 use App\Adress;
 use App\Review;
 
-class Invoices extends Authenticatable
+class LongPromocode extends Authenticatable
 {
-    protected $table = 'invoices';
+    protected $table = 'long_promocodes';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'title'
+        'subscription_id', 'used_per_month', 'end_subscription'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     /**
      * @return array
      */

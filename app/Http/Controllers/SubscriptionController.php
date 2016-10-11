@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\LongPromocode;
 use App\Subscription;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -74,6 +75,16 @@ class SubscriptionController extends Controller
             } catch (\Exception $e) {
                 return $e;
             }
+
+            for($i = 1; $i <= $subscription->duration; $i++) {
+                LongPromocode::create([
+                    'subscription_id' => $subscription->id,
+                    'used_per_month' => 0,
+                    'end_subscription' => Carbon::now()->addMonths($i),
+                ]);
+            }
+
+
             return response()->json(['status' => true]);
         } else {
             return response()->json(['status' => false]);
