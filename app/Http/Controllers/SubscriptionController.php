@@ -31,11 +31,13 @@ class SubscriptionController extends Controller
                 ->where('is_free', '0')
                 ->orderBy('end_subscription', 'desc')->first();
 
+
         $subscription = Subscription::create($request->all());
 
         $subscription->start_subscription = $last_subscription->end_subscription;
+
         $new_start_date = $last_subscription->end_subscription;
-        $subscription->end_subscription = $new_start_date->addMonths(1);
+        $subscription->end_subscription = Carbon::parse($new_start_date)->addMonths(1);
         try {
             $subscription->save();
         } catch (\Exception $e) {
