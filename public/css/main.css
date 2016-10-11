@@ -1658,3 +1658,26 @@ td #ex2Slider{
 .showDiv{
 	display: block!important;
 }
+.table-striped td{
+	background-color: #f9f9f9;
+}
+
+.slider-tick-label{
+	width: auto!important;
+	padding-right: 10px;
+}
+.slider-tick-label-container{
+	margin-left: 0!important;
+}
+.slider-tick-label:last-child{
+	padding-right: 0;
+}
+.finalPriceSubscriptions{
+	margin-top: 10px;
+}
+.visb-h{
+	position: absolute!important;
+	visibility: hidden;
+	top:-100px;
+	z-index: -10;
+}

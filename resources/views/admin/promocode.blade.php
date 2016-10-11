@@ -1,11 +1,13 @@
+
 <form name="promocode" method="post" action="{{route('admin.promocodecreate')}}">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="user_id" value="0">
     <input type="hidden" name="auto_subscription" value="1">
+    <input type="hidden" name="is_free" value="1">
     <input type="hidden" name="current_quantity">
     <input type="hidden" name="promocode">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-2">
             <div>Срок действия промо кода: </div>
             <select name="duration" id="month" onchange="" size="1">
                 <option value="1">1 Месяц</option>
@@ -16,25 +18,40 @@
                 <option value="6">6 Месяцев</option>
             </select>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-2">
             <div>Количество доставок в месяц: </div>
-            <input type="number" min="4" max="28" name="total_quantity">
+            <input type="number" value="4" min="4" max="28" name="total_quantity">
         </div>
-        <div class="col-md-12">
+        <div class="col-md-3">
             <a href="#" id="gen">Генерировать промо код: </a>
             <span id="short_link"></span>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-2">
             <input type="submit" name="save" value="Сохранить">
         </div>
     </div>
 </form>
-<div class="col-md-12">
-    @foreach($subscriptions as $subscription)
-    <div>Срок действия, месяцев {{$subscription->duration}}</div><br>
-    <div>Количество доставок в месяц, шт. {{$subscription->total_quantity}}</div><br>
-    <div>Промо код {{$subscription->promocode}}</div><br>
-    @endforeach
+<div class='promoCode wrapper-acaunt'>
+    <div class="table-responsive">
+        <table class="table" style="margin-top: 20px">
+            <tr>
+                <th></th>
+                <th>Срок действия, мес.</th>
+                <th>Количество доставок в месяц, шт.</th>
+                <th>Промо-код</th>
+            </tr>
+            <?php $i = 0; ?>
+            @foreach($subscriptions as $subscription)
+                <tr>
+                    <td><?php echo ++$i ?></td>
+                    <td>{{$subscription->duration}}</td>
+                    <td>{{$subscription->total_quantity}}</td>
+                    <td>{{$subscription->promocode}}</td>
+                </tr>
+            @endforeach
+        </table>
+        <div>{{$subscriptions->render() }}</div>
+    </div>
 </div>
 <script>
     $(function() {

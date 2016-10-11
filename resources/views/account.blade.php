@@ -98,7 +98,6 @@
                         @endforeach
                     </table>
                 </div>
-
             </div>
 
             <div class='adresses wrapper-acaunt'>
@@ -148,7 +147,14 @@
                 <div class="falseSubscription">
                     <h3>Подписка</h3>
                     <p class="costSubscription"><span>500</span> руб</p>
-                    <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="4"/>
+                    <input id="ex1" data-provide="slider" data-slider-orientation="vertical"
+                           data-slider-ticks="[1, 2, 3,4]"
+                           data-slider-ticks-labels='["1 раз в неделю (4 раза в месяц) - 1600", "2 раза в неделю (8 раз в месяц) - 3000", "3 раза в неделю (12 раз в месяц) - 4200","Каждый день (30 доставок в месяц) - 7500"]'
+                           data-slider-min="1"
+                           data-slider-max="4"
+                           data-slider-step="1"
+                           data-slider-value="3"
+                           data-slider-tooltip="hide"/>
                     <p class="finalPriceSubscription"><span>0</span> руб</p>
                     <button type="button" class="buySubscription btn btn-default" >Купить</button>
                 </div>
@@ -156,13 +162,13 @@
                     @if(isset($subscription))
                     <input type="hidden" name="subscription_id" value="{{$subscription->id}}">
                     <h3>Подписка</h3>
-                    <table class="table-striped ">
+                    <table class="table">
                         <tbody>
                         <tr>
-                            <td><span>количество оставшихся доставок/количество доставок всего</span> </td>
-                            <td><span class="countDelivery">{{$subscription->current_quantity}}</span>/<span class="countDeliveryAll">{{$subscription->total_quantity}}</span></br>
-
-                            </td>
+                            <td><span>Срок действия подписки до: {{\Carbon\Carbon::parse($subscription->end_subscription)->format('d-m-Y')}}</span> </td>
+                        </tr>
+                        <tr>
+                            <td><span>Количество оставшихся доставок/количество доставок всего</span> <span class="countDelivery">{{$subscription->current_quantity}}</span>/<span class="countDeliveryAll">{{$subscription->total_quantity}}</span></td>
                         </tr>
                         <tr class="dop-wrapper hideDiv">
                             <td colspan="2">
@@ -179,16 +185,23 @@
                                     </label>
                                 </div>
                             </td>
-                            <td></td>
+
                         </tr>
                         <tr>
                             <td colspan="1">
-                                <input id="ex2" data-slider-id='ex2Slider'  type="text" data-slider-min="4" data-slider-max="28" data-slider-step="1" data-slider-value="{{$subscription->current_quantity}}"/></br>
+                                <input id="ex2" data-slider-orientation="vertical" class="hideDiv" data-provide="slider"
+                                       data-slider-ticks="[1, 2, 3,4]"
+                                       data-slider-ticks-labels='["1 раз в неделю (4 раза в месяц) - 1600", "2 раза в неделю (8 раз в месяц) - 3000", "3 раза в неделю (12 раз в месяц) - 4200","Каждый день (30 доставок в месяц) - 7500"]'
+                                       data-slider-min="1"
+                                       data-slider-max="4"
+                                       data-slider-step="1"
+                                       data-slider-value="{{$subscription->current_quantity}}"
+                                       data-slider-tooltip="hide"/></br>
                                 <p class="finalPriceSubscriptions"><span>0</span> руб</p>
                                 <button class="btn btn-default editSubscription" disabled type="button">изменить условия</button>
                                 <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
                             </td>
-                            <td></td>
+
                         </tr>
                         </tbody>
                     </table>
@@ -196,7 +209,10 @@
                 </div>
 
             </div>
-            <div class='promoCode wrapper-acaunt'>Промо-коды</div>
+            <div class='promoCode wrapper-acaunt'>
+                <input type="text" name="promocode">
+                <a href="#" class="activate-promocode btn btn-default">Активировать</a>
+            </div>
             <div class='rules wrapper-acaunt'>Правила</div>
             <div class='lists wrapper-acaunt'>
                 Список заказов
@@ -248,19 +264,38 @@
     <div class="bg-shadows"></div>
 
     <script>
+
+        $(document).on('ready',function () {
+            $('table .slider-vertical').addClass('visb-h');
+        });
         $(document).on('click','.editSubscription',function () {
-            $('.slider-horizontal').addClass('showDiv');
+            $('.slider-vertical').removeClass('visb-h');
             $('.editSubscription').addClass('hideDiv');
             $('.editsSubscription').removeClass('hideDiv');
         });
 
         $(document).on('click','.editsSubscription',function () {
-            $('.slider-horizontal').removeClass('showDiv');
+            $('.slider-vertical').addClass('visb-h');
             $('.editSubscription').removeClass('hideDiv');
             $('.editsSubscription').addClass('hideDiv');
-            var countDelivery = $('#ex2').val();
-            $('.countDeliveryAll').html(countDelivery);
-            $('.countDelivery').html(countDelivery);
+            var countDelivery = parseInt($('#ex2').val());
+            if(countDelivery == 1){
+                $('.countDeliveryAll').html('4');
+                $('.countDelivery').html('4');
+            }
+            if(countDelivery == 2){
+                $('.countDeliveryAll').html('8');
+                $('.countDelivery').html('8');
+            }
+            if(countDelivery == 3){
+                $('.countDeliveryAll').html('12');
+                $('.countDelivery').html('12');
+            }
+            if(countDelivery == 4){
+                $('.countDeliveryAll').html('30');
+                $('.countDelivery').html('30');
+            }
+
         });
         $(document).on('click','.buySubscription',function () {
             var countDelivery = $('#ex1').val();
@@ -271,24 +306,47 @@
         });
         $(document).on('change','#ex1',function () {
             var countDelivery = parseInt($('#ex1').val());
-            var costSubscription = parseInt($('.costSubscription').text());
             var finalPriceSubscription = 0;
-            finalPriceSubscription = countDelivery * costSubscription;
+            if(countDelivery == 1){
+                finalPriceSubscription = 1600;
+            }
+            if(countDelivery == 2){
+                finalPriceSubscription = 3000;
+            }
+            if(countDelivery == 3){
+                finalPriceSubscription = 4200;
+            }
+            if(countDelivery == 4){
+                finalPriceSubscription = 7500;
+            }
             $('.finalPriceSubscription span').html(finalPriceSubscription);
         });
         $(document).on('change','#ex2',function () {
             var countDelivery2 = parseInt($('#ex2').val());
-            var costSubscription2 = parseInt($('.costSubscription').text());
+
             var finalPriceSubscription2 = 0;
-            finalPriceSubscription2 = countDelivery2 * costSubscription2;
+            if(countDelivery2 == 1){
+                finalPriceSubscription2 = 1600;
+            }
+            if(countDelivery2 == 2){
+                finalPriceSubscription2 = 3000;
+            }
+            if(countDelivery2 == 3){
+                finalPriceSubscription2 = 4200;
+            }
+            if(countDelivery2 == 4){
+                finalPriceSubscription2 = 7500;
+            }
             $('.finalPriceSubscriptions span').html(finalPriceSubscription2);
         });
         $(document).on('click','.auto_subscription',function () {
             var $el = $(this);
             if($el.prop('checked') == true){
                 $('.editSubscription').removeAttr('disabled');
+                $('.editsSubscription').removeAttr('disabled');
             } else {
                 $('.editSubscription').attr('disabled','disabled');
+                $('.editsSubscription').attr('disabled','disabled');
             }
         });
         $(document).on('click','.buy-dop',function () {
@@ -309,8 +367,7 @@
             }
             $("input#ex2").bootstrapSlider();
             var ex2 = $('#ex2').val();
-            var finalPriceSubscriptions = 500 * ex2;
-            $('.finalPriceSubscriptions span').html(finalPriceSubscriptions);
+
             if($('.subscriptionHide').val() == 0){
                 $('.trueSubscription').addClass('hideDiv');
                 $('.falseSubscription').removeClass('hideDiv');
@@ -318,12 +375,6 @@
                 $('.falseSubscription').addClass('hideDiv');
                 $('.trueSubscription').removeClass('hideDiv');
             }
-            var countDelivery = 4;
-            var costSubscription = parseInt($('.costSubscription').text());
-            var finalPriceSubscription = 0;
-            finalPriceSubscription = countDelivery * costSubscription;
-            $('.finalPriceSubscription span').html(finalPriceSubscription);
-            var costSubscription = parseInt($('.costSubscription span').text());
             $("input#ex1").bootstrapSlider();
 
             $(".tabs").lightTabs();
@@ -403,6 +454,18 @@
                 var user_id = $('.userId').val();
                 var price = $('.finalPriceSubscription span').text();
                 var quantity = $('#ex1').val();
+                if(quantity == 1){
+                    quantity = 4;
+                }
+                if(quantity == 2){
+                    quantity = 8;
+                }
+                if(quantity == 3){
+                    quantity = 12;
+                }
+                if(quantity == 4){
+                    quantity = 30;
+                }
                 $.ajax({
                     type: "POST", //Метод отправки
                     url: "/subscription/create", //путь до php фаила отправителя
@@ -428,6 +491,18 @@
                 var user_id = $('.userId').val();
                 var price = $('.finalPriceSubscriptions span').text();
                 var quantity = $('#ex2').val();
+                if(quantity == 1){
+                    quantity = 4;
+                }
+                if(quantity == 2){
+                    quantity = 8;
+                }
+                if(quantity == 3){
+                    quantity = 12;
+                }
+                if(quantity == 4){
+                    quantity = 30;
+                }
                 var checkboxs = 0;
                 if($('.auto_subscription').prop('checked') == true){
                     checkboxs = 1;
@@ -480,6 +555,27 @@
 //                        alert("Подписка оформлена!");
                     }
                 });
+            });
+        });
+
+        $(document).on('click','.activate-promocode',function() { //устанавливаем событие отправки для формы с id=form
+            $_token = "{!! csrf_token() !!}";
+            var promocode = $('input[name="promocode"]').val();
+            var user_id = $('.userId').val();
+            $.ajax({
+                type: "POST", //Метод отправки
+                url: "/promo-code/activate", //путь до php фаила отправителя
+                data: {
+                    'user_id':user_id,
+                    'promocode': promocode,
+                    '_token':$_token
+                },
+                success: function(data) {
+                    if(!data.status) {
+                        alert('Введён неправильный промо-код!');
+                    }
+                    return false;
+                }
             });
         });
     </script>
