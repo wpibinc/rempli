@@ -80,8 +80,6 @@ class OrderController extends BaseController
                 }
             }
         }
-
-
         if($user->free_delivery_manually){
             $freeDelivery = true;
         }
