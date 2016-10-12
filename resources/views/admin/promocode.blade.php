@@ -55,6 +55,9 @@
 </div>
 <script>
     $(function() {
+        var total_quantity = $('input[name="total_quantity"]').val();
+        $('input[name="current_quantity"]').val(total_quantity);
+
         function str_rand() {
             var result       = '';
             var words        = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';

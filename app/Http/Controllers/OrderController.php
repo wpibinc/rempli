@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\LongPromocode;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Order;
@@ -61,6 +62,23 @@ class OrderController extends BaseController
         $freeDelivery = true;
         if($user->free_delivery){
             $freeDelivery = false;
+        }
+
+        $subscription = $user->subscriptions()->where('end_subscription', '>', Carbon::now())->first();
+        if (isset($subscription)) {
+            if($subscription->is_free == 0 && $subscription->current_quantity > 0) {
+                $subscription->current_quantity--;
+                $freeDelivery = true;
+                $subscription->save();
+            } elseif ($subscription->is_free == 1) {
+                $long_promocodes = LongPromocode::where('subscription_id', $subscription->id)
+                ->where('end_subscription', '>', Carbon::now())->first();
+                if ($long_promocodes->used_per_month < $subscription->current_quantity) {
+                    $long_promocodes->used_per_month++;
+                    $freeDelivery = true;
+                    $long_promocodes->save();
+                }
+            }
         }
         if($user->free_delivery_manually){
             $freeDelivery = true;
