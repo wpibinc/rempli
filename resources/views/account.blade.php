@@ -188,6 +188,7 @@
                             </td>
                         </tr>
                         @endif
+                        @if(!isset($current_quantity))
                         <tr>
                             <td colspan="1">
                                 <div class="checkbox">
@@ -220,8 +221,8 @@
                                 <button class="btn btn-default editSubscription" disabled type="button">изменить условия</button>
                                 <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
                             </td>
-
                         </tr>
+                        @endif
                         </tbody>
                     </table>
                     @endif
