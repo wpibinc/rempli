@@ -216,7 +216,7 @@
                                        data-slider-value="4"
                                        @endif
                                        data-slider-tooltip="hide"/></br>
-                                <p class="finalPriceSubscriptions hideDiv"><span>{{$subscription->price}}</span> руб</p>
+                                <p class="finalPriceSubscriptions hideDiv"><span></span> руб</p>
                                 <button class="btn btn-default editSubscription" disabled type="button">изменить условия</button>
                                 <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
                             </td>
@@ -374,7 +374,6 @@
         $(document).on('click','.buy-dop',function () {
             var dopBuy = $('.input-dop').val();
             var bopPrice = dopBuy * 450;
-            $('.countDeliveryAll').html(dopBuy);
             $('.countDelivery').html(dopBuy);
         });
         $(document).on('input','.input-dop',function () {
@@ -382,7 +381,9 @@
             var bopPrice = dopBuy * 450;
             $('.dop-price').html(bopPrice+'руб');
         });
+
         $(document).ready(function(){
+            $('.auto_subscription').prop('checked',false);
             var dopCount = $('.countDelivery').text();
             console.log(dopCount);
             if(dopCount == 0){
@@ -390,7 +391,19 @@
             }
             $("input#ex2").bootstrapSlider();
             var ex2 = $('#ex2').val();
-
+            if(ex2 == 1){
+                var exval = 1600;
+            }
+            if(ex2== 2){
+                var exval = 3000;
+            }
+            if(ex2 == 3){
+                var exval = 4200;
+            }
+            if(ex2 == 4){
+                var exval = 7500;
+            }
+            $('.finalPriceSubscriptions span').html(exval);
             if($('.subscriptionHide').val() == 0){
                 $('.trueSubscription').addClass('hideDiv');
                 $('.falseSubscription').removeClass('hideDiv');
