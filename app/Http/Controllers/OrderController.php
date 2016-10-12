@@ -80,8 +80,6 @@ class OrderController extends BaseController
                 }
             }
         }
-
-
         if($user->free_delivery_manually){
             $freeDelivery = true;
         }
@@ -124,11 +122,11 @@ class OrderController extends BaseController
         
         $userPhone = $user->phone;
         $text2 = 'Ваш заказ на сумму '.$cost.' рублей принят. В ближайшее время мы свяжемся с Вами для подтверждения';
-        $sms2 = new \Zelenin\SmsRu\Entity\Sms($userPhone, $text2);
-        $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text1);
+//        $sms2 = new \Zelenin\SmsRu\Entity\Sms($userPhone, $text2);
+//        $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text1);
 
-        $client->smsSend($sms);
-        $client->smsSend($sms2);
+//        $client->smsSend($sms);
+//        $client->smsSend($sms2);
         return redirect('/')->with('order', 'success');
     }
 }

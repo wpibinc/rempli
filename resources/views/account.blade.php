@@ -145,6 +145,7 @@
                 </div> 
             </div>
             <div class='subscription wrapper-acaunt'>
+                <div class="message"></div>
                 <input type="hidden" value="{{$user->id}}" class="userId">
 
                 @if(!isset($subscription))
@@ -176,13 +177,13 @@
                             <td><span>Срок действия подписки до: {{\Carbon\Carbon::parse($subscription->end_subscription)->format('d-m-Y')}}</span> </td>
                         </tr>
                         <tr>
-                            <td><span>Количество оставшихся доставок/количество доставок всего</span> <span class="countDelivery">{{$subscription->current_quantity}}</span>/<span class="countDeliveryAll">{{$subscription->total_quantity}}</span></td>
+                            <td><span>Количество оставшихся доставок/количество доставок всего</span> <span class="countDelivery">{{isset($current_quantity) ? $current_quantity : $subscription->current_quantity}}</span>/<span class="countDeliveryAll">{{$subscription->total_quantity}}</span></td>
                         </tr>
-                        @if ($subscription->current_quantity == 0 && \Carbon\Carbon::now() < $subscription->end_subscription)
+                        @if (\Carbon\Carbon::now() < $subscription->end_subscription && $subscription->current_quantity == 0 || (isset($current_quantity) && $current_quantity == 0))
                         <tr class="dop-wrapper hideDiv">
                             <td colspan="2">
                                 <span>Количество доставок израсходовано</span></br>
-                                <span><input min="1" type="number" name="input-dop" class="input-dop" value="1"><buttod class='btn buy-dop'>купить доп. Доставку</buttod></span></br>
+                                <span><input min="1" type="number" name="input-dop" class="input-dop" value="1"><button class='btn buy-dop'>купить доп. Доставку</button></span></br>
                                 Цена: <span class="dop-price">450руб</span>
                             </td>
                         </tr>
@@ -228,7 +229,7 @@
 
             </div>
             <div class='promoCode wrapper-acaunt'>
-                <div id="message"></div>
+                <div class="message"></div>
                 <input type="text" name="promocode">
                 <a href="#" class="activate-promocode btn btn-default">Активировать</a>
             </div>
@@ -383,7 +384,8 @@
         });
         $(document).ready(function(){
             var dopCount = $('.countDelivery').text();
-            if(parseInt(dopCount) == 0){
+            console.log(dopCount);
+            if(dopCount == 0){
                 $('.dop-wrapper').removeClass('hideDiv');
             }
             $("input#ex2").bootstrapSlider();
@@ -498,10 +500,22 @@
                         'total_quantity':quantity,
                         'price':price
                     },
-                    success: function() {
-                        //код в этом блоке выполняется при успешной отправке сообщения
-                        location.reload();
-//                        alert("Подписка оформлена!");
+                    success: function(data) {
+                        var alert_class = '';
+                        if(!data.status) {
+                            alert_class = 'warning';
+                        } else {
+                            alert_class = 'success';
+                        }
+                        $('.message').html(
+                                '<div class="alert alert-' + alert_class + ' alert-message">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">×</span>' +
+                                '</button>' +
+                                data.msg+
+                                '</div>'
+                        );
+                        return false;
                     }
                     });
             });
@@ -543,9 +557,22 @@
                         'price':price,
                         'auto_subscription':auto_subscription
                     },
-                    success: function() {
-                        //код в этом блоке выполняется при успешной отправке сообщения
-//                        alert("Подписка оформлена!");
+                    success: function(data) {
+                        var alert_class = '';
+                        if(!data.status) {
+                            alert_class = 'warning';
+                        } else {
+                            alert_class = 'success';
+                        }
+                        $('.message').html(
+                                '<div class="alert alert-' + alert_class + ' alert-message">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">×</span>' +
+                                '</button>' +
+                                data.msg+
+                                '</div>'
+                        );
+                        return false;
                     }
                 });
             });
@@ -556,11 +583,7 @@
                 var user_id = $('.userId').val();
                 var price = $('.dop-price').text();
                 var quantity = $('.input-dop').val();
-                var checkboxs = 0;
-                if($('.auto_subscription').prop('checked') == true){
-                    checkboxs = 1;
-                }
-                var auto_subscription = checkboxs;
+                var input_dop = 1;
                 $.ajax({
                     type: "POST", //Метод отправки
                     url: "/subscription/update", //путь до php фаила отправителя
@@ -568,14 +591,26 @@
                         'user_id':user_id,
                         'id':subscription_id,
                         '_token':$_token,
-                        'current_quantity':quantity,
-                        'total_quantity':quantity,
+                        'dop_quantity':quantity,
                         'price':price,
-                        'auto_subscription':auto_subscription
+                        'input_dop':input_dop
                     },
-                    success: function() {
-                        //код в этом блоке выполняется при успешной отправке сообщения
-//                        alert("Подписка оформлена!");
+                    success: function(data) {
+                        var alert_class = '';
+                        if(!data.status) {
+                            alert_class = 'warning';
+                        } else {
+                            alert_class = 'success';
+                        }
+                        $('.message').html(
+                                '<div class="alert alert-' + alert_class + ' alert-message">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">×</span>' +
+                                '</button>' +
+                                data.msg+
+                                '</div>'
+                        );
+                        return false;
                     }
                 });
             });
@@ -585,7 +620,7 @@
             $_token = "{!! csrf_token() !!}";
             var promocode = $('input[name="promocode"]').val();
             if(promocode.length) {
-                $('#message').html('');
+                $('.message').html('');
             }
             var user_id = $('.userId').val();
             $.ajax({
@@ -603,7 +638,7 @@
                     } else {
                         alert_class = 'success';
                     }
-                    $('#message').html(
+                    $('.message').html(
                             '<div class="alert alert-' + alert_class + ' alert-message">' +
                                 '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
                                     '<span aria-hidden="true">×</span>' +

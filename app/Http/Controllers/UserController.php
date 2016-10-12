@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\LongPromocode;
 use App\Subscription;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,9 +26,17 @@ class UserController extends Controller
         $user = Auth::user();
 //        $subscriptions = $user->subscriptions()->where('current_quantity', '>', 0)->first();
         $subscriptions = $user->subscriptions()->where('end_subscription', '>', Carbon::now())->first();
+        if(isset($subscriptions)) {
+            $long_promocode = LongPromocode::where('subscription_id', $subscriptions->id)
+                ->where('end_subscription', '>', Carbon::now())->first();
+        }
         $orders = Order::where('user_id', $user->id)->simplePaginate(15);
         $listProducts = ListProduct::where('user_id', $user->id)->simplePaginate(15);
         $adresses = $user->adresses;
+        if(isset($long_promocode)) {
+            $current_quantity = $subscriptions->current_quantity - $long_promocode->used_per_month;
+            return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions, 'long_promocode' => $long_promocode, 'current_quantity' => $current_quantity]);
+        }
         return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions]);
     }
     

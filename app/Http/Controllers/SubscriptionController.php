@@ -23,14 +23,45 @@ class SubscriptionController extends Controller
             return $e;
         }
 
-        return response()->json(['status' => true]);
+        return response()->json(['status' => true, 'msg' => 'Подписка оформлена.']);
     }
     public function update(Request $request)
     {
+        if($request->input_dop == 1) {
+            $subscription = Subscription::find($request->id);
+            if($subscription->is_free == 0) {
+                $subscription->current_quantity += $request->dop_quantity;
+                $subscription->price += $request->price;
+                try {
+                    $subscription->save();
+                } catch (\Exception $e) {
+                    return $e;
+                }
+            } else {
+                $long_promocodes = LongPromocode::where('subscription_id', $subscription->id)
+                    ->where('end_subscription', '>', Carbon::now())->first();
+                $long_promocodes->used_per_month -= $request->dop_quantity;
+                $subscription->price += $request->price;
+
+                try {
+                    $long_promocodes->save();
+                } catch (\Exception $e) {
+                    return $e;
+                }
+
+                try {
+                    $subscription->save();
+                } catch (\Exception $e) {
+                    return $e;
+                }
+            }
+
+            return response()->json(['status' => true, 'msg' => 'Доп. Доставки успешно куплены.']);
+        }
+
         $last_subscription = Subscription::where('user_id', $request->user_id)
                 ->where('is_free', '0')
                 ->orderBy('end_subscription', 'desc')->first();
-
 
         $subscription = Subscription::create($request->all());
 
@@ -44,7 +75,7 @@ class SubscriptionController extends Controller
             return $e;
         }
 
-        return response()->json(['status' => true]);
+        return response()->json(['status' => true, 'msg' => 'Подписка изменена.']);
     }
 
     public function promoCodeCreate(Request $request)
@@ -52,7 +83,6 @@ class SubscriptionController extends Controller
         Subscription::create($request->all());
 
         return redirect()->back();
-//        return redirect()->back()->with('success_message', 'Подписка оформлена.');
     }
 
     public function promoCodeActivate(Request $request)
@@ -86,12 +116,9 @@ class SubscriptionController extends Controller
                 ]);
             }
 
-
             return response()->json(['status' => true, 'msg' => 'Промо-код активирован.']);
         } else {
             return response()->json(['status' => false, 'msg' => 'Введён неправильный промо-код!']);
         }
-
-//        return redirect()->back()->with('success_message', 'Подписка оформлена.');
     }
 }
