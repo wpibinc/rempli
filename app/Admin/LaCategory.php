@@ -16,7 +16,7 @@ AdminSection::registerModel(LaCategory::class, function (ModelConfiguration $mod
         return AdminDisplay::tree()->setValue(function ($instanse){
             return "{$instanse->name} [id:{$instanse->id}]";
         })
-            ->setReorderable(false);
+            ->setReorderable(true);
     });
     
     $model->onEdit(function($id = null) {

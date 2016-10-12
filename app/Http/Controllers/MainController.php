@@ -9,6 +9,8 @@ use App\Product;
 use App\Review;
 use Auth;
 use DB;
+use App\LaCategory;
+use App\LaProduct;
 
 class MainController extends Controller
 {
@@ -119,6 +121,22 @@ class MainController extends Controller
         if(!$word){
             return response()->json(['success' => false]);
         }
+        $shop = session('shop');
+        $json;
+        switch($shop){
+            case 'La': $json = $this->avSearch($word);
+                break;
+            default:
+                $json = $this->avSearch($word);
+            break;
+        }
+        
+        
+        return response()->json($json);
+    }
+    
+    protected function avSearch($word)
+    {
         $avProducts = AvProduct::where('name', 'like', '%'.$word.'%')
                 ->orderBy('updated_at')
                 ->get();
@@ -183,8 +201,40 @@ class MainController extends Controller
             }
         }
         
-        return response()->json($json);
+        return $json;
     }
     
+    protected function laSearch($word)
+    {
+        $products = LaProduct::where('name', 'like', '%'.$word.'%')
+                ->orderBy('updated_at')
+                ->get();
+        $json = array(
+            'success' => true,
+            'products' => array(),
+        );
+        if(!count($products)){
+            return response()->json(['success' => false]);
+        }
+
+        foreach($products as $product){
+            $json['products'][] = array(
+                'objectId' => $product->id,
+                'cvalues' => '',
+                'ctitles' => '',
+                'img_sm' => $product->image,
+                'category' => $id,
+                'product_name' => $product->name,
+                'price' => $product->price,
+                'amount' => $product->price_style,
+                'weight' => '',
+                'description' => $product->description,
+                'updatedAt' => $product->updated_at,
+                'shop' => $product->shop
+            );
+        }
+        
+        return $json;
+    }
 }
 

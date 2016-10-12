@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class AvCategory extends Model
 {
     protected $guarded = ['id'];
-
+    
+    public $shop = 'Av';
+    
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_avcategory', 'avcategory_id', 'category_id');

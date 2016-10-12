@@ -57,6 +57,24 @@
 <header class="header">
     <div class="topline col-md-12">
         <a href="/" class="logo"><img src="img/first.png" alt="rempli"></a>
+        <?php 
+        
+        ?>
+        <form id='change-shop-form' action="" method="get">
+            <select name="shop">
+                @if(session('shop') == 'Av')
+                    <option value="Av" selected="selected">Азбука Вкуса</option>
+                @else
+                    <option value="Av">Азбука Вкуса</option>
+                @endif
+                @if(session('shop') == 'La')
+                    <option value="La" selected="selected">La Maree</option>
+                @else
+                    <option value="La">La Maree</option>
+                @endif
+            </select>
+        </form>
+       
         <a href="#" id="dd_btn">
             <button class="cart-btn"><img src="img/cart.png">Корзина <span id="cart-number">0</span></button>
         </a>

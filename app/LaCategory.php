@@ -8,6 +8,8 @@ use App\LaProduct;
 
 class LaCategory extends Model
 {
+    public $shop = 'La';
+    
     protected $table = 'la_categories';
     
     protected $fillable = ['name', 'link', 'parent_id', 'order'];

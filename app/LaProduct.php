@@ -8,16 +8,14 @@ use App\LaCategory;
 
 class LaProduct extends Model
 {
-    protected $primaryKey = 'articul';
+    //use \SleepingOwl\Admin\Traits\OrderableModel;
+    public $incrementing = false;
+    
+    public $shop = 'La';
     
     protected $table = 'la_products';
     
     protected $guarded = ['created_at', 'updated_at'];
-    
-    public function category()
-    {
-        return $this->belongsTo(Category::class, 'category_id','id');
-    }
     
     public function laCategory()
     {

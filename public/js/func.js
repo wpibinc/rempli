@@ -11,31 +11,6 @@ jQuery(document).ready(function($){
         event.stopPropagation();
     });
 });
-// var fruits = '';
-// var juices = '';
-// var water = '';
-// var baby = '';
-// var curd = '';
-// var dairy = '';
-// var canned = '';
-// var salt = '';
-// var sauces = '';
-// var breakfasts = '';
-// var pasta = '';
-// var nuts = '';
-// var oil = '';
-// var frozen = '';
-// var cooked = '';
-// var meatdeli = '';
-// var meat = '';
-// var fish = '';
-// var cheese = '';
-// var bread = '';
-// var tea = '';
-// var sweet = '';
-// var cookies = '';
-// var choco = '';
-// var test = '';
 
 var searchvar = '';
 
@@ -50,32 +25,6 @@ function num2word(num,words) {
   }
 }
 words=Array("рубль", "рубля", "рублей");
-
-
-//for (i = 0; i < json.length; i++) {
-//
-//    if (Number(sessionStorage[json[i].objectId]) > 0) {
-//        console.log(1);
-//        window[json[i].category] += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + json[i].objectId + '"><div class="count item_count visible">' + sessionStorage[json[i].objectId] + '</div><a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '"> <img src="' + json[i].img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '">' + json[i].product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + json[i].price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">' + json[i].amount + '</div><br class="clearfix"></div><button href="javascript:void(0)" class="increase_count buy">Добавить</button></div>';
-//    } else {
-//        
-//        if (typeof window[json[i].category] === 'undefined') {
-//            console.log(2);
-//            console.log(json[i].category);
-//            window[json[i].category] = '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + json[i].objectId + '"><div class="count item_count hidden">' + sessionStorage[json[i].objectId] + '</div><a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '"> <img src="' + json[i].img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '">' + json[i].product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + json[i].price + ' руб</div><div id="weight_product" class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">' + json[i].amount + '</div><br class="clearfix"></div><button href="javascript:void(0)" class="increase_count buy">Добавить</button></div>';
-//        }
-//        else {
-//            console.log(3);
-//            console.log(json[i].category);
-//            window[json[i].category] += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + json[i].objectId + '"><div class="count item_count hidden">' + sessionStorage[json[i].objectId] + '</div><a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '"> <img src="' + json[i].img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + json[i].objectId + '">' + json[i].product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + json[i].price + ' руб</div><div id="weight_product" class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">' + json[i].amount + '</div><br class="clearfix"></div><button href="javascript:void(0)" class="increase_count buy">Добавить</button></div>';
-//
-//        }
-//    }
-//}
-
-
-
-
 
 var current;
 
@@ -180,87 +129,9 @@ cats.each(function(i){
                 $(".bg-shadow").hide();
            }
         });
-//        
-//
-//        $(".inmoscow").empty();
-//        $(".header_cat").css('top', '20px');
-//
-//
-//        $(".products-wrap").empty();
-//        $(".products-wrap").prepend(window[value]);
-//        current = value;
     });
 
 });
-
-//$.each([ 'fruits', 'juices', 'water', 'baby',  'curd', 'dairy', 'canned', 'salt', 'sauces', 'breakfasts', 'pasta', 'nuts', 'oil' , 'frozen' , 'cooked' , 'meatdeli' , 'meat' , 'fish' , 'cheese' , 'bread' , 'tea' , 'sweet' , 'cookies', 'choco'  ], function( index, value ) {
-// $.each(rubric, function( index, value ) {
-//     $('#' + value).click(function () {
-//         $(".header_cat").empty();
-//
-//
-//         if (value == 'fruits') {
-//             $(".header_cat").prepend('Фрукты и овощи');
-//         } else if (value == 'juices') {
-//             $(".header_cat").prepend('Соки');
-//         } else if (value == 'water') {
-//             $(".header_cat").prepend('Вода и напитки');
-//         } else if (value == 'baby') {
-//             $(".header_cat").prepend('Детское питание');
-//         } else if (value == 'curd') {
-//             $(".header_cat").prepend('Творог и йогурты');
-//         } else if (value == 'dairy') {
-//             $(".header_cat").prepend('Молочные продукты');
-//         } else if (value == 'canned') {
-//             $(".header_cat").prepend('Консервы');
-//         } else if (value == 'salt') {
-//             $(".header_cat").prepend('Соль и специи');
-//         } else if (value == 'sauces') {
-//             $(".header_cat").prepend('Соусы');
-//         } else if (value == 'breakfasts') {
-//             $(".header_cat").prepend('Завтраки и чипсы');
-//         } else if (value == 'pasta') {
-//             $(".header_cat").prepend('Макароны и крупы');
-//         } else if (value == 'nuts') {
-//             $(".header_cat").prepend('Орехи и масла');
-//         } else if (value == 'frozen') {
-//             $(".header_cat").prepend('Замороженные продукты');
-//         } else if (value == 'cooked') {
-//             $(".header_cat").prepend('Кулинарея');
-//         } else if (value == 'meatdeli') {
-//             $(".header_cat").prepend('Мясные деликатесы');
-//         } else if (value == 'meat') {
-//             $(".header_cat").prepend('Мясо');
-//         } else if (value == 'fish') {
-//             $(".header_cat").prepend('Рыба');
-//         } else if (value == 'cheese') {
-//             $(".header_cat").prepend('Сыры');
-//         } else if (value == 'bread') {
-//             $(".header_cat").prepend('Хлеб');
-//         } else if (value == 'tea') {
-//             $(".header_cat").prepend('Чай и кофе');
-//         } else if (value == 'sweet') {
-//             $(".header_cat").prepend('Сладости');
-//         } else if (value == 'cookies') {
-//             $(".header_cat").prepend('Печенье');
-//         } else if (value == 'choco') {
-//             $(".header_cat").prepend('Шоколад');
-//         }
-//
-//
-//         $(".inmoscow").empty();
-//         $(".header_cat").css('top', '20px');
-//
-//
-//
-//
-//         window[current] = '';
-//         window[current] = $(".products-wrap").html();
-//         $(".products-wrap").empty();
-//         $(".products-wrap").prepend(window[value]);
-//         current = value;
-//     });
-// });
 
 $('#logo').click(function () {
     $(".header_cat").css('top', '14px');
@@ -284,11 +155,6 @@ $( ".cats" ).click(function() {
     });
 });
 
-// var resultInt = 0;
-// $('body').on('click', '.increase_count.buy', function(){
-//     var reg = /\D+/g;
-//     var idProduct = $(this).parents('.col-lg-1.col-md-2.col-sm-3.col-xs-6.product-wrap.product').find('#weight_product').html();
-//     var resultReplace = idProduct.replace(reg, "");
-//     resultInt += parseInt(resultReplace, 10);
-//     $('.cart-total').find('th').html(resultInt + ' грамм');
-// });
+$('#change-shop-form select').on('change', function(){
+    $('#change-shop-form').submit();
+});

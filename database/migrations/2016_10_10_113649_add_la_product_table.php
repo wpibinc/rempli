@@ -13,6 +13,7 @@ class AddLaProductTable extends Migration
     public function up()
     {
         Schema::create('la_products', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('articul');
             $table->string('name');
             $table->string('link');
@@ -22,7 +23,6 @@ class AddLaProductTable extends Migration
             $table->string('image')->nullable();
             $table->string('price_style');
             $table->text('description')->nullable();
-            $table->primary('articul');
             $table->timestamps();
         });
     }

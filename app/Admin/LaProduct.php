@@ -17,17 +17,14 @@ AdminSection::registerModel(LaProduct::class, function (ModelConfiguration $mode
         return $display
             ->setHtmlAttribute('class', 'table-primary')
             ->setColumns([
-                AdminColumn::text('articul')->setLabel('articul'),
+                AdminColumn::text('articul')->setLabel('артикул'),
                 AdminColumn::custom('image')
                     ->setCallback(function ($instance) {
                         return "<img src='{$instance->image}' width='100px'>";
                     })
                     ->setLabel('Изображение'),
-                //AdminColumn::link('objectId')->setLabel('старый ID'),
                 AdminColumn::link('name')->setLabel('Название'),
-                //AdminColumn::text('category.name')->setLabel('Категория')->append(AdminColumn::filter('category_id')),
                 AdminColumn::text('price')->setLabel('Цена'),
-                AdminColumn::text('weight')->setLabel('Вес'),
                 AdminColumn::text('price_style')->setLabel('Кол-во')
             ])->paginate(20);
     });

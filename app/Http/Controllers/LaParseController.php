@@ -9,6 +9,8 @@ use SleepingOwl\Admin\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use App\LaCategory;
 use App\LaProduct;
+use App\Jobs\ParseLaMaree;
+use Carbon\Carbon;
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -19,11 +21,7 @@ use App\LaProduct;
 class LaParseController extends AdminController
 {
     const URL_CATALOG = 'http://shop.lamaree.ru/catalog/';
-    const URL = 'http://shop.lamaree.ru/';
-    
-    protected $productCount = 0;
-    protected $categoryCount = 0;
-    protected $categoryId;
+    protected $laCategoryId;
     
     public function __construct(Request $request)
     {
@@ -39,6 +37,7 @@ class LaParseController extends AdminController
     {
         $doc = hQuery::fromUrl(self::URL_CATALOG);
         $categoryLinks = $doc->find('#catalog > li');
+        $order = 0;
         foreach($categoryLinks as $categoryLink){
             $liClass = $categoryLink->attr('class');
             if(!$liClass){
@@ -55,6 +54,7 @@ class LaParseController extends AdminController
                         'name' => $name,
                         'link' => $link,
                         'parent_id' => $parent,
+                        'order' => $this->categoryCount,
                     ]);
                     $this->categoryCount++;
                 }
@@ -70,43 +70,46 @@ class LaParseController extends AdminController
         foreach($products as $product){
             $product->delete();
         }
+        
         $categories = LaCategory::all();
         if(!count($categories)){
-            return redirect('admin/parser-la')->with('status', 'Необходимо получить категории');
+            return;
         }
         foreach($categories as $category){
-            $this->categoryId = $category->id;
+            $this->laCategoryId = $category->id;
             $doc = hQuery::fromUrl($category->link);
             $ul = $doc->find('#catalog > li.active > ul');
             if($ul){
                 $as = $ul->find('a');
+                $order = 0;
                 foreach($as as $a){
                     $link = $a->attr('href');
                     $name = trim($a->text());
                     $parent = $category->id;
                     $laCategory = LaCategory::where('link', $link)->first();
-                    if($laCategory){
-                        continue;
-                        
+                    if(!$laCategory){
+                        LaCategory::create([
+                            'name' => $name,
+                            'link' => $link,
+                            'parent_id' => $parent,
+                            'order' => $order,
+                        ]);
+                        $order++;
                     }
-                    LaCategory::create([
-                        'name' => $name,
-                        'link' => $link,
-                        'parent_id' => $parent,
-                    ]);
-                    $this->categoryCount++;
+                    
                     $subDoc = hQuery::fromUrl($link);
-                    $this->getProductsFormLink($subDoc);
+                    $this->getProductsFromLink($subDoc);
                 }
             }else{
-                $this->getProductsFormLink($doc);
+                $this->getProductsFromLink($doc);
             }
         }
         
-        return redirect('admin/parser-la')->with('status', 'Добавлено '.$this->productCount.'  товаров, '.$this->categoryCount.' категорий');
+        
+        return redirect('admin/parser-la')->with('status', 'Продукты получены');
     }
     
-    protected function getProductsFormLink($doc)
+    protected function getProductsFromLink($doc)
     {
         $products = $doc->find('.catalog .product_holder > .product_grid a');
         if(!$products){
@@ -152,7 +155,6 @@ class LaParseController extends AdminController
             return;
         }
         $name = trim($name->text());
-        $categoryId = $this->categoryId;
         $originalPrice = $doc->find('#content #article_price #left_side_right > p.weight');
         if(!$originalPrice){
             $originalPrice = 0;
@@ -163,6 +165,9 @@ class LaParseController extends AdminController
             return;
         }
         $price = (float) trim($price->text());
+        if(!$price){
+            $price = $originalPrice;
+        }
         $image = $doc->find('#content > img');
         if($image){
             $image = $image->attr('src');
@@ -179,14 +184,13 @@ class LaParseController extends AdminController
             'articul' => $articul,
             'name' => $name,
             'link' => $link,
-            'la_category_id' => $this->categoryId,
+            'la_category_id' => $this->laCategoryId,
             'original_price' => $originalPrice,
             'price' => $price,
             'image' => $image,
             'price_style' => $priceStyle,
             'description' => $description,
         ]);
-        $this->productCount++;
     }
     
     protected function pagination($doc)
@@ -201,7 +205,7 @@ class LaParseController extends AdminController
         }
         $nextLink = $nextLink->attr('href');
         $nextDoc = hQuery::fromUrl($nextLink);
-        $this->getProductsFormLink($nextDoc);
+        $this->getProductsFromLink($nextDoc);
         
     }
 }

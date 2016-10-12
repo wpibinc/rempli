@@ -25,7 +25,7 @@ class Category extends Model
         return $this->hasMany('\App\AvProduct', 'category_id', 'id');
     }
     
-    public function laCategories()
+    public function lacategories()
     {
         return $this->belongsToMany(LaCategory::class, 'category_lacategory', 'category_id', 'lacategory_id');
     }

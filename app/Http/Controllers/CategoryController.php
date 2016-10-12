@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Http\Request;
 use DB;
+use App\LaCategory;
+use App\LaProduct;
 
 class CategoryController extends BaseController
 {
@@ -53,8 +55,63 @@ class CategoryController extends BaseController
         {
             abort(404);
         }
-        global $id;
+        $shop = session('shop');
+        //global $id;
         $id = (int) $request->input('id');
+        $json;
+        switch($shop){
+            case 'La': 
+                $json = $this->getLaCategories($id);
+                break;
+            default:
+                $json = $this->getAvCategories($id);
+            break;
+        }
+        
+        
+        return response()->json($json);
+    }
+    
+    public function getAvCategory(Request $request)
+    {
+        if(!$request->isXmlHttpRequest())
+        {
+            abort(404);
+        }
+        $id = $request->input('id');
+        $products = \App\AvCategory::find($id)->products;
+        $json = array();
+        if(!empty($products)){
+            foreach($products as $product){
+                $price = $product->price;
+                $amount = $product->price_style;
+                
+                if($product->price_style == '1 кг'){
+                    $price = $product->price/10;
+                    $amount = '100 гр';
+                }
+                $json[] = array(
+                    'objectId' => $product->id,
+                    'cvalues' => explode(";", $product->cvalues),
+                    'ctitles' => explode(";", $product->ctitles),
+                    'img_sm' => 'http://av.ru' . $product->image,
+                    'category' => $product->category_id,
+                    'product_name' => $product->name,
+                    'price' => $price,
+                    'amount' => 'за ' . $amount,
+                    'weight' => $product->original_typical_weight,
+                    'description' => $product->description,
+                    'updatedAt' => $product->updated_at,
+                    'shop' => 'Av'
+                );
+            }
+        }
+        
+        return response()->json($json);
+    }
+    
+    protected function getAvCategories($id)
+    {
         $category = \App\Category::with('avProducts', 'products', 'avcategories')->where('category_id', '=', $id)->first();
         $category->getRelations();
         $json = array(
@@ -69,7 +126,7 @@ class CategoryController extends BaseController
                 );
             }
         }
-        
+
         if(!empty($category->products)){
             foreach($category->products as $product){
                 $price = $product->price;
@@ -125,44 +182,42 @@ class CategoryController extends BaseController
                 );
             }
         }
-        return response()->json($json);
+        
+        return $json;
     }
     
-    public function getAvCategory(Request $request)
+    protected function getLaCategories($id)
     {
-        if(!$request->isXmlHttpRequest())
-        {
-            abort(404);
-        }
-        $id = $request->input('id');
-        $products = \App\AvCategory::find($id)->products;
-        $json = array();
-        if(!empty($products)){
-            foreach($products as $product){
-                $price = $product->price;
-                $amount = $product->price_style;
-                
-                if($product->price_style == '1 кг'){
-                    $price = $product->price/10;
-                    $amount = '100 гр';
-                }
-                $json[] = array(
+        $json = array(
+            'avCategories' => array(),
+            'products' => array(),
+        );
+        $category = \App\Category::where('category_id', '=', $id)->first();
+        foreach($category->lacategories as $laCat){
+            $json['avCategories'][] = array(
+                'id' => $laCat->id,
+                'name' => $avCateg->name
+            );
+            
+            foreach($laCat->products as $product){
+                $json['products'][] = array(
                     'objectId' => $product->id,
-                    'cvalues' => explode(";", $product->cvalues),
-                    'ctitles' => explode(";", $product->ctitles),
-                    'img_sm' => 'http://av.ru' . $product->image,
-                    'category' => $product->category_id,
+                    'cvalues' => '',
+                    'ctitles' => '',
+                    'img_sm' => $product->image,
+                    'category' => $id,
                     'product_name' => $product->name,
-                    'price' => $price,
-                    'amount' => 'за ' . $amount,
-                    'weight' => $product->original_typical_weight,
+                    'price' => $product->price,
+                    'amount' => $product->price_style,
+                    'weight' => '',
                     'description' => $product->description,
                     'updatedAt' => $product->updated_at,
-                    'shop' => 'Av'
+                    'shop' => $product->shop
                 );
             }
+            
+            
         }
-        
-        return response()->json($json);
+        return $json;
     }
 }

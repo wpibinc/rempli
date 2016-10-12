@@ -38,8 +38,12 @@ AdminSection::registerModel(Category::class, function (ModelConfiguration $model
                                 ->setModelForOptions(new \App\AvCategory)
                                 ->setDisplay('name'),
                                 //->required(),
-                             AdminFormElement::multiselect('lacategories', 'Категории АВ')
+                             AdminFormElement::multiselect('lacategories', 'Категории La maree')
                                 ->setModelForOptions(new \App\LaCategory)
+                                ->setLoadOptionsQueryPreparer(function($item, $query) {
+                                    return $query
+                                        ->where('parent_id', 0);
+                               })
                                 ->setDisplay('name'),
                         ];
                     }
