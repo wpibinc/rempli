@@ -1673,3 +1673,17 @@ td #ex2Slider{
 	top:-100px;
 	z-index: -10;
 }
+#change-shop-form{
+	display: inline-block;
+}
+#change-shop-form select{
+	border:none;
+	background-color: transparent;
+	width: 140px;
+	margin-top: 2px;
+	margin-left: 30px;
+	font-size: 17px;
+}
+option {
+	color: #000;
+}
