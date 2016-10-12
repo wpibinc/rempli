@@ -71,7 +71,7 @@ class LaParseController extends AdminController
             $product->delete();
         }
         
-        $categories = LaCategory::all();
+        $categories = LaCategory::where('parent_id', 0)->get();
         if(!count($categories)){
             return;
         }

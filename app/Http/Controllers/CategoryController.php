@@ -196,7 +196,7 @@ class CategoryController extends BaseController
         foreach($category->lacategories as $laCat){
             $json['avCategories'][] = array(
                 'id' => $laCat->id,
-                'name' => $avCateg->name
+                'name' => $laCat->name
             );
             
             foreach($laCat->products as $product){
