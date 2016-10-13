@@ -29,33 +29,25 @@ class SubscriptionController extends Controller
     {
         if($request->input_dop == 1) {
             $subscription = Subscription::find($request->id);
+            $subscription->extra_deliveries = $request->dop_quantity;
+            $subscription->extra_deliveries_price = $request->price;
             if($subscription->is_free == 0) {
                 $subscription->current_quantity += $request->dop_quantity;
-                $subscription->price += $request->price;
-                try {
-                    $subscription->save();
-                } catch (\Exception $e) {
-                    return $e;
-                }
             } else {
                 $long_promocodes = LongPromocode::where('subscription_id', $subscription->id)
                     ->where('end_subscription', '>', Carbon::now())->first();
                 $long_promocodes->used_per_month -= $request->dop_quantity;
-                $subscription->price += $request->price;
-
                 try {
                     $long_promocodes->save();
                 } catch (\Exception $e) {
                     return $e;
                 }
-
-                try {
-                    $subscription->save();
-                } catch (\Exception $e) {
-                    return $e;
-                }
             }
-
+            try {
+                $subscription->save();
+            } catch (\Exception $e) {
+                return $e;
+            }
             return response()->json(['status' => true, 'msg' => 'Доп. Доставки успешно куплены.']);
         }
 
