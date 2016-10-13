@@ -19,6 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->string('title');
             $table->decimal('price',10,2);
             $table->boolean('is_paid')->default(0);
+            $table->dateTime('last_pay_day');
             $table->timestamps();
         });
     }

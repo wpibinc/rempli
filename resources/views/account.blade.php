@@ -11,7 +11,7 @@
         <ul class="col-md-2">
             <li><i class="fa fa-user" aria-hidden="true"></i> Учетная запись <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-list-alt" aria-hidden="true"></i> История заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
-            <li><i class="fa fa-usd" aria-hidden="true"></i> Страница Счета  <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
+            <li><i class="fa fa-usd" aria-hidden="true"></i> Счета <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-phone" aria-hidden="true"></i> Адреса <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-bullhorn" aria-hidden="true"></i> Подписка <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-barcode" aria-hidden="true"></i> Промо-коды <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
