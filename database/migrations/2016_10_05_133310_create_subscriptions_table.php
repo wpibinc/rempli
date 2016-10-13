@@ -17,13 +17,15 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('current_quantity')->nullable();
             $table->integer('total_quantity')->nullable();
-            $table->integer('price')->nullable();
+            $table->decimal('price',10,2)->nullable();
             $table->string('promocode')->nullable();
             $table->string('duration')->nullable();
             $table->dateTime('start_subscription')->nullable();
             $table->dateTime('end_subscription')->nullable();
             $table->tinyInteger('auto_subscription')->nullable()->default(0);
             $table->tinyInteger('is_free')->nullable()->default(0);
+            $table->integer('extra_deliveries')->nullable();
+            $table->decimal('extra_deliveries_price',10,2)->nullable();
             $table->timestamps();
         });
     }
