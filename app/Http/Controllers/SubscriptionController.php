@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Invoice;
 use App\LongPromocode;
 use App\Subscription;
 use Carbon\Carbon;
@@ -29,8 +30,8 @@ class SubscriptionController extends Controller
     {
         if($request->input_dop == 1) {
             $subscription = Subscription::find($request->id);
-            $subscription->extra_deliveries = $request->dop_quantity;
-            $subscription->extra_deliveries_price = $request->price;
+            $subscription->extra_deliveries_total += $request->dop_quantity;
+            $subscription->extra_deliveries_price += $request->price;
             if($subscription->is_free == 0) {
                 $subscription->current_quantity += $request->dop_quantity;
             } else {
@@ -48,7 +49,17 @@ class SubscriptionController extends Controller
             } catch (\Exception $e) {
                 return $e;
             }
-            return response()->json(['status' => true, 'msg' => 'Доп. Доставки успешно куплены.']);
+
+            Invoice::create([
+                'user_id' => $request->user_id,
+                'subscription_id' => $request->id,
+                'title' => 'Дополнительные доставки',
+                'price' => $request->price,
+                'last_pay_day' => Carbon::now()->addDay(3),
+                'extra_deliveries' => $request->dop_quantity
+            ]);
+
+            return response()->json(['status' => true, 'msg' => 'Дополнительные доставки успешно куплены.']);
         }
 
         $last_subscription = Subscription::where('user_id', $request->user_id)
@@ -56,16 +67,23 @@ class SubscriptionController extends Controller
                 ->orderBy('end_subscription', 'desc')->first();
 
         $subscription = Subscription::create($request->all());
-
         $subscription->start_subscription = $last_subscription->end_subscription;
-
         $new_start_date = $last_subscription->end_subscription;
         $subscription->end_subscription = Carbon::parse($new_start_date)->addMonths(1);
+
         try {
             $subscription->save();
         } catch (\Exception $e) {
             return $e;
         }
+
+        Invoice::create([
+            'user_id' => $request->user_id,
+            'subscription_id' => $subscription->id,
+            'title' => 'Продление подписки',
+            'price' => $request->price,
+            'last_pay_day' => $last_subscription->end_subscription
+        ]);
 
         return response()->json(['status' => true, 'msg' => 'Подписка изменена.']);
     }

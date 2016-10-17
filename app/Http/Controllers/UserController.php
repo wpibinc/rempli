@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Invoice;
 use App\LongPromocode;
 use App\Subscription;
 use Carbon\Carbon;
@@ -24,20 +25,36 @@ class UserController extends Controller
     public function myAccount(Request $request)
     {
         $user = Auth::user();
-//        $subscriptions = $user->subscriptions()->where('current_quantity', '>', 0)->first();
+        $time_to_pay = null;
         $subscriptions = $user->subscriptions()->where('end_subscription', '>', Carbon::now())->first();
         if(isset($subscriptions)) {
             $long_promocode = LongPromocode::where('subscription_id', $subscriptions->id)
                 ->where('end_subscription', '>', Carbon::now())->first();
         }
+
+        if(isset($subscriptions) && $subscriptions->is_free == '0') {
+            $next_subscription = $user->subscriptions()->where('end_subscription', '>', Carbon::now())
+                ->where('start_subscription', $subscriptions->end_subscription)->first();
+            if(isset($next_subscription)) {
+                $invoice = Invoice::where('is_paid', '0')
+                    ->where('subscription_id', $next_subscription->id)
+                    ->where('last_pay_day', $next_subscription->start_subscription)->first();
+
+                if (isset($invoice) && Carbon::now()->addDay(3) > $invoice->last_pay_day) {
+                    $time_to_pay = 'У Вас имеются неоплаченные счета';
+                }
+            }
+        }
+
         $orders = Order::where('user_id', $user->id)->simplePaginate(15);
         $listProducts = ListProduct::where('user_id', $user->id)->simplePaginate(15);
         $adresses = $user->adresses;
+        $invoices = $user->invoices()->where('is_paid', '0')->get();
         if(isset($long_promocode)) {
             $current_quantity = $subscriptions->current_quantity - $long_promocode->used_per_month;
-            return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions, 'long_promocode' => $long_promocode, 'current_quantity' => $current_quantity]);
+            return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions, 'long_promocode' => $long_promocode, 'current_quantity' => $current_quantity, 'invoices' => $invoices]);
         }
-        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions]);
+        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions, 'time_to_pay' => $time_to_pay, 'invoices' => $invoices]);
     }
     
     public function changeInfo(Request $request)
