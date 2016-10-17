@@ -37,7 +37,14 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
                 AdminColumn::link('name')->setLabel('Имя'),
                 AdminColumn::link('phone')->setLabel('Телефон'),
                 AdminColumn::datetime('date')->setLabel('Дата')->setFormat('d.m.Y H:m'),
-//                AdminColumn::text('status')->setLabel('Статус'),
+                AdminColumn::custom()->setLabel('Магазин')->setCallback(function(Order $model){
+                    switch($model->shop){
+                        case 'La': return 'La Maree';
+                            break;
+                        default: return 'Азбука вкуса';
+                            break;
+                    }
+                }),
             ]
         );
 

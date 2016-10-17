@@ -18,6 +18,7 @@ class OrderController extends BaseController
             $adressChecked = $request->input('addressChecked');
             $user = Auth::user();
             $order['user_id'] = $user->id;
+            $order['shop'] = session('shop');
             $items = request()->only('items');
             if(!empty($adressChecked)){
                 $adress = Adress::find($adressChecked);
@@ -34,7 +35,6 @@ class OrderController extends BaseController
                 $adress->user_id = $user->id;
                 $adress->save();
             }
-            
             $order= Order::create($order);
             $order->items()->createMany($items['items']);
     

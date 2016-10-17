@@ -247,16 +247,7 @@
                         @foreach($listProducts as $product)
                         <?php 
                            switch($product->shop){
-                                case 'Av':
-                                    $title = $product->product->name;
-                                    $img = 'http://av.ru'.$product->product->image;
-                                    $price = $product->product->price;
-                                    if($product->product->price_style == '1 кг'){
-                                        $price = $product->product->price/10;
-                                    }
-                                    $weight = $product->product->original_typical_weight;
-                                break;
-                                default:
+                                case 'La':
                                     $title = $product->product->product_name;
                                     $img = $product->product->img;
                                     $price = $product->product->price;
@@ -264,6 +255,15 @@
                                         $price = $product->product->price/10;
                                     }
                                     $weight = $product->product->weight;
+                                break;
+                                default:
+                                    $title = $product->product->name;
+                                    $img = 'http://av.ru'.$product->product->image;
+                                    $price = $product->product->price;
+                                    if($product->product->price_style == '1 кг'){
+                                        $price = $product->product->price/10;
+                                    }
+                                    $weight = $product->product->original_typical_weight;
                                 break;
                             }
                         ?>

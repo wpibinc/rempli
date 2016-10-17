@@ -57,9 +57,7 @@
 <header class="header">
     <div class="topline col-md-12">
         <a href="/" class="logo"><img src="img/first.png" alt="rempli"></a>
-        <?php 
-        
-        ?>
+        @if($subscription)
         <form id='change-shop-form' action="" method="get">
             <select name="shop">
                 @if(session('shop') == 'Av')
@@ -74,7 +72,7 @@
                 @endif
             </select>
         </form>
-       
+        @endif
         <a href="#" id="dd_btn">
             <button class="cart-btn"><img src="img/cart.png">Корзина <span id="cart-number">0</span></button>
         </a>

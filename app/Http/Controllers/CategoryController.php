@@ -79,33 +79,15 @@ class CategoryController extends BaseController
             abort(404);
         }
         $id = $request->input('id');
-        $products = \App\AvCategory::find($id)->products;
+        $shop = session('shop');
         $json = array();
-        if(!empty($products)){
-            foreach($products as $product){
-                $price = $product->price;
-                $amount = $product->price_style;
-                
-                if($product->price_style == '1 кг'){
-                    $price = $product->price/10;
-                    $amount = '100 гр';
-                }
-                $json[] = array(
-                    'objectId' => $product->id,
-                    'cvalues' => explode(";", $product->cvalues),
-                    'ctitles' => explode(";", $product->ctitles),
-                    'img_sm' => 'http://av.ru' . $product->image,
-                    'category' => $product->category_id,
-                    'product_name' => $product->name,
-                    'price' => $price,
-                    'amount' => 'за ' . $amount,
-                    'weight' => $product->original_typical_weight,
-                    'description' => $product->description,
-                    'updatedAt' => $product->updated_at,
-                    'shop' => 'Av'
-                );
-            }
+        switch($shop){
+            case 'La': $json = $this->getLaSubCategories($id);
+                break;
+            default: $json = $this->getAvSubCategories($id);
+                break;
         }
+        
         
         return response()->json($json);
     }
@@ -218,6 +200,68 @@ class CategoryController extends BaseController
             
             
         }
+        return $json;
+    }
+    
+    protected function getLaSubCategories($id)
+    {
+        $products = LaCategory::find($id)->products;
+        $json = array();
+        if(!empty($products)){
+            foreach($products as $product){
+                $price = $product->price;
+                $amount = $product->price_style;
+                $category = $product->laCategory->categories->first();
+                $json[] = array(
+                    'objectId' => $product->id,
+                    'cvalues' => '',
+                    'ctitles' => '',
+                    'img_sm' => $product->image,
+                    'category' => $category->id,
+                    'product_name' => $product->name,
+                    'price' => $price,
+                    'amount' => $amount,
+                    'weight' => '',
+                    'description' => $product->description,
+                    'updatedAt' => $product->updated_at,
+                    'shop' => 'La'
+                );
+            }
+        }
+        
+        return $json;
+    }
+    
+    protected function getAvSubCategories($id)
+    {
+        $products = \App\AvCategory::find($id)->products;
+        $json = array();
+        if(!empty($products)){
+            foreach($products as $product){
+                $price = $product->price;
+                $amount = $product->price_style;
+                
+                if($product->price_style == '1 кг'){
+                    $price = $product->price/10;
+                    $amount = '100 гр';
+                }
+                $json[] = array(
+                    'objectId' => $product->id,
+                    'cvalues' => explode(";", $product->cvalues),
+                    'ctitles' => explode(";", $product->ctitles),
+                    'img_sm' => 'http://av.ru' . $product->image,
+                    'category' => $product->category_id,
+                    'product_name' => $product->name,
+                    'price' => $price,
+                    'amount' => 'за ' . $amount,
+                    'weight' => $product->original_typical_weight,
+                    'description' => $product->description,
+                    'updatedAt' => $product->updated_at,
+                    'shop' => 'Av'
+                );
+            }
+        }
+        
         return $json;
     }
 }

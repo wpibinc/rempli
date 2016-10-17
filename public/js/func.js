@@ -156,5 +156,7 @@ $( ".cats" ).click(function() {
 });
 
 $('#change-shop-form select').on('change', function(){
+    sessionStorage.clear();
+    localStorage.clear();
     $('#change-shop-form').submit();
 });

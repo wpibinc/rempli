@@ -11,9 +11,29 @@ use Auth;
 use DB;
 use App\LaCategory;
 use App\LaProduct;
+use Illuminate\Contracts\Auth\Guard;
+use View;
+use Carbon\Carbon;
 
 class MainController extends Controller
 {
+    public function __construct(Guard $auth)
+    {
+        $userId = $auth->id();
+        $subscriptions = \App\Subscription::where('user_id', $userId)->get();
+        $now = Carbon::now();
+        $haveSubs = false;
+        foreach($subscriptions as $subsciption){
+            $start = new Carbon($subsciption->start_subscription);
+            $end = new Carbon($subsciption->end_subscription);
+            if($now->between($start, $end)){
+                $haveSubs = true;
+            }
+        }
+        
+        View::share('subscription', $haveSubs);
+    }
+    
     public function index()
     {
         return view('index');
@@ -78,6 +98,24 @@ class MainController extends Controller
         if(!$term){
             abort(404);
         }
+        
+        $shop = session('shop');
+        $json = array();
+        switch($shop){
+            case 'La':
+                $json = $this->laAutocompleteSearch($term);
+                break;
+            default:
+                $json = $this->avAutocompleteSearch($term);
+                break;
+        }
+        
+        return response()->json($json);
+    }
+    
+    protected function avAutocompleteSearch($term)
+    {
+        $json = array();
         $avProducts = AvProduct::where('name', 'like', $term.'%')
                 ->orderBy('updated_at')
                 ->take(3)
@@ -86,7 +124,7 @@ class MainController extends Controller
                 ->orderBy('updated_at')
                 ->take(3)
                 ->get();
-        $json = array();
+        
         foreach($avProducts as $product){
             $json[] = array(
                 'label' => $product->name,
@@ -112,7 +150,33 @@ class MainController extends Controller
                 'shop' => ''
             );
         }
-        return response()->json($json);
+        
+        return $json;
+    }
+    
+    protected function laAutocompleteSearch($term)
+    {
+        $json = array();
+        $products = LaProduct::where('name', 'like', $term.'%')
+                ->orderBy('updated_at')
+                ->take(3)
+                ->get();
+        
+        foreach($products as $product){
+            $category = $product->laCategory->categories->first();
+            $categId = $category?$category->id:'';
+            $json[] = array(
+                'label' => $product->name,
+                'image' => $product->image,
+                'id' => $product->id,
+                'price' => $product->price,
+                'weight' => '',
+                'category' => $categId,
+                'shop' => $product->shop,
+            );
+        }
+        
+        return $json;
     }
     
     public function mainSearch(Request $request)
@@ -124,7 +188,7 @@ class MainController extends Controller
         $shop = session('shop');
         $json;
         switch($shop){
-            case 'La': $json = $this->avSearch($word);
+            case 'La': $json = $this->laSearch($word);
                 break;
             default:
                 $json = $this->avSearch($word);
@@ -216,14 +280,17 @@ class MainController extends Controller
         if(!count($products)){
             return response()->json(['success' => false]);
         }
-
+        
+        
         foreach($products as $product){
+            $category = $product->laCategory->categories->first();
+            $categId = $category ? $categId = $category->id : '';
             $json['products'][] = array(
                 'objectId' => $product->id,
                 'cvalues' => '',
                 'ctitles' => '',
                 'img_sm' => $product->image,
-                'category' => $id,
+                'category' => $categId,
                 'product_name' => $product->name,
                 'price' => $product->price,
                 'amount' => $product->price_style,

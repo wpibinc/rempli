@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Mail;
 use Illuminate\Http\Request;
+use View;
 
 class AuthController extends Controller
 {
@@ -42,6 +43,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        View::share('subscription', null);
     }
 
     /**
