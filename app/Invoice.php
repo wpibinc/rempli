@@ -5,16 +5,16 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Schema;
 
-class Subscription extends Authenticatable
+class Invoice extends Authenticatable
 {
-    protected $table = 'subscriptions';
+    protected $table = 'invoices';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id', 'current_quantity', 'total_quantity', 'price', 'promocode', 'duration', 'start_promocode', 'promocode', 'auto_subscription', 'is_free', 'extra_deliveries', 'extra_deliveries_price'
+        'user_id', 'order_id', 'subscription_id', 'title', 'price', 'is_paid', 'last_pay_day', 'extra_deliveries'
     ];
 
     public function user()

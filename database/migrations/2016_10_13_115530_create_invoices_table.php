@@ -14,12 +14,14 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id');
-            $table->integer('subscription_id');
+            $table->integer('user_id')->nullable();
+            $table->integer('order_id')->nullable();
+            $table->integer('subscription_id')->nullable();
             $table->string('title');
             $table->decimal('price',10,2);
             $table->boolean('is_paid')->default(0);
-            $table->dateTime('last_pay_day');
+            $table->dateTime('last_pay_day')->nullable();
+            $table->integer('extra_deliveries')->nullable();
             $table->timestamps();
         });
     }
