@@ -51,10 +51,6 @@
                     <div type="text" class="col-sm-8 col-md-6 totalPay" id="payTotal"></div>
                 </div>
 
-
-
-
-
             </form>
 
             <nav>

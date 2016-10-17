@@ -11,7 +11,7 @@
         <ul class="col-md-2">
             <li><i class="fa fa-user" aria-hidden="true"></i> Учетная запись <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-list-alt" aria-hidden="true"></i> История заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
-            <li><i class="fa fa-usd" aria-hidden="true"></i> Счета <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
+            <li><i class="fa fa-usd" aria-hidden="true"></i> Счета ({{$invoices->count()}})<i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-phone" aria-hidden="true"></i> Адреса <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-bullhorn" aria-hidden="true"></i> Подписка <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-barcode" aria-hidden="true"></i> Промо-коды <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
@@ -85,17 +85,25 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
-                            <th>номер счета</th>
-                            <th>дата выставления счета</th>
-                            <th>назначение</th>
+                            <th>Номер счета</th>
+                            <th>Дата выставления счета</th>
+                            <th>Оплатить до</th>
+                            <th>Назначение</th>
+                            <th>Стоимость</th>
                             <th></th>
                         </tr>
                         <?php $i = 0; ?>
-                        @foreach($orders as $order)
+                        @foreach($invoices as $invoice)
                             <tr>
                                 <td><?php echo ++$i ?></td>
-                                <td><a class='get-order-details' href='javascript:void(0)'>{{$order->cost}} руб</a></td>
-                                <td>{{$order->status}}</td>
+                                <td>{{\Carbon\Carbon::parse($invoice->created_at)->format('Y-m-d H:i')}}</td>
+                                <td>{{\Carbon\Carbon::parse($invoice->last_pay_day)->format('Y-m-d H:i')}}</td>
+                                @if($invoice->title == 'Дополнительные доставки')
+                                    <td>{{$invoice->title .' ('. $invoice->extra_deliveries . ')'}}</td>
+                                @else
+                                    <td>{{$invoice->title}}</td>
+                                @endif
+                                <td>{{$invoice->price}} руб.</td>
                                 <td><button type="button" class="btn buy-bill">оплатить</button></td>
                             </tr>
                         @endforeach
@@ -226,8 +234,11 @@
                         </tbody>
                     </table>
                     @endif
+                    @if($time_to_pay)
+                        <div style="color: red;">{{$time_to_pay}}</div>
+                        <button class="invoice_page">Оплатить</button>
+                    @endif
                 </div>
-
             </div>
             <div class='promoCode wrapper-acaunt'>
                 <div class="message"></div>
@@ -663,6 +674,11 @@
                     return false;
                 }
             });
+        });
+    </script>
+    <script>
+        $('.invoice_page').on('click',function () {
+            $('ul li[data-page="2"]').trigger('click');
         });
     </script>
 </div>
