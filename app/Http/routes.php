@@ -16,6 +16,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('search', 'MainController@mainSearch');
 
+    Route::get('check-alert-invoice', 'MainController@checkAlertInvoice');
+
     Route::get('/enter', function () {
         return view('auth.enter');
     });

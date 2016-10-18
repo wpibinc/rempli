@@ -445,7 +445,7 @@ $('#orderBtn').on({
             dataType: 'json',
             success: function(res){
                 if(res.success){
-                    
+                    alert('123')
                     return false;
                 }else{
                     if (totalCost < 200) {

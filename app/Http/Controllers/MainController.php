@@ -24,13 +24,6 @@ class MainController extends Controller
         $userId = $auth->id();
         $haveSubs = false;
 
-        $invoice_alert = false;
-        $late_invoice = Invoice::where('is_paid', '0')
-            ->where('last_pay_day', '<', Carbon::now())->first();
-        if(isset($late_invoice)) {
-            $invoice_alert = true;
-        }
-
         $subscription = \App\Subscription::where('user_id', $userId)
                 ->where('end_subscription', '>', $now)
                 ->first();
@@ -326,6 +319,17 @@ class MainController extends Controller
         }
         
         return $json;
+    }
+
+    public function checkAlertInvoice()
+    {
+
+        $late_invoice = Invoice::where('is_paid', '0')
+            ->where('last_pay_day', '<', Carbon::now())->first();
+        if(isset($late_invoice)) {
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false]);
     }
 }
 
