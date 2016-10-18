@@ -54,6 +54,11 @@
 <a href="#" class="ok-popup btn btn-warning">Согласен</a>
 <a href="#" class="close-popup btn btn-default">Отмена</a>
 </div>
+<div class="popup-oplata-false col-md-12">
+    <p class="alcogol">У вас есть неоплаченные счета</p>
+    <a href="my-account?section=subscription" class="ok-popup btn btn-warning">Оплатить</a>
+</div>
+<div class="popup-oplata-false-bg"></div>
 <header class="header">
     <div class="topline col-md-12">
         <a href="/" class="logo"><img src="img/first.png" alt="rempli"></a>

@@ -1,3 +1,4 @@
+
 Parse.initialize("mmcrSN69TR6IR6e6uo2pzlhpR2amZNkHl4b0GVh1", "ALR6Z7SnB2mWr2SBkZ9cnQX8dgqJph0F47b1aPjl");
 
 function handleParseError(err) {
@@ -444,7 +445,8 @@ $('#orderBtn').on({
             dataType: 'json',
             success: function(res){
                 if(res.success){
-                    alert('123')
+                    $('.popup-oplata-false').addClass('active-popup');
+					$('.popup-oplata-false-bg').addClass('active-popup');
                     return false;
                 }else{
                     if (totalCost < 200) {
