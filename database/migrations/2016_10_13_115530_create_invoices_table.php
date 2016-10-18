@@ -22,6 +22,7 @@ class CreateInvoicesTable extends Migration
             $table->boolean('is_paid')->default(0);
             $table->dateTime('last_pay_day')->nullable();
             $table->integer('extra_deliveries')->nullable();
+            $table->boolean('is_sent')->default(0);
             $table->timestamps();
         });
     }
