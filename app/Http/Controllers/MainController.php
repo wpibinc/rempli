@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Invoice;
 use Illuminate\Http\Request;
 use App\AvProduct;
 use App\Product;
@@ -22,21 +23,30 @@ class MainController extends Controller
         $now = Carbon::now();
         $userId = $auth->id();
         $haveSubs = false;
+
+        $invoice_alert = false;
+        $late_invoice = Invoice::where('is_paid', '0')
+            ->where('last_pay_day', '<', Carbon::now())->first();
+        if(isset($late_invoice)) {
+            $invoice_alert = true;
+        }
+
         $subscription = \App\Subscription::where('user_id', $userId)
                 ->where('end_subscription', '>', $now)
                 ->first();
+
         if($subscription){
             if($subscription->auto_subscription == 0){
                 $haveSubs = true;
-            }else{
-                $subs = $subscription->invoices->first();
+            }elseif ($subscription->is_free){
+                $haveSubs = true;
+            } else {
+                $subs = $subscription->invoices()->where('title', 'Продление подписки')->first();
                 if($subs->is_paid){
                     $haveSubs = true;
                 }
             }
         }
-        
-        
 //        foreach($subscriptions as $subsciption){
 //            $start = new Carbon($subsciption->start_subscription);
 //            $end = new Carbon($subsciption->end_subscription);

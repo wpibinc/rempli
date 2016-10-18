@@ -65,6 +65,9 @@ class OrderController extends BaseController
         }
 
         $subscription = $user->subscriptions()->where('end_subscription', '>', Carbon::now())->first();
+        $late_invoices = $user->invoices()
+            ->where('last_pay_day','<', Carbon::now())
+            ->where('is_paid', '0')->first();
         if (isset($subscription)) {
             if($subscription->is_free == 0 && $subscription->current_quantity > 0) {
                 $subscription->current_quantity--;
@@ -82,6 +85,9 @@ class OrderController extends BaseController
         }
         if($user->free_delivery_manually){
             $freeDelivery = true;
+        }
+        if(isset($late_invoices)) {
+            $freeDelivery = false;
         }
         return view('payment', ['freeDelivery' => $freeDelivery]);
     }
