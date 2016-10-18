@@ -19,17 +19,31 @@ class MainController extends Controller
 {
     public function __construct(Guard $auth)
     {
-        $userId = $auth->id();
-        $subscriptions = \App\Subscription::where('user_id', $userId)->get();
         $now = Carbon::now();
+        $userId = $auth->id();
         $haveSubs = false;
-        foreach($subscriptions as $subsciption){
-            $start = new Carbon($subsciption->start_subscription);
-            $end = new Carbon($subsciption->end_subscription);
-            if($now->between($start, $end)){
+        $subscription = \App\Subscription::where('user_id', $userId)
+                ->where('end_subscriptions', '>', $now)
+                ->first();
+        if($subscription){
+            if($subscription->auto_subscription == 0){
                 $haveSubs = true;
+            }else{
+                $subs = $subscription->invoices->first();
+                if($subs->is_paid){
+                    $haveSubs = true;
+                }
             }
         }
+        
+        
+//        foreach($subscriptions as $subsciption){
+//            $start = new Carbon($subsciption->start_subscription);
+//            $end = new Carbon($subsciption->end_subscription);
+//            if($now->between($start, $end)){
+//                $haveSubs = true;
+//            }
+//        }
         
         View::share('subscription', $haveSubs);
     }

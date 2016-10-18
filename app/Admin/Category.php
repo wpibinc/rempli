@@ -16,7 +16,7 @@ AdminSection::registerModel(Category::class, function (ModelConfiguration $model
             AdminColumn::text('alias')->setLabel('Псевдоним'),
             AdminColumn::text('img')->setLabel('Фотография'),
             AdminColumn::text('email')->setLabel('E-mail'),
-            AdminColumn::count('orders')->setLabel('Заказы'),
+           // AdminColumn::count('orders')->setLabel('Заказы'),
         ]);
         //return AdminDisplay::tree()->setValue('name');
     });

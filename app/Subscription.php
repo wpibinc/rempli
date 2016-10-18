@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Schema;
+use App\Invoice;
 
 class Subscription extends Authenticatable
 {
@@ -28,5 +29,10 @@ class Subscription extends Authenticatable
     public function getColumnNames()
     {
         return Schema::getColumnListing($this->table);
+    }
+    
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
     }
 }

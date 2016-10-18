@@ -19,6 +19,10 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
             [
                 AdminColumn::text('id')->setLabel('ID'),
                 AdminColumn::custom()->setLabel('Статус')->setCallback(function (Order $model) {
+                    $currentUser = \Auth::user();
+                    $button = '';
+                 //   if($currentUser)
+                  //  var_dump($currentUser->id);
                     switch ($model->status) {
                         case 'новый':
                             return "<span class=\"label label-info\">$model->status</span>";

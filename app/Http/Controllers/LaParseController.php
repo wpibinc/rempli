@@ -22,6 +22,7 @@ class LaParseController extends AdminController
 {
     const URL_CATALOG = 'http://shop.lamaree.ru/catalog/';
     protected $laCategoryId;
+    protected $categoryCount = 0;
     
     public function __construct(Request $request)
     {
