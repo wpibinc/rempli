@@ -438,7 +438,7 @@ $('#orderBtn').on({
         if(isAlcohol&&!confirmAlcohol){
             return true;
         }
-        
+        var self = this;
         $.ajax({
             url: '/check-alert-invoice',
             method: 'get',
@@ -446,6 +446,7 @@ $('#orderBtn').on({
             success: function(res){
                 if(res.success){
                     
+                    return false;
                 }else{
                     if (totalCost < 200) {
                             e.stopPropagation();
@@ -462,9 +463,9 @@ $('#orderBtn').on({
                                 comments = JSON.parse(comments);
                             }
                             $("#ordered-items textarea.special-instructions-box").each(function(){
-                                var id = $(this).closest('tr').attr('id').substring(5);
-                                var comment = $(this).val();
-                                if(!$(this).hasClass('has-comment')){
+                                var id = $(self).closest('tr').attr('id').substring(5);
+                                var comment = $(self).val();
+                                if(!$(self).hasClass('has-comment')){
                                     comment = '';
                                 }
                                 comments[id] = comment;
