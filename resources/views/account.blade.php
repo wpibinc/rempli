@@ -435,6 +435,8 @@
                     break;
                 case '?section=subscription': showPage(4);
                     break;
+                case '?section=invoice': showPage(2);
+                    break;
                 case '?section=order-list': showPage(6);
                     break;
                 default: showPage(0);

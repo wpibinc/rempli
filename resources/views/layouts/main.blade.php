@@ -56,13 +56,14 @@
 </div>
 <div class="popup-oplata-false col-md-12">
     <p class="alcogol">У вас есть неоплаченные счета</p>
-    <a href="my-account?section=subscription" class="ok-popup btn btn-warning">Оплатить</a>
+    <a href="my-account?section=invoice" class="ok-popup btn btn-warning">Оплатить</a>
 </div>
 <div class="popup-oplata-false-bg"></div>
 <header class="header">
     <div class="topline col-md-12">
         <a href="/" class="logo"><img src="img/first.png" alt="rempli"></a>
-        @if($subscription)
+        @if(isset($subscription))
+
         <form id='change-shop-form' action="" method="get">
             <select name="shop">
                 @if(session('shop') == 'Av')
