@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Order;
 use App\Adress;
@@ -52,17 +53,22 @@ class User extends Authenticatable
     {
         return $this->hasMany(Invoice::class);
     }
+
+    public function getInvoicesTotal()
+    {
+        $totalSum = 0;
+        $invoices = $this->invoices()->where('is_paid', '0')
+            ->where('last_pay_day', '<=' , Carbon::now()->addDay(1))->get();
+        if(isset($invoices)) {
+            foreach ($invoices as $invoice) {
+                $totalSum += $invoice->price;
+            }
+        }
+        return $totalSum;
+    }
     
     public function listProducts()
     {
         return $this->hasMany(ListProduct::class);
-    }
-    
-    public function isPaid()
-    {
-//        if($this->subscriptions > 3 days) {
-//            return false;
-//        }
-//        return true;
     }
 }

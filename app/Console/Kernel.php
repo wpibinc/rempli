@@ -31,6 +31,7 @@ class Kernel extends ConsoleKernel
         {
             $schedule->call(function(){
 
+                $usersArray = [];
                 $invoices = Invoice::where('is_paid', '0')
                     ->where('is_sent','0')
                     ->where('last_pay_day', '<=' , Carbon::now()->addDay(1))->get();
@@ -38,8 +39,11 @@ class Kernel extends ConsoleKernel
                 foreach ($invoices as $invoice) {
                     $invoice->is_sent = 1;
                     $invoice->save();
+                    $usersArray[$invoice->user->id] = $invoice->user;
                 }
-                Event::fire(new SmsEvent($invoices->first()));
+                foreach ($usersArray as $user) {
+                    \Event::fire(new SmsEvent($user));
+                }
                 return true;
             })->everyFiveMinutes();
         }
