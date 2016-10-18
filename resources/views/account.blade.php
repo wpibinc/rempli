@@ -3,9 +3,6 @@
 @section('title')
 
 @section('content')
-{{--    @if(!Auth::user()->isPaid())--}}
-        {{--here remember block--}}
-    {{--@endif--}}
 <div class="col-md-12">
     <div class="tabs col-md-12">
         <ul class="col-md-2">
@@ -429,13 +426,15 @@
             switch(window.location.search){
                 case '?section=orders': showPage(1);
                     break;
-                case '?section=adress': showPage(2);
+                case '?section=adress': showPage(3);
                     break;
-                case '?section=rules': showPage(3);
+                case '?section=rules': showPage(6);
                     break;
                 case '?section=subscription': showPage(4);
                     break;
-                case '?section=order-list': showPage(6);
+                case '?section=invoice': showPage(2);
+                    break;
+                case '?section=order-list': showPage(7);
                     break;
                 default: showPage(0);
                     break;
@@ -444,7 +443,7 @@
                 showPage(1);
             }
             if(window.location.search.indexOf('section=order-list') > 0){
-                showPage(6);
+                showPage(7);
             }
         });
 
