@@ -2,6 +2,8 @@
 
 use App\Order;
 use SleepingOwl\Admin\Model\ModelConfiguration;
+use Auth;
+use Carbon\Carbon;
 
 AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
     $model->setTitle('Заказы');
@@ -66,7 +68,27 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
             $avp=\App\AvProduct::where('id',$item['objectId'])->get();
             $all[] = (! $avp->isEmpty()) ? $avp : \App\Product::where('id',$item['objectId'])->get();
         }
+        
+        $now = Carbon::now();
+        $order = Order::find($id);
+        $user = $order->user;
+        $haveSubs = false;
+        $subscription = \App\Subscription::where('user_id', $user->id)
+                ->where('end_subscription', '>', $now)
+                ->first();
 
+        if($subscription){
+            if($subscription->auto_subscription == 0){
+                $haveSubs = true;
+            }elseif ($subscription->is_free){
+                $haveSubs = true;
+            } else {
+                $subs = $subscription->invoices()->where('title', 'Продление подписки')->first();
+                if($subs->is_paid){
+                    $haveSubs = true;
+                }
+            }
+        }
         $form->addBody([
             AdminFormElement::select('status', 'Статус') ->setEnum(['новый','в работе','выполнен','отменен']),
             AdminFormElement::text('name', 'Имя'),

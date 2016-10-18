@@ -59,8 +59,14 @@ Route::get('parser/clear', ['as' => 'admin.parser.clear', 'uses' => '\App\Http\C
 
 Route::get('parser-la', '\App\Http\Controllers\LaParseController@index');
 
+
+Route::get('parser-me', '\App\Http\Controllers\MeParseController@index');
+
 Route::get('la-get-products', ['as' => 'admin.la_get_products', 'uses' => '\App\Http\Controllers\LaParseController@getProducts']);
 Route::get('la-get-categories', ['as' => 'admin.la_get_categories', 'uses' => '\App\Http\Controllers\LaParseController@getCategories']);
+Route::get('me-get-products', ['as' => 'admin.me_get_products', 'uses' => '\App\Http\Controllers\MeParseController@getProducts']);
+Route::get('me-get-categories', ['as' => 'admin.me_get_categories', 'uses' => '\App\Http\Controllers\MeParseController@getCategories']);
+
 //Users
 //Route::get('/users', ['as' => 'admin.users', 'uses' => '\App\Http\Controllers\UserController@index']);
 

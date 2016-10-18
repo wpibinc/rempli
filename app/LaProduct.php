@@ -8,8 +8,6 @@ use App\LaCategory;
 
 class LaProduct extends Model
 {
-    //use \SleepingOwl\Admin\Traits\OrderableModel;
-    public $incrementing = false;
     
     public $shop = 'La';
     

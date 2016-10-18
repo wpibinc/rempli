@@ -29,13 +29,13 @@ $menu = [
         'title' => 'Промо коды',
         'icon'  => 'fa fa-dashboard',
         'url'   => 'admin/promo-code',
-        'priority' => 8
+        'priority' => 9
     ],
     [
         'title' => 'Продукты по категориям',
         'icon' => 'fa fa-group',
         'pages' => $submenu,
-        'priority' => 9,
+        'priority' => 10,
         'AccessLogic' => function() {
             return auth()->user()->username=='admin';
         }
@@ -45,7 +45,7 @@ $menu = [
         'title' => 'Экспорт продуктов',
         'icon'  => 'fa fa-download',
         'url'   => 'admin/export',
-        'priority' => 10,
+        'priority' => 11,
         'AccessLogic' => function() {
             return auth()->user()->username=='admin';
         }
@@ -84,8 +84,22 @@ $menu = [
                 'url' => '/admin/parser-la',
                 'priority' => 5
             ],
+            (new Page(\App\MeCategory::class))
+                ->setIcon('fa fa-plus')
+                ->setTitle('Категории Metro')
+                ->setPriority(6),
+            (new Page(\App\MeProduct::class))
+                ->setIcon('fa fa-plus')
+                ->setTitle('Продукты Metro')
+                ->setPriority(7),
+            [
+                'title' => 'Парсер Metro',
+                'icon' => 'fa fa-plus',
+                'url' => '/admin/parser-me',
+                'priority' => 8
+            ],
         ],
-        'priority' => 11,
+        'priority' => 12,
         'AccessLogic' => function() {
             return auth()->user()->username=='admin';
         }
@@ -94,7 +108,7 @@ $menu = [
         'title' => 'Кеш',
         'icon'  => 'fa fa-trash-o',
         'url'   => 'admin/cache',
-        'priority' => 12
+        'priority' => 13
     ],
     [
         'title' => 'Выход',
