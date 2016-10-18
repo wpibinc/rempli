@@ -390,7 +390,9 @@ $('#orderBtn2').on({
 
 			data = id;
 			//console.log(data);
-
+                        
+                        
+                        
 			$.ajax({
 				type: 'POST',
 				url: '/order',
@@ -436,73 +438,87 @@ $('#orderBtn').on({
         if(isAlcohol&&!confirmAlcohol){
             return true;
         }
-// $(document).on('click', "#orderBtn", function(){ // Parse
-	if (totalCost < 200) {
-		e.stopPropagation();
-		$('#notmin').css( "display", "block" );
-	}
-	else {
-
-		$('#notmin').css( "display", "none" );
-
-        var comments = sessionStorage.getItem('comments');
-        if(!comments){
-            comments = {};
-        }else{
-            comments = JSON.parse(comments);
-        }
-        $("#ordered-items textarea.special-instructions-box").each(function(){
-            var id = $(this).closest('tr').attr('id').substring(5);
-            var comment = $(this).val();
-            if(!$(this).hasClass('has-comment')){
-                comment = '';
-            }
-            comments[id] = comment;
-        });
-        comments = JSON.stringify(comments);
-        sessionStorage.setItem('comments', comments);
-
-	var OrderArchive = Parse.Object.extend("OrdersArchive");
-	var orderArchive = new OrderArchive();
-	orderArchive.set("html", $('#cart-items').html());
-	orderArchive.save(null, {
-	  success: function(order) {
-	  	sessionStorage.cOrderArchive = orderArchive.id;
-                console.log(sessionStorage);
-	  },
-	  error: function(order, error) {
-	  }
-	});
-
-
-	var Order = Parse.Object.extend("Orders");
-	var order = new Order();
-	order.set("html", $('#cart-items').html());
-
         
-	order.save(null, {
-	  success: function(order) {
-	  	sessionStorage.cOrder = order.id;
-	  	sessionStorage.cost = totalCost;
-	  	sessionStorage.dCost = dCost;
-	    // if (currentUser) {
-	    	window.location = "/order";
-	    // } else {
-	    // 	window.location = "signin.html";
-	    // }
+        $.ajax({
+            url: '/check-alert-invoice',
+            method: 'get',
+            dataType: 'json',
+            success: function(res){
+                if(res.success){
+                    
+                }else{
+                    if (totalCost < 200) {
+                            e.stopPropagation();
+                            $('#notmin').css( "display", "block" );
+                    }
+                    else {
+
+                            $('#notmin').css( "display", "none" );
+
+                            var comments = sessionStorage.getItem('comments');
+                            if(!comments){
+                                comments = {};
+                            }else{
+                                comments = JSON.parse(comments);
+                            }
+                            $("#ordered-items textarea.special-instructions-box").each(function(){
+                                var id = $(this).closest('tr').attr('id').substring(5);
+                                var comment = $(this).val();
+                                if(!$(this).hasClass('has-comment')){
+                                    comment = '';
+                                }
+                                comments[id] = comment;
+                            });
+                            comments = JSON.stringify(comments);
+                            sessionStorage.setItem('comments', comments);
+
+                            var OrderArchive = Parse.Object.extend("OrdersArchive");
+                            var orderArchive = new OrderArchive();
+                            orderArchive.set("html", $('#cart-items').html());
+                            orderArchive.save(null, {
+                              success: function(order) {
+                                    sessionStorage.cOrderArchive = orderArchive.id;
+                                    console.log(sessionStorage);
+                              },
+                              error: function(order, error) {
+                              }
+                            });
 
 
-	  },
-	  error: function(order, error) {
-	    // Execute any logic that should take place if the save fails.
-	    // error is a Parse.Error with an error code and message.
-	    console.log(error.message);
-	    // alert('Не удалось создать заказ: ' + error.message);
+                            var Order = Parse.Object.extend("Orders");
+                            var order = new Order();
+                            order.set("html", $('#cart-items').html());
 
-	  }
-	});
 
-}//end else
+
+                            order.save(null, {
+                              success: function(order) {
+                                    sessionStorage.cOrder = order.id;
+                                    sessionStorage.cost = totalCost;
+                                    sessionStorage.dCost = dCost;
+                                // if (currentUser) {
+                                    window.location = "/order";
+                                // } else {
+                                // 	window.location = "signin.html";
+                                // }
+
+
+                              },
+                              error: function(order, error) {
+                                // Execute any logic that should take place if the save fails.
+                                // error is a Parse.Error with an error code and message.
+                                console.log(error.message);
+                                // alert('Не удалось создать заказ: ' + error.message);
+
+                              }
+                            });
+
+                    }//end else
+                }
+            }
+        });
+// $(document).on('click', "#orderBtn", function(){ // Parse
+	
 }//end on click
 });
 // $('.reduce_count').click(function () {
