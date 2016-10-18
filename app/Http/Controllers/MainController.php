@@ -23,7 +23,7 @@ class MainController extends Controller
         $userId = $auth->id();
         $haveSubs = false;
         $subscription = \App\Subscription::where('user_id', $userId)
-                ->where('end_subscriptions', '>', $now)
+                ->where('end_subscription', '>', $now)
                 ->first();
         if($subscription){
             if($subscription->auto_subscription == 0){
