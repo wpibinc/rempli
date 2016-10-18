@@ -22,6 +22,10 @@ class Invoice extends Authenticatable
         return $this->belongsTo(User::class);
     }
 
+    public function subscription()
+    {
+        return $this->belongsTo(Subscription::class);
+    }
     /**
      * @return array
      */
