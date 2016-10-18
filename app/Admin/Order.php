@@ -2,7 +2,6 @@
 
 use App\Order;
 use SleepingOwl\Admin\Model\ModelConfiguration;
-use Auth;
 use Carbon\Carbon;
 
 AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
@@ -21,10 +20,6 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
             [
                 AdminColumn::text('id')->setLabel('ID'),
                 AdminColumn::custom()->setLabel('Статус')->setCallback(function (Order $model) {
-                    $currentUser = \Auth::user();
-                    $button = '';
-                 //   if($currentUser)
-                  //  var_dump($currentUser->id);
                     switch ($model->status) {
                         case 'новый':
                             return "<span class=\"label label-info\">$model->status</span>";
@@ -62,13 +57,12 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
 
         $form = AdminForm::panel();
         $all=[];
-        $data = \App\OrderItem::where('order_id',$id)->get();
-
+        $data = \App\OrderItem::where('order_id', $id)->get();
         foreach ($data as $item) {
             $avp=\App\AvProduct::where('id',$item['objectId'])->get();
             $all[] = (! $avp->isEmpty()) ? $avp : \App\Product::where('id',$item['objectId'])->get();
         }
-        
+
         $now = Carbon::now();
         $order = Order::find($id);
         $user = $order->user;
@@ -91,6 +85,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
         }
         $form->addBody([
             AdminFormElement::select('status', 'Статус') ->setEnum(['новый','в работе','выполнен','отменен']),
+//            AdminFormElement::view('misc.over8kg')->setData(['order' => $order, 'haveSubs'=>$haveSubs]),
             AdminFormElement::text('name', 'Имя'),
             AdminFormElement::text('phone', 'Телефон'),
             AdminFormElement::text('address', 'Адрес'),
