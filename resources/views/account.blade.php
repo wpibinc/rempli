@@ -3,9 +3,6 @@
 @section('title')
 
 @section('content')
-{{--    @if(!Auth::user()->isPaid())--}}
-        {{--here remember block--}}
-    {{--@endif--}}
 <div class="col-md-12">
     <div class="tabs col-md-12">
         <ul class="col-md-2">

@@ -1,17 +1,5 @@
 <?php
 
-Route::get('test123', function() {
-    $invoices = \App\Invoice::where('is_paid', '0')
-        ->where('is_sent','0')
-        ->where('last_pay_day', '<=' , \Carbon\Carbon::now()->addDay(1))->get();
-    foreach ($invoices as $invoice) {
-//        $invoice->is_sent = 1;
-//        $invoice->save();
-    }
-    \Event::fire(new \App\Events\SmsEvent($invoices->first()));
-
-});
-
 Route::group(['middleware' => ['web']], function () {
     //Главная - магазин
     Route::get('/', 'MainController@index');

@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Events\Event;
 use App\Invoice;
+use App\User;
 use Illuminate\Queue\SerializesModels;
 
 class SmsEvent extends Event
@@ -14,10 +15,10 @@ class SmsEvent extends Event
 
     /**
      * SmsEvent constructor.
-     * @param Invoice $invoice
+     * @param User $user
      */
-    public function __construct(Invoice $invoice)
+    public function __construct(User $user)
     {
-        $this->invoice = $invoice;
+        $this->user = $user;
     }
 }
