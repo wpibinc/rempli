@@ -2,6 +2,10 @@
 
 namespace App\Console;
 
+use App\Events\SmsEvent;
+use App\Invoice;
+use Event;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +17,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // Commands\Inspire::class,
+         Commands\Inspire::class,
     ];
 
     /**
@@ -24,7 +28,20 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        {
+            $schedule->call(function(){
+
+                $invoices = Invoice::where('is_paid', '0')
+                    ->where('is_sent','0')
+                    ->where('last_pay_day', '<=' , Carbon::now()->addDay(1))->get();
+
+                foreach ($invoices as $invoice) {
+                    $invoice->is_sent = 1;
+                    $invoice->save();
+                }
+                Event::fire(new SmsEvent($invoices->first()));
+                return true;
+            })->everyFiveMinutes();
+        }
     }
 }
