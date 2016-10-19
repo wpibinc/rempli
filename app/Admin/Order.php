@@ -84,7 +84,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
             }
         }
         $form->addBody([
-//            AdminFormElement::select('status', 'Статус') ->setEnum(['новый','в работе','выполнен','отменен']),
+            AdminFormElement::select('status', 'Статус') ->setEnum(['новый','в работе','выполнен','отменен']),
             AdminFormElement::view('misc.over8kg')->setData(['order' => $order, 'haveSubs'=>$haveSubs]),
             AdminFormElement::text('name', 'Имя'),
             AdminFormElement::text('phone', 'Телефон'),
