@@ -70,7 +70,6 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
         $subscription = \App\Subscription::where('user_id', $user->id)
                 ->where('end_subscription', '>', $now)
                 ->first();
-
         if($subscription){
             if($subscription->auto_subscription == 0){
                 $haveSubs = true;
