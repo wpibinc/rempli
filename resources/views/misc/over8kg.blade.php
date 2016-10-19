@@ -1,7 +1,7 @@
 <div class="message"></div>
 <input type="hidden" name="haveSubs" value="{{$haveSubs}}">
 <input type="hidden" name="mass" value="{{$order->mass}}">
-<label>Статус</label>
+{{--<label>Статус</label>
 <div class="col-md-12">
     <select name="status">
         <option @if($order->status && $order->status == 'новый'){{ 'selected' }}@endif value="новый">Новый</option>
@@ -9,7 +9,7 @@
         <option @if($order->status && $order->status == 'выполнен'){{ 'selected' }}@endif value="выполнен">Выполнен</option>
         <option @if($order->status && $order->status == 'отменен'){{ 'selected' }}@endif value="отменен">Отменен</option>
     </select>
-</div>
+</div>--}}
 @if($haveSubs)
     <div class="col-md-12 invoice" style="display: none">
         <input type="button" class="invoice-button" name="invoice-button" value="Выставить счет на 300р">
