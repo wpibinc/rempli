@@ -32,6 +32,7 @@ Route::get('promo-code', ['as' => 'admin.promo-code', function () {
 	return AdminSection::view($content, 'Промо Коды');
 }]);
 Route::post('promo-code/create', ['as' => 'admin.promocodecreate', 'uses' => '\App\Http\Controllers\SubscriptionController@promoCodeCreate']);
+Route::post('invoice/order', ['as' => 'admin.invoice', 'uses' => '\App\Http\Controllers\InvoiceController@over8kg']);
 
 //Панель парса
 Route::get('parser', ['as' => 'admin.parser', 'uses' => '\App\Http\Controllers\ParseController@admin']);
