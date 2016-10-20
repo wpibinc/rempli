@@ -322,7 +322,7 @@ $(document).on('click', '.add-to-cart', function(e){
         $(this).closest('.modal').find('.item_count').removeClass( "hidden" ).addClass( "visible" ).html(sessionStorage[theId]);
 	newItem = (
 	'<tr data-category="'+category+'" class="ordered-item" id="cart-'+theId+'" data-shop="'+shop+'"> '+
-	'<td class="quantity"> x '+Number(sessionStorage[theId])+
+	'<td class="quantity">'+Number(sessionStorage[theId])+
 	'<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
 	'<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
 	'</td>' +
@@ -391,9 +391,9 @@ $('#orderBtn2').on({
 
 			data = id;
 			//console.log(data);
-                        
-                        
-                        
+
+
+
 			$.ajax({
 				type: 'POST',
 				url: '/order',
@@ -454,7 +454,7 @@ $('#orderBtn').on({
                             $('#notmin').css( "display", "block" );
                     }
                     else {
-                        
+
                             $('#notmin').css( "display", "none" );
 
                             var comments = sessionStorage.getItem('comments');
@@ -464,10 +464,10 @@ $('#orderBtn').on({
                                 comments = JSON.parse(comments);
                             }
                             $("#ordered-items textarea.special-instructions-box").each(function(){
-                                
+
                                 var id = $(this).closest('tr').attr('id').substring(5);
                                 var comment = $(this).val();
-                                
+
                                 if(!$(this).hasClass('has-comment')){
                                     comment = '';
                                 }
@@ -522,7 +522,7 @@ $('#orderBtn').on({
             }
         });
 // $(document).on('click', "#orderBtn", function(){ // Parse
-	
+
 }//end on click
 });
 // $('.reduce_count').click(function () {
@@ -545,7 +545,7 @@ $(document).on('click', ".reduce_count", function(){
 		$('.cart-total').find('th').html(sessionStorage.mass + ' грамм');
 		newItem = (
 		'<tr class="ordered-item" id="cart-' + $(this).closest('.product').attr('id') + '"> ' +
-		'<td class="quantity"> x ' + Number(sessionStorage[theId]) +
+		'<td class="quantity"> ' + Number(sessionStorage[theId]) +
 		'<br>' + '<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>' +
 		'<br>' + '<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
 		'</td>' +
@@ -646,13 +646,13 @@ $(".cart-del").click(function() {
 
 
 $("#ordered-items").on('click', '.cart-add', function(e) {
-        
+
 	var str = $(this).closest('tr').attr('id');
 	var theId = str.substring(5);
 	var thePrice = Number($(this).closest('tr').find('.priceShow').html());
         var weight = +$(this).parents('tr').find('td.total .weight').text();
         console.log(thePrice * Number(sessionStorage[theId]));
-        
+
 	sessionStorage.count = Number(sessionStorage.count)+1;
 	$('#cart-number').html(Number(sessionStorage.count));
 	sessionStorage[theId] = Number(sessionStorage[theId])+1;
@@ -661,8 +661,8 @@ $("#ordered-items").on('click', '.cart-add', function(e) {
 	'<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
 	'<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>'
 	);
-        
-	
+
+
 
 	//sessionStorage.mass = parseFloat(sessionStorage.mass) + parseFloat($(this).closest('tr').find('.mass').html());
 	sessionStorage.mass = parseInt(sessionStorage.mass) + weight;
@@ -697,7 +697,7 @@ $("#ordered-items").on('click', '.cart-min', function() {
 			'<br>' + '<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>' +
 			'<br>' + '<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>'
 		);
-		
+
 		//sessionStorage.mass = parseFloat(sessionStorage.mass) - parseFloat($(this).closest('tr').find('.mass').html());
 		sessionStorage.mass = parseInt(sessionStorage.mass) - weight;
 		totalCost = totalCost - Math.round(thePrice);
@@ -813,7 +813,7 @@ function search(word) {
 	word = word.toLowerCase();
 	var n = 0;
 	search_results = '';
-        
+
         $.ajax({
             url: '/search',
             dataType: 'json',
@@ -850,10 +850,10 @@ function search(word) {
                         }
                         search_results  += '<div class="modal fade bs-example-modal-lg" id="idt' + json[i].objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-shop="'+json[i].shop+'"><div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image"><div class="count item_count '+vis+'">' + sessionStorage[json[i].objectId] + '</div><span class="popup-helper"></span> <img class="popimg" src="' + json[i].img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + json[i].product_name + '</p> <div class="popup-price"> ' + json[i].price + ' <span class="popup-rub">'+num2word(Math.floor(json[i].price),words)+'</span>  </div> <div class="popup-mass"> '+ json[i].amount +'</div> </div> </div><div class="row" style="text-align: right"> <button href="javascript:void(0)" data-id="'+json[i].objectId+'" data-category="'+json[i].category+'" data-weight="'+json[i].weight+'" data-weight="'+json[i].weight+'" class="add-to-cart buy" aria-hidden="true" data-dismiss="modal" aria-label="Close">Добавить</button></div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + json[i].description + '</div> </div><div class="product_card_props f32"> '+consist+'</div></div> </div> </div> </div>';
                     }
-                    
-                    
-                    
-                    
+
+
+
+
                    // $(".products-wrap").prepend(search_results);
 
                     $( ".product" ).each(function( index ) {
@@ -873,10 +873,10 @@ function search(word) {
                 content += search_results;
                 content += "</div>";
                 $(".main-block").prepend(content);
-                
+
             }
         });
-        
+
 //	$.each(json, function(i, v) {
 //        if (v.product_name.toLowerCase().indexOf(word) >= 0) {
 //        		if (Number(sessionStorage[v.objectId]) > 0) {
@@ -927,7 +927,7 @@ $(document).on('click', '#add-to-order-list', function(){
         ids.push({id: id, shop: shop});
     });
     var json = JSON.stringify(ids);
-    
+
     $.ajax({
         url: '/add-to-order-list',
         method: 'POST',
@@ -935,10 +935,12 @@ $(document).on('click', '#add-to-order-list', function(){
             json: json
         },
         success: function(){
+        	$('#add-to-order-list').addClass('hide');
+			$('#go-to-order-list').addClass('show');
             sessionStorage.clear();
             localStorage.clear();
             $("#ordered-items").html('');
-            alert('добавлено');
+            // alert('добавлено');
         }
     });
 });
@@ -952,24 +954,24 @@ $('.add-to-cart-from-list').on('click', function(){
         var shop = $(this).attr('data-shop');
         var img = $(this).children("td:nth-child(1)").html();
         var name = $(this).children("td:nth-child(3)").html();
-        
+
         if (sessionStorage.count) {
             sessionStorage.count = Number(sessionStorage.count)+1;
 	} else {
 	    sessionStorage.count = 1;
 	}
-	
+
 	sessionStorage.mass = parseInt(sessionStorage.mass) + weight;
-        
+
         if (sessionStorage[theId]) {
             sessionStorage[theId] = Number(sessionStorage[theId])+1;
 	} else {
 	    sessionStorage[theId] = 1;
 	}
-        
+
         newItem = (
 	'<tr data-category="'+category+'" class="ordered-item" id="cart-'+theId+'" data-shop="'+shop+'"> '+
-	'<td class="quantity"> x '+Number(sessionStorage[theId])+
+	'<td class="quantity"> '+Number(sessionStorage[theId])+
 	'<br>'+'<a href="#" class="cart-change cart-add"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span class="cart-del-txt"> Добавить</span></a>'  +
 	'<br>'+'<a href="#" class="cart-change cart-min"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span><span class="cart-del-txt"> Убрать</span></a>' +
 	'</td>' +
@@ -989,17 +991,17 @@ $('.add-to-cart-from-list').on('click', function(){
         var itemId = theId;
         $("#cart-"+ itemId).remove();
 	$("#ordered-items").prepend(newItem);
-        
+
         totalCost = totalCost + parseFloat(price);
 
 	totalCost = Math.round(totalCost);
 
 	$('#cart-price').html(totalCost);
-        
+
         if (totalCost >= 200) {
 		$('#notmin').css( "display", "none" );
 	}
-        
+
         $('.cart-total').find('th').html(sessionStorage.mass + ' грамм');
 	sessionStorage.cart = $("#ordered-items").html();
 	sessionStorage.total = totalCost;
@@ -1011,8 +1013,19 @@ $('.add-to-cart-from-list').on('click', function(){
         success: function(res){
             if(res.success){
                 $(".product-list").remove();
-                alert(res.message);
+                // alert(res.message);
             }
         }
     });
+});
+
+$(document).on('click ready',function () {
+	if($('#ordered-items tr').hasClass('ordered-item')){
+		$('#add-to-order-list').removeClass('hide');
+		$('#go-to-order-list').removeClass('show');
+
+	} else {
+		$('#go-to-order-list').addClass('show');
+		$('#add-to-order-list').addClass('hide');
+	}
 });

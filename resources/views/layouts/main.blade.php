@@ -62,7 +62,7 @@
 <header class="header">
     <div class="topline col-md-12">
         <a href="/" class="logo"><img src="img/first.png" alt="rempli"></a>
-        @if(isset($subscription) && $subscription)
+        @if(isset($subscription))
 
         <form id='change-shop-form' action="" method="get">
             <select name="shop">
@@ -146,7 +146,8 @@
                 </th>
                 </tbody>
             </table>
-            <button id="add-to-order-list" class="btn btn-primary checkout_button" >Добавить в список заказов</button>
+            <a id="go-to-order-list" class="btn-link" href="/my-account?section=order-list">Перейти в список заказов</a>
+            <button id="add-to-order-list" class="btn-link" >Добавить в список заказов</button>
             <button class="checkout_button btn btn-primary" id="orderBtn">Заказать <span id="cototal"><span id="cart-price">100</span> руб</span></button>
             <p id="notmin">Извините, минимальная сумма заказа: 200р</p>
 

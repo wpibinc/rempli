@@ -3,6 +3,9 @@
 @section('title')
 
 @section('content')
+{{--    @if(!Auth::user()->isPaid())--}}
+        {{--here remember block--}}
+    {{--@endif--}}
 <div class="col-md-12">
     <div class="tabs col-md-12">
         <ul class="col-md-2">
@@ -223,7 +226,7 @@
                                        @endif
                                        data-slider-tooltip="hide"/></br>
                                 <p class="finalPriceSubscriptions hideDiv"><span></span> руб</p>
-                                <button class="btn btn-default editSubscription" disabled type="button">изменить условия</button>
+                                {{--<button class="btn btn-default editSubscription" disabled type="button">изменить условия</button>--}}
                                 <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
                             </td>
                         </tr>
@@ -243,46 +246,49 @@
                 <a href="#" class="activate-promocode btn btn-default">Активировать</a>
             </div>
             <div class='rules wrapper-acaunt'>Правила</div>
-            <div class='lists wrapper-acaunt'>
+            <div class='orders lists wrapper-acaunt'>
                 Список заказов
-                <table class="table">
-                    <tr>
-                        <th>фото</th>
-                        <th>цена</th>
-                        <th>название</th>
-                    </tr>
-                    @if(count($listProducts))
-                        @foreach($listProducts as $product)
-                        <?php 
-                           switch($product->shop){
-                                case 'La':
-                                    $title = $product->product->product_name;
-                                    $img = $product->product->img;
-                                    $price = $product->product->price;
-                                    if($product->product->price_style == 'за 1кг'){
-                                        $price = $product->product->price/10;
-                                    }
-                                    $weight = $product->product->weight;
-                                break;
-                                default:
-                                    $title = $product->product->name;
-                                    $img = 'http://av.ru'.$product->product->image;
-                                    $price = $product->product->price;
-                                    if($product->product->price_style == '1 кг'){
-                                        $price = $product->product->price/10;
-                                    }
-                                    $weight = $product->product->original_typical_weight;
-                                break;
-                            }
-                        ?>
-                        <tr class="product-list" data-shop="{{$product->shop}}" data-id="{{$product->product_id}}" data-weight="{{$weight}}" data-category="{{$product->product->category_id}}">
-                            <td><img width="100" height="100" src="{{$img}}" alt="product"></td>
-                            <td>{{$price}}</td>
-                            <td>{{$title}}</td>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>фото</th>
+                            <th>цена</th>
+                            <th>название</th>
                         </tr>
-                        @endforeach
-                    @endif
-                </table>
+                        @if(count($listProducts))
+                            @foreach($listProducts as $product)
+                                <?php
+                                switch($product->shop){
+                                    case 'La':
+                                        $title = $product->product->product_name;
+                                        $img = $product->product->img;
+                                        $price = $product->product->price;
+                                        if($product->product->price_style == 'за 1кг'){
+                                            $price = $product->product->price/10;
+                                        }
+                                        $weight = $product->product->weight;
+                                        break;
+                                    default:
+                                        $title = $product->product->name;
+                                        $img = 'http://av.ru'.$product->product->image;
+                                        $price = $product->product->price;
+                                        if($product->product->price_style == '1 кг'){
+                                            $price = $product->product->price/10;
+                                        }
+                                        $weight = $product->product->original_typical_weight;
+                                        break;
+                                }
+                                ?>
+                                <tr class="product-list" data-shop="{{$product->shop}}" data-id="{{$product->product_id}}" data-weight="{{$weight}}" data-category="{{$product->product->category_id}}">
+                                    <td><img width="100" height="100" src="{{$img}}" alt="product"></td>
+                                    <td>{{$price}}</td>
+                                    <td>{{$title}}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </table>
+                </div>
+
                  @if(count($listProducts))
                     {{$listProducts->appends(['section' => 'order-list'])->render()}}
                  @endif
@@ -298,34 +304,34 @@
             $('table .slider-horizontal').addClass('visb-h');
         });
         $(document).on('click','.editSubscription',function () {
-            $('.slider-horizontal').removeClass('visb-h');
-            $('.finalPriceSubscriptions').removeClass('hideDiv');
-            $('.editSubscription').addClass('hideDiv');
-            $('.editsSubscription').removeClass('hideDiv');
+//            $('.slider-horizontal').removeClass('visb-h');
+//            $('.finalPriceSubscriptions').removeClass('hideDiv');
+//            $('.editSubscription').addClass('hideDiv');
+//            $('.editsSubscription').removeClass('hideDiv');
         });
 
         $(document).on('click','.editsSubscription',function () {
-            $('.slider-horizontal').addClass('visb-h');
-            $('.finalPriceSubscriptions').addClass('hideDiv');
-            $('.editSubscription').removeClass('hideDiv');
-            $('.editsSubscription').addClass('hideDiv');
-            var countDelivery = parseInt($('#ex2').val());
-            if(countDelivery == 1){
-                $('.countDeliveryAll').html('4');
-                $('.countDelivery').html('4');
-            }
-            if(countDelivery == 2){
-                $('.countDeliveryAll').html('8');
-                $('.countDelivery').html('8');
-            }
-            if(countDelivery == 3){
-                $('.countDeliveryAll').html('12');
-                $('.countDelivery').html('12');
-            }
-            if(countDelivery == 4){
-                $('.countDeliveryAll').html('30');
-                $('.countDelivery').html('30');
-            }
+//            $('.slider-horizontal').addClass('visb-h');
+//            $('.finalPriceSubscriptions').addClass('hideDiv');
+//            $('.editSubscription').removeClass('hideDiv');
+//            $('.editsSubscription').addClass('hideDiv');
+//            var countDelivery = parseInt($('#ex2').val());
+//            if(countDelivery == 1){
+//                $('.countDeliveryAll').html('4');
+//                $('.countDelivery').html('4');
+//            }
+//            if(countDelivery == 2){
+//                $('.countDeliveryAll').html('8');
+//                $('.countDelivery').html('8');
+//            }
+//            if(countDelivery == 3){
+//                $('.countDeliveryAll').html('12');
+//                $('.countDelivery').html('12');
+//            }
+//            if(countDelivery == 4){
+//                $('.countDeliveryAll').html('30');
+//                $('.countDelivery').html('30');
+//            }
 
         });
         $(document).on('click','.buySubscription',function () {
@@ -373,9 +379,17 @@
         $(document).on('click','.auto_subscription',function () {
             var $el = $(this);
             if($el.prop('checked') == true){
+                $('.slider-horizontal').removeClass('visb-h');
+                $('.finalPriceSubscriptions').removeClass('hideDiv');
+                $('.editsSubscription').removeClass('hideDiv');
+
                 $('.editSubscription').removeAttr('disabled');
                 $('.editsSubscription').removeAttr('disabled');
             } else {
+                $('.slider-horizontal').addClass('visb-h');
+                $('.finalPriceSubscriptions').addClass('hideDiv');
+                $('.editsSubscription').addClass('hideDiv');
+
                 $('.editSubscription').attr('disabled','disabled');
                 $('.editsSubscription').attr('disabled','disabled');
             }

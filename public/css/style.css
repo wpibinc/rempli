@@ -2443,10 +2443,10 @@ label
    font-family:montserrat;
    text-transform:uppercase;
 }
-.tabs .table 
-{
-   border:1px solid #F3F3F3;
-}
+/*.tabs .table*/
+/*{*/
+   /*border:1px solid #F3F3F3;*/
+/*}*/
 .table.specs td,.table.specs th
 {
 	border-top:1px solid #f3f3f3;
@@ -2458,7 +2458,7 @@ label
    background:#FBFBFB;
    font-size:12px;
    color:#777;
-} 
+}
 .tab-pane .rating
 {
    color:#777;
@@ -2472,7 +2472,7 @@ label
    font-size:12px;
    color:#888;
 }
-.tab-pane a 
+.tab-pane a
 {
    color:#4DC7EC;
    font-size:12px;
@@ -2516,17 +2516,17 @@ label
 	width: 600px;
 }
 
-.table 
+.table
 {
 	background:#fff;
 	border:none;
 }
 
-.table thead > tr > th, 
-.table tbody > tr > th, 
-.table tfoot > tr > th, 
-.table thead > tr > td,  
-.table tbody > tr > td, 
+.table thead > tr > th,
+.table tbody > tr > th,
+.table tfoot > tr > th,
+.table thead > tr > td,
+.table tbody > tr > td,
 .table tfoot > tr > td
 {
 	border:none;
@@ -2537,21 +2537,21 @@ label
 	/*width:260px;*/
 }
 
-.empty 
+.empty
 {
     padding: 10px 10px 20px;
     text-align: center;
     font-size:12px;
-    font-family:Arial,Helvetica, sans-serif;	
+    font-family:Arial,Helvetica, sans-serif;
 }
 
-.table thead > tr > th 
+.table thead > tr > th
 {
 	padding:20px 10px;
 	background: #fafafa;
 }
 
-.cart-totals .table td 
+.cart-totals .table td
 {
     text-align: right;
 }
@@ -2573,7 +2573,7 @@ label
 {
    border:1px solid #f3f3f3;
 }
-.cart-info thead th 
+.cart-info thead th
 {
    color:#555;
    font-size:12px;
@@ -2609,7 +2609,7 @@ label
 .checkout {
 	text-align: center;
 	/*width: 200px;*/
-	
+
 /*	position: relative;
 	right: -50px;
 	margin-top: 10px;
@@ -2623,7 +2623,7 @@ label
 	font-family: sans-serif;
 	color:#fff!important;
 }
-td.image 
+td.image
 {
   text-align: center;
 
@@ -2631,7 +2631,7 @@ td.image
     width: 100px;
     border: 1px solid red;
     white-space: nowrap;
-    
+
     text-align: center; margin: 1em 0;
 }
 
@@ -2721,7 +2721,7 @@ td.name {
 .cart-totals table.table tr , table.table td
 {
   border:1px solid #f3f3f3;
-  
+
 }
 .cart-totals .table th, .table td
 {
@@ -2730,7 +2730,7 @@ td.name {
    font-size:12px;
 }
 
-.cart-totals p 
+.cart-totals p
 {
 	text-align:right;
 }
@@ -2765,7 +2765,7 @@ p.forgotten-password
 .forgotten .form-horizontal .control-label
 {
 	padding-left:15px;
-	
+
 }
 .forgotten .btn-primary
 {
@@ -2780,16 +2780,16 @@ p.forgotten-password
 
 .sitemap ul
 {
-	
+
 	padding:5px 15px;
-} 
-.sitemap ul li a 
+}
+.sitemap ul li a
 {
 	font-size:13px;
 	color:#333;
 	line-height:30px;
 }
-.sitemap  ul.subtitle a 
+.sitemap  ul.subtitle a
 {
 	font-size:12px;
 	color:#888;
@@ -2907,7 +2907,7 @@ h2.page-title
 	padding-bottom:20px;
 	margin-bottom: 20px;
 }
-.content-blog h3 a 
+.content-blog h3 a
 {
 	font-size:18px;
 	color:#383838;
@@ -2923,11 +2923,11 @@ h2.page-title
 	font-size:12px;
 	color:#888;
 }
-.post-detail b 
+.post-detail b
 {
 	color:#444;
 }
-.post-detail a 
+.post-detail a
 {
 	color:#4DC7EC;
 }
@@ -2936,13 +2936,13 @@ h2.page-title
 	text-decoration:none;
 	color:#444;
 }
-.text-blog p 
+.text-blog p
 {
 	margin-top:20px;
 	color:#444;
 	font-size:12px;
 }
-.text-blog a em 
+.text-blog a em
 {
 	color:#444;
 	font-family:arial;
@@ -2961,7 +2961,7 @@ h2.page-title
 {
 	margin-bottom:35px;
 }
-.col-post h3 
+.col-post h3
 {
 	line-height:24px;
 	color:#555;
@@ -2973,7 +2973,7 @@ h2.page-title
 	border-bottom:1px dotted #eee;
 	padding:3px 5px 5px;
 }
-.col-post ul.post-menu li a 
+.col-post ul.post-menu li a
 {
 	color:#444;
 }
@@ -2982,17 +2982,17 @@ h2.page-title
 	color:#4DC7EC;
 	text-decoration:none;
 }
-.col-post .post-menu b 
+.col-post .post-menu b
 {
 	font-size:12px;
 	color:#555;
 }
-.col-post p 
+.col-post p
 {
 	font-size:12px;
 	color:#444;
 }
-.col-post ul.tags a 
+.col-post ul.tags a
 {
 	background:#eee;
 	display:inline-block;
@@ -3002,21 +3002,21 @@ h2.page-title
 .col-post ul.tags a:hover
 {
 	text-decoration:none;
-	background:#4DC7EC; 
+	background:#4DC7EC;
 	color:#fff;
 }
-.col-post .tags li a 
+.col-post .tags li a
 {
 	float:left;
 	margin:0 5px 7px 0;
 	color:#444;
-	
+
 }
 .text-blog blockquote
 {
 	border-left:2px solid #eee;
 }
-.text-blog .quote-content p 
+.text-blog .quote-content p
 {
 	color:#555;
 	font-size:13px;
@@ -3024,11 +3024,11 @@ h2.page-title
 	font-weight:100;
 	line-height:22px;
 }
-.text-blog ul li 
+.text-blog ul li
 {
 	list-style-type:disc;
 	color:#aaa;
-	
+
 }
 .text-blog ul li span
 {
@@ -3085,10 +3085,10 @@ h2.page-title
 	float:left;
 	margin:0 5px 5px 0;
 }
-.comments 
+.comments
 {
 }
-.comments h3 
+.comments h3
 {
 	margin-top:0px;
 	color:#222;
@@ -3108,12 +3108,12 @@ h2.page-title
 	color:#777;
 	font-size:12px;
 }
-.comment-text p 
+.comment-text p
 {
 	font-size:12px;
 	color:#555;
 }
-.comments-content 
+.comments-content
 {
 	margin-top:20px;
 }
@@ -3279,7 +3279,7 @@ a.comment-reply-link
 /*-----------------------------------------------------------------------------------*/
 
 
-ul.autocomplete 
+ul.autocomplete
 {
     position: absolute;
     overflow: hidden;
@@ -3292,10 +3292,10 @@ ul.autocomplete
 	z-index:1000;
 	border: 1px solid #eee;
 }
-ul.autocomplete li 
+ul.autocomplete li
 {
-  display: block; 
-  padding: 5px; 
+  display: block;
+  padding: 5px;
   overflow: hidden;
   width: 100%;
   cursor:pointer;
@@ -3303,22 +3303,22 @@ ul.autocomplete li
   font-family:'Open Sans',Helvetica,Arial, sans-serif;
 }
 
-ul.autocomplete li.selected 
+ul.autocomplete li.selected
 {
-  background-color: #4DC7EC; 
+  background-color: #4DC7EC;
   color: #fff;
 }
 
-ul.autocomplete li strong 
+ul.autocomplete li strong
 {
-  color: #4DC7EC; 
+  color: #4DC7EC;
   font-weight:600;
 }
 
-ul.autocomplete li.selected strong 
+ul.autocomplete li.selected strong
 {
 	color:#fff;
-} 
+}
 
 ul.autocomplete li img
 {
@@ -3372,7 +3372,7 @@ ul.autocomplete li img
 .product_img {
 	height: 170px;
     white-space: nowrap;
-    text-align: center; 
+    text-align: center;
 }
 
 .helper {
