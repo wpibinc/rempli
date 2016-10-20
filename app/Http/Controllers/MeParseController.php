@@ -43,39 +43,39 @@ class MeParseController extends AdminController
         );  
         $doc = HtmlDomParser::file_get_html( self::URL_CATALOG, false,  stream_context_create($streamContextOptions));
         
-//        $doc = hQuery::fromUrl(self::URL_CATALOG);
-//        $parents = $doc->find('.l-category .col-left .subcatalog .subcatalog_list');
-//        if(!$parents){
-//            return back()->with('status', 'Категорий не найдено');
-//        }
-//        $categoriesCount = 0;
-//        foreach ($parents as $parent){
-//            $parentA = $parent->find('a.subcatalog_title');
-//            if(!$parentA){
-//                continue;
-//            }
-//            $meCategory = new MeCategory();
-//            $meCategory->name = trim($parentA->text());
-//            $meCategory->link = $parentA->attr('href');
-//            $meCategory->parent_id = 0;
-//            $meCategory->order = $categoriesCount;
-//            $meCategory->save();
-//            $categoriesCount++;
-//            $subCategories = $parent->find('ul a');
-//            if(!$subCategories){
-//                continue;
-//            }
-//            foreach($subCategories as $a){
-//                MeCategory::create([
-//                    'name' => trim($a->text()),
-//                    'link' => $a->attr('href'),
-//                    'parent_id' => $meCategory->id,
-//                    'order' => $categoriesCount
-//                ]);
-//                $categoriesCount++;
-//            }
-//        }
-//        return back()->with('status', 'Получено категорий '.$categoriesCount);
+        $parents = $doc->find('.l-category .col-left .subcatalog .subcatalog_list');
+        if(!$parents){
+            return back()->with('status', 'Категорий не найдено');
+        }
+        $categoriesCount = 0;
+        foreach ($parents as $parent){
+            $parentA = $parent->find('a.subcatalog_title');
+            if(!$parentA){
+                continue;
+            }
+
+            $meCategory = new MeCategory();
+            $meCategory->name = trim($parentA->plaintext);
+            $meCategory->link = $parentA->attr('href');
+            $meCategory->parent_id = 0;
+            $meCategory->order = $categoriesCount;
+            $meCategory->save();
+            $categoriesCount++;
+            $subCategories = $parent->find('ul a');
+            if(!$subCategories){
+                continue;
+            }
+            foreach($subCategories as $a){
+                MeCategory::create([
+                    'name' => trim($a->text()),
+                    'link' => $a->attr('href'),
+                    'parent_id' => $meCategory->id,
+                    'order' => $categoriesCount
+                ]);
+                $categoriesCount++;
+            }
+        }
+        return back()->with('status', 'Получено категорий '.$categoriesCount);
     }
 }
 
