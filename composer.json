@@ -15,8 +15,8 @@
         "laravel/framework": "5.2.*",
         "laravelrus/sleepingowl": "4.*@dev",
         "zelenin/smsru": "~4",
-        "duzun/hquery": "^1.5"
-
+        "duzun/hquery": "^1.5",
+        "sunra/php-simple-html-dom-parser": "1.5.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

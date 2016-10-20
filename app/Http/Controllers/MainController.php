@@ -40,6 +40,7 @@ class MainController extends Controller
                 }
             }
         }
+        //dd($haveSubs);
 //        foreach($subscriptions as $subsciption){
 //            $start = new Carbon($subsciption->start_subscription);
 //            $end = new Carbon($subsciption->end_subscription);
