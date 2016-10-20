@@ -70,7 +70,6 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
         $subscription = \App\Subscription::where('user_id', $user->id)
                 ->where('end_subscription', '>', $now)
                 ->first();
-
         if($subscription){
             if($subscription->auto_subscription == 0){
                 $haveSubs = true;
@@ -84,7 +83,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
             }
         }
         $form->addBody([
-//            AdminFormElement::select('status', 'Статус') ->setEnum(['новый','в работе','выполнен','отменен']),
+            AdminFormElement::select('status', 'Статус') ->setEnum(['новый','в работе','выполнен','отменен']),
             AdminFormElement::view('misc.over8kg')->setData(['order' => $order, 'haveSubs'=>$haveSubs]),
             AdminFormElement::text('name', 'Имя'),
             AdminFormElement::text('phone', 'Телефон'),

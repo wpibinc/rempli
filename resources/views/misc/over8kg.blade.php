@@ -1,15 +1,11 @@
 <div class="message"></div>
 <input type="hidden" name="haveSubs" value="{{$haveSubs}}">
 <input type="hidden" name="mass" value="{{$order->mass}}">
-<label>Статус</label>
-<div class="col-md-12">
-    <select name="status">
-        <option @if($order->status && $order->status == 'новый'){{ 'selected' }}@endif value="новый">Новый</option>
-        <option @if($order->status && $order->status == 'в работе'){{ 'selected' }}@endif value="в работе">В работе</option>
-        <option @if($order->status && $order->status == 'выполнен'){{ 'selected' }}@endif value="выполнен">Выполнен</option>
-        <option @if($order->status && $order->status == 'отменен'){{ 'selected' }}@endif value="отменен">Отменен</option>
-    </select>
-</div>
+@if($order->invoice)
+    <div>
+        Счет за превышение веса выставлен.<br>Оплатить до: {{\Carbon\Carbon::parse($order->invoice->last_pay_day)->format('Y-m-d H:i')}}
+    </div>
+@endif
 @if($haveSubs)
     <div class="col-md-12 invoice" style="display: none">
         <input type="button" class="invoice-button" name="invoice-button" value="Выставить счет на 300р">
@@ -32,6 +28,8 @@
             data: {
                 'user_id':{{$order->user->id}},
                 'order_id':{{$order->id}},
+                'title':'Превышение веса',
+                'price':300,
                 '_token':$_token
             },
             success: function(data) {
@@ -39,6 +37,7 @@
                 if(!data.status) {
                     alert_class = 'warning';
                 } else {
+                    $('.invoice').hide();
                     alert_class = 'success';
                 }
                 $('.message').html(

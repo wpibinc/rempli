@@ -54,7 +54,7 @@ Route::group(['middleware' => ['web']], function () {
             'as' => 'admin.promocodeactivate',
             'uses' => 'SubscriptionController@promoCodeActivate'
         ]);
-
+        Route::post('invoice/order', ['as' => 'admin.invoice', 'uses' => 'InvoiceController@over8kg']);
         Route::post('add-to-order-list', 'UserController@addToOrderList');
 
         Route::post('clear-product-list', 'UserController@clearProductList');
