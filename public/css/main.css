@@ -922,7 +922,7 @@ div.modal-dialog > div > div:nth-child(3){
 .wrapper-acaunt{
 	padding: 10px 30px 20px;
 	background-color: #fff;
-	border: 1px solid #F0EFEC;
+	/*border: 1px solid #F0EFEC;*/
 	margin-bottom: 15px;
 }
 .product .price{
@@ -988,8 +988,11 @@ header.header{
 	z-index: 2;
 }
 .table > tbody > tr > td{
-	padding: 7px 0;
+	padding: 8px;
 	margin-left: 5px;
+}
+.main-block{
+	margin-bottom: 45px;
 }
 .orderlogin{
 	color: #000!important;
@@ -1712,4 +1715,14 @@ td #ex2Slider{
 }
 option {
 	color: #000;
+
+}
+#go-to-order-list{
+	display: none;
+	font-size: 14px;
+}
+#add-to-order-list,
+#go-to-order-list{
+	float: left;
+	padding-left: 10px;
 }
