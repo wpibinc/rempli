@@ -66,24 +66,48 @@ class SubscriptionController extends Controller
                 ->where('is_free', '0')
                 ->orderBy('end_subscription', 'desc')->first();
 
-        $subscription = Subscription::create($request->all());
-        $subscription->start_subscription = $last_subscription->end_subscription;
-        $new_start_date = $last_subscription->end_subscription;
-        $subscription->end_subscription = Carbon::parse($new_start_date)->addMonths(1);
+        if($last_subscription->start_subscription > Carbon::now()) {
+            $invoice = $last_subscription->invoices()->where('last_pay_day', $last_subscription->start_subscription)->first();
+            if(!$invoice->is_paid) {
+                $last_subscription->current_quantity = $request->current_quantity;
+                $last_subscription->total_quantity = $request->total_quantity;
+                $last_subscription->price = $request->price;
+                try {
+                    $last_subscription->save();
+                } catch (\Exception $e) {
+                    return $e;
+                }
 
-        try {
-            $subscription->save();
-        } catch (\Exception $e) {
-            return $e;
+                $invoice->price = $request->price;
+                try {
+                    $invoice->save();
+                } catch (\Exception $e) {
+                    return $e;
+                }
+            } else {
+                return response()->json(['status' => false, 'msg' => 'Не удалось изменить. Ваша подписка уже проплачена.']);
+            }
+        } else {
+            $subscription = Subscription::create($request->all());
+            $subscription->start_subscription = $last_subscription->end_subscription;
+            $new_start_date = $last_subscription->end_subscription;
+            $subscription->end_subscription = Carbon::parse($new_start_date)->addMonths(1);
+
+            try {
+                $subscription->save();
+            } catch (\Exception $e) {
+                return $e;
+            }
+
+            Invoice::create([
+                'user_id' => $request->user_id,
+                'subscription_id' => $subscription->id,
+                'title' => 'Продление подписки',
+                'price' => $request->price,
+                'last_pay_day' => $last_subscription->end_subscription
+            ]);
         }
 
-        Invoice::create([
-            'user_id' => $request->user_id,
-            'subscription_id' => $subscription->id,
-            'title' => 'Продление подписки',
-            'price' => $request->price,
-            'last_pay_day' => $last_subscription->end_subscription
-        ]);
 
         return response()->json(['status' => true, 'msg' => 'Подписка изменена.']);
     }
