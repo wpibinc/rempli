@@ -1729,3 +1729,63 @@ option {
     margin-bottom: 5px;
     text-align: center;
 }
+.select2{
+	width: 170px!important;
+}
+.select2-container--default .select2-selection--single{
+	background-color: transparent!important;
+	border: none!important;
+}
+.select2-container .select2-selection--single .select2-selection__rendered{
+	color: #fff!important;
+	font-size: 15px!important;
+	font-weight: bold!important;
+}
+.select2-search--dropdown{
+	display: none!important;
+}
+.select2-results__options > li{
+	padding-left: 34px;
+	color: #fff!important;
+}
+.select2-results__options > li:nth-child(1){
+	background: url("../img/logo/ab-logo.png") no-repeat;
+	background-size: 30px 30px;
+}
+.select2-results__options > li:nth-child(2){
+	background: url("../img/logo/lm-logo.png") no-repeat;
+	background-size: 30px 30px;
+}
+.select2-selection__rendered{
+	padding-left: 34px!important;
+}
+.select2-selection__rendered[title="Азбука Вкуса"]{
+	background: url("../img/logo/ab-logo.png") no-repeat;
+	background-size: 28px 28px;
+}
+.select2-selection__rendered[title="La Maree"]{
+	background: url("../img/logo/lm-logo.png") no-repeat;
+	background-size: 28px 28px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b{
+	border:none!important;
+
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow:before{
+	content: '\2039';
+	font-size: 33px;
+	transform: rotate(-91deg);
+	display: block;
+	position: absolute;
+	top: -8px;
+	left: 0;
+}
+.select2-dropdown{
+	background-color: transparent!important;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected]{
+	background-color: transparent!important;
+}
+.select2-container--default .select2-results__option[aria-selected=true]{
+	background-color: transparent!important;
+}
