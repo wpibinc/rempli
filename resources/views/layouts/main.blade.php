@@ -25,6 +25,7 @@
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
     <link href="/js/bootstrap-slider-master/css/bootstrap-slider.min.css" rel="stylesheet">
+    <link href="/js/select-custom/css/select2.min.css" rel="stylesheet">
     @yield('style')
 
     {{--Js--}}
@@ -65,7 +66,7 @@
         @if(isset($subscription))
 
         <form id='change-shop-form' action="" method="get">
-            <select name="shop">
+            <select name="shop" class="shop-select">
                 @if(session('shop') == 'Av')
                     <option value="Av" selected="selected">Азбука Вкуса</option>
                 @else
@@ -207,6 +208,8 @@
 <!--<script type="text/javascript" src="/data/categories.json"></script>-->
 <script type="text/javascript" src="/js/func.js"></script>
 <script type="text/javascript" src="/js/func2.js"></script>
+<script type="text/javascript" src="/js/select-custom/js/select2.min.js"></script>
+
 @if(Request::is('my-account'))
     
     <script type="text/javascript" src="/js/account.js"></script>
@@ -273,6 +276,7 @@
     </script>
 @endif
 <script>
+    $('.shop-select').select2();
     //$('.success-modal').modal('show');
     $('.cart-btn').on('click',function () {
         $('#dd_body').addClass('activeMenu');
