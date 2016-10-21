@@ -17,7 +17,7 @@ class CreateMeproduct extends Migration
             $table->string('articul');
             $table->string('name');
             $table->string('link');
-            $table->integer('la_category_id');
+            $table->integer('me_category_id');
             $table->decimal('price', 10, 2);
             $table->string('image')->nullable();
             $table->string('price_style');
