@@ -87,27 +87,25 @@ class MeParseController extends AdminController
                 "verify_peer_name"=>false,
             ),
         );
-//        $doc = HtmlDomParser::file_get_html('https://online.metro-cc.ru/category/produkty/alkogolnaya-produkciya/pivo/napitok-kronenbourg-046-l-20-sht', false, stream_context_create($streamContextOptions));
-//        $price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', '', $doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
+//        $doc = HtmlDomParser::file_get_html('https://online.metro-cc.ru/category/produkty/gotovye-bljuda-polufabrikaty/pizza/grecheskie-pirogi-bontier-brecel-picca-130g', false, stream_context_create($streamContextOptions));
+//        $price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', "", $doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
 //        dd($price_style);
         MeProduct::truncate();
-//        \DB::table('test')->truncate();
+        \DB::table('test')->truncate();
         $doc = HtmlDomParser::file_get_html(self::URL_CATALOG, false, stream_context_create($streamContextOptions));
         $uls = $doc->find('div[class=subcatalog cat1]', 0)->find('ul.subcatalog_items > li.subcatalog_item');
         if($uls){
             foreach ($uls as $ul) {
                 $as = $ul->find('a.subcatalog_link', 0);
-
-                /*\DB::table('test')->insert([
-                    'page' => self::URL_MAIN .''. $as->href. '?limit=999999999',
-                    'created' => Carbon::now()
-                ]);*/
                 $sub_doc = HtmlDomParser::file_get_html(self::URL_MAIN .''. $as->href. '?limit=999999999', false, stream_context_create($streamContextOptions));
-
                 $sub_as = $sub_doc->find('.catalog-i_link');
                 $category_name = trim($sub_doc->find('ul.horizontal > li.active > a', 0)->plaintext);
                 $category = MeCategory::where('name', $category_name)->first();
                 foreach ($sub_as as $sub_a) {
+                    \DB::table('test')->insert([
+                        'page' => $sub_a->href,
+                        'created' => Carbon::now()
+                    ]);
                     $meProduct = new MeProduct();
                     $meProduct->link = $sub_a->href;
                     $product_doc = HtmlDomParser::file_get_html($meProduct->link, false, stream_context_create($streamContextOptions));
@@ -122,11 +120,13 @@ class MeParseController extends AdminController
 //                        $price_style = explode($sep, $price_style)[0];
 //                    }
 //                    $meProduct->price_style = $price_style;
-
-                    $meProduct->price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', '', $doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
+                    $meProduct->price_style = trim(str_replace('ME:', '', str_replace('\t', '', $product_doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
+                    $meProduct->price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', '', $product_doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
                     $meProduct->image = $product_doc->find('img[itemprop="image"]', 0) ? trim($product_doc->find('img[itemprop="image"]', 0)->src) : null;
-                    $meProduct->description = $product_doc->find('div.b-product-main__info-descr', 0) ? trim($product_doc->find('div.b-product-main__info-descr', 0)->plaintext) : null;
-                    $meProduct->description = $doc->find('ul.b-product-main__info-attrs', 0) ? $meProduct->description . '<br>' . trim(preg_replace('/\t+/', "", $doc->find('ul.b-product-main__info-attrs', 0)->outertext)) : $meProduct->description;
+                    $description = $product_doc->find('div.b-product-main__info-descr', 0) ? trim($product_doc->find('div.b-product-main__info-descr', 0)->plaintext) : null;
+                    $attrs = $doc->find('ul.b-product-main__info-attrs', 0) ? '<br>' . trim(preg_replace('/\t+/', "", $product_doc->find('ul.b-product-main__info-attrs', 0)->outertext)) : null;
+                    $meProduct->description = $description . '' . $attrs;
+                    dd($meProduct->toArray());
                     $meProduct->save();
                 }
             }
