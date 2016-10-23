@@ -87,6 +87,9 @@ class MeParseController extends AdminController
                 "verify_peer_name"=>false,
             ),
         );
+//        $doc = HtmlDomParser::file_get_html('https://online.metro-cc.ru/category/produkty/alkogolnaya-produkciya/pivo/napitok-kronenbourg-046-l-20-sht', false, stream_context_create($streamContextOptions));
+//        $price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', '', $doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
+//        dd($price_style);
         MeProduct::truncate();
 //        \DB::table('test')->truncate();
         $doc = HtmlDomParser::file_get_html(self::URL_CATALOG, false, stream_context_create($streamContextOptions));
@@ -112,14 +115,18 @@ class MeParseController extends AdminController
                     $meProduct->name = trim($product_doc->find('h1[itemprop="name"]', 0)->plaintext);
                     $meProduct->me_category_id = $category->id;
                     $meProduct->price = trim(str_replace(' ', '', $product_doc->find('.int', 0)->plaintext)) . '.' . trim($product_doc->find('.float', 0)->plaintext);
-                    $price_style = trim(str_replace('ME:', '', str_replace('\t', '', $product_doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
-                    $sep = $product_doc->find('span.sep', 0)->plaintext;
-                    if (strpos($price_style, $sep) !== false) {
-                        $price_style = explode($sep, $price_style)[0];
-                    }
-                    $meProduct->price_style = $price_style;
+
+//                    $price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', '', $doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
+//                    $sep = $product_doc->find('span.sep', 0)->plaintext;
+//                    if (strpos($price_style, $sep) !== false) {
+//                        $price_style = explode($sep, $price_style)[0];
+//                    }
+//                    $meProduct->price_style = $price_style;
+
+                    $meProduct->price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', '', $doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
                     $meProduct->image = $product_doc->find('img[itemprop="image"]', 0) ? trim($product_doc->find('img[itemprop="image"]', 0)->src) : null;
                     $meProduct->description = $product_doc->find('div.b-product-main__info-descr', 0) ? trim($product_doc->find('div.b-product-main__info-descr', 0)->plaintext) : null;
+                    $meProduct->description = $doc->find('ul.b-product-main__info-attrs', 0) ? $meProduct->description . '<br>' . trim(preg_replace('/\t+/', "", $doc->find('ul.b-product-main__info-attrs', 0)->outertext)) : $meProduct->description;
                     $meProduct->save();
                 }
             }
