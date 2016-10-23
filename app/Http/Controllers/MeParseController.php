@@ -126,7 +126,6 @@ class MeParseController extends AdminController
                     $description = $product_doc->find('div.b-product-main__info-descr', 0) ? trim($product_doc->find('div.b-product-main__info-descr', 0)->plaintext) : null;
                     $attrs = $doc->find('ul.b-product-main__info-attrs', 0) ? '<br>' . trim(preg_replace('/\t+/', "", $product_doc->find('ul.b-product-main__info-attrs', 0)->outertext)) : null;
                     $meProduct->description = $description . '' . $attrs;
-                    dd($meProduct->toArray());
                     $meProduct->save();
                 }
             }
