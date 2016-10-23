@@ -90,8 +90,8 @@ class MeParseController extends AdminController
 //        $doc = HtmlDomParser::file_get_html('https://online.metro-cc.ru/category/produkty/gotovye-bljuda-polufabrikaty/pizza/grecheskie-pirogi-bontier-brecel-picca-130g', false, stream_context_create($streamContextOptions));
 //        $price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', "", $doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
 //        dd($price_style);
+//        \DB::table('test')->truncate();
         MeProduct::truncate();
-        \DB::table('test')->truncate();
         $doc = HtmlDomParser::file_get_html(self::URL_CATALOG, false, stream_context_create($streamContextOptions));
         $uls = $doc->find('div[class=subcatalog cat1]', 0)->find('ul.subcatalog_items > li.subcatalog_item');
         if($uls){
@@ -102,10 +102,10 @@ class MeParseController extends AdminController
                 $category_name = trim($sub_doc->find('ul.horizontal > li.active > a', 0)->plaintext);
                 $category = MeCategory::where('name', $category_name)->first();
                 foreach ($sub_as as $sub_a) {
-                    \DB::table('test')->insert([
-                        'page' => $sub_a->href,
-                        'created' => Carbon::now()
-                    ]);
+//                    \DB::table('test')->insert([
+//                        'page' => $sub_a->href,
+//                        'created' => Carbon::now()
+//                    ]);
                     $meProduct = new MeProduct();
                     $meProduct->link = $sub_a->href;
                     $product_doc = HtmlDomParser::file_get_html($meProduct->link, false, stream_context_create($streamContextOptions));
