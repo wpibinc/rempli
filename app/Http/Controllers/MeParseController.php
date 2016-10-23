@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use duzun\hQuery;
 use SleepingOwl\Admin\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use App\MeCategory;
@@ -24,6 +23,8 @@ class MeParseController extends AdminController
     public function __construct(Request $request)
     {
         $this->path = public_path() . '/parser/cache/';
+        define('MAX_FILE_SIZE', 6000000);
+//        set_time_limit(21600); //6 hours
     }
     
     public function index(Request $request)
@@ -40,8 +41,7 @@ class MeParseController extends AdminController
             ),
         );
 
-        $doc = HtmlDomParser::file_get_html( self::URL_CATALOG, false,  stream_context_create($streamContextOptions));
-        
+        $doc = HtmlDomParser::file_get_html(self::URL_CATALOG, false, stream_context_create($streamContextOptions));
         $parents = $doc->find('.l-category .col-left .subcatalog .subcatalog_list');
         if(!$parents){
             return back()->with('status', 'Категорий не найдено');
@@ -87,52 +87,41 @@ class MeParseController extends AdminController
                 "verify_peer_name"=>false,
             ),
         );
+        MeProduct::truncate();
+//        \DB::table('test')->truncate();
+        $doc = HtmlDomParser::file_get_html(self::URL_CATALOG, false, stream_context_create($streamContextOptions));
+        $uls = $doc->find('div[class=subcatalog cat1]', 0)->find('ul.subcatalog_items > li.subcatalog_item');
+        if($uls){
+            foreach ($uls as $ul) {
+                $as = $ul->find('a.subcatalog_link', 0);
 
-        $products = MeProduct::all();
-        foreach($products as $product){
-            $product->delete();
-        }
+                /*\DB::table('test')->insert([
+                    'page' => self::URL_MAIN .''. $as->href. '?limit=999999999',
+                    'created' => Carbon::now()
+                ]);*/
+                $sub_doc = HtmlDomParser::file_get_html(self::URL_MAIN .''. $as->href. '?limit=999999999', false, stream_context_create($streamContextOptions));
 
-        $categories = MeCategory::where('parent_id', 0)->get();
-
-        if(!count($categories)){
-            return;
-        }
-        foreach($categories as $category){
-            $this->meCategoryId = $category->id;
-            $doc = HtmlDomParser::file_get_html( self::URL_CATALOG, false,  stream_context_create($streamContextOptions));
-            $uls = $doc->find('ul.subcatalog_items > li.subcatalog_item');
-            if($uls){
-                foreach ($uls as $ul) {
-                    $as = $ul->find('a.subcatalog_link', 0);
-                    header('Content-Type: text/html; charset=utf-8');
-                    echo "<pre>";
-                    var_dump($as);
-                    echo "</pre>";
-                    die();
-                    $order = 0;
-                    foreach($as as $a){
-                        $link = $a->attr('href');
-                        $name = trim($a->text());
-                        $parent = $category->id;
-                        $laCategory = LaCategory::where('link', $link)->first();
-                        if(!$laCategory){
-                            LaCategory::create([
-                                'name' => $name,
-                                'link' => $link,
-                                'parent_id' => $parent,
-                                'order' => $order,
-                            ]);
-                            $order++;
-                        }
-
-                        $subDoc = hQuery::fromUrl($link);
-                        $this->getProductsFromLink($subDoc);
+                $sub_as = $sub_doc->find('.catalog-i_link');
+                $category_name = trim($sub_doc->find('ul.horizontal > li.active > a', 0)->plaintext);
+                $category = MeCategory::where('name', $category_name)->first();
+                foreach ($sub_as as $sub_a) {
+                    $meProduct = new MeProduct();
+                    $meProduct->link = $sub_a->href;
+                    $product_doc = HtmlDomParser::file_get_html($meProduct->link, false, stream_context_create($streamContextOptions));
+                    $meProduct->articul = trim($product_doc->find('span[itemprop="productID"]', 0)->plaintext);
+                    $meProduct->name = trim($product_doc->find('h1[itemprop="name"]', 0)->plaintext);
+                    $meProduct->me_category_id = $category->id;
+                    $meProduct->price = trim(str_replace(' ', '', $product_doc->find('.int', 0)->plaintext)) . '.' . trim($product_doc->find('.float', 0)->plaintext);
+                    $price_style = trim(str_replace('ME:', '', str_replace('\t', '', $product_doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
+                    $sep = $product_doc->find('span.sep', 0)->plaintext;
+                    if (strpos($price_style, $sep) !== false) {
+                        $price_style = explode($sep, $price_style)[0];
                     }
+                    $meProduct->price_style = $price_style;
+                    $meProduct->image = $product_doc->find('img[itemprop="image"]', 0) ? trim($product_doc->find('img[itemprop="image"]', 0)->src) : null;
+                    $meProduct->description = $product_doc->find('div.b-product-main__info-descr', 0) ? trim($product_doc->find('div.b-product-main__info-descr', 0)->plaintext) : null;
+                    $meProduct->save();
                 }
-
-            }else{
-                $this->getProductsFromLink($doc);
             }
         }
 
