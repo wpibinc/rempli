@@ -77,6 +77,11 @@
                 @else
                     <option value="La">La Maree</option>
                 @endif
+                @if(session('shop') == 'Me')
+                    <option value="Me" selected="selected">Metro</option>
+                @else
+                    <option value="Me">Metro</option>
+                @endif
             </select>
         </form>
         @endif
