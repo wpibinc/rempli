@@ -271,9 +271,11 @@ $(document).ready(function() {
 var orderDate = $("input[name=order-date]").val();
 $('.check-date').on('change', function(){
     if($(this).attr('id')=='date-now'){
-        $("input[name=order-date]").val(orderDate).hide();    
+        $("input[name=order-date]").val(orderDate).hide();
+        $(".show-date-now").show();
     }else{
         $("input[name=order-date]").show();
+        $(".show-date-now").hide();
     }
     
 });
