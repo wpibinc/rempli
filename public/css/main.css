@@ -1767,6 +1767,9 @@ option {
 	background: url("../img/logo/lm-logo.png") no-repeat;
 	background-size: 28px 28px;
 }
+.logo{
+	margin-right: 20px;
+}
 .select2-container--default .select2-selection--single .select2-selection__arrow b{
 	border:none!important;
 
@@ -1788,4 +1791,10 @@ option {
 }
 .select2-container--default .select2-results__option[aria-selected=true]{
 	background-color: transparent!important;
+}
+.main-block{
+	min-height: 600px;
+}
+:focus {
+	outline:0!important;
 }
