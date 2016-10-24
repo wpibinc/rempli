@@ -47,8 +47,12 @@ class OrderController extends BaseController
         if($date->hour >= 20){
             $orderNow = false;
         }
-        $orderDate = substr($date->addHour(), 0, -3);
-
+        $shop = session('shop');
+        if($shop == 'Me'){
+            $orderDate = substr($date->addHours(3), 0, -3);
+        }
+        
+        
         return view('order', [
             'user' => $user, 
             'date' => $orderDate,
@@ -116,24 +120,23 @@ class OrderController extends BaseController
 //            //dd($client->myLimit());
 //            return ['ok'];
 //        }
-        
-        
+
         $apiId = 'BAFD72FC-2E9F-6C9F-77BF-4F2BDEEBD21F';
+
         $client = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
-    
         $phone = '89645805819';
         $text1 = "$name. Сумма заказа $cost руб.";
+        $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text1);
+        $client->smsSend($sms);
 
-        
-        
+        $client2 = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
         $userPhone = $user->phone;
         $text2 = 'Ваш заказ на сумму '.$cost.' рублей принят. В ближайшее время мы свяжемся с Вами для подтверждения';
         $sms2 = new \Zelenin\SmsRu\Entity\Sms($userPhone, $text2);
-        $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text1);
+        $client2->smsSend($sms2);
 
-        $client->smsSend($sms);
-        $client->smsSend($sms2);
-        return redirect('/')->with('order', 'success');
+        session(['orderSuccess' => true]);
+        return redirect('/');
     }
 }
 

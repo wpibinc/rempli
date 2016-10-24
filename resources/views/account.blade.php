@@ -8,6 +8,10 @@
     {{--@endif--}}
 <div class="col-md-12">
     <div class="tabs col-md-12">
+        @if($time_to_pay)
+            <div style="color: red;">{{$time_to_pay}}</div>
+            <button class="invoice_page btn" style="display: block;margin-bottom: 15px;">Оплатить</button>
+        @endif
         <ul class="col-md-2">
             <li><i class="fa fa-user" aria-hidden="true"></i> Учетная запись <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-list-alt" aria-hidden="true"></i> История заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
@@ -233,10 +237,6 @@
                         @endif
                         </tbody>
                     </table>
-                    @endif
-                    @if($time_to_pay)
-                        <div style="color: red;">{{$time_to_pay}}</div>
-                        <button class="invoice_page">Оплатить</button>
                     @endif
                 </div>
             </div>

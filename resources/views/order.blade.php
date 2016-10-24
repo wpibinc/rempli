@@ -135,8 +135,9 @@
                     @if($orderNow)
                     <label for="date-now">
                         <input type="radio" checked="checked" id="date-now" value="now" name="check-date" class="check-date">
-                        Сейчас
+                        Сейчас <span class='show-date-now'>{{$date}}</span>
                     </label></br>
+                    
                     @endif
                     <label for="date-later">
                         <input type="radio" id="date-later" value="set-time" name="check-date" class="check-date">
@@ -213,7 +214,6 @@
             if($("#optionsRadios1").prop('checked')){
                 $('#val-1').addClass('activeClassradio').removeClass('radiocustom');
                 $('#val-2').addClass('radiocustom').removeClass('activeClassradio');
-                console.log("sdasdsa");
             } else{
                 $('#val-2').addClass('activeClassradio').removeClass('radiocustom');
                 $('#val-1').addClass('radiocustom').removeClass('activeClassradio');

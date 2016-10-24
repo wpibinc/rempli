@@ -42,8 +42,9 @@
         }
     });
     </script>
-@if (session('order'))
+@if (session('orderSuccess'))
     <script>
+        <?php session(['orderSuccess' => false]); ?>
         sessionStorage.clear();
         localStorage.clear();
     </script>
@@ -56,7 +57,7 @@
 <a href="#" class="close-popup btn btn-default">Отмена</a>
 </div>
 <div class="popup-oplata-false col-md-12">
-    <p class="alcogol">У вас есть неоплаченные счета</p>
+    <p class="alcogol">Не удалось сделать заказ, у Вас имеются неоплаченные счета.</p>
     <a href="my-account?section=invoice" class="ok-popup btn btn-warning">Оплатить</a>
 </div>
 <div class="popup-oplata-false-bg"></div>
