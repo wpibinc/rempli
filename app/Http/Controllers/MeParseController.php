@@ -120,7 +120,6 @@ class MeParseController extends AdminController
 //                        $price_style = explode($sep, $price_style)[0];
 //                    }
 //                    $meProduct->price_style = $price_style;
-                    $meProduct->price_style = trim(str_replace('ME:', '', str_replace('\t', '', $product_doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
                     $meProduct->price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', '', $product_doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
                     $meProduct->image = $product_doc->find('img[itemprop="image"]', 0) ? trim($product_doc->find('img[itemprop="image"]', 0)->src) : null;
                     $description = $product_doc->find('div.b-product-main__info-descr', 0) ? trim($product_doc->find('div.b-product-main__info-descr', 0)->plaintext) : null;
