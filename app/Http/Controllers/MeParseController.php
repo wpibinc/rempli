@@ -24,7 +24,7 @@ class MeParseController extends AdminController
     {
         $this->path = public_path() . '/parser/cache/';
         define('MAX_FILE_SIZE', 6000000);
-//        set_time_limit(21600); //6 hours
+        set_time_limit(21600); //6 hours
     }
     
     public function index(Request $request)
