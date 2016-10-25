@@ -13,10 +13,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        if (! \App::runningInConsole()) {
-            $categories = \App\Category::all()->sortBy("order");
-            view()->share('categories', $categories);
-        }
     }
 
     /**

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Invoice;
+use App\MeCategory;
+use App\MeProduct;
 use Illuminate\Http\Request;
 use App\AvProduct;
 use App\Product;
@@ -20,6 +23,26 @@ class MainController extends Controller
 {
     public function __construct(Guard $auth)
     {
+        if (! \App::runningInConsole()) {
+            $shop = session('shop');
+            switch($shop){
+                case 'Me':
+                    $categories = Category::whereHas('mecategories', function($q){
+                        $q->whereNotNull('category_id');
+                    })->get();
+                    break;
+                case 'La':
+                    $categories = Category::whereHas('lacategories', function($q){
+                        $q->whereNotNull('category_id');
+                    })->get();
+                    break;
+                default:
+                    $categories = Category::all()->sortBy("order");
+                    break;
+            }
+
+            view()->share('categories', $categories);
+        }
         $now = Carbon::now();
         $userId = $auth->id();
         $haveSubs = false;
@@ -120,6 +143,9 @@ class MainController extends Controller
         $shop = session('shop');
         $json = array();
         switch($shop){
+            case 'Me':
+                $json = $this->meAutocompleteSearch($term);
+                break;
             case 'La':
                 $json = $this->laAutocompleteSearch($term);
                 break;
@@ -196,6 +222,31 @@ class MainController extends Controller
         
         return $json;
     }
+
+    protected function meAutocompleteSearch($term)
+    {
+        $json = array();
+        $products = MeProduct::where('name', 'like', $term.'%')
+                ->orderBy('updated_at')
+                ->take(3)
+                ->get();
+
+        foreach($products as $product){
+            $category = $product->meCategory->categories->first();
+            $categId = $category?$category->id:'';
+            $json[] = array(
+                'label' => $product->name,
+                'image' => $product->image,
+                'id' => $product->id,
+                'price' => $product->price,
+                'weight' => '',
+                'category' => $categId,
+                'shop' => $product->shop,
+            );
+        }
+
+        return $json;
+    }
     
     public function mainSearch(Request $request)
     {
@@ -206,6 +257,8 @@ class MainController extends Controller
         $shop = session('shop');
         $json;
         switch($shop){
+            case 'Me': $json = $this->meSearch($word);
+                break;
             case 'La': $json = $this->laSearch($word);
                 break;
             default:
@@ -319,6 +372,42 @@ class MainController extends Controller
             );
         }
         
+        return $json;
+    }
+
+    protected function meSearch($word)
+    {
+        $products = MeProduct::where('name', 'like', '%'.$word.'%')
+                ->orderBy('updated_at')
+                ->get();
+        $json = array(
+            'success' => true,
+            'products' => array(),
+        );
+        if(!count($products)){
+            return response()->json(['success' => false]);
+        }
+
+
+        foreach($products as $product){
+            $category = $product->meCategory->categories->first();
+            $categId = $category ? $categId = $category->id : '';
+            $json['products'][] = array(
+                'objectId' => $product->id,
+                'cvalues' => '',
+                'ctitles' => '',
+                'img_sm' => $product->image,
+                'category' => $categId,
+                'product_name' => $product->name,
+                'price' => $product->price,
+                'amount' => $product->price_style,
+                'weight' => '',
+                'description' => $product->description,
+                'updatedAt' => $product->updated_at,
+                'shop' => $product->shop
+            );
+        }
+
         return $json;
     }
 

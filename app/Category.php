@@ -29,6 +29,11 @@ class Category extends Model
     {
         return $this->belongsToMany(LaCategory::class, 'category_lacategory', 'category_id', 'lacategory_id');
     }
+
+    public function mecategories()
+    {
+        return $this->belongsToMany(MeCategory::class, 'category_mecategory', 'category_id', 'mecategory_id');
+    }
 //    public function getAvcategoriesAttribute()
 //    {
 //       // dd('lol');
