@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Invoice;
+use App\MeCategory;
 use App\MeProduct;
 use Illuminate\Http\Request;
 use App\AvProduct;
@@ -21,6 +23,26 @@ class MainController extends Controller
 {
     public function __construct(Guard $auth)
     {
+        if (! \App::runningInConsole()) {
+            $shop = session('shop');
+            switch($shop){
+                case 'Me':
+                    $categories = Category::whereHas('mecategories', function($q){
+                        $q->whereNotNull('category_id');
+                    })->get();
+                    break;
+                case 'La':
+                    $categories = Category::whereHas('lacategories', function($q){
+                        $q->whereNotNull('category_id');
+                    })->get();
+                    break;
+                default:
+                    $categories = Category::all()->sortBy("order");
+                    break;
+            }
+
+            view()->share('categories', $categories);
+        }
         $now = Carbon::now();
         $userId = $auth->id();
         $haveSubs = false;

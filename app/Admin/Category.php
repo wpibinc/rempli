@@ -49,7 +49,7 @@ AdminSection::registerModel(Category::class, function (ModelConfiguration $model
                                 ->setModelForOptions(new \App\MeCategory)
                                 ->setLoadOptionsQueryPreparer(function($item, $query) {
                                     return $query
-                                        ->where('parent_id', 0);
+                                        ->where('parent_id', '!=', 0);
                                })
                                 ->setDisplay('name'),
                         ];
