@@ -45,6 +45,13 @@ AdminSection::registerModel(Category::class, function (ModelConfiguration $model
                                         ->where('parent_id', 0);
                                })
                                 ->setDisplay('name'),
+                             AdminFormElement::multiselect('mecategories', 'Категории Metro')
+                                ->setModelForOptions(new \App\MeCategory)
+                                ->setLoadOptionsQueryPreparer(function($item, $query) {
+                                    return $query
+                                        ->where('parent_id', 0);
+                               })
+                                ->setDisplay('name'),
                         ];
                     }
                 )->addColumn(function ()

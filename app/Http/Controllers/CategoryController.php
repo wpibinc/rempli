@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MeCategory;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -60,7 +61,10 @@ class CategoryController extends BaseController
         $id = (int) $request->input('id');
         $json;
         switch($shop){
-            case 'La': 
+            case 'Me':
+                $json = $this->getMeCategories($id);
+                break;
+            case 'La':
                 $json = $this->getLaCategories($id);
                 break;
             default:
@@ -82,6 +86,8 @@ class CategoryController extends BaseController
         $shop = session('shop');
         $json = array();
         switch($shop){
+            case 'Me': $json = $this->getMeSubCategories($id);
+                break;
             case 'La': $json = $this->getLaSubCategories($id);
                 break;
             default: $json = $this->getAvSubCategories($id);
@@ -229,6 +235,70 @@ class CategoryController extends BaseController
             }
         }
         
+        return $json;
+    }
+
+    protected function getMeCategories($id)
+    {
+        $json = array(
+            'avCategories' => array(),
+            'products' => array(),
+        );
+        $category = \App\Category::where('category_id', '=', $id)->first();
+        foreach($category->mecategories as $meCat){
+            $json['avCategories'][] = array(
+                'id' => $meCat->id,
+                'name' => $meCat->name
+            );
+
+            foreach($meCat->products as $product){
+                $json['products'][] = array(
+                    'objectId' => $product->id,
+                    'cvalues' => '',
+                    'ctitles' => '',
+                    'img_sm' => $product->image,
+                    'category' => $id,
+                    'product_name' => $product->name,
+                    'price' => $product->price,
+                    'amount' => $product->price_style,
+                    'weight' => '',
+                    'description' => $product->description,
+                    'updatedAt' => $product->updated_at,
+                    'shop' => $product->shop
+                );
+            }
+
+
+        }
+        return $json;
+    }
+
+    protected function getMeSubCategories($id)
+    {
+        $products = MeCategory::find($id)->products;
+        $json = array();
+        if(!empty($products)){
+            foreach($products as $product){
+                $price = $product->price;
+                $amount = $product->price_style;
+                $category = $product->meCategory->categories->first();
+                $json[] = array(
+                    'objectId' => $product->id,
+                    'cvalues' => '',
+                    'ctitles' => '',
+                    'img_sm' => $product->image,
+                    'category' => $category->id,
+                    'product_name' => $product->name,
+                    'price' => $price,
+                    'amount' => $amount,
+                    'weight' => '',
+                    'description' => $product->description,
+                    'updatedAt' => $product->updated_at,
+                    'shop' => 'Me'
+                );
+            }
+        }
+
         return $json;
     }
     
