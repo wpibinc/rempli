@@ -189,7 +189,7 @@
                             <td><span>Срок действия подписки до: {{\Carbon\Carbon::parse($subscription->end_subscription)->format('d-m-Y')}}</span> </td>
                         </tr>
                         <tr>
-                            <td><span>Количество оставшихся доставок/количество доставок всего</span> <span class="countDelivery">{{isset($current_quantity) ? $current_quantity : $subscription->current_quantity}}</span>/<span class="countDeliveryAll">{{$subscription->total_quantity}}</span></td>
+                            <td><span>Количество оставшихся доставок/количество доставок всего:</span> </br><span class="countDelivery">{{isset($current_quantity) ? $current_quantity : $subscription->current_quantity}}</span><span class="dots">/</span><span class="countDeliveryAll">{{$subscription->total_quantity}}</span></td>
                         </tr>
                         @if (\Carbon\Carbon::now() < $subscription->end_subscription && $subscription->current_quantity == 0 || (isset($current_quantity) && $current_quantity == 0))
                         <tr class="dop-wrapper hideDiv">
@@ -230,7 +230,7 @@
                                        @endif
                                        data-slider-tooltip="hide"/></br>
                                 <p class="finalPriceSubscriptions hideDiv"><span></span> руб</p>
-                                {{--<button class="btn btn-default editSubscription" disabled type="button">изменить условия</button>--}}
+                                <button class="btn btn-default editSubscription Dsp-none" disabled type="button">изменить условия</button>
                                 <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
                             </td>
                         </tr>
@@ -304,34 +304,34 @@
             $('table .slider-horizontal').addClass('visb-h');
         });
         $(document).on('click','.editSubscription',function () {
-//            $('.slider-horizontal').removeClass('visb-h');
-//            $('.finalPriceSubscriptions').removeClass('hideDiv');
-//            $('.editSubscription').addClass('hideDiv');
-//            $('.editsSubscription').removeClass('hideDiv');
+          $('.slider-horizontal').removeClass('visb-h');
+           $('.finalPriceSubscriptions').removeClass('hideDiv');
+          $('.editSubscription').addClass('hideDiv');
+         $('.editsSubscription').removeClass('hideDiv');
         });
 
         $(document).on('click','.editsSubscription',function () {
-//            $('.slider-horizontal').addClass('visb-h');
-//            $('.finalPriceSubscriptions').addClass('hideDiv');
-//            $('.editSubscription').removeClass('hideDiv');
-//            $('.editsSubscription').addClass('hideDiv');
-//            var countDelivery = parseInt($('#ex2').val());
-//            if(countDelivery == 1){
-//                $('.countDeliveryAll').html('4');
-//                $('.countDelivery').html('4');
-//            }
-//            if(countDelivery == 2){
-//                $('.countDeliveryAll').html('8');
-//                $('.countDelivery').html('8');
-//            }
-//            if(countDelivery == 3){
-//                $('.countDeliveryAll').html('12');
-//                $('.countDelivery').html('12');
-//            }
-//            if(countDelivery == 4){
-//                $('.countDeliveryAll').html('30');
-//                $('.countDelivery').html('30');
-//            }
+            $('.slider-horizontal').addClass('visb-h');
+            $('.finalPriceSubscriptions').addClass('hideDiv');
+            $('.editSubscription').removeClass('hideDiv');
+            $('.editsSubscription').addClass('hideDiv');
+            var countDelivery = parseInt($('#ex2').val());
+            if(countDelivery == 1){
+                $('.countDeliveryAll').html('4');
+                $('.countDelivery').html('4');
+            }
+            if(countDelivery == 2){
+                $('.countDeliveryAll').html('8');
+                $('.countDelivery').html('8');
+            }
+            if(countDelivery == 3){
+                $('.countDeliveryAll').html('12');
+                $('.countDelivery').html('12');
+            }
+            if(countDelivery == 4){
+                $('.countDeliveryAll').html('30');
+                $('.countDelivery').html('30');
+            }
 
         });
         $(document).on('click','.buySubscription',function () {
@@ -379,17 +379,17 @@
         $(document).on('click','.auto_subscription',function () {
             var $el = $(this);
             if($el.prop('checked') == true){
-                $('.slider-horizontal').removeClass('visb-h');
-                $('.finalPriceSubscriptions').removeClass('hideDiv');
-                $('.editsSubscription').removeClass('hideDiv');
-
+//                $('.slider-horizontal').removeClass('visb-h');
+//                $('.finalPriceSubscriptions').removeClass('hideDiv');
+//                $('.editsSubscription').removeClass('hideDiv');
+                $('.editSubscription').removeClass('Dsp-none');
                 $('.editSubscription').removeAttr('disabled');
                 $('.editsSubscription').removeAttr('disabled');
             } else {
-                $('.slider-horizontal').addClass('visb-h');
-                $('.finalPriceSubscriptions').addClass('hideDiv');
-                $('.editsSubscription').addClass('hideDiv');
-
+//                $('.slider-horizontal').addClass('visb-h');
+//                $('.finalPriceSubscriptions').addClass('hideDiv');
+//                $('.editsSubscription').addClass('hideDiv');
+                $('.editSubscription').addClass('Dsp-none');
                 $('.editSubscription').attr('disabled','disabled');
                 $('.editsSubscription').attr('disabled','disabled');
             }
