@@ -18,7 +18,7 @@ class OrderController extends BaseController
             $adressChecked = $request->input('addressChecked');
             $user = Auth::user();
             $order['user_id'] = $user->id;
-            $order['shop'] = session('shop');
+            $order['shop'] = session('shop')?session('shop'):'Av';
             $items = request()->only('items');
             if(!empty($adressChecked)){
                 $adress = Adress::find($adressChecked);
@@ -48,11 +48,10 @@ class OrderController extends BaseController
             $orderNow = false;
         }
         $shop = session('shop');
+        $orderDate = substr($date->addHour(), 0, -3);
         if($shop == 'Me'){
             $orderDate = substr($date->addHours(3), 0, -3);
         }
-        
-        
         return view('order', [
             'user' => $user, 
             'date' => $orderDate,
