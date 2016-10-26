@@ -182,6 +182,7 @@
                 <div class="trueSubscription">
                     @if(isset($subscription))
                     <input type="hidden" name="subscription_id" value="{{$subscription->id}}">
+                    <input type="hidden" name="price" value="{{$subscription->price}}">
                     <h3>Подписка</h3>
                     <table class="table">
                         <tbody>
@@ -377,6 +378,8 @@
             $('.finalPriceSubscriptions span').html(finalPriceSubscription2);
         });
         $(document).on('click','.auto_subscription',function () {
+
+
             var $el = $(this);
             if($el.prop('checked') == true){
 //                $('.slider-horizontal').removeClass('visb-h');
