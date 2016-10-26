@@ -1069,7 +1069,7 @@ header.header{
 .main-start-page h4{
 	text-transform: uppercase;
 	color: #000;
-	margin-top: 28%;
+
 	margin-bottom: 25px;
 	font-family: "HelveticaLight";
 	color: #777;
@@ -1085,10 +1085,9 @@ header.header{
 .main-start-page p{
 	color: #777;
 	font-size: 18px;
-	padding-left: 28px;
-	padding-right: 28px;
+
 	font-family: "HelveticaLight";
-	width: 330px;
+
 }
 .main-start-page > img{
 	margin-bottom: 25px;
@@ -1129,11 +1128,7 @@ header.header{
 	font-size: 35px;
 }
 .btn-custom-reset{
-	height: 50px;
-	vertical-align: middle;
-	color: #fff;
-	font-size: 17px;
-	padding: 0 25px;
+
 }
 #tt > iframe{
 	float: right;
@@ -1756,6 +1751,7 @@ option {
 .select2-results__options > li:nth-child(1){
 	background: url("../img/logo/ab-logo.png") no-repeat;
 	background-size: 30px 30px;
+	margin-bottom: 5px;
 }
 .select2-results__options > li:nth-child(2){
 	background: url("../img/logo/lm-logo.png") no-repeat;
@@ -1771,6 +1767,16 @@ option {
 .select2-selection__rendered[title="La Maree"]{
 	background: url("../img/logo/lm-logo.png") no-repeat;
 	background-size: 28px 28px;
+}
+.select2-selection__rendered[title="Metro"]{
+	background: url("../img/mento.png") no-repeat;
+	background-size: 28px 17px;
+	background-position-y: 6px;
+}
+.select2-results__options > li:nth-child(3){
+	background: url("../img/mento.png") no-repeat;
+	background-size: 28px 17px;
+	background-position-y: 7px;
 }
 .logo{
 	margin-right: 20px;
@@ -1804,7 +1810,7 @@ option {
 	outline:0!important;
 }
 .select2-dropdown{
-	margin-top: 5px;
+	margin-top: 8px;
 	border: none!important;
 }
 .subscription h3{
@@ -1838,4 +1844,14 @@ option {
 
 .Dsp-none{
 	display: none;
+}
+/*.home-p p{*/
+	/*padding-left: 44px;*/
+/*}*/
+/*.home-p2 p{*/
+	/*padding-left: 33px;*/
+/*}*/
+.home-p h4,
+.home-p2 h4{
+	margin-bottom: 5px;
 }

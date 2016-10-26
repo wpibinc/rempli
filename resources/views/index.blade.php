@@ -7,35 +7,36 @@
     <div class="av-categ-menu"></div>
     <div style="clear:both"></div>
     <div id="item-wrap-inner" class="products-wrap">
-        <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12 main-start-page">
+        <div class="col-md-12  col-sm-12 col-xs-12 main-start-page" style="text-align: center">
             <img src="/img/main_title.png" alt='main' >
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <img src="/img/main_girl.png" alt='main' >
+            <div class="col-md-12" style="text-align: center">
+                <img src="/img/main-img-home.png" alt='main'>
+                <div class="col-md-4">
+                    {{--<img src="/img/main_girl.png" alt='main'>--}}
+                    <div class="col-md-12-2 home-p">
+                        <h4>1. Выбор продуктов</h4>
+                        <p>В нашем магазине Вы можете выбрать из тысяч продуктов только проверенных магазинов</p>
+                    </div>
+
                 </div>
-                <div class="col-md-6">
-                    <h4>1. Выбор продуктов</h4>
-                    <p>В нашем магазине вы можите выбрать из тысяч продуктов</p>
+                <div class="col-md-4">
+                    {{--<img src="/img/main_girl2.png" alt='main'>--}}
+                    <div class="col-md-12 home-p2">
+                        <h4>2. ОФОРМЛЕНИЕ ЗАКАЗА</h4>
+                        <p>Укажите адрес доставки и свои пожелания.</p>
+                    </div>
                 </div>
+                <div class="col-md-4">
+                    {{--<img src="/img/main_guys.png" alt='main' >--}}
+                    <div class="col-md-12 home-p" >
+                        <h4>3. ПОЛУЧЕНИЕ ЗАКАЗА</h4>
+                        <p>В течение часа Ваши продукты будут доставлены курьером Rempli с полок магазина прямо к Вашей двери.</p>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <h4>1. Выбор продуктов</h4>
-                    <p>В нашем магазине вы можите выбрать из тысяч продуктов</p>
-                </div>
-                <div class="col-md-6">
-                    <img src="/img/main_girl2.png" alt='main' >
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <img src="/img/main_guys.png" alt='main' >
-                </div>
-                <div class="col-md-6">
-                    <h4>1. Выбор продуктов</h4>
-                    <p>В нашем магазине вы можите выбрать из тысяч продуктов</p>
-                </div>
-            </div>
+
+
         </div>
 
     </div>
