@@ -40,20 +40,26 @@ class UserController extends Controller
         if(isset($subscriptions) && $subscriptions->is_free == '0') {
             $next_subscription = $user->subscriptions()->where('end_subscription', '>', Carbon::now())
                 ->where('start_subscription', $subscriptions->end_subscription)->first();
+
             if(isset($next_subscription)) {
                 $invoice = Invoice::where('is_paid', '0')
                     ->where('subscription_id', $next_subscription->id)
                     ->where('last_pay_day', $next_subscription->start_subscription)->first();
+
                 if (isset($invoice) && Carbon::now()->addDay(3) > $invoice->last_pay_day) {
                     $time_to_pay = 'У Вас имеются неоплаченные счета';
                 }
             }
         }
-
         $orders = Order::where('user_id', $user->id)->simplePaginate(15);
         $listProducts = ListProduct::where('user_id', $user->id)->simplePaginate(15);
         $adresses = $user->adresses;
-        $invoices = $user->invoices()->where('is_paid', '0')->get();
+        $invoices = $user->invoices()->where('is_paid', '0')
+            ->where('last_pay_day', '<', Carbon::now()->addDay(3))
+            ->get();
+        if($invoices->count() > 0) {
+            $time_to_pay = 'У Вас имеются неоплаченные счета';
+        }
         if(isset($long_promocode)) {
             $current_quantity = $subscriptions->current_quantity - $long_promocode->used_per_month;
             return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions, 'long_promocode' => $long_promocode, 'current_quantity' => $current_quantity, 'invoices' => $invoices]);
