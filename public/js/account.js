@@ -137,5 +137,12 @@ $(document).on('ready', function(){
         });
     });
     
+    $('.shops > li > a').on('click', function(e){
+        e.preventDefault();
+        var href = $(this).attr('href');
+        sessionStorage.clear();
+        localStorage.clear();
+        window.location.href = href;
+    });
 });
 

@@ -248,11 +248,13 @@
             </div>
             <div class='rules wrapper-acaunt'>Правила</div>
             <div class='orders lists wrapper-acaunt '>
+                @if(isset($subscription) && $subscription)
                 <ul class='shops'>
-                    <li><a class="" href='my-account?section=order-list&shop=Av'>Азбука Вкуса</a></li>
-                    <li><a href='my-account?section=order-list&shop=La'>La Maree</a></li>
-                    <li><a href='my-account?section=order-list&shop=Me'>Metro</a></li>
+                    <li class="{{ session('shop')=='Av'||!session('shop') ? 'active' : '' }}"><a href='my-account?section=order-list&shop=Av'>Азбука Вкуса</a></li>
+                    <li class="{{ session('shop')=='La' ? 'active' : '' }}"><a href='my-account?section=order-list&shop=La'>La Maree</a></li>
+                    <li class="{{ session('shop')=='Me' ? 'active' : '' }}"><a href='my-account?section=order-list&shop=Me'>Metro</a></li>
                 </ul>
+                @endif
                 Список заказов
                 <div class="table-responsive">
                     <table class="table">
