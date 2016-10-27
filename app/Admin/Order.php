@@ -42,6 +42,8 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
                     switch($model->shop){
                         case 'La': return 'La Maree';
                             break;
+                        case 'Me': return 'Metro';
+                            break;
                         default: return 'Азбука вкуса';
                             break;
                     }

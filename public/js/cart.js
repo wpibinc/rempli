@@ -446,7 +446,7 @@ $('#orderBtn').on({
             success: function(res){
                 if(res.success){
                     $('.popup-oplata-false').addClass('active-popup');
-					$('.popup-oplata-false-bg').addClass('active-popup');
+                    $('.popup-oplata-false-bg').addClass('active-popup');
                     return false;
                 }else{
                     if (totalCost < 200) {
@@ -935,12 +935,14 @@ $(document).on('click', '#add-to-order-list', function(){
             json: json
         },
         success: function(){
-        	$('#add-to-order-list').addClass('hide');
-			$('#go-to-order-list').addClass('show');
+            $('#add-to-order-list').addClass('hide');
+            $('#go-to-order-list').addClass('show');
             sessionStorage.clear();
             localStorage.clear();
+            totalCost = 0;
             $("#ordered-items").html('');
-            // alert('добавлено');
+            $('#cart-price').text(0);
+            $('#cart-number').text(0);
         }
     });
 });
