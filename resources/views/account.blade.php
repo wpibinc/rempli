@@ -183,6 +183,8 @@
                     @if(isset($subscription))
                     <input type="hidden" name="subscription_id" value="{{$subscription->id}}">
                     <input type="hidden" name="price" value="{{$subscription->price}}">
+                    <input type="hidden" name="has_next_subscription" value="{{$has_next_subscription}}">
+                    <input type="hidden" name="is_paid_next_subscription" value="{{$is_paid_next_subscription}}">
                     <h3>Подписка</h3>
                     <table class="table">
                         <tbody>
@@ -570,6 +572,12 @@
             $(".phone-input").mask("+7 (999) 999-9999");
         });
         $(document).ready(function(){
+            if($('input[name="has_next_subscription"]').val()) {
+                $('.auto_subscription').prop('checked', true);
+            }
+            if($('input[name="is_paid_next_subscription"]').val()) {
+                $('.auto_subscription').attr("disabled", true);
+            }
             $(document).on('click','.buySubscription',function() { //устанавливаем событие отправки для формы с id=form
                 $_token = "{!! csrf_token() !!}";
                 var user_id = $('.userId').val();
