@@ -621,7 +621,7 @@
                 }
                 $.ajax({
                     type: "POST", //Метод отправки
-                    url: "/subscription/create?xyu=1", //путь до php фаила отправителя
+                    url: "/subscription/create", //путь до php фаила отправителя
                     data: {
                         'user_id':user_id,
                         '_token':$_token,
