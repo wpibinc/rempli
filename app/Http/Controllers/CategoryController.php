@@ -119,9 +119,11 @@ class CategoryController extends BaseController
             foreach($category->products as $product){
                 $price = $product->price;
                 $amount = $product->amount;
+                $weight = $product->weight;
                 if($product->amount == 'за 1кг'||$product->amount == 'за 1кг.'){
                     $price = $product->price/10;
                     $amount = 'за 100 гр';
+                    $weight = 100;
                 }
                 $json['products'][] = [
                     'objectId'      => $product->id,
@@ -132,7 +134,7 @@ class CategoryController extends BaseController
                     'product_name'  => $product->product_name,
                     'price'         => $price,
                     'amount'        => $amount,
-                    'weight'        => $product->weight,
+                    'weight'        => $weight,
                     'description'   => $product->description,
                     'updatedAt'     => (string) $product->updated_at,
                     'shop' => ''
@@ -143,17 +145,16 @@ class CategoryController extends BaseController
             foreach($category->avProducts as $product){
                 $price = $product->price;
                 $amount = $product->price_style;
-
+                $weight = $product->original_typical_weight;
                 if($product->price_style == '1 кг'){
                     $price = $product->price/10;
                     $amount = '100 гр';
+                    $weight = 100;
                 } elseif ($product->price_style == '100 г'){
                     $amount = $product->price_style;
                 } elseif ($product->original_typical_weight == '0') {
                     $amount = $product->price_style;
-                } /*else {
-                    $amount = $product->price_style . '. (' . $product->original_typical_weight . ' г.)';
-                }*/
+                } 
                 $json['products'][] = array(
                     'objectId' => $product->id,
                     'cvalues' => explode(";", $product->cvalues),
@@ -163,7 +164,7 @@ class CategoryController extends BaseController
                     'product_name' => $product->name,
                     'price' => $price,
                     'amount' => 'за ' . $amount,
-                    'weight' => $product->original_typical_weight,
+                    'weight' => $weight,
                     'description' => $product->description,
                     'updatedAt' => $product->updated_at,
                     'shop' => 'Av'
@@ -308,10 +309,11 @@ class CategoryController extends BaseController
             foreach($products as $product){
                 $price = $product->price;
                 $amount = $product->price_style;
-                
+                $weight = $product->original_typical_weight;
                 if($product->price_style == '1 кг'){
                     $price = $product->price/10;
                     $amount = '100 гр';
+                    $weight = 100;
                 }
                 $json[] = array(
                     'objectId' => $product->id,
@@ -322,7 +324,7 @@ class CategoryController extends BaseController
                     'product_name' => $product->name,
                     'price' => $price,
                     'amount' => 'за ' . $amount,
-                    'weight' => $product->original_typical_weight,
+                    'weight' => $weight,
                     'description' => $product->description,
                     'updatedAt' => $product->updated_at,
                     'shop' => 'Av'

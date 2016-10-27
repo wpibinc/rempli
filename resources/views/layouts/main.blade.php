@@ -51,6 +51,12 @@
 @endif
 </head>
 <body>
+<div class="popup-cart col-md-12" style="display:none">
+    <p>Корзина будет очищена. Перенести товары в список заказов?</p>
+    <a href="#" class="ok-popup btn btn-warning yes">Да</a>
+    <a href="#" class="ok-popup btn btn-warning no">Нет</a>
+    <a href="#" class="close-popup btn btn-default">Отмена</a>
+</div>
 <div class="popup-alcogol col-md-12">
 <p class="alcogol">Продажа алкоголя с <span>18+</span></p>
 <a href="#" class="ok-popup btn btn-warning">Согласен</a>
@@ -68,18 +74,18 @@
 
         <form id='change-shop-form' action="/" method="get">
             <select name="shop" class="shop-select">
-                @if(session('shop') == 'Av')
-                    <option value="Av" selected="selected">Азбука Вкуса</option>
+                @if(session('shop') == 'Av'||!session('shop'))
+                    <option class="current" value="Av" selected="selected">Азбука Вкуса</option>
                 @else
                     <option value="Av">Азбука Вкуса</option>
                 @endif
                 @if(session('shop') == 'La')
-                    <option value="La" selected="selected">La Maree</option>
+                    <option class="current" value="La" selected="selected">La Maree</option>
                 @else
                     <option value="La">La Maree</option>
                 @endif
                 @if(session('shop') == 'Me')
-                    <option value="Me" selected="selected">Metro</option>
+                    <option class="current" value="Me" selected="selected">Metro</option>
                 @else
                     <option value="Me">Metro</option>
                 @endif

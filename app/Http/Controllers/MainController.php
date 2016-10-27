@@ -170,12 +170,24 @@ class MainController extends Controller
                 ->get();
         
         foreach($avProducts as $product){
+            $price = $product->price;
+            $amount = $product->price_style;
+            $weight = $product->original_typical_weight;
+            if($product->price_style == '1 кг'){
+                $price = $product->price/10;
+                $amount = '100 гр';
+                $weight = 100;
+            } elseif ($product->price_style == '100 г'){
+                $amount = $product->price_style;
+            } elseif ($product->original_typical_weight == '0') {
+                $amount = $product->price_style;
+            }
             $json[] = array(
                 'label' => $product->name,
                 'image' => 'http://av.ru'.$product->image,
                 'id' => $product->id,
-                'price' => $product->price,
-                'weight' => $product->original_typical_weight,
+                'price' => $price,
+                'weight' => $weight,
                 'category' => $product->category_id,
                 'shop' => 'Av',
             );
@@ -184,12 +196,20 @@ class MainController extends Controller
             if(count($json) >= 3){
                 break;
             }
+            $price = $product->price;
+            $amount = $product->amount;
+            $weight = $product->weight;
+            if($product->amount == 'за 1кг'||$product->amount == 'за 1кг.'){
+                $price = $product->price/10;
+                $amount = 'за 100 гр';
+                $weight = 100;
+            }
             $json[] = array(
                 'label' => $product->product_name,
                 'image' => $product->img,
                 'id' => $product->id,
                 'price' => $price,
-                'weight' => $product->weight,
+                'weight' => $weight,
                 'category' => $product->category_id,
                 'shop' => ''
             );
@@ -288,11 +308,16 @@ class MainController extends Controller
         if(count($avProducts)){
             foreach($avProducts as $product){
                 $price = $product->price;
-                $amount = $product->original_price_style;
-                
-                if($product->original_price_style == '1 кг'){
+                $amount = $product->price_style;
+                $weight = $product->original_typical_weight;
+                if($product->price_style == '1 кг'){
                     $price = $product->price/10;
                     $amount = '100 гр';
+                    $weight = 100;
+                } elseif ($product->price_style == '100 г'){
+                    $amount = $product->price_style;
+                } elseif ($product->original_typical_weight == '0') {
+                    $amount = $product->price_style;
                 }
                 $json['products'][] = array(
                     'objectId' => $product->id,
@@ -303,7 +328,7 @@ class MainController extends Controller
                     'product_name' => $product->name,
                     'price' => $price,
                     'amount' => 'за ' . $amount,
-                    'weight' => $product->original_typical_weight,
+                    'weight' => $weight,
                     'description' => $product->description,
                     'updatedAt' => $product->updated_at,
                     'shop' => 'Av',
@@ -315,9 +340,11 @@ class MainController extends Controller
             foreach($products as $product){
                 $price = $product->price;
                 $amount = $product->amount;
-                if($product->amount == 'за 1кг'){
+                $weight = $product->weight;
+                if($product->amount == 'за 1кг'||$product->amount == 'за 1кг.'){
                     $price = $product->price/10;
                     $amount = 'за 100 гр';
+                    $weight = 100;
                 }
                 $json['products'][] = array(
                     'objectId'      => $product->id,
@@ -328,7 +355,7 @@ class MainController extends Controller
                     'product_name'  => $product->product_name,
                     'price'         => $price,
                     'amount'        => $amount,
-                    'weight'        => $product->weight,
+                    'weight'        => $weight,
                     'description'   => $product->description,
                     'updatedAt'     => (string) $product->updated_at,
                     'shop' => '',

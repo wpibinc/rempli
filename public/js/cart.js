@@ -8,6 +8,37 @@ function handleParseError(err) {
       break;
   }
 }
+
+function addToProductList(){
+    var ids = [];
+    $("#ordered-items tr").each(function(){
+        var id = $(this).attr('id').substring(5);
+        var shop = $(this).attr('data-shop');
+        ids.push({id: id, shop: shop});
+    });
+    var json = JSON.stringify(ids);
+
+    $.ajax({
+        url: '/add-to-order-list',
+        method: 'POST',
+        data: {
+            json: json
+        },
+        async: false,
+        success: function(){
+            $('#add-to-order-list').addClass('hide');
+            $('#go-to-order-list').addClass('show');
+            sessionStorage.clear();
+            localStorage.clear();
+            totalCost = 0;
+            $("#ordered-items").html('');
+            $('.cart-total > table th').text('');
+            $('#cart-price').text(0);
+            $('#cart-number').text(0);
+        }
+    });
+}
+
 $.widget('custom.autocomplete', $.ui.autocomplete, {
     _renderItem: function( ul, item ) {
         return $( "<li>" )
@@ -876,27 +907,6 @@ function search(word) {
 
             }
         });
-
-//	$.each(json, function(i, v) {
-//        if (v.product_name.toLowerCase().indexOf(word) >= 0) {
-//        		if (Number(sessionStorage[v.objectId]) > 0) {
-//			    search_results  += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + v.objectId + '"><div class="count item_count visible">'+sessionStorage[v.objectId]+'</div><a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '"> <img src="' + v.img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '">' + v.product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + v.price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">'+ v.amount +'</div><br class="clearfix"></div><button href="javascript:void(0)" class="increase_count buy">Добавить</button></div>';
-//
-//			    } else {
-//			    search_results  += '<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6 product-wrap product" id="' + v.objectId + '"><div class="count item_count hidden">'+sessionStorage[v.objectId]+'</div><a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '"> <img src="' + v.img_sm + '" alt=""></a><div class="desc"><div class="product-title"> <a href="#" data-toggle="modal" data-target="#idt' + v.objectId + '">' + v.product_name + '</a></div><div class="col-lg-6 col-md-8 col-xs-12 col-sm-8 price">' + v.price + ' руб</div><div class="col-lg-6 col-md-4 col-xs-12 col-sm-4 quantity">'+ v.amount +'</div><br class="clearfix"></div><button href="javascript:void(0)" class="increase_count buy">Добавить</button></div>';
-//
-//			    }
-//
-//			    search_results  += '<div class="modal fade bs-example-modal-lg" id="idt' + v.objectId + '" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg"> <div class="modal-content row"> <div class="row"> <div class="popup-image";> <span class="popup-helper"></span> <img class="popimg" src="' + v.img_sm + '"> </div> <div class="popup-name"> <p class="popup-title" id="myModalLabel">' + v.product_name + '</p> <div class="popup-price"> ' + v.price + ' <span class="popup-rub">'+num2word(Math.floor(v.price),words)+'</span> <button href="javascript:void(0)" class="increase_count buy">Добавить</button> </div> <div class="popup-mass"> '+ v.amount +'</div> </div> </div> <hr> <div class="row"> <div class="popup-description"> <strong>Описание</strong> <br> <div class="description-text">' + v.description + '</div> </div> '+v.consist+'</div> </div> </div> </div>'
-//
-//			    n+=1;
-//        }
-//        });
-
-//		if (n == 0) {
-//		search_results = '<div id="nosearch"> <h2>К сожалению по Вашему запросу ничего не найдено</h2> <h3>Попробуйте ввести другое или более короткое слово</h3> </div>'
-//		}
-
 }
 
 
@@ -919,34 +929,7 @@ $(document).on('click', ".glyphicon-search", function(){
     	}
 });
 
-$(document).on('click', '#add-to-order-list', function(){
-    var ids = [];
-    $("#ordered-items tr").each(function(){
-        var id = $(this).attr('id').substring(5);
-        var shop = $(this).attr('data-shop');
-        ids.push({id: id, shop: shop});
-    });
-    var json = JSON.stringify(ids);
-
-    $.ajax({
-        url: '/add-to-order-list',
-        method: 'POST',
-        data: {
-            json: json
-        },
-        success: function(){
-            $('#add-to-order-list').addClass('hide');
-            $('#go-to-order-list').addClass('show');
-            sessionStorage.clear();
-            localStorage.clear();
-            totalCost = 0;
-            $("#ordered-items").html('');
-            $('.cart-total > table th').text('');
-            $('#cart-price').text(0);
-            $('#cart-number').text(0);
-        }
-    });
-});
+$(document).on('click', '#add-to-order-list', addToProductList);
 $('.add-to-cart-from-list').on('click', function(){
     var products = [];
     $(".product-list").each(function(){

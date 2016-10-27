@@ -156,7 +156,28 @@ $( ".cats" ).click(function() {
 });
 
 $('#change-shop-form select').on('change', function(){
+    if($("#cart-items #ordered-items > tr").length){
+        $('.popup-cart').show();
+        return false;
+    }
     sessionStorage.clear();
     localStorage.clear();
     $('#change-shop-form').submit();
+});
+
+$('.popup-cart a.ok-popup').on('click', function(){
+    if($(this).hasClass('no')){
+        sessionStorage.clear();
+        localStorage.clear();
+        $('#change-shop-form').submit();
+        return true;
+    }
+    addToProductList();
+    sessionStorage.clear();
+    localStorage.clear();
+    $('#change-shop-form').submit();
+});
+
+$('.popup-cart a.close-popup').on('click', function(){
+    $('.popup-cart').hide();
 });

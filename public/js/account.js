@@ -140,6 +140,13 @@ $(document).on('ready', function(){
     $('.shops > li > a').on('click', function(e){
         e.preventDefault();
         var href = $(this).attr('href');
+        var shop = href.substr(-2);
+        $('.shop-select').val(shop);
+        if($("#cart-items #ordered-items > tr").length){
+            $('.popup-cart').show();
+            return false;
+        }
+        
         sessionStorage.clear();
         localStorage.clear();
         window.location.href = href;
