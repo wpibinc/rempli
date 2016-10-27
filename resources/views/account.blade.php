@@ -382,8 +382,49 @@
             }
             $('.finalPriceSubscriptions span').html(finalPriceSubscription2);
         });
-        $(document).on('click','.auto_subscription',function () {
 
+        $(document).on('click','.auto_subscription',function () {
+            var checkboxs = 0;
+            if($('.auto_subscription').prop('checked') == true){
+                checkboxs = 1;
+            }
+            var auto_subscription = checkboxs;
+            $_token = "{!! csrf_token() !!}";
+            var user_id = $('.userId').val();
+            var subscription_id = $('input[name="subscription_id"]').val();
+            var price = $('input[name="price"]').val();
+            var quantity = $('.countDeliveryAll').text();
+
+            $.ajax({
+                type: "POST", //Метод отправки
+                url: "/subscription/update-onclick", //путь до php фаила отправителя
+                data: {
+                    'user_id':user_id,
+                    'id':subscription_id,
+                    '_token':$_token,
+                    'current_quantity':quantity,
+                    'total_quantity':quantity,
+                    'price':price,
+                    'auto_subscription':auto_subscription
+                },
+                success: function(data) {
+                    var alert_class = '';
+                    if(!data.status) {
+                        alert_class = 'warning';
+                    } else {
+                        alert_class = 'success';
+                    }
+                    $('.message').html(
+                            '<div class="alert alert-' + alert_class + ' alert-message">' +
+                            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                            '<span aria-hidden="true">×</span>' +
+                            '</button>' +
+                            data.msg+
+                            '</div>'
+                    );
+                    return false;
+                }
+            });
 
             var $el = $(this);
             if($el.prop('checked') == true){
