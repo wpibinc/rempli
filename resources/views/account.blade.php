@@ -322,22 +322,22 @@
             $('.editSubscription').removeClass('hideDiv');
             $('.editsSubscription').addClass('hideDiv');
             var countDelivery = parseInt($('#ex2').val());
-            if(countDelivery == 1){
-                $('.countDeliveryAll').html('4');
-                $('.countDelivery').html('4');
-            }
-            if(countDelivery == 2){
-                $('.countDeliveryAll').html('8');
-                $('.countDelivery').html('8');
-            }
-            if(countDelivery == 3){
-                $('.countDeliveryAll').html('12');
-                $('.countDelivery').html('12');
-            }
-            if(countDelivery == 4){
-                $('.countDeliveryAll').html('30');
-                $('.countDelivery').html('30');
-            }
+//            if(countDelivery == 1){
+//                $('.countDeliveryAll').html('4');
+//                $('.countDelivery').html('4');
+//            }
+//            if(countDelivery == 2){
+//                $('.countDeliveryAll').html('8');
+//                $('.countDelivery').html('8');
+//            }
+//            if(countDelivery == 3){
+//                $('.countDeliveryAll').html('12');
+//                $('.countDelivery').html('12');
+//            }
+//            if(countDelivery == 4){
+//                $('.countDeliveryAll').html('30');
+//                $('.countDelivery').html('30');
+//            }
 
         });
         $(document).on('click','.buySubscription',function () {

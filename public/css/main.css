@@ -1091,6 +1091,7 @@ header.header{
 }
 .main-start-page > img{
 	margin-bottom: 25px;
+	width: 60%;
 }
 .error{
 	display: inline-block;
