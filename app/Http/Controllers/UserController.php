@@ -29,7 +29,7 @@ class UserController extends Controller
         $user = Auth::user();
         $time_to_pay = null;
         $subscriptions = $user->subscriptions()->where('end_subscription', '>', Carbon::now())->first();
-        $late_invoice = Invoice::where('is_paid', '0')
+        $late_invoice = $user->invoices()->where('is_paid', '0')
             ->where('title', '!=', 'Продление подписки')->first();
         if(isset($late_invoice)) {
             $time_to_pay = 'У Вас имеются неоплаченные счета';
@@ -78,7 +78,7 @@ class UserController extends Controller
             $current_quantity = $subscriptions->current_quantity - $long_promocode->used_per_month;
             return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts,
                                     'subscription' => $subscriptions, 'long_promocode' => $long_promocode,
-                                    'current_quantity' => $current_quantity, 'invoices' => $invoices]);
+                                    'current_quantity' => $current_quantity, 'invoices' => $invoices, 'time_to_pay' => $time_to_pay]);
         }
         return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts,
                                 'subscription' => $subscriptions, 'time_to_pay' => $time_to_pay, 'invoices' => $invoices,
