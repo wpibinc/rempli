@@ -249,9 +249,9 @@
             <div class='rules wrapper-acaunt'>Правила</div>
             <div class='orders lists wrapper-acaunt'>
                 <ul class='shops'>
-                    <li><a href='my-account?section=order-list&shop="Av"'>Азбука Вкуса</a></li>
-                    <li><a href='my-account?section=order-list&shop="La"'>La Maree</a></li>
-                    <li><a href='my-account?section=order-list&shop="Me"'>Metro</a></li>
+                    <li><a class="" href='my-account?section=order-list&shop=Av'>Азбука Вкуса</a></li>
+                    <li><a href='my-account?section=order-list&shop=La'>La Maree</a></li>
+                    <li><a href='my-account?section=order-list&shop=Me'>Metro</a></li>
                 </ul>
                 Список заказов
                 <div class="table-responsive">
@@ -266,12 +266,21 @@
                                 <?php
                                 switch($product->shop){
                                     case 'La':
-                                        $title = $product->product->product_name;
-                                        $img = $product->product->img;
+                                        $title = $product->product->name;
+                                        $img = $product->product->image;
                                         $price = $product->product->price;
-                                        if($product->product->price_style == 'за 1кг'){
+                                        if($product->product->price_style == '1 кг'){
                                             $price = $product->product->price/10;
                                         }
+                                        $weight = $product->product->weight;
+                                        break;
+                                    case 'Me':
+                                        $title = $product->product->name;
+                                        $img = $product->product->image;
+                                        $price = $product->product->price;
+//                                        if($product->product->price_style == '1 кг'){
+//                                            $price = $product->product->price/10;
+//                                        }
                                         $weight = $product->product->weight;
                                         break;
                                     default:

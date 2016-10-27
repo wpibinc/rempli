@@ -119,7 +119,7 @@ class CategoryController extends BaseController
             foreach($category->products as $product){
                 $price = $product->price;
                 $amount = $product->amount;
-                if($product->amount == 'за 1кг'){
+                if($product->amount == 'за 1кг'||$product->amount == 'за 1кг.'){
                     $price = $product->price/10;
                     $amount = 'за 100 гр';
                 }
@@ -267,8 +267,6 @@ class CategoryController extends BaseController
                     'shop' => $product->shop
                 );
             }
-
-
         }
         return $json;
     }

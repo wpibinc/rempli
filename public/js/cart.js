@@ -941,6 +941,7 @@ $(document).on('click', '#add-to-order-list', function(){
             localStorage.clear();
             totalCost = 0;
             $("#ordered-items").html('');
+            $('.cart-total > table th').text('');
             $('#cart-price').text(0);
             $('#cart-number').text(0);
         }

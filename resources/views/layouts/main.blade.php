@@ -66,7 +66,7 @@
         <a href="/" class="logo"><img src="img/first.png" alt="rempli"></a>
         @if(isset($subscription) && $subscription)
 
-        <form id='change-shop-form' action="" method="get">
+        <form id='change-shop-form' action="/" method="get">
             <select name="shop" class="shop-select">
                 @if(session('shop') == 'Av')
                     <option value="Av" selected="selected">Азбука Вкуса</option>

@@ -52,7 +52,10 @@ class UserController extends Controller
             }
         }
         $orders = Order::where('user_id', $user->id)->simplePaginate(15);
-        $listProducts = ListProduct::where('user_id', $user->id)->simplePaginate(15);
+        $shop = session('shop')?session('shop'):'Av';
+        $listProducts = ListProduct::where('user_id', $user->id)
+                ->where('shop', $shop)
+                ->simplePaginate(15);
         $adresses = $user->adresses;
         $invoices = $user->invoices()->where('is_paid', '0')
             ->where('last_pay_day', '<', Carbon::now()->addDay(3))
@@ -185,14 +188,14 @@ class UserController extends Controller
         if(!$user){
             die();
         }
+
         foreach($products as $product){
-            $shop = '';
-            if(isset($product->shop)){
-                $shop = $product->shop;
+            if(!isset($product->shop)||!$product->shop){
+                continue;
             }
             ListProduct::firstOrCreate([
                 'user_id' => $user->id,
-                'shop' => $shop,
+                'shop' => $product->shop,
                 'product_id' => $product->id
             ]);
         }
@@ -204,7 +207,10 @@ class UserController extends Controller
             abort(404);
         }
         $user = Auth::user();
-        $productLists = ListProduct::where('user_id', $user->id)->delete();
+        $shop = session('shop')?session('shop'):'Av';
+        $productLists = ListProduct::where('user_id', $user->id)
+                ->where('shop', $shop)
+                ->delete();
         if($productLists){
             return response()->json([
                 'success' => true,
