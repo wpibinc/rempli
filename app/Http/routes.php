@@ -50,6 +50,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::post('/subscription/create', 'SubscriptionController@create');
         Route::post('/subscription/update', 'SubscriptionController@update');
+        Route::post('/subscription/update-onclick', 'SubscriptionController@updateOnClick');
         Route::post('promo-code/activate', [
             'as' => 'admin.promocodeactivate',
             'uses' => 'SubscriptionController@promoCodeActivate'
