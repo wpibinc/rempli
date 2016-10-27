@@ -17,4 +17,9 @@ class MeProduct extends Model
     {
         return $this->belongsTo(MeCategory::class, 'me_category_id', 'id');
     }
+    
+    public function category()
+    {
+        return $this->meCategory->categories->first();
+    }
 }
