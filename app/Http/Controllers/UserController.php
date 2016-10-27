@@ -24,7 +24,7 @@ class UserController extends Controller
     
     public function myAccount(Request $request)
     {
-        $is_paid = false;
+        $is_paid_next_subscription = false;
         $has_next_subscription = false;
         $user = Auth::user();
         $time_to_pay = null;
@@ -50,7 +50,7 @@ class UserController extends Controller
                             ->where('is_paid', '1')
                             ->first();
                 if (isset($paid_next_sudscription)) {
-                    $is_paid = true;
+                    $is_paid_next_subscription = true;
                 }
 
                 $invoice = Invoice::where('is_paid', '0')
@@ -82,7 +82,7 @@ class UserController extends Controller
         }
         return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts,
                                 'subscription' => $subscriptions, 'time_to_pay' => $time_to_pay, 'invoices' => $invoices,
-                                'has_next_subscription' => $has_next_subscription, 'is_paid' => $is_paid]);
+                                'has_next_subscription' => $has_next_subscription, 'is_paid_next_subscription' => $is_paid_next_subscription]);
     }
     
     public function changeInfo(Request $request)
