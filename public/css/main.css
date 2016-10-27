@@ -1856,3 +1856,6 @@ option {
 .home-p2 h4{
 	margin-bottom: 5px;
 }
+.orders .shops li{
+	display: inline-block;
+}
