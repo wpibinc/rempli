@@ -8,7 +8,7 @@
     {{--@endif--}}
 <div class="col-md-12">
     <div class="tabs col-md-12">
-        @if($time_to_pay)
+        @if(isset($time_to_pay) && $time_to_pay)
             <div style="color: red;">{{$time_to_pay}}</div>
             <button class="invoice_page btn" style="display: block;margin-bottom: 15px;">Оплатить</button>
         @endif
@@ -181,21 +181,23 @@
                            data-slider-tooltip="hide"/>
                     <p class="finalPriceSubscription"><span>4200</span> руб</p>
                     <button type="button" class="buySubscription btn btn-default" >Купить</button>
-                    <iframe style="float: left"
+                    {{--<iframe style="float: left"
                             class="thisIframe"
                             frameborder="0"
                             allowtransparency="true"
                             scrolling="no"
                             src="https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=rempli&default-sum=4200&successURL=http://rempli.development.kharkov.ua/my-account"
                             width="195"
-                            height="54"></iframe>
+                            height="54"></iframe>--}}
                 </div>
                 <div class="trueSubscription">
                     @if(isset($subscription))
                     <input type="hidden" name="subscription_id" value="{{$subscription->id}}">
                     <input type="hidden" name="price" value="{{$subscription->price}}">
+                    @if(isset($has_next_subscription) && isset($is_paid_next_subscription))
                     <input type="hidden" name="has_next_subscription" value="{{$has_next_subscription}}">
                     <input type="hidden" name="is_paid_next_subscription" value="{{$is_paid_next_subscription}}">
+                    @endif
                     <h3>Подписка</h3>
                     <table class="table">
                         <tbody>
@@ -586,6 +588,7 @@
         jQuery(function($){
             $(".phone-input").mask("+7 (999) 999-9999");
         });
+
         $(document).ready(function(){
             if($('input[name="has_next_subscription"]').val()) {
                 $('.auto_subscription').prop('checked', true);
@@ -618,7 +621,7 @@
                 }
                 $.ajax({
                     type: "POST", //Метод отправки
-                    url: "/subscription/create", //путь до php фаила отправителя
+                    url: "/subscription/create?xyu=1", //путь до php фаила отправителя
                     data: {
                         'user_id':user_id,
                         '_token':$_token,
@@ -631,7 +634,8 @@
                         if(!data.status) {
                             alert_class = 'warning';
                         } else {
-                            alert_class = 'success';
+
+//                            alert_class = 'success';
                         }
                         $('.message').html(
                                 '<div class="alert alert-' + alert_class + ' alert-message">' +
