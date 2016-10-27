@@ -1091,6 +1091,7 @@ header.header{
 }
 .main-start-page > img{
 	margin-bottom: 25px;
+	width: 60%;
 }
 .error{
 	display: inline-block;
@@ -1854,4 +1855,7 @@ option {
 .home-p h4,
 .home-p2 h4{
 	margin-bottom: 5px;
+}
+.orders .shops li{
+	display: inline-block;
 }
