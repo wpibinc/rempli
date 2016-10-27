@@ -71,4 +71,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(ListProduct::class);
     }
+    
+    public function isAdmin()
+    {
+        return $this->username == 'courier'||$this->username == 'admin'?true:false;
+    }
 }

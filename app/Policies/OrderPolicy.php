@@ -19,7 +19,7 @@ class OrderPolicy
      */
     public function before(User $user, $ability, Order $item)
     {
-        if ($user->username == 'admin') {
+        if ($user->username == 'admin'||$user->username=='courier') {
             return true;
         }
     }
