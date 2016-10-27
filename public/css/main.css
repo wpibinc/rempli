@@ -1858,4 +1858,9 @@ option {
 }
 .orders .shops li{
 	display: inline-block;
+	padding: 0;
+}
+.orders .shops li a{
+ padding: 10px 15px;
+	display: block;
 }
