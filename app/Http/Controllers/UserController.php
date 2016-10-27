@@ -24,6 +24,8 @@ class UserController extends Controller
     
     public function myAccount(Request $request)
     {
+        $is_paid_next_subscription = false;
+        $has_next_subscription = false;
         $user = Auth::user();
         $time_to_pay = null;
         $subscriptions = $user->subscriptions()->where('end_subscription', '>', Carbon::now())->first();
@@ -42,6 +44,15 @@ class UserController extends Controller
                 ->where('start_subscription', $subscriptions->end_subscription)->first();
 
             if(isset($next_subscription)) {
+                $has_next_subscription = true;
+                $paid_next_sudscription = $next_subscription->invoices()
+                            ->where('last_pay_day', $next_subscription->start_subscription)
+                            ->where('is_paid', '1')
+                            ->first();
+                if (isset($paid_next_sudscription)) {
+                    $is_paid_next_subscription = true;
+                }
+
                 $invoice = Invoice::where('is_paid', '0')
                     ->where('subscription_id', $next_subscription->id)
                     ->where('last_pay_day', $next_subscription->start_subscription)->first();
@@ -65,9 +76,13 @@ class UserController extends Controller
         }
         if(isset($long_promocode)) {
             $current_quantity = $subscriptions->current_quantity - $long_promocode->used_per_month;
-            return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions, 'long_promocode' => $long_promocode, 'current_quantity' => $current_quantity, 'invoices' => $invoices]);
+            return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts,
+                                    'subscription' => $subscriptions, 'long_promocode' => $long_promocode,
+                                    'current_quantity' => $current_quantity, 'invoices' => $invoices]);
         }
-        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts, 'subscription' => $subscriptions, 'time_to_pay' => $time_to_pay, 'invoices' => $invoices]);
+        return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts,
+                                'subscription' => $subscriptions, 'time_to_pay' => $time_to_pay, 'invoices' => $invoices,
+                                'has_next_subscription' => $has_next_subscription, 'is_paid_next_subscription' => $is_paid_next_subscription]);
     }
     
     public function changeInfo(Request $request)
