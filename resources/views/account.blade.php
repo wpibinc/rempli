@@ -109,6 +109,9 @@
                                 @endif
                                 <td>{{$invoice->price}} руб.</td>
                                 <td><button type="button" class="btn buy-bill">оплатить</button></td>
+                                {{--<td>--}}
+                                    {{--<iframe style="float: left" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=expfood&default-sum={{$invoice->price}}&successURL=http://rempli/invoice/paid?invoice={{$invoice->id}}" width="195" height="54"></iframe>--}}
+                                {{--</td>--}}
                             </tr>
                         @endforeach
                     </table>
@@ -178,6 +181,7 @@
                            data-slider-tooltip="hide"/>
                     <p class="finalPriceSubscription"><span>4200</span> руб</p>
                     <button type="button" class="buySubscription btn btn-default" >Купить</button>
+                    {{--<iframe style="float: left" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=expfood&default-sum=123&successURL=http://rempli/invoice/paid?invoice=1" width="195" height="54"></iframe>--}}
                 </div>
                 <div class="trueSubscription">
                     @if(isset($subscription))
