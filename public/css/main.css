@@ -1864,3 +1864,12 @@ option {
  padding: 10px 15px;
 	display: block;
 }
+.popup-cart{
+	background-color: #fff;
+	padding: 10px;
+	text-align: center;
+	position: absolute;
+	top:0;
+	left: 0;
+	z-index: 999;
+}

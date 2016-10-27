@@ -143,7 +143,7 @@ $(document).on('ready', function(){
         var shop = href.substr(-2);
         $('.shop-select').val(shop);
         if($("#cart-items #ordered-items > tr").length){
-            $('.popup-cart').show();
+            $('.popup-cart').slideDown();
             return false;
         }
         

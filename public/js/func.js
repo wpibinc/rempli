@@ -157,7 +157,7 @@ $( ".cats" ).click(function() {
 
 $('#change-shop-form select').on('change', function(){
     if($("#cart-items #ordered-items > tr").length){
-        $('.popup-cart').show();
+        $('.popup-cart').slideDown();
         return false;
     }
     sessionStorage.clear();
@@ -179,5 +179,5 @@ $('.popup-cart a.ok-popup').on('click', function(){
 });
 
 $('.popup-cart a.close-popup').on('click', function(){
-    $('.popup-cart').hide();
+    $('.popup-cart').slideUp();
 });
