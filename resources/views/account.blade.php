@@ -247,7 +247,7 @@
                 <a href="#" class="activate-promocode btn btn-default">Активировать</a>
             </div>
             <div class='rules wrapper-acaunt'>Правила</div>
-            <div class='orders lists wrapper-acaunt'>
+            <div class='orders lists wrapper-acaunt '>
                 <ul class='shops'>
                     <li><a href='my-account?section=order-list&shop="Av"'>Азбука Вкуса</a></li>
                     <li><a href='my-account?section=order-list&shop="La"'>La Maree</a></li>
