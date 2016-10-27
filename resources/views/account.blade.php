@@ -110,7 +110,7 @@
                                 <td>{{$invoice->price}} руб.</td>
                                 {{--<td><button type="button" class="btn buy-bill">оплатить</button></td>--}}
                                 <td>
-                                    <iframe style="float: left" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=expfood&default-sum={{$invoice->price}}&successURL=http://rempli/invoice/paid?invoice={{$invoice->id}}" width="195" height="54"></iframe>
+                                    <iframe style="float: left" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=rempli&default-sum={{$invoice->price}}&successURL=http://rempli.development.kharkov.ua/my-account" width="195" height="54"></iframe>
                                 </td>
                             </tr>
                         @endforeach
@@ -186,7 +186,7 @@
                             frameborder="0"
                             allowtransparency="true"
                             scrolling="no"
-                            src="https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=expfood&default-sum=4200&successURL=http://rempl?sucssess=1/"
+                            src="https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=rempli&default-sum=4200&successURL=http://rempli.development.kharkov.ua/my-account"
                             width="195"
                             height="54"></iframe>
                 </div>
