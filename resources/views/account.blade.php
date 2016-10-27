@@ -320,6 +320,7 @@
     <script>
 
         $(document).on('ready',function () {
+
             $('table .slider-horizontal').addClass('visb-h');
         });
         $(document).on('click','.editSubscription',function () {
@@ -574,9 +575,14 @@
         $(document).ready(function(){
             if($('input[name="has_next_subscription"]').val()) {
                 $('.auto_subscription').prop('checked', true);
+                $('.editSubscription').removeClass('Dsp-none');
+                if($('input[name="is_paid_next_subscription"]').val() == ""){
+                    $('.editSubscription').removeAttr('disabled');
+                }
             }
             if($('input[name="is_paid_next_subscription"]').val()) {
                 $('.auto_subscription').attr("disabled", true);
+
             }
             $(document).on('click','.buySubscription',function() { //устанавливаем событие отправки для формы с id=form
                 $_token = "{!! csrf_token() !!}";
