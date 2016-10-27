@@ -19,9 +19,11 @@ class PasswordController extends Controller
     | explore this trait and override any methods you wish to tweak.
     |
     */
-
+    
+    
     use ResetsPasswords;
-
+    
+    protected $redirectPath = '/login';
     /**
      * Create a new password controller instance.
      *
@@ -41,5 +43,10 @@ class PasswordController extends Controller
     {
         $user = User::where('phone', $request->input('phone'))->first();
         return ['email' => $user->email];
+    }
+    
+    protected function getSendResetLinkEmailSuccessResponse($response)
+    {
+        return redirect($this->redirectPath())->with('status', trans($response));
     }
 }

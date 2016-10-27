@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => 'sheckShop'], function () {
     //Главная - магазин
     Route::get('/', 'MainController@index');
 
