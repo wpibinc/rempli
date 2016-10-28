@@ -108,10 +108,10 @@
                                     <td>{{$invoice->title}}</td>
                                 @endif
                                 <td>{{$invoice->price}} руб.</td>
-                                {{--<td><button type="button" class="btn buy-bill">оплатить</button></td>--}}
-                                <td>
-                                    <iframe style="float: left" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=rempli&default-sum={{$invoice->price}}&successURL=http://rempli.development.kharkov.ua/my-account" width="195" height="54"></iframe>
-                                </td>
+                                <td><button type="button" class="btn buy-bill">оплатить</button></td>
+                                {{--<td>--}}
+                                    {{--<iframe style="float: left" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=rempli&default-sum={{$invoice->price}}&successURL=http://rempli.development.kharkov.ua/my-account" width="195" height="54"></iframe>--}}
+                                {{--</td>--}}
                             </tr>
                         @endforeach
                     </table>
@@ -390,7 +390,7 @@
             }
             $('.finalPriceSubscription span').html(finalPriceSubscription);
 
-            $('.thisIframe').attr('src','https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=expfood&default-sum='+finalPriceSubscription+'&successURL=http://rempl?sucssess=1/');
+//            $('.thisIframe').attr('src','https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=expfood&default-sum='+finalPriceSubscription+'&successURL=http://rempl?sucssess=1/');
 
         });
         $(document).on('change','#ex2',function () {
@@ -634,8 +634,7 @@
                         if(!data.status) {
                             alert_class = 'warning';
                         } else {
-
-//                            alert_class = 'success';
+                            alert_class = 'success';
                         }
                         $('.message').html(
                                 '<div class="alert alert-' + alert_class + ' alert-message">' +
