@@ -170,6 +170,9 @@ class MainController extends Controller
                 ->get();
         
         foreach($avProducts as $product){
+            if(!$product->category){
+                continue;
+            }
             $price = $product->price;
             $amount = $product->price_style;
             $weight = $product->original_typical_weight;
@@ -195,6 +198,9 @@ class MainController extends Controller
         foreach($products as $product){
             if(count($json) >= 3){
                 break;
+            }
+            if(!$product->category){
+                continue;
             }
             $price = $product->price;
             $amount = $product->amount;
@@ -228,6 +234,9 @@ class MainController extends Controller
         
         foreach($products as $product){
             $category = $product->laCategory->categories->first();
+            if(!$category){
+                continue;
+            }
             $categId = $category?$category->id:'';
             $json[] = array(
                 'label' => $product->name,
@@ -253,6 +262,9 @@ class MainController extends Controller
 
         foreach($products as $product){
             $category = $product->meCategory->categories->first();
+            if(!$category){
+                continue;
+            }
             $categId = $category?$category->id:'';
             $json[] = array(
                 'label' => $product->name,
@@ -307,6 +319,9 @@ class MainController extends Controller
         }
         if(count($avProducts)){
             foreach($avProducts as $product){
+                if(!$product->category){
+                    continue;
+                }
                 $price = $product->price;
                 $amount = $product->price_style;
                 $weight = $product->original_typical_weight;
@@ -338,6 +353,9 @@ class MainController extends Controller
         
         if(count($products)){
             foreach($products as $product){
+                if(!$product->category){
+                    continue;
+                }
                 $price = $product->price;
                 $amount = $product->amount;
                 $weight = $product->weight;
@@ -362,7 +380,9 @@ class MainController extends Controller
                 );
             }
         }
-        
+        if(!count($json['products'])){
+            return response()->json(['success' => false]);
+        }
         return $json;
     }
     
@@ -382,6 +402,9 @@ class MainController extends Controller
         
         foreach($products as $product){
             $category = $product->laCategory->categories->first();
+            if(!$category){
+                continue;
+            }
             $categId = $category ? $categId = $category->id : '';
             $json['products'][] = array(
                 'objectId' => $product->id,
@@ -398,7 +421,9 @@ class MainController extends Controller
                 'shop' => $product->shop
             );
         }
-        
+        if(!count($json['products'])){
+            return response()->json(['success' => false]);
+        }
         return $json;
     }
 
@@ -418,6 +443,9 @@ class MainController extends Controller
 
         foreach($products as $product){
             $category = $product->meCategory->categories->first();
+            if(!$category){
+                continue;
+            }
             $categId = $category ? $categId = $category->id : '';
             $json['products'][] = array(
                 'objectId' => $product->id,
@@ -434,7 +462,9 @@ class MainController extends Controller
                 'shop' => $product->shop
             );
         }
-
+        if(!count($json['products'])){
+            return response()->json(['success' => false]);
+        }
         return $json;
     }
 
