@@ -171,6 +171,6 @@ class SubscriptionController extends Controller
                 'last_pay_day' => $last_subscription->end_subscription
             ]);
         }
-        return response()->json(['status' => true, 'msg' => 'Подписка изменена.']);
+        return response()->json(['status' => true, 'msg' => '']);
     }
 }

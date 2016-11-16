@@ -441,8 +441,10 @@
                     var alert_class = '';
                     if(!data.status) {
                         alert_class = 'warning';
+                        $('.message').show();
                     } else {
-                        alert_class = 'success';
+//                        alert_class = 'success';
+                        $('.message').hide();
                     }
                     $('.message').html(
                             '<div class="alert alert-' + alert_class + ' alert-message">' +
@@ -633,8 +635,10 @@
                         var alert_class = '';
                         if(!data.status) {
                             alert_class = 'warning';
+                            $('.message').show();
                         } else {
-                            alert_class = 'success';
+                             alert_class = 'success';
+                            $('.message').show();
                         }
                         $('.message').html(
                                 '<div class="alert alert-' + alert_class + ' alert-message">' +
@@ -651,6 +655,8 @@
 
 
             $(document).on('click','.editsSubscription',function() { //устанавливаем событие отправки для формы с id=form
+
+
                 $_token = "{!! csrf_token() !!}";
                 var subscription_id = $('input[name="subscription_id"]').val();
                 var user_id = $('.userId').val();
@@ -690,8 +696,10 @@
                         var alert_class = '';
                         if(!data.status) {
                             alert_class = 'warning';
+                            $('.message').show();
                         } else {
                             alert_class = 'success';
+                            $('.message').show();
                         }
                         $('.message').html(
                                 '<div class="alert alert-' + alert_class + ' alert-message">' +
@@ -728,8 +736,10 @@
                         var alert_class = '';
                         if(!data.status) {
                             alert_class = 'warning';
+                            $('.message').show();
                         } else {
                             alert_class = 'success';
+                            $('.message').show();
                         }
                         $('.message').html(
                                 '<div class="alert alert-' + alert_class + ' alert-message">' +
@@ -764,8 +774,10 @@
                     var alert_class = '';
                     if(!data.status) {
                         alert_class = 'warning';
+                        $('.message').show();
                     } else {
                         alert_class = 'success';
+                        $('.message').show();
                     }
                     $('.message').html(
                             '<div class="alert alert-' + alert_class + ' alert-message">' +
