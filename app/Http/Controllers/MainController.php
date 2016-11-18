@@ -37,7 +37,10 @@ class MainController extends Controller
                     })->get();
                     break;
                 default:
-                    $categories = Category::all()->sortBy("order");
+//                    $categories = Category::all()->sortBy("order");
+                    $categories = Category::whereHas('avcategories', function($q){
+                        $q->whereNotNull('category_id');
+                    })->get();
                     break;
             }
 
