@@ -257,7 +257,7 @@
                 </div>
             </div>
             <div class='promoCode wrapper-acaunt'>
-                <div class="message"></div>
+                <div class="messages"></div>
                 <input type="text" name="promocode">
                 <a href="#" class="activate-promocode btn btn-default">Активировать</a>
             </div>
@@ -774,12 +774,12 @@
                     var alert_class = '';
                     if(!data.status) {
                         alert_class = 'warning';
-                        $('.message').show();
+                        $('.messages').show();
                     } else {
                         alert_class = 'success';
-                        $('.message').show();
+                        $('.messages').show();
                     }
-                    $('.message').html(
+                    $('.messages').html(
                             '<div class="alert alert-' + alert_class + ' alert-message">' +
                                 '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
                                     '<span aria-hidden="true">×</span>' +
