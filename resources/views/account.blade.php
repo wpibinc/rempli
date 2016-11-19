@@ -7,7 +7,7 @@
         {{--here remember block--}}
     {{--@endif--}}
 <div class="col-md-12 main-start-page">
-    <div class="tabs col-md-12">
+    <div class="tabs col-md-10 col-md-offset-1">
         @if(isset($time_to_pay) && $time_to_pay)
             <div style="color: red;">{{$time_to_pay}}</div>
             <button class="invoice_page btn" style="display: block;margin-bottom: 15px;">Оплатить</button>

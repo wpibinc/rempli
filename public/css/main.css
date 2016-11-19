@@ -1085,9 +1085,14 @@ header.header{
 .main-start-page p{
 	color: #777;
 	font-size: 18px;
-
+	padding: 0 40px;
 	font-family: "HelveticaLight";
 
+}
+@media (min-width: 1600px) {
+	.main-start-page p {
+		padding: 0 90px;
+	}
 }
 .main-start-page > img{
 	margin-bottom: 25px;

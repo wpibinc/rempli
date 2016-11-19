@@ -5,7 +5,7 @@
 @section('content')
     <div class="col-md-12 main-start-page">
 
-        <div class="tabs col-md-12 ">
+        <div class="tabs col-md-10 col-md-offset-1 ">
         <ul class="col-md-2">
             <li><i class="fa fa-pencil-square" aria-hidden="true"></i> Оформление заказа <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-map" aria-hidden="true"></i> Территория доставки <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
