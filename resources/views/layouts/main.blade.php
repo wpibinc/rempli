@@ -26,6 +26,8 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
     <link href="/js/bootstrap-slider-master/css/bootstrap-slider.min.css" rel="stylesheet">
     <link href="/js/select-custom/css/select2.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200" rel="stylesheet">
     @yield('style')
 
     {{--Js--}}
