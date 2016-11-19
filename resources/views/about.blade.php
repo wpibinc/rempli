@@ -3,7 +3,9 @@
 @section('title')
 
 @section('content')
-    <div class="container">
+  <div class="col-md-8 col-md-offset-2">
+
+
         <div class="panel-group " id="accordion" role="tablist" aria-multiselectable="true">
             <h1>О нас</h1>
             <p>
@@ -25,6 +27,6 @@
                 Где мы берем продукты:<br>
                 Всю продукцию для доставки курьеры Rempli покупают в магазинах «Азбука Вкуса» рядом с Вами. После получения заказа Ваши продукты собираются в «Азбуке Вкуса» и наш курьер доставляет их до Вас за кратчайшее время.            </p>
         </div>
-
+  </div>
 
 @endsection
