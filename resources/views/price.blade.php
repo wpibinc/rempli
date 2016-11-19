@@ -5,15 +5,15 @@
 @section('content')
     <div class="col-md-12 main-start-page">
 
-        <div class="tabs col-md-10 col-md-offset-1 ">
-        <ul class="col-md-2">
+        <div class="tabs col-md-8 col-md-offset-2 ">
+        <ul class="col-md-3">
             <li><i class="fa fa-pencil-square" aria-hidden="true"></i> Оформление заказа <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-map" aria-hidden="true"></i> Территория доставки <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Стоимость доставки <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-comments-o" aria-hidden="true"></i> Вопросы/ответы <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-coffee" aria-hidden="true"></i> Как мы работаем <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
         </ul>
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div >
                 <h1>
                     Оформление заказа

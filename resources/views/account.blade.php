@@ -7,12 +7,12 @@
         {{--here remember block--}}
     {{--@endif--}}
 <div class="col-md-12 main-start-page">
-    <div class="tabs col-md-10 col-md-offset-1">
+    <div class="tabs col-md-8 col-md-offset-2">
         @if(isset($time_to_pay) && $time_to_pay)
             <div style="color: red;">{{$time_to_pay}}</div>
             <button class="invoice_page btn" style="display: block;margin-bottom: 15px;">Оплатить</button>
         @endif
-        <ul class="col-md-2">
+        <ul class="col-md-3">
             <li><i class="fa fa-user" aria-hidden="true"></i> Учетная запись <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-list-alt" aria-hidden="true"></i> История заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-usd" aria-hidden="true"></i> Счета ({{$invoices->count()}})<i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
@@ -23,7 +23,7 @@
             <li><i class="fa fa-list-alt" aria-hidden="true"></i> Cписок заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход</a> <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
         </ul>
-        <div class="col-md-10 ">
+        <div class="col-md-9">
             <div class='account '>
                 <div class="wrapper-acaunt col-md-12">
                     <h4>ИЗМЕНИТЬ ПАРОЛЬ</h4>
