@@ -18,14 +18,14 @@ class ParseController extends AdminController
 
     public function __construct(\Illuminate\Http\Request $request)
     {
-        $this->path = public_path() . '/parser/cache/';
+        $this->path = storage_path() . "/app/public/cache";
     }
 
     //    Получаем рубрики с главной страницы
     public function index()
     {
 
-        hQuery::$cache_path = public_path() . "/parser/cache";
+        hQuery::$cache_path = storage_path() . "/app/public/cache";
         $doc = hQuery::fromUrl('http://av.ru', ['Accept' => 'text/html,application/xhtml+xml;q=0.9,*/*;q=0.8']);
         $menu = $doc->find('.main-menu__item');
         $i = 0;
@@ -254,7 +254,7 @@ class ParseController extends AdminController
         }
 
         $url = "http://av.ru/js-api/catalog/product-detail/{$link}/?expire=1h&user_can_view_alcohol=false";
-        $file = $this->path . 'info/' . md5($url) . '.json';
+        $file = $this->path . '/info/' . md5($url) . '.json';
         if (!file_exists($file)) {
             $content = file_get_contents($url);
             file_put_contents($file, $content);
