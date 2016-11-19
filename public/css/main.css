@@ -1875,7 +1875,7 @@ option {
 	z-index: 999;
 }
 @media (min-width: 1990px){
-	.main-block{
+	.main-start-page{
 		width: 1900px;
 		margin: 10px auto;
 		float: none;

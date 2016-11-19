@@ -6,7 +6,7 @@
 {{--    @if(!Auth::user()->isPaid())--}}
         {{--here remember block--}}
     {{--@endif--}}
-<div class="col-md-12">
+<div class="col-md-12 main-start-page">
     <div class="tabs col-md-12">
         @if(isset($time_to_pay) && $time_to_pay)
             <div style="color: red;">{{$time_to_pay}}</div>
