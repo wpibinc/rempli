@@ -10,9 +10,8 @@
         <div class="col-md-12  col-sm-12 col-xs-12 main-start-page" style="text-align: center">
             <img src="/img/main_title.png" alt='main' >
             <div class="col-md-12" style="text-align: center">
-                {{--<img src="/img/main-img-home.png" alt='main'>--}}
-
-                <div class="row">
+                <img src="/img/main-img-home.png" alt='main' class="hidden-xs hidden-sm">
+                <div class="row visible-sm visible-xs">
                     <div class="col-md-4">
                         <img src="/img/main_girl.png" alt='main'>
                         <div class="col-md-12 home-p visible-sm visible-xs">
