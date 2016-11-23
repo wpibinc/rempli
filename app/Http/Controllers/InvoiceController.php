@@ -26,8 +26,14 @@ class InvoiceController extends Controller
 
     public function checkOrder(Request $request)
     {
+//        $subscription = Subscription::create([
+//            'user_id' => 1,
+//            'current_quantity' => 1,
+//            'total_quantity' => 1,
+//            'price' => 1,
+//        ]);
 //        $config = [];
-//        $config['shopId'] 			= '78360';
+        $config['shopId'] 			= '78360';
 //        $config['ShopPassword'] 	= 'K0mkCkCfjB7mOyyJdn4n';
 //
 //        $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$config['shopId'].';'.$request->invoiceId.';'.$request->customerNumber.';'.$config['ShopPassword']);
@@ -39,7 +45,7 @@ class InvoiceController extends Controller
             $code = 0;
 //        }
         print '<?xml version="1.0" encoding="UTF-8"?>';
-        print '<checkOrderResponse performedDatetime="'. $request->requestDatetime .'" code="'.$code.'"'. ' invoiceId="'. $request->invoiceId .'" shopId="'. $config['shopId'] .'"/>';
+        print '<checkOrderResponse performedDatetime="'. $request->requestDatetime .'" code="'.$code.'" invoiceId="'. $request->invoiceId .'" shopId="'. $config['shopId'] .'"/>';
     }
 
     public function paymentAviso(Request $request)
@@ -76,7 +82,7 @@ class InvoiceController extends Controller
                     return $e;
                 }
 
-                return response()->json(['status' => true, 'msg' => 'Подписка оформлена.']);
+//                return response()->json(['status' => true, 'msg' => 'Подписка оформлена.']);
             }
         }
         print '<?xml version="1.0" encoding="UTF-8"?>';

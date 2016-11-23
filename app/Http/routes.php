@@ -59,8 +59,8 @@ Route::group(['middleware' => 'checkShop'], function () {
         Route::post('add-to-order-list', 'UserController@addToOrderList');
 
         Route::post('clear-product-list', 'UserController@clearProductList');
-        Route::post('yandex-kassa/checkorder', 'InvoiceController@checkOrder');
-        Route::post('yandex-kassa/paymentaviso', 'InvoiceController@paymentAviso');
+        Route::any('yandex-kassa/checkorder', 'InvoiceController@checkOrder');
+        Route::any('yandex-kassa/paymentaviso', 'InvoiceController@paymentAviso');
     });
 
     #---------ПАРС--------------------------------
