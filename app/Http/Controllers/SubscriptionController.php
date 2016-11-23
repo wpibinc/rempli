@@ -12,7 +12,7 @@ use App\Http\Requests;
 
 class SubscriptionController extends Controller
 {
-    public function create(Request $request)
+    /*public function create(Request $request)
     {
         $subscription = Subscription::create($request->all());
         $subscription->start_subscription = Carbon::now();
@@ -25,7 +25,7 @@ class SubscriptionController extends Controller
         }
 
         return response()->json(['status' => true, 'msg' => 'Подписка оформлена.']);
-    }
+    }*/
     public function update(Request $request)
     {
         if($request->input_dop == 1) {

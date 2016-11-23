@@ -108,10 +108,16 @@
                                     <td>{{$invoice->title}}</td>
                                 @endif
                                 <td>{{$invoice->price}} руб.</td>
-                                <td><button type="button" class="btn buy-bill">оплатить</button></td>
-                                {{--<td>--}}
-                                    {{--<iframe style="float: left" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=rempli&default-sum={{$invoice->price}}&successURL=http://rempli.development.kharkov.ua/my-account" width="195" height="54"></iframe>--}}
-                                {{--</td>--}}
+                                {{--<td><button type="button" class="btn buy-bill">оплатить</button></td>--}}
+                                <form action="https://demomoney.yandex.ru/eshop.xml" method="POST">
+                                    <input name="shopId" value="78360" type="hidden">
+                                    <input name="scid" value="545092" type="hidden">
+                                    <input name="customerNumber" value="{{$user->id}}" type="hidden"><!-- Идентификатор вашего покупателя -->
+                                    <input name="paymentType" value="AC" type="hidden"/>
+                                    <input name="sum" value="10.00"><!-- Сумма покупки (руб.) -->
+                                    <input name="orderNumber" value="{{$invoice->id}}" type="hidden" />
+                                    <input type="submit" value="Оплатить">
+                                </form>
                             </tr>
                         @endforeach
                     </table>
@@ -180,15 +186,16 @@
                            data-slider-value="3"
                            data-slider-tooltip="hide"/>
                     <p class="finalPriceSubscription"><span>4200</span> руб</p>
-                    <button type="button" class="buySubscription btn btn-default" >Купить</button>
-                    {{--<iframe style="float: left"
-                            class="thisIframe"
-                            frameborder="0"
-                            allowtransparency="true"
-                            scrolling="no"
-                            src="https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=rempli&default-sum=4200&successURL=http://rempli.development.kharkov.ua/my-account"
-                            width="195"
-                            height="54"></iframe>--}}
+                    {{--<button type="button" class="buySubscription btn btn-default" >Купить</button>--}}
+                    <form action="https://demomoney.yandex.ru/eshop.xml" method="POST">
+                        <input name="shopId" value="78360" type="hidden">
+                        <input name="scid" value="545092" type="hidden">
+                        <input name="customerNumber" value="{{$user->id}}" type="hidden"><!-- Идентификатор вашего покупателя -->
+                        <input name="paymentType" value="AC" type="hidden"/>
+                        <input name="sum" value="10.00"><!-- Сумма покупки (руб.) -->
+                        <input name="quantity" value="4200"><!-- Сумма покупки (руб.) -->
+                        <input type="submit" value="Оплатить">
+                    </form>
                 </div>
                 <div class="trueSubscription">
                     @if(isset($subscription))
@@ -624,6 +631,7 @@
                 $.ajax({
                     type: "POST", //Метод отправки
                     url: "/subscription/create", //путь до php фаила отправителя
+//                    url: "/yandex-kassa/paymentaviso", //путь до php фаила отправителя
                     data: {
                         'user_id':user_id,
                         '_token':$_token,
