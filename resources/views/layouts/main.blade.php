@@ -44,7 +44,6 @@
     </script>
 @if (session('orderSuccess'))
     <script>
-        <?php session(['orderSuccess' => false]); ?>
         sessionStorage.clear();
         localStorage.clear();
     </script>
@@ -282,10 +281,11 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-@if (session('order'))
+@if (session('orderSuccess'))
     <script>
         $('.success-modal').modal('show');
     </script>
+    <?php session(['orderSuccess' => false]); ?>
 @endif
 <script>
     $('.shop-select').select2();

@@ -130,6 +130,8 @@ class OrderController extends BaseController
 
         $client2 = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
         $userPhone = $user->phone;
+        $replace = [' ', '+7', '-', '(', ')'];
+        $userPhone = '8'.str_replace($replace, '', $userPhone);
         $text2 = 'Ваш заказ на сумму '.$cost.' рублей принят. В ближайшее время мы свяжемся с Вами для подтверждения';
         $sms2 = new \Zelenin\SmsRu\Entity\Sms($userPhone, $text2);
         $client2->smsSend($sms2);
