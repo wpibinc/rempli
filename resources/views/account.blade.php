@@ -6,13 +6,13 @@
 {{--    @if(!Auth::user()->isPaid())--}}
         {{--here remember block--}}
     {{--@endif--}}
-<div class="col-md-12">
-    <div class="tabs col-md-12">
+<div class="col-md-12 main-start-page">
+    <div class="tabs col-md-8 col-md-offset-2">
         @if(isset($time_to_pay) && $time_to_pay)
             <div style="color: red;">{{$time_to_pay}}</div>
             <button class="invoice_page btn" style="display: block;margin-bottom: 15px;">Оплатить</button>
         @endif
-        <ul class="col-md-2">
+        <ul class="col-md-3">
             <li><i class="fa fa-user" aria-hidden="true"></i> Учетная запись <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-list-alt" aria-hidden="true"></i> История заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-usd" aria-hidden="true"></i> Счета ({{$invoices->count()}})<i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
@@ -23,7 +23,7 @@
             <li><i class="fa fa-list-alt" aria-hidden="true"></i> Cписок заказов <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход</a> <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
         </ul>
-        <div class="col-md-10 ">
+        <div class="col-md-9">
             <div class='account '>
                 <div class="wrapper-acaunt col-md-12">
                     <h4>ИЗМЕНИТЬ ПАРОЛЬ</h4>
@@ -108,10 +108,16 @@
                                     <td>{{$invoice->title}}</td>
                                 @endif
                                 <td>{{$invoice->price}} руб.</td>
-                                <td><button type="button" class="btn buy-bill">оплатить</button></td>
-                                {{--<td>--}}
-                                    {{--<iframe style="float: left" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=rempli&default-sum={{$invoice->price}}&successURL=http://rempli.development.kharkov.ua/my-account" width="195" height="54"></iframe>--}}
-                                {{--</td>--}}
+                                {{--<td><button type="button" class="btn buy-bill">оплатить</button></td>--}}
+                                <form action="https://demomoney.yandex.ru/eshop.xml" method="POST">
+                                    <input name="shopId" value="78360" type="hidden">
+                                    <input name="scid" value="545092" type="hidden">
+                                    <input name="customerNumber" value="{{$user->id}}" type="hidden"><!-- Идентификатор вашего покупателя -->
+                                    <input name="paymentType" value="AC" type="hidden"/>
+                                    <input name="sum" value="10.00"><!-- Сумма покупки (руб.) -->
+                                    <input name="orderNumber" value="{{$invoice->id}}" type="hidden" />
+                                    <input type="submit" value="Оплатить">
+                                </form>
                             </tr>
                         @endforeach
                     </table>
@@ -180,15 +186,16 @@
                            data-slider-value="3"
                            data-slider-tooltip="hide"/>
                     <p class="finalPriceSubscription"><span>4200</span> руб</p>
-                    <button type="button" class="buySubscription btn btn-default" >Купить</button>
-                    {{--<iframe style="float: left"
-                            class="thisIframe"
-                            frameborder="0"
-                            allowtransparency="true"
-                            scrolling="no"
-                            src="https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=rempli&default-sum=4200&successURL=http://rempli.development.kharkov.ua/my-account"
-                            width="195"
-                            height="54"></iframe>--}}
+                    {{--<button type="button" class="buySubscription btn btn-default" >Купить</button>--}}
+                    <form action="https://demomoney.yandex.ru/eshop.xml" method="POST">
+                        <input name="shopId" value="78360" type="hidden">
+                        <input name="scid" value="545092" type="hidden">
+                        <input name="customerNumber" value="{{$user->id}}" type="hidden"><!-- Идентификатор вашего покупателя -->
+                        <input name="paymentType" value="AC" type="hidden"/>
+                        <input name="sum" value="10.00" type="hidden"><!-- Сумма покупки (руб.) -->
+                        {{--<input name="label" value="12" type="hidden">--}}
+                        <input type="submit" value="Оплатить">
+                    </form>
                 </div>
                 <div class="trueSubscription">
                     @if(isset($subscription))
@@ -257,7 +264,7 @@
                 </div>
             </div>
             <div class='promoCode wrapper-acaunt'>
-                <div class="message"></div>
+                <div class="messages"></div>
                 <input type="text" name="promocode">
                 <a href="#" class="activate-promocode btn btn-default">Активировать</a>
             </div>
@@ -441,8 +448,10 @@
                     var alert_class = '';
                     if(!data.status) {
                         alert_class = 'warning';
+                        $('.message').show();
                     } else {
-                        alert_class = 'success';
+//                        alert_class = 'success';
+                        $('.message').hide();
                     }
                     $('.message').html(
                             '<div class="alert alert-' + alert_class + ' alert-message">' +
@@ -487,7 +496,6 @@
         $(document).ready(function(){
             $('.auto_subscription').prop('checked',false);
             var dopCount = $('.countDelivery').text();
-            console.log(dopCount);
             if(dopCount == 0){
                 $('.dop-wrapper').removeClass('hideDiv');
             }
@@ -622,6 +630,7 @@
                 $.ajax({
                     type: "POST", //Метод отправки
                     url: "/subscription/create", //путь до php фаила отправителя
+//                    url: "/yandex-kassa/paymentaviso", //путь до php фаила отправителя
                     data: {
                         'user_id':user_id,
                         '_token':$_token,
@@ -633,8 +642,10 @@
                         var alert_class = '';
                         if(!data.status) {
                             alert_class = 'warning';
+                            $('.message').show();
                         } else {
-                            alert_class = 'success';
+                             alert_class = 'success';
+                            $('.message').show();
                         }
                         $('.message').html(
                                 '<div class="alert alert-' + alert_class + ' alert-message">' +
@@ -651,6 +662,8 @@
 
 
             $(document).on('click','.editsSubscription',function() { //устанавливаем событие отправки для формы с id=form
+
+
                 $_token = "{!! csrf_token() !!}";
                 var subscription_id = $('input[name="subscription_id"]').val();
                 var user_id = $('.userId').val();
@@ -690,8 +703,10 @@
                         var alert_class = '';
                         if(!data.status) {
                             alert_class = 'warning';
+                            $('.message').show();
                         } else {
                             alert_class = 'success';
+                            $('.message').show();
                         }
                         $('.message').html(
                                 '<div class="alert alert-' + alert_class + ' alert-message">' +
@@ -728,8 +743,10 @@
                         var alert_class = '';
                         if(!data.status) {
                             alert_class = 'warning';
+                            $('.message').show();
                         } else {
                             alert_class = 'success';
+                            $('.message').show();
                         }
                         $('.message').html(
                                 '<div class="alert alert-' + alert_class + ' alert-message">' +
@@ -764,10 +781,12 @@
                     var alert_class = '';
                     if(!data.status) {
                         alert_class = 'warning';
+                        $('.messages').show();
                     } else {
                         alert_class = 'success';
+                        $('.messages').show();
                     }
-                    $('.message').html(
+                    $('.messages').html(
                             '<div class="alert alert-' + alert_class + ' alert-message">' +
                                 '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
                                     '<span aria-hidden="true">×</span>' +

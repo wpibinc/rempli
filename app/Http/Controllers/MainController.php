@@ -37,7 +37,10 @@ class MainController extends Controller
                     })->get();
                     break;
                 default:
-                    $categories = Category::all()->sortBy("order");
+//                    $categories = Category::all()->sortBy("order");
+                    $categories = Category::whereHas('avcategories', function($q){
+                        $q->whereNotNull('category_id');
+                    })->get();
                     break;
             }
 
@@ -470,12 +473,16 @@ class MainController extends Controller
 
     public function checkAlertInvoice()
     {
-
-        $late_invoice = Invoice::where('is_paid', '0')
-            ->where('last_pay_day', '<', Carbon::now())->first();
-        if(isset($late_invoice)) {
-            return response()->json(['success' => true]);
+        if(Auth::check()) {
+            $user = Auth::user();
+            $late_invoice = Invoice::where('is_paid', '0')
+                ->where('user_id', $user->id)
+                ->where('last_pay_day', '<', Carbon::now())->first();
+            if(isset($late_invoice)) {
+                return response()->json(['success' => true]);
+            }
         }
+
         return response()->json(['success' => false]);
     }
 }
