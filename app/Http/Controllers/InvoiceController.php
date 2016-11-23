@@ -27,25 +27,28 @@ class InvoiceController extends Controller
     public function checkOrder(Request $request)
     {
 //        $config = [];
-//        $config['shopId'] 			= '';
-//        $config['scId'] 			= '';
-//        $config['ShopPassword'] 	= '';
-
-        $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$request->shopId.';'.$request->invoiceId.';'.$request->customerNumber.';'.$request->ShopPassword);
+//        $config['shopId'] 			= '78360';
+//        $config['ShopPassword'] 	= 'K0mkCkCfjB7mOyyJdn4n';
+//
 //        $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$config['shopId'].';'.$request->invoiceId.';'.$request->customerNumber.';'.$config['ShopPassword']);
-        if (strtolower($hash) != strtolower($request->md5)){
-            $code = 1;
-        }
-        else {
+////        $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$request->shopId.';'.$request->invoiceId.';'.$request->customerNumber.';'.$config['ShopPassword']);
+//        if (strtolower($hash) != strtolower($request->md5)){
+//            $code = 1;
+//        }
+//        else {
             $code = 0;
-        }
+//        }
         print '<?xml version="1.0" encoding="UTF-8"?>';
-        print '<checkOrderResponse performedDatetime="'. $request->requestDatetime .'" code="'.$code.'"'. ' invoiceId="'. $request->invoiceId .'" shopId="'. $request->shopId .'"/>';
+        print '<checkOrderResponse performedDatetime="'. $request->requestDatetime .'" code="'.$code.'"'. ' invoiceId="'. $request->invoiceId .'" shopId="'. $config['shopId'] .'"/>';
     }
 
     public function paymentAviso(Request $request)
     {
-        $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$request->shopId.';'.$request->invoiceId.';'.$request->customerNumber.';'.$request->ShopPassword);
+        $config = [];
+        $config['shopId'] 			= '78360';
+        $config['ShopPassword'] 	= 'K0mkCkCfjB7mOyyJdn4n';
+
+        $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$config['shopId'].';'.$request->invoiceId.';'.$request->customerNumber.';'.$config['ShopPassword']);
 //        $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$config['shopId'].';'.$request->invoiceId.';'.$request->customerNumber.';'.$config['ShopPassword']);
         if (strtolower($hash) != strtolower($_POST['md5'])){
             $code = 1;
@@ -60,8 +63,8 @@ class InvoiceController extends Controller
 //                $subscription = Subscription::create($request->all());
                 $subscription = Subscription::create([
                     'user_id' => $request->customerNumber,
-                    'current_quantity' => $request->quantity,
-                    'total_quantity' => $request->quantity,
+                    'current_quantity' => $request->label,
+                    'total_quantity' => $request->label,
                     'price' => $request->orderSumAmount,
                 ]);
                 $subscription->start_subscription = Carbon::now();
@@ -77,6 +80,6 @@ class InvoiceController extends Controller
             }
         }
         print '<?xml version="1.0" encoding="UTF-8"?>';
-        print '<checkOrderResponse performedDatetime="'. $request->requestDatetime .'" code="'.$code.'"'. ' invoiceId="'. $request->invoiceId .'" shopId="'. $request->shopId .'"/>';
+        print '<checkOrderResponse performedDatetime="'. $request->requestDatetime .'" code="'.$code.'"'. ' invoiceId="'. $request->invoiceId .'" shopId="'. $config['shopId'] .'"/>';
     }
 }

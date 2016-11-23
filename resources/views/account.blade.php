@@ -192,8 +192,8 @@
                         <input name="scid" value="545092" type="hidden">
                         <input name="customerNumber" value="{{$user->id}}" type="hidden"><!-- Идентификатор вашего покупателя -->
                         <input name="paymentType" value="AC" type="hidden"/>
-                        <input name="sum" value="10.00"><!-- Сумма покупки (руб.) -->
-                        <input name="quantity" value="4200"><!-- Сумма покупки (руб.) -->
+                        <input name="sum" value="10.00" type="hidden"><!-- Сумма покупки (руб.) -->
+                        {{--<input name="label" value="12" type="hidden">--}}
                         <input type="submit" value="Оплатить">
                     </form>
                 </div>
@@ -496,7 +496,6 @@
         $(document).ready(function(){
             $('.auto_subscription').prop('checked',false);
             var dopCount = $('.countDelivery').text();
-            console.log(dopCount);
             if(dopCount == 0){
                 $('.dop-wrapper').removeClass('hideDiv');
             }
