@@ -26,15 +26,15 @@ class InvoiceController extends Controller
 
     public function checkOrder(Request $request)
     {
-//        $subscription = Subscription::create([
-//            'user_id' => 1,
-//            'current_quantity' => 1,
-//            'total_quantity' => 1,
-//            'price' => 1,
-//        ]);
-//        $config = [];
+        $subscription = Subscription::create([
+            'user_id' => 1,
+            'current_quantity' => 1,
+            'total_quantity' => 1,
+            'price' => 1,
+        ]);
+        $config = [];
         $config['shopId'] 			= '78360';
-//        $config['ShopPassword'] 	= 'K0mkCkCfjB7mOyyJdn4n';
+        $config['ShopPassword'] 	= 'K0mkCkCfjB7mOyyJdn4n';
 //
 //        $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$config['shopId'].';'.$request->invoiceId.';'.$request->customerNumber.';'.$config['ShopPassword']);
 ////        $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$request->shopId.';'.$request->invoiceId.';'.$request->customerNumber.';'.$config['ShopPassword']);
@@ -50,13 +50,19 @@ class InvoiceController extends Controller
 
     public function paymentAviso(Request $request)
     {
+        $subscription = Subscription::create([
+            'user_id' => 2,
+            'current_quantity' => 2,
+            'total_quantity' => 2,
+            'price' => 2,
+        ]);
         $config = [];
         $config['shopId'] 			= '78360';
         $config['ShopPassword'] 	= 'K0mkCkCfjB7mOyyJdn4n';
 
         $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$config['shopId'].';'.$request->invoiceId.';'.$request->customerNumber.';'.$config['ShopPassword']);
 //        $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$config['shopId'].';'.$request->invoiceId.';'.$request->customerNumber.';'.$config['ShopPassword']);
-        if (strtolower($hash) != strtolower($_POST['md5'])){
+        if (strtolower($hash) != strtolower($request->md5)){
             $code = 1;
         }
         else {
