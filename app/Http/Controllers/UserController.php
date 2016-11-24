@@ -74,11 +74,21 @@ class UserController extends Controller
         if($invoices->count() > 0) {
             $time_to_pay = 'У Вас имеются неоплаченные счета';
         }
+
+        /*$ya_str = '';
+        if($request->action == 'PaymentSuccess') {
+            $ya_str = 'Оплата прошла успешно';
+        } else if ($request->action == 'PaymentFail') {
+            $ya_str = 'При оплате произошла ошибка';
+        }
+        ->with('success_message', $ya_str);*/
+
         if(isset($long_promocode)) {
             $current_quantity = $subscriptions->current_quantity - $long_promocode->used_per_month;
             return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts,
                                     'subscription' => $subscriptions, 'long_promocode' => $long_promocode,
                                     'current_quantity' => $current_quantity, 'invoices' => $invoices, 'time_to_pay' => $time_to_pay]);
+
         }
         return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts,
                                 'subscription' => $subscriptions, 'time_to_pay' => $time_to_pay, 'invoices' => $invoices,

@@ -11,6 +11,14 @@ use App\Http\Requests;
 
 class InvoiceController extends Controller
 {
+    public $allowArray = [
+        0 => [4 => 1600],
+        1 => [8 => 3000],
+        2 => [12 => 4200],
+        3 => [30 => 7500]
+    ];
+
+
     public function over8kg(Request $request)
     {
         Invoice::create([
@@ -30,8 +38,27 @@ class InvoiceController extends Controller
         $config['shopId'] 			= '78360';
         $config['ShopPassword'] 	= 'K0mkCkCfjB7mOyyJdn4n';
 
+        $hash = md5($request->action.';'.$request->orderSumAmount.';'.$request->orderSumCurrencyPaycash.';'.$request->orderSumBankPaycash.';'.$config['shopId'].';'.$request->invoiceId.';'.$request->customerNumber.';'.$config['ShopPassword']);
+        if (strtolower($hash) != strtolower($request->md5)){
+            $code = 1;
+        }
+        else {
+            if(isset($request->orderNumber)){
+                $invoice = Invoice::find($request->orderNumber);
+                if($invoice->price == $request->orderSumAmount && $invoice->id == $request->orderNumber) {
+                    $code = 0;
+                } else {
+                    $code = 1;
+                }
+            } elseif( $this->my_in_array($this->allowArray, $request->label, $request->orderSumAmount) ) {
+                $code = 0;
+            } else {
+                $code = 1;
+            }
+        }
+
         print '<?xml version="1.0" encoding="UTF-8"?>';
-        print '<checkOrderResponse performedDatetime="'. $request->requestDatetime .'" code="0" invoiceId="'. $request->invoiceId .'" shopId="'. $config['shopId'] .'"/>';
+        print '<checkOrderResponse performedDatetime="'. $request->requestDatetime .'" code="'.$code.'"'. ' invoiceId="'. $request->invoiceId .'" shopId="'. $config['shopId'] .'"/>';
     }
 
     public function paymentAviso(Request $request)
@@ -45,12 +72,16 @@ class InvoiceController extends Controller
             $code = 1;
         }
         else {
-            $code = 0;
             if(isset($request->orderNumber)){
                 $invoice = Invoice::find($request->orderNumber);
-                $invoice->is_paid = 1;
-                $invoice->save();
-            } else {
+                if($invoice->price == $request->orderSumAmount && $invoice->id == $request->orderNumber) {
+                    $invoice->is_paid = 1;
+                    $invoice->save();
+                    $code = 0;
+                } else {
+                    $code = 1;
+                }
+            } elseif( $this->my_in_array($this->allowArray, $request->label, $request->orderSumAmount) ) {
                 $subscription = Subscription::create([
                     'user_id' => $request->customerNumber,
                     'current_quantity' => $request->label,
@@ -60,12 +91,20 @@ class InvoiceController extends Controller
                 $subscription->start_subscription = Carbon::now();
                 $cur_date = Carbon::now();
                 $subscription->end_subscription = $cur_date->addMonths(1);
-                    $subscription->save();
-
-//                return response()->json(['status' => true, 'msg' => 'Подписка оформлена.']);
+                $subscription->save();
+                $code = 0;
+            } else {
+                $code = 1;
             }
         }
         print '<?xml version="1.0" encoding="UTF-8"?>';
-        print '<checkOrderResponse performedDatetime="'. $request->requestDatetime .'" code="'.$code.'"'. ' invoiceId="'. $request->invoiceId .'" shopId="'. $config['shopId'] .'"/>';
+        print '<paymentAvisoResponse performedDatetime="'. $request->requestDatetime .'" code="'.$code.'"'. ' invoiceId="'. $request->invoiceId .'" shopId="'. $config['shopId'] .'"/>';
+    }
+
+    public function my_in_array($array, $key, $val) {
+        foreach ($array as $item)
+            if (isset($item[$key]) && $item[$key] == $val)
+                return true;
+        return false;
     }
 }
