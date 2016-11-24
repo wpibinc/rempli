@@ -14,7 +14,8 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+        'yandex-kassa/checkorder',
+        'yandex-kassa/paymentaviso'
     ];
     
      public function handle($request, Closure $next)
