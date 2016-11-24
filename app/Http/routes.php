@@ -59,8 +59,7 @@ Route::group(['middleware' => 'checkShop'], function () {
         Route::post('add-to-order-list', 'UserController@addToOrderList');
 
         Route::post('clear-product-list', 'UserController@clearProductList');
-        Route::any('yandex-kassa/checkorder', 'InvoiceController@checkOrder');
-        Route::any('yandex-kassa/paymentaviso', 'InvoiceController@paymentAviso');
+
     });
 
     #---------ПАРС--------------------------------
@@ -256,4 +255,7 @@ Route::group(['middleware' => 'checkShop'], function () {
 //        Route::get('/', 'MainController@index');
 //    });
 });
+
+Route::any('yandex-kassa/checkorder', 'InvoiceController@checkOrder');
+Route::any('yandex-kassa/paymentaviso', 'InvoiceController@paymentAviso');
 
