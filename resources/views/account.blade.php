@@ -194,8 +194,8 @@
                         <input name="scid" value="545092" type="hidden">
                         <input name="customerNumber" value="{{$user->id}}" type="hidden">
                         {{--<input name="paymentType" value="AC" type="hidden"/>--}}
-                        <input name="sum" value="10.00" type="hidden">
-                        <input name="label" value="12" type="hidden">
+                        <input name="sum" value="4200" type="hidden" id="step1-sum">
+                        <input name="label" value="12" type="hidden" id="step1-label">
                         <input type="submit" class="btn buy-bill" value="Оплатить">
                     </form>
                 </div>
@@ -385,20 +385,26 @@
         $(document).on('change','#ex1',function () {
             var countDelivery = parseInt($('#ex1').val());
             var finalPriceSubscription = 0;
+            var finalCountSubscription = 0;
             if(countDelivery == 1){
                 finalPriceSubscription = 1600;
+                finalCountSubscription = 4;
             }
             if(countDelivery == 2){
                 finalPriceSubscription = 3000;
+                finalCountSubscription = 8;
             }
             if(countDelivery == 3){
                 finalPriceSubscription = 4200;
+                finalCountSubscription = 12;
             }
             if(countDelivery == 4){
                 finalPriceSubscription = 7500;
+                finalCountSubscription = 30;
             }
             $('.finalPriceSubscription span').html(finalPriceSubscription);
-
+            $('#step1-label').val(finalCountSubscription);
+            $('#step1-sum').val(finalPriceSubscription);
 //            $('.thisIframe').attr('src','https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=expfood&default-sum='+finalPriceSubscription+'&successURL=http://rempl?sucssess=1/');
 
         });
