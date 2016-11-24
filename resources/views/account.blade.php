@@ -109,15 +109,17 @@
                                 @endif
                                 <td>{{$invoice->price}} руб.</td>
                                 {{--<td><button type="button" class="btn buy-bill">оплатить</button></td>--}}
-                                <form action="https://demomoney.yandex.ru/eshop.xml" method="POST">
-                                    <input name="shopId" value="78360" type="hidden">
-                                    <input name="scid" value="545092" type="hidden">
-                                    <input name="customerNumber" value="{{$user->id}}" type="hidden"><!-- Идентификатор вашего покупателя -->
-                                    <input name="paymentType" value="AC" type="hidden"/>
-                                    <input name="sum" value="10.00"><!-- Сумма покупки (руб.) -->
-                                    <input name="orderNumber" value="{{$invoice->id}}" type="hidden" />
-                                    <input type="submit" value="Оплатить">
-                                </form>
+                                <td>
+                                    <form action="https://demomoney.yandex.ru/eshop.xml" method="POST">
+                                        <input name="shopId" value="78360" type="hidden">
+                                        <input name="scid" value="545092" type="hidden">
+                                        <input name="customerNumber" value="{{$user->id}}" type="hidden">
+                                        {{--<input name="paymentType" value="AC" type="hidden"/>--}}
+                                        <input name="sum" value="{{$invoice->price}}" type="hidden"><!-- Сумма покупки (руб.) -->
+                                        <input name="orderNumber" value="{{$invoice->id}}" type="hidden" />
+                                        <input type="submit" class="btn buy-bill" value="Оплатить">
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </table>
@@ -190,11 +192,11 @@
                     <form action="https://demomoney.yandex.ru/eshop.xml" method="POST">
                         <input name="shopId" value="78360" type="hidden">
                         <input name="scid" value="545092" type="hidden">
-                        <input name="customerNumber" value="{{$user->id}}" type="hidden"><!-- Идентификатор вашего покупателя -->
-                        <input name="paymentType" value="AC" type="hidden"/>
-                        <input name="sum" value="10.00" type="hidden"><!-- Сумма покупки (руб.) -->
-                        {{--<input name="label" value="12" type="hidden">--}}
-                        <input type="submit" value="Оплатить">
+                        <input name="customerNumber" value="{{$user->id}}" type="hidden">
+                        {{--<input name="paymentType" value="AC" type="hidden"/>--}}
+                        <input name="sum" value="10.00" type="hidden">
+                        <input name="label" value="12" type="hidden">
+                        <input type="submit" class="btn buy-bill" value="Оплатить">
                     </form>
                 </div>
                 <div class="trueSubscription">
