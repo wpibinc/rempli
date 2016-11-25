@@ -256,6 +256,6 @@ Route::group(['middleware' => 'checkShop'], function () {
 //    });
 });
 
-Route::any('yandex-kassa/checkorder', 'InvoiceController@checkOrder');
-Route::any('yandex-kassa/paymentaviso', 'InvoiceController@paymentAviso');
+Route::post('yandex-kassa/checkorder', 'InvoiceController@checkOrder');
+Route::post('yandex-kassa/paymentaviso', 'InvoiceController@paymentAviso');
 
