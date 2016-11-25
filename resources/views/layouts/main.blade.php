@@ -71,7 +71,7 @@
 <header class="header">
     <div class="topline col-md-12">
         <a href="/" class="logo"><img src="img/first.png" alt="rempli"></a>
-        @if(isset($subscription) && $subscription)
+        @if((\Auth::user()&&\Auth::user()->isAdmin())||(isset($subscription) && $subscription))
 
         <form id='change-shop-form' action="/" method="get">
             <select name="shop" class="shop-select">
