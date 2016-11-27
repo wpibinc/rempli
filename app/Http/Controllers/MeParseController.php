@@ -96,7 +96,9 @@ class MeParseController extends AdminController
         $uls = $doc->find('div[class=subcatalog cat1]', 0)->find('ul.subcatalog_items > li.subcatalog_item');
         if($uls){
             foreach ($uls as $ul) {
-                if($ul->plaintext == "Замороженные") {
+//                if($ul->plaintext == "Замороженные") {
+//                    
+//                }
                     $as = $ul->find('a.subcatalog_link', 0);
                     $sub_doc = HtmlDomParser::file_get_html(self::URL_MAIN .''. $as->href. '?limit=999999999', false, stream_context_create($streamContextOptions));
                     $sub_as = $sub_doc->find('.catalog-i_link');
@@ -135,7 +137,6 @@ class MeParseController extends AdminController
                         $meProduct->description = $description . '' . $attrs;
                         $meProduct->save();
                     }
-                }
             }
         }
 
