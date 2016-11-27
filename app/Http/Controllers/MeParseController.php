@@ -96,23 +96,31 @@ class MeParseController extends AdminController
         $uls = $doc->find('div[class=subcatalog cat1]', 0)->find('ul.subcatalog_items > li.subcatalog_item');
         if($uls){
             foreach ($uls as $ul) {
-                $as = $ul->find('a.subcatalog_link', 0);
-                $sub_doc = HtmlDomParser::file_get_html(self::URL_MAIN .''. $as->href. '?limit=999999999', false, stream_context_create($streamContextOptions));
-                $sub_as = $sub_doc->find('.catalog-i_link');
-                $category_name = trim($sub_doc->find('ul.horizontal > li.active > a', 0)->plaintext);
-                $category = MeCategory::where('name', $category_name)->first();
-                foreach ($sub_as as $sub_a) {
+                if($ul->plaintext == "Замороженные") {
+                    $as = $ul->find('a.subcatalog_link', 0);
+                    $sub_doc = HtmlDomParser::file_get_html(self::URL_MAIN .''. $as->href. '?limit=999999999', false, stream_context_create($streamContextOptions));
+                    $sub_as = $sub_doc->find('.catalog-i_link');
+                    $category_name = trim($sub_doc->find('ul.horizontal > li.active > a', 0)->plaintext);
+//                    dd($sub_doc->find('ul.horizontal > li.active > a', 0)->parent()->prev_sibling()->plaintext);
+
+                    $parentCategory_id = MeCategory::where('name', $sub_doc->find('ul.horizontal > li.active > a', 0)->parent()->prev_sibling()->plaintext)
+                        ->first()
+                        ->id;
+                    $category = MeCategory::where('name', $category_name)
+                        ->where('parent_id', $parentCategory_id)
+                        ->first();
+                    foreach ($sub_as as $sub_a) {
 //                    \DB::table('test')->insert([
 //                        'page' => $sub_a->href,
 //                        'created' => Carbon::now()
 //                    ]);
-                    $meProduct = new MeProduct();
-                    $meProduct->link = $sub_a->href;
-                    $product_doc = HtmlDomParser::file_get_html($meProduct->link, false, stream_context_create($streamContextOptions));
-                    $meProduct->articul = trim($product_doc->find('span[itemprop="productID"]', 0)->plaintext);
-                    $meProduct->name = trim($product_doc->find('h1[itemprop="name"]', 0)->plaintext);
-                    $meProduct->me_category_id = $category->id;
-                    $meProduct->price = trim(str_replace(' ', '', $product_doc->find('.int', 0)->plaintext)) . '.' . trim($product_doc->find('.float', 0)->plaintext);
+                        $meProduct = new MeProduct();
+                        $meProduct->link = $sub_a->href;
+                        $product_doc = HtmlDomParser::file_get_html($meProduct->link, false, stream_context_create($streamContextOptions));
+                        $meProduct->articul = trim($product_doc->find('span[itemprop="productID"]', 0)->plaintext);
+                        $meProduct->name = trim($product_doc->find('h1[itemprop="name"]', 0)->plaintext);
+                        $meProduct->me_category_id = $category->id;
+                        $meProduct->price = trim(str_replace(' ', '', $product_doc->find('.int', 0)->plaintext)) . '.' . trim($product_doc->find('.float', 0)->plaintext);
 
 //                    $price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', '', $doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
 //                    $sep = $product_doc->find('span.sep', 0)->plaintext;
@@ -120,12 +128,13 @@ class MeParseController extends AdminController
 //                        $price_style = explode($sep, $price_style)[0];
 //                    }
 //                    $meProduct->price_style = $price_style;
-                    $meProduct->price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', '', $product_doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
-                    $meProduct->image = $product_doc->find('img[itemprop="image"]', 0) ? trim($product_doc->find('img[itemprop="image"]', 0)->src) : null;
-                    $description = $product_doc->find('div.b-product-main__info-descr', 0) ? trim($product_doc->find('div.b-product-main__info-descr', 0)->plaintext) : null;
-                    $attrs = $doc->find('ul.b-product-main__info-attrs', 0) ? '<br>' . trim(preg_replace('/\t+/', "", $product_doc->find('ul.b-product-main__info-attrs', 0)->outertext)) : null;
-                    $meProduct->description = $description . '' . $attrs;
-                    $meProduct->save();
+                        $meProduct->price_style = trim(str_replace('ME:', '', preg_replace('/\t+/', '', $product_doc->find('div.b-product-sidebar-price-info', 0)->plaintext)));
+                        $meProduct->image = $product_doc->find('img[itemprop="image"]', 0) ? trim($product_doc->find('img[itemprop="image"]', 0)->src) : null;
+                        $description = $product_doc->find('div.b-product-main__info-descr', 0) ? trim($product_doc->find('div.b-product-main__info-descr', 0)->plaintext) : null;
+                        $attrs = $doc->find('ul.b-product-main__info-attrs', 0) ? '<br>' . trim(preg_replace('/\t+/', "", $product_doc->find('ul.b-product-main__info-attrs', 0)->outertext)) : null;
+                        $meProduct->description = $description . '' . $attrs;
+                        $meProduct->save();
+                    }
                 }
             }
         }

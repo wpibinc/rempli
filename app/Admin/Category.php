@@ -49,7 +49,9 @@ AdminSection::registerModel(Category::class, function (ModelConfiguration $model
                                 ->setModelForOptions(new \App\MeCategory)
                                 ->setLoadOptionsQueryPreparer(function($item, $query) {
                                     return $query
-                                        ->where('parent_id', '!=', 0);
+                                        ->join('me_categories AS parent_categories', 'me_categories.parent_id', '=', 'parent_categories.id')
+                                        ->where('me_categories.parent_id', '!=', 0)
+                                        ->select('me_categories.*', 'parent_categories.name as parent_name', \Illuminate\Support\Facades\DB::raw('CONCAT(me_categories.name, " (", parent_categories.name, ")") AS name'));
                                })
                                 ->setDisplay('name'),
                         ];
