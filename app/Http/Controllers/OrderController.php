@@ -61,13 +61,13 @@ class OrderController extends BaseController
     
     public function payment(Request $request)
     {
+
         $user = Auth::user();
         $freeDelivery = true;
         if($user->free_delivery){
             $freeDelivery = false;
         }
-        $order = Order::find($request->input('order'));
-//        
+
         $subscription = $user->subscriptions()->where('end_subscription', '>', Carbon::now())->first();
         $late_invoices = $user->invoices()
             ->where('last_pay_day','<', Carbon::now())
@@ -93,10 +93,7 @@ class OrderController extends BaseController
         if(isset($late_invoices)) {
             $freeDelivery = false;
         }
-        if($order&&!$freeDelivery){
-            $order->delivery_cost = $request->input("delivery_cost");
-            $order->save();
-        }
+        
         return view('payment', ['freeDelivery' => $freeDelivery]);
     }
     
@@ -108,6 +105,16 @@ class OrderController extends BaseController
             $user->save();
         }
         $order = Order::find($_REQUEST['order']);
+        $freeDelivery = true;
+        if($user->free_delivery){
+            $freeDelivery = false;
+        }
+        if($order&&!$freeDelivery){
+            $order->delivery_cost = $request->input("delivery_cost");
+        } else {
+            $order->delivery_cost = 'Бесплатно!';
+        }
+        $order->save();
         $name = $order->name;
         $cost = $order->cost;
 //        if($request->method() === 'POST'){
