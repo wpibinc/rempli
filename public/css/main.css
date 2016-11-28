@@ -1901,3 +1901,11 @@ option {
 	padding: 0;
 	font-size: 15px;
 }
+.orders > ul > li{
+	display: inline-block!important;
+	background: transparent!important;
+	border: none!important;
+}
+.tabs > ul > li > i{
+	padding-right: 5px;
+}
