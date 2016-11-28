@@ -178,8 +178,14 @@
                     </div>
                 </div>
             </div>
-
-
+            <div class="form-group">
+                <label for="inputAddress" class="col-sm-3 control-label">Сумма, с которой нужна сдача:
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="total_cash" placeholder="" id="total_cash">
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
 
             <div class="clearfix"></div>
             <div class="col-lg-12 text-center" id="submitOrder">
