@@ -51,6 +51,7 @@ Route::group(['middleware' => 'checkShop'], function () {
         Route::post('/subscription/create', 'SubscriptionController@create');
         Route::post('/subscription/update', 'SubscriptionController@update');
         Route::post('/subscription/update-onclick', 'SubscriptionController@updateOnClick');
+        Route::post('/subscription/update-promocode', 'SubscriptionController@updatePromocode');
         Route::post('promo-code/activate', [
             'as' => 'admin.promocodeactivate',
             'uses' => 'SubscriptionController@promoCodeActivate'

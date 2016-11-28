@@ -43,6 +43,7 @@
                     @else
                     <div type="text" class="col-sm-8  col-md-6" id="dCostPay"></div>
                     @endif
+                    <input type="hidden" value="" id="dCostPay_input" name="delivery_cost" />
                 </div>
 
 

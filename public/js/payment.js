@@ -39,6 +39,7 @@ var payFinal = payTotal;
 $( "#payProducts" ).html( productPay + ' <span class="payRub">' + num2word(productPay,words) + '</span>');
 if(dCostPay > 0) {
   $( "#dCostPay" ).html( '+' + dCostPay + ' <span class="payRub">' + num2word(dCostPay,words) + '</span>' );
+  $("#dCostPay_input").val(dCostPay);
 } else {
   $( "#dCostPay" ).html( '<span class="payFree">Бесплатно!</span>' );
 }
