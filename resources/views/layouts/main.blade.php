@@ -151,7 +151,7 @@
             <h2>Корзина товаров</h2>
         </div>
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-        <div class="cart-total">
+        <div class="cart-total {{session('shop')}}">
 
             <table>
                 <tbody>
