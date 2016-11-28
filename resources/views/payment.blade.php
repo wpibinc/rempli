@@ -17,7 +17,7 @@
 
             <form class="form-horizontal">
 
-                <div class="form-group howtopay">
+                {{--<div class="form-group howtopay">
                     <label class="radio-inline howpayradio">
                         <input type="radio" name="howpay" id="creditcard" value="CreditCard" checked="checked"> Картой сейчаc
                     </label>
@@ -27,7 +27,7 @@
                     </label>
                     <p class="help-block text-danger" id="kwarn">Извините, при заказе на более чем 3000 рублей, оплата только картой</p>
 
-                </div>
+                </div>--}}
 
 
 
@@ -59,13 +59,11 @@
                         <a href="/order" id="backToOrder" class="backForth"><span aria-hidden="true">&larr;</span> Назад</a>
                     </li>
                     <li id="tt" class="next">
-                        <iframe style="float: right" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=l&button-color=white&targets=expfood&default-sum=123&successURL=http://rempli/payment?order=<?php echo $_GET['order'] ?>" width="195" height="54"></iframe>
+                        <!--iframe style="float: right" frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=l&button-color=white&targets=expfood&default-sum=123&successURL=http://rempli/payment?order=<?php echo $_GET['order'] ?>" width="195" height="54"></iframe -->
                     </li>
                 </ul>
             </nav>
         </div>
     </div>
-
-
     </div>
 @endsection

@@ -3,9 +3,10 @@
 @section('title')
 
 @section('content')
-    <div class="col-md-12 main-start-page">
+    <div class="col-md-13 main-start-page">
 
-        <div class="tabs col-md-8 col-md-offset-2 ">
+        <div class="tabs col-md-8 col-md-offset-2">
+    <div class="tabs col-md-12">
         <ul class="col-md-3">
             <li><i class="fa fa-pencil-square" aria-hidden="true"></i> Оформление заказа <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-map" aria-hidden="true"></i> Территория доставки <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
@@ -13,7 +14,7 @@
             <li><i class="fa fa-comments-o" aria-hidden="true"></i> Вопросы/ответы <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
             <li><i class="fa fa-coffee" aria-hidden="true"></i> Как мы работаем <i class="fa fa-angle-right" aria-hidden="true" style="float: right"></i></li>
         </ul>
-        <div class="col-md-9">
+<div class="col-md-8" style="box-sizing:border-box;margin-left:30px">
             <div >
                 <h1>
                     Оформление заказа
@@ -24,9 +25,9 @@
                     <h1>
                         Территория доставки
                     </h1>
-                    <p>
+                    <div>
                         На данный момент мы работаем только в центре Москвы. Но не волнуйтесь – прямо сейчас наши специалисты трудятся над расширением территории доставки, чтобы Вы могли заказывать продукты на дом в любом месте.
-                    </p>
+                    </div>
 
                     <div id="map-canvas">
 
@@ -93,7 +94,7 @@
                         <h1>
                             Стоимость доставки
                         </h1>
-                        <p>
+                        <div>
                             Мы в Rempli долго думали над тем, как сделать доставку наиболее простой и выгодной для Вас. Для этого мы разработали наиболее прозрачные условия оплаты наших услуг. Вы не переплачиваете за продукты, нет никаких сложных процентов за доставку, все просто:
                             <br>
                             Сумма заказа - стоимость продуктов по чеку магазина + стоимость доставки.
@@ -102,7 +103,7 @@
                             - 500р. – при любом заказе до 8кг.<br>
                             - 800р. – при любом заказе свыше 8кг.
 
-                        </p>
+                        </div>
 
 
                     </div>
@@ -129,20 +130,38 @@
                     </div>
                 </div>
 
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingTwo">
+<h4 class="panel-title">
+<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+Где мы берем продукты?
+</a>
+</h4>
+</div>
+<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+<div class="panel-body">
+Всю продукцию для доставки курьеры Rempli покупают в магазинах «Азбука Вкуса», «Metro» и «LaMaree» рядом с Вами. После получения заказа Ваши продукты собираются в магазине и наш курьер доставляет их до Вас за кратчайшее время. <br>
+Внимание! Пользователям, не использующим подписку, доступна доставка только из магазинов «Азбука Вкуса».
+</div>
+</div>
+</div>
+
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo">
+                    <div class="panel-heading" role="tab" id="headingThree">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                                 Что если в магазине не окажется заказанного товара?
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                         <div class="panel-body">
-                            Все товары на сайте совпадают с реальным ассортиментом магазинов «Азбука Вкуса». Но если какого-либо товара в магазине не окажется, наш курьер позвонит Вам и вежливо уточнит - можно ли купить схожий товар или лучше вернуть Вам деньги.
+                            Все товары на сайте совпадают с реальным ассортиментом магазинов. Но если какого-либо товара в магазине не окажется, наш курьер позвонит Вам и вежливо уточнит - можно ли купить схожий товар или лучше вернуть Вам деньги.
                         </div>
                     </div>
+
                 </div>
+
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingSix">
                         <h4 class="panel-title">
@@ -156,9 +175,7 @@
                             По всем интересующим Вас вопросам Вы можете обращаться по номеру телефона или адресу электронной почты, указанным на странице Контакты.
                         </div>
                     </div>
-                </div>
-
-
+</div>
             </div>
             <div>
                 <h1>
@@ -170,7 +187,6 @@
         </div>
     </div>
 </div>
-
     <script>
         var initMap = false;
         (function($){

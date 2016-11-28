@@ -13,7 +13,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
         //$display = AdminDisplay::datatablesAsync()->setHtmlAttribute('class', 'table-primary');
         $display = AdminDisplay::datatables()
             ->setHtmlAttribute('class', 'table-primary');
-        $display->setOrder([[4, 'desc']]);;
+        $display->setOrder([[0, 'desc']]);;
 
 
         $display->setColumns(
@@ -37,7 +37,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
                     })->setWidth('50px')->setHtmlAttribute('class', 'text-center')->setOrderable(false),
                 AdminColumn::link('name')->setLabel('Имя'),
                 AdminColumn::link('phone')->setLabel('Телефон'),
-                AdminColumn::datetime('date')->setLabel('Дата')->setFormat('d.m.Y H:m'),
+                AdminColumn::datetime('date')->setLabel('Дата')->setFormat('d.m.Y H:i'),
                 AdminColumn::custom()->setLabel('Магазин')->setCallback(function(Order $model){
                     switch($model->shop){
                         case 'La': return 'La Maree';
@@ -48,6 +48,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
                             break;
                     }
                 }),
+                AdminColumn::text('total_cash')->setLabel('Сумма, с которой нужна сдача')->setWidth('200px'),
             ]
         );
 
@@ -88,6 +89,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
             AdminFormElement::select('status', 'Статус') ->setEnum(['новый','в работе','выполнен','отменен']),
             AdminFormElement::view('misc.over8kg')->setData(['order' => $order, 'haveSubs'=>$haveSubs]),
             AdminFormElement::text('name', 'Имя'),
+            AdminFormElement::text('total_cash', 'Сумма, с которой нужна сдача'),
             AdminFormElement::text('phone', 'Телефон'),
             AdminFormElement::text('address', 'Адрес'),
             AdminFormElement::text('house', 'Дом'),
