@@ -110,9 +110,9 @@
                                 <td>{{$invoice->price}} руб.</td>
                                 {{--<td><button type="button" class="btn buy-bill">оплатить</button></td>--}}
                                 <td>
-                                    <form action="https://demomoney.yandex.ru/eshop.xml" method="POST">
+                                    <form action="https://money.yandex.ru/eshop.xml" method="post">
                                         <input name="shopId" value="78360" type="hidden">
-                                        <input name="scid" value="545092" type="hidden">
+                                        <input name="scid" value="79048" type="hidden">
                                         <input name="customerNumber" value="{{$user->id}}" type="hidden">
                                         {{--<input name="paymentType" value="AC" type="hidden"/>--}}
                                         <input name="sum" value="{{$invoice->price}}" type="hidden"><!-- Сумма покупки (руб.) -->
@@ -188,10 +188,9 @@
                            data-slider-value="3"
                            data-slider-tooltip="hide"/>
                     <p class="finalPriceSubscription"><span>4200</span> руб</p>
-                    {{--<button type="button" class="buySubscription btn btn-default" >Купить</button>--}}
-                    <form action="https://demomoney.yandex.ru/eshop.xml" method="POST">
-                        <input name="shopId" value="78360" type="hidden">
-                        <input name="scid" value="545092" type="hidden">
+                    <form action="https://money.yandex.ru/eshop.xml" method="post">
+                    <input name="shopId" value="78360" type="hidden">
+                        <input name="scid" value="79048" type="hidden">
                         <input name="customerNumber" value="{{$user->id}}" type="hidden">
                         {{--<input name="paymentType" value="AC" type="hidden"/>--}}
                         <input name="sum" value="4200" type="hidden" id="step1-sum">
@@ -405,8 +404,6 @@
             $('.finalPriceSubscription span').html(finalPriceSubscription);
             $('#step1-label').val(finalCountSubscription);
             $('#step1-sum').val(finalPriceSubscription);
-//            $('.thisIframe').attr('src','https://money.yandex.ru/embed/small.xml?account=410013085842859&quickpay=small&any-card-payment-type=on&button-text=02&button-size=m&button-color=orange&targets=expfood&default-sum='+finalPriceSubscription+'&successURL=http://rempl?sucssess=1/');
-
         });
         $(document).on('change','#ex2',function () {
             var countDelivery2 = parseInt($('#ex2').val());
@@ -638,7 +635,6 @@
                 $.ajax({
                     type: "POST", //Метод отправки
                     url: "/subscription/create", //путь до php фаила отправителя
-//                    url: "/yandex-kassa/paymentaviso", //путь до php фаила отправителя
                     data: {
                         'user_id':user_id,
                         '_token':$_token,
