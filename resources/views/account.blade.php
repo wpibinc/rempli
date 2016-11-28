@@ -258,6 +258,45 @@
                                 <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
                             </td>
                         </tr>
+                        @else
+                            <tr>
+                                <td colspan="1">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="auto_subscription_promocode" @if($has_next_subscription) checked @endif value="1" class="auto_subscription_promocode"> продление подписки promocode
+                                        </label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="1">
+                                    <input id="ex2"  data-provide="slider"
+                                           data-slider-ticks="[1, 2, 3, 4]"
+                                           data-slider-ticks-labels='["4", "8", "12","30"]'
+                                           data-slider-min="4"
+                                           data-slider-max="30"
+                                           data-slider-step="1"
+                                           @if($subscription->current_quantity == 4)
+                                           data-slider-value="1"
+                                           @elseif($subscription->current_quantity == 8)
+                                           data-slider-value="2"
+                                           @elseif($subscription->current_quantity == 12)
+                                           data-slider-value="3"
+                                           @else
+                                           data-slider-value="4"
+                                           @endif
+                                           data-slider-tooltip="hide"/></br>
+                                    <p class="finalPriceSubscriptions hideDiv"><span></span> руб</p>
+                                    {{--<button class="btn btn-default editSubscription Dsp-none" disabled type="button">изменить условия</button>--}}
+                                    @if(!$has_next_subscription)
+                                        <button class="btn btn-default editsSubscription hideDiv" type="button">Продлить</button>
+                                    @else
+                                        <button class="btn btn-default edits Subscription" type="button">изменить</button>
+                                        <button class="btn btn-default delSubscription" type="button">Удалить</button>
+                                    @endif
+                                </td>
+                            </tr>
                         @endif
                         </tbody>
                     </table>
@@ -424,8 +463,33 @@
             $('.finalPriceSubscriptions span').html(finalPriceSubscription2);
 
         });
+        $(document).on('click','.auto_subscription_promocode',function () {
+            var $el = $(this);
+            if($el.prop('checked') == true){
+                $('.slider-horizontal').removeClass('visb-h');
+                $('.finalPriceSubscriptions').removeClass('hideDiv');
+                $('.editSubscription').addClass('hideDiv');
+                $('.editsSubscription').removeClass('hideDiv');
+            } else {
+                $('.slider-horizontal').addClass('visb-h');
+                $('.finalPriceSubscriptions').addClass('hideDiv');
+                $('.editSubscription').removeClass('hideDiv');
+                $('.editsSubscription').addClass('hideDiv');
+            }
+        });
 
-        $(document).on('click','.auto_subscription',function () {
+        $(document).on('ready',function () {
+            if($('.auto_subscription_promocode').prop('checked') == true){
+                $('.slider-horizontal').removeClass('visb-h');
+                $('.finalPriceSubscriptions').removeClass('hideDiv');
+            } else {
+                $('.slider-horizontal').addClass('visb-h');
+                $('.finalPriceSubscriptions').addClass('hideDiv');
+            }
+        });
+
+
+        $(document).on('click','.auto_subscription, .delSubscription',function () {
             var checkboxs = 0;
             if($('.auto_subscription').prop('checked') == true){
                 checkboxs = 1;

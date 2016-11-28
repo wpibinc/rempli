@@ -12,20 +12,6 @@ use App\Http\Requests;
 
 class SubscriptionController extends Controller
 {
-    /*public function create(Request $request)
-    {
-        $subscription = Subscription::create($request->all());
-        $subscription->start_subscription = Carbon::now();
-        $cur_date = Carbon::now();
-        $subscription->end_subscription = $cur_date->addMonths(1);
-        try {
-            $subscription->save();
-        } catch (\Exception $e) {
-            return $e;
-        }
-
-        return response()->json(['status' => true, 'msg' => 'Подписка оформлена.']);
-    }*/
     public function update(Request $request)
     {
         if($request->input_dop == 1) {
@@ -63,7 +49,7 @@ class SubscriptionController extends Controller
         }
 
         $last_subscription = Subscription::where('user_id', $request->user_id)
-                ->where('is_free', '0')
+//                ->where('is_free', '0')
                 ->orderBy('end_subscription', 'desc')->first();
 
         if($last_subscription->start_subscription > Carbon::now()) {
@@ -77,7 +63,6 @@ class SubscriptionController extends Controller
                 } catch (\Exception $e) {
                     return $e;
                 }
-
                 $invoice->price = $request->price;
                 try {
                     $invoice->save();
@@ -138,7 +123,7 @@ class SubscriptionController extends Controller
     public function updateOnClick(Request $request)
     {
         $last_subscription = Subscription::where('user_id', $request->user_id)
-            ->where('is_free', '0')
+//            ->where('is_free', '0')
             ->orderBy('end_subscription', 'desc')->first();
 
         if($last_subscription->start_subscription > Carbon::now()) {

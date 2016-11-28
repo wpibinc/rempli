@@ -39,7 +39,7 @@ class UserController extends Controller
                 ->where('end_subscription', '>', Carbon::now())->first();
         }
 
-        if(isset($subscriptions) && $subscriptions->is_free == '0') {
+        if(isset($subscriptions) /*&& $subscriptions->is_free == '0'*/) {
             $next_subscription = $user->subscriptions()->where('end_subscription', '>', Carbon::now())
                 ->where('start_subscription', $subscriptions->end_subscription)->first();
 
@@ -75,19 +75,12 @@ class UserController extends Controller
             $time_to_pay = 'У Вас имеются неоплаченные счета';
         }
 
-        /*$ya_str = '';
-        if($request->action == 'PaymentSuccess') {
-            $ya_str = 'Оплата прошла успешно';
-        } else if ($request->action == 'PaymentFail') {
-            $ya_str = 'При оплате произошла ошибка';
-        }
-        ->with('success_message', $ya_str);*/
-
         if(isset($long_promocode)) {
             $current_quantity = $subscriptions->current_quantity - $long_promocode->used_per_month;
             return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts,
                                     'subscription' => $subscriptions, 'long_promocode' => $long_promocode,
-                                    'current_quantity' => $current_quantity, 'invoices' => $invoices, 'time_to_pay' => $time_to_pay]);
+                                    'current_quantity' => $current_quantity, 'invoices' => $invoices, 'time_to_pay' => $time_to_pay,
+                                    'has_next_subscription' => $has_next_subscription, 'is_paid_next_subscription' => $is_paid_next_subscription]);
 
         }
         return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts,
