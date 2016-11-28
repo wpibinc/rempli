@@ -425,7 +425,8 @@
     <script>
         $(document).on('ready',function () {
 
-            $('table .slider-horizontal').addClass('visb-h');
+//            $('table .slider-horizontal').addClass('visb-h');
+//            $('.falseSubscription .slider-horizontal').removeClass('visb-h');
         });
         $(document).on('click','.editSubscription',function () {
           $('.slider-horizontal').removeClass('visb-h');
@@ -976,6 +977,10 @@
     <script>
         $('.invoice_page').on('click',function () {
             $('ul li[data-page="2"]').trigger('click');
+        });
+        $(document).on('ready',function () {
+                $('.falseSubscription .slider-horizontal').removeClass('visb-h');
+
         });
     </script>
 </div>
