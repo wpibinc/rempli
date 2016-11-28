@@ -239,22 +239,43 @@
                         </tr>
                         <tr>
                             <td colspan="1">
-                                <input id="ex2"  data-provide="slider"
-                                       data-slider-ticks="[1, 2, 3, 4]"
-                                       data-slider-ticks-labels='["4", "8", "12","30"]'
-                                       data-slider-min="4"
-                                       data-slider-max="30"
-                                       data-slider-step="1"
-                                       @if($subscription->current_quantity == 4)
-                                       data-slider-value="1"
-                                       @elseif($subscription->current_quantity == 8)
-                                       data-slider-value="2"
-                                       @elseif($subscription->current_quantity == 12)
-                                       data-slider-value="3"
-                                       @else
-                                       data-slider-value="4"
-                                       @endif
-                                       data-slider-tooltip="hide"/></br>
+                                @if(isset($next_subscription))
+                                    <input id="ex2"  data-provide="slider"
+                                           data-slider-ticks="[1, 2, 3, 4]"
+                                           data-slider-ticks-labels='["4", "8", "12","30"]'
+                                           data-slider-min="4"
+                                           data-slider-max="30"
+                                           data-slider-step="1"
+                                           @if($next_subscription->total_quantity == 4)
+                                           data-slider-value="1"
+                                           @elseif($next_subscription->total_quantity == 8)
+                                           data-slider-value="2"
+                                           @elseif($next_subscription->total_quantity == 12)
+                                           data-slider-value="3"
+                                           @else
+                                           data-slider-value="4"
+                                           @endif
+                                           data-slider-tooltip="hide"/>
+                                @else
+                                    <input id="ex2"  data-provide="slider"
+                                           data-slider-ticks="[1, 2, 3, 4]"
+                                           data-slider-ticks-labels='["4", "8", "12","30"]'
+                                           data-slider-min="4"
+                                           data-slider-max="30"
+                                           data-slider-step="1"
+                                           @if($subscription->current_quantity == 4)
+                                           data-slider-value="1"
+                                           @elseif($subscription->current_quantity == 8)
+                                           data-slider-value="2"
+                                           @elseif($subscription->current_quantity == 12)
+                                           data-slider-value="3"
+                                           @else
+                                           data-slider-value="4"
+                                           @endif
+                                           data-slider-tooltip="hide"/>
+                                    @endif
+
+                                </br>
                                 <p class="finalPriceSubscriptions hideDiv"><span></span> руб</p>
                                 <button class="btn btn-default editSubscription Dsp-none" disabled type="button">Изменить условия</button>
                                 <button class="btn btn-default editsSubscription hideDiv" type="button">Изменить</button>
@@ -274,22 +295,42 @@
                             </tr>
                             <tr>
                                 <td colspan="1">
-                                    <input id="ex2"  data-provide="slider"
-                                           data-slider-ticks="[1, 2, 3, 4]"
-                                           data-slider-ticks-labels='["4", "8", "12","30"]'
-                                           data-slider-min="4"
-                                           data-slider-max="30"
-                                           data-slider-step="1"
-                                           @if($subscription->current_quantity == 4)
-                                           data-slider-value="1"
-                                           @elseif($subscription->current_quantity == 8)
-                                           data-slider-value="2"
-                                           @elseif($subscription->current_quantity == 12)
-                                           data-slider-value="3"
-                                           @else
-                                           data-slider-value="4"
-                                           @endif
-                                           data-slider-tooltip="hide"/></br>
+                                    @if(isset($next_subscription))
+                                        <input id="ex2"  data-provide="slider"
+                                               data-slider-ticks="[1, 2, 3, 4]"
+                                               data-slider-ticks-labels='["4", "8", "12","30"]'
+                                               data-slider-min="4"
+                                               data-slider-max="30"
+                                               data-slider-step="1"
+                                               @if($next_subscription->total_quantity == 4)
+                                               data-slider-value="1"
+                                               @elseif($next_subscription->total_quantity == 8)
+                                               data-slider-value="2"
+                                               @elseif($next_subscription->total_quantity == 12)
+                                               data-slider-value="3"
+                                               @else
+                                               data-slider-value="4"
+                                               @endif
+                                               data-slider-tooltip="hide"/>
+                                    @else
+                                        <input id="ex2"  data-provide="slider"
+                                               data-slider-ticks="[1, 2, 3, 4]"
+                                               data-slider-ticks-labels='["4", "8", "12","30"]'
+                                               data-slider-min="4"
+                                               data-slider-max="30"
+                                               data-slider-step="1"
+                                               @if($subscription->current_quantity == 4)
+                                               data-slider-value="1"
+                                               @elseif($subscription->current_quantity == 8)
+                                               data-slider-value="2"
+                                               @elseif($subscription->current_quantity == 12)
+                                               data-slider-value="3"
+                                               @else
+                                               data-slider-value="4"
+                                               @endif
+                                               data-slider-tooltip="hide"/>
+                                        @endif
+                                        </br>
                                     <p class="finalPriceSubscriptions hideDiv"><span></span> руб</p>
                                     {{--<button class="btn btn-default editSubscription Dsp-none" disabled type="button">изменить условия</button>--}}
                                     @if(!$has_next_subscription)
