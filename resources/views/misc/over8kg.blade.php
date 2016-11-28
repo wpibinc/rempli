@@ -13,7 +13,7 @@
 @endif
 <script>
     $(document).on('change', 'select[name="status"]', function () {
-        if ( $('input[name="haveSubs"]').val() == 1 &&  parseInt($('input[name="mass"]').val()) >= 8000 && $('select[name="status"] option:selected').val() == 'выполнен') {
+        if ( $('input[name="haveSubs"]').val() == 1 &&  /*parseInt($('input[name="mass"]').val()) >= 8000 && */$('select[name="status"] option:selected').val() == 'выполнен') {
             $('.invoice').show();
         } else {
             $('.invoice').hide();

@@ -49,8 +49,14 @@ $( "iframe" ).attr({
   src: "https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=l&button-color=white&targets=ExpFood.ru&default-sum="+payFinal+"&successURL=http://rempli.ru/success?order="+orderId,
 });
 
+    //28.11 fix
+    $(document).ready(function() {
+      $( "#discPay" ).html( '- 0 <span class="payRub"> рублей </span>' );
+      $( "#payTotal" ).html( payTotal + ' <span class="payRub"> ' + num2word(payTotal,words) + '</span>' );
+      $( ".next" ).html( '<a href="/success?order='+orderId+'" id="toPay" class="backForth">Завершить <span aria-hidden="true">&rarr;</span></a>' );
+    });
 
-$('#creditcard').click(function() {
+/*$('#creditcard').click(function() {
     $( "#discPay" ).html( '- ' + discPay + ' <span class="payRub"> ' + num2word(discPay,words) + '</span>' );
     $( "#payTotal" ).html( payFinal + ' <span class="payRub"> ' + num2word(payFinal,words) + '</span>' );
     $( ".next" ).html( '<iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=l&button-color=white&targets=expfood&default-sum='+payFinal+'&successURL=http://rempli.ru/success?order='+orderId+'" width="195" height="54"></iframe>' );
@@ -60,7 +66,7 @@ $('#cash').click(function() {
     $( "#discPay" ).html( '- 0 <span class="payRub"> рублей </span>' );
     $( "#payTotal" ).html( payTotal + ' <span class="payRub"> ' + num2word(payTotal,words) + '</span>' );
     $( ".next" ).html( '<a href="/success?order='+orderId+'" id="toPay" class="backForth">Завершить <span aria-hidden="true">&rarr;</span></a>' );
-});
+});*/
 
 
 
@@ -118,14 +124,14 @@ query.find({
 });
 
 
-if (Number(sessionStorage.cost) > 3000) {
+/*if (Number(sessionStorage.cost) > 3000) {
   document.getElementById("cash").disabled = true;
   $('.radiocash').css('cursor', 'default');
   $('.radiocash').css('color', '#aaa');
   $( ".radiocash" ).click(function() {
     $('#kwarn').css('display', 'block');
   });
-}
+}*/
 
 
   focus();

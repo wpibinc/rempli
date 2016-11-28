@@ -12,6 +12,10 @@ okplace = 1;
 		  	if (user.get("FirstName") != null ) {
 		    	document.getElementById('name').value = user.get("FirstName");
 		    }
+
+		  	if (user.get("total_cash") != null ) {
+		    	document.getElementById('total_cash').value = user.get("total_cash");
+		    }
     	    if (user.get("phone") != null ) {
 		    	document.getElementById('phone').value = user.get("phone");
 		    }
@@ -28,6 +32,7 @@ okplace = 1;
 		    $(document).on('click', "#toPay", function(){
 				// alert(currentUser);
 				user.set("FirstName", document.getElementById('name').value);
+				user.set("total_cash", document.getElementById('total_cash').value);
 				user.set("phone", document.getElementById('phone').value);
                                 if($("#optionsRadios1").prop('checked')){
                                     user.set("AdressField", document.getElementById('pac-input').value);
@@ -77,6 +82,9 @@ okplace = 1;
 		if (localStorage.FirstName != undefined) {
 		    	document.getElementById('name').value = localStorage.FirstName;
 		}
+		if (localStorage.total_cash != undefined) {
+		    	document.getElementById('total_cash').value = localStorage.total_cash;
+		}
 		if (localStorage.phone != undefined) {
 		    	document.getElementById('phone').value = localStorage.phone;
 		}
@@ -114,6 +122,7 @@ okplace = 1;
 
 				// alert(currentUser);
 				localStorage.FirstName = document.getElementById('name').value;
+				localStorage.total_cash = document.getElementById('total_cash').value;
 				localStorage.phone = document.getElementById('phone').value;
 				localStorage.AdressField = document.getElementById('pac-input').value;
 				localStorage.house = document.getElementById('house').value;
@@ -215,6 +224,9 @@ $(document).on('click', ".checkout_button", function(){
 
 
 $(document).ready(function() {
+	//28.11 fix
+	$( "#toPay" ).html( 'Завершить <span aria-hidden="true">&rarr;</span>' );
+
     $(document).on('click', "#toPay", function(){
                 var checked = $("#optionsRadios1").prop('checked');
                 var address = '';
@@ -223,6 +235,7 @@ $(document).ready(function() {
                 var flat = '';
                 var adressChecked = '';
                 var orderDate = $("input[name=order-date]").val();
+                var total_cash = $("input[name=total_cash]").val();
                 if(checked){
                     address = localStorage.AdressField;
                     house = localStorage.house;
@@ -243,6 +256,7 @@ $(document).ready(function() {
 				{
 					items: data,
 					name: localStorage.FirstName,
+					total_cash: localStorage.total_cash,
 					phone: localStorage.phone,
 					address: address,
 					house: house,
@@ -320,13 +334,13 @@ if (h > 8 && h < 22) { // now
 
 
 
-$('#creditcard').click(function() {
+/*$('#creditcard').click(function() {
     $( "#toPay" ).html( 'Оплатить <span aria-hidden="true">&rarr;</span>' );
 });
 
 $('#cash').click(function() {
     $( "#toPay" ).html( 'Завершить <span aria-hidden="true">&rarr;</span>' );
-});
+});*/
 
 
 $('#nocomment').click(function() {
