@@ -12,7 +12,7 @@ function num2word(num,words) {
 words=Array("рубль", "рубля", "рублей");
 
 
-
+var dCostPay;
 var orderId;
 var free = Parse.Object.extend("free");
 var query = new Parse.Query(free);
@@ -54,7 +54,7 @@ $( "iframe" ).attr({
     $(document).ready(function() {
       $( "#discPay" ).html( '- 0 <span class="payRub"> рублей </span>' );
       $( "#payTotal" ).html( payTotal + ' <span class="payRub"> ' + num2word(payTotal,words) + '</span>' );
-      $( ".next" ).html( '<a href="/success?order='+orderId+'" id="toPay" class="backForth">Завершить <span aria-hidden="true">&rarr;</span></a>' );
+      $( ".next" ).html( '<a href="/success?order='+orderId+'&delivery_cost='+dCostPay+'" id="toPay" class="backForth">Завершить <span aria-hidden="true">&rarr;</span></a>' );
     });
 
 /*$('#creditcard').click(function() {
