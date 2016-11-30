@@ -225,6 +225,8 @@
                         </tr>
                         @endif
                         @if(!isset($current_quantity))
+{{--                            {{dd(isset($next_subscription))}}--}}
+{{--                            {{dd($next_subscription->total_quantity)}}--}}
                         <tr>
                             <td colspan="1">
                                 <div class="checkbox">
@@ -254,16 +256,17 @@
                                        @endif
                                        data-slider-tooltip="hide"/></br>
                                 <p class="finalPriceSubscriptions hideDiv"><span></span> руб</p>
-                                <button class="btn btn-default editSubscription Dsp-none" disabled type="button">изменить условия</button>
-                                <button class="btn btn-default editsSubscription hideDiv" type="button">изменить</button>
+                                <button class="btn btn-default editSubscription Dsp-none" disabled type="button">Изменить условия</button>
+                                <button class="btn btn-default editsSubscription hideDiv" type="button">Изменить</button>
                             </td>
                         </tr>
                         @else
+                            {{--{{dd($next_subscription->total_quantity)}}--}}
                             <tr>
                                 <td colspan="1">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="auto_subscription_promocode" @if($has_next_subscription) checked @endif value="1" class="auto_subscription_promocode"> продление подписки promocode
+                                            <input type="checkbox" name="auto_subscription_promocode" @if($has_next_subscription) checked @endif value="1" class="auto_subscription_promocode"> продление подписки
                                         </label>
                                     </div>
                                 </td>
@@ -290,10 +293,11 @@
                                     <p class="finalPriceSubscriptions hideDiv"><span></span> руб</p>
                                     {{--<button class="btn btn-default editSubscription Dsp-none" disabled type="button">изменить условия</button>--}}
                                     @if(!$has_next_subscription)
-                                        <button class="btn btn-default editsSubscription hideDiv" type="button">Продлить</button>
+                                        {{--<button class="btn btn-default editsSubscriptionPromocode hideDiv" type="button">Продлить</button>--}}
+                                        <input class="btn btn-default editsSubscriptionPromocode hideDiv" name="button_action" value="Продлить" type="button">
                                     @else
-                                        <button class="btn btn-default edits Subscription" type="button">изменить</button>
-                                        <button class="btn btn-default delSubscription" type="button">Удалить</button>
+                                        <button class="btn btn-default editsSubscription" type="button">Изменить</button>
+                                        <input class="btn btn-default editsSubscriptionPromocode" name="button_action" value="Удалить" type="button">
                                     @endif
                                 </td>
                             </tr>
@@ -468,13 +472,13 @@
             if($el.prop('checked') == true){
                 $('.slider-horizontal').removeClass('visb-h');
                 $('.finalPriceSubscriptions').removeClass('hideDiv');
-                $('.editSubscription').addClass('hideDiv');
-                $('.editsSubscription').removeClass('hideDiv');
+//                $('.editsSubscriptionPromocode').addClass('hideDiv');
+                $('.editsSubscriptionPromocode').removeClass('hideDiv');
             } else {
                 $('.slider-horizontal').addClass('visb-h');
                 $('.finalPriceSubscriptions').addClass('hideDiv');
-                $('.editSubscription').removeClass('hideDiv');
-                $('.editsSubscription').addClass('hideDiv');
+//                $('.editsSubscriptionPromocode').removeClass('hideDiv');
+                $('.editsSubscriptionPromocode').addClass('hideDiv');
             }
         });
 
@@ -678,55 +682,55 @@
                 $('.auto_subscription').attr("disabled", true);
 
             }
-            $(document).on('click','.buySubscription',function() { //устанавливаем событие отправки для формы с id=form
-                $_token = "{!! csrf_token() !!}";
-                var user_id = $('.userId').val();
-                var price = $('.finalPriceSubscription span').text();
-                var quantity = $('#ex1').val();
+            {{--$(document).on('click','.buySubscription',function() { //устанавливаем событие отправки для формы с id=form--}}
+                {{--$_token = "{!! csrf_token() !!}";--}}
+                {{--var user_id = $('.userId').val();--}}
+                {{--var price = $('.finalPriceSubscription span').text();--}}
+                {{--var quantity = $('#ex1').val();--}}
 
-                if(quantity == 2){
-                    quantity = 8;
-                }
-                if(quantity == 3){
-                    quantity = 12;
-                }
-                if(quantity == 4){
-                    quantity = 30;
-                }
-                if(quantity == 1){
-                    quantity = 4;
-                }
-                $.ajax({
-                    type: "POST", //Метод отправки
-                    url: "/subscription/create", //путь до php фаила отправителя
-                    data: {
-                        'user_id':user_id,
-                        '_token':$_token,
-                        'current_quantity':quantity,
-                        'total_quantity':quantity,
-                        'price':price
-                    },
-                    success: function(data) {
-                        var alert_class = '';
-                        if(!data.status) {
-                            alert_class = 'warning';
-                            $('.message').show();
-                        } else {
-                             alert_class = 'success';
-                            $('.message').show();
-                        }
-                        $('.message').html(
-                                '<div class="alert alert-' + alert_class + ' alert-message">' +
-                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                                '<span aria-hidden="true">×</span>' +
-                                '</button>' +
-                                data.msg+
-                                '</div>'
-                        );
-                        return false;
-                    }
-                    });
-            });
+                {{--if(quantity == 2){--}}
+                    {{--quantity = 8;--}}
+                {{--}--}}
+                {{--if(quantity == 3){--}}
+                    {{--quantity = 12;--}}
+                {{--}--}}
+                {{--if(quantity == 4){--}}
+                    {{--quantity = 30;--}}
+                {{--}--}}
+                {{--if(quantity == 1){--}}
+                    {{--quantity = 4;--}}
+                {{--}--}}
+                {{--$.ajax({--}}
+                    {{--type: "POST", //Метод отправки--}}
+                    {{--url: "/subscription/create", //путь до php фаила отправителя--}}
+                    {{--data: {--}}
+                        {{--'user_id':user_id,--}}
+                        {{--'_token':$_token,--}}
+                        {{--'current_quantity':quantity,--}}
+                        {{--'total_quantity':quantity,--}}
+                        {{--'price':price--}}
+                    {{--},--}}
+                    {{--success: function(data) {--}}
+                        {{--var alert_class = '';--}}
+                        {{--if(!data.status) {--}}
+                            {{--alert_class = 'warning';--}}
+                            {{--$('.message').show();--}}
+                        {{--} else {--}}
+                             {{--alert_class = 'success';--}}
+                            {{--$('.message').show();--}}
+                        {{--}--}}
+                        {{--$('.message').html(--}}
+                                {{--'<div class="alert alert-' + alert_class + ' alert-message">' +--}}
+                                {{--'<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +--}}
+                                {{--'<span aria-hidden="true">×</span>' +--}}
+                                {{--'</button>' +--}}
+                                {{--data.msg+--}}
+                                {{--'</div>'--}}
+                        {{--);--}}
+                        {{--return false;--}}
+                    {{--}--}}
+                    {{--});--}}
+            {{--});--}}
 
 
             $(document).on('click','.editsSubscription',function() { //устанавливаем событие отправки для формы с id=form
@@ -766,6 +770,67 @@
                         'total_quantity':quantitys,
                         'price':price,
                         'auto_subscription':auto_subscription
+                    },
+                    success: function(data) {
+                        var alert_class = '';
+                        if(!data.status) {
+                            alert_class = 'warning';
+                            $('.message').show();
+                        } else {
+                            alert_class = 'success';
+                            $('.message').show();
+                        }
+                        $('.message').html(
+                                '<div class="alert alert-' + alert_class + ' alert-message">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">×</span>' +
+                                '</button>' +
+                                data.msg+
+                                '</div>'
+                        );
+                        return false;
+                    }
+                });
+            });
+
+
+            $(document).on('click','.editsSubscriptionPromocode',function() { //устанавливаем событие отправки для формы с id=form
+
+
+                $_token = "{!! csrf_token() !!}";
+                var subscription_id = $('input[name="subscription_id"]').val();
+                var user_id = $('.userId').val();
+                var price = $('.finalPriceSubscriptions span').text();
+                var quantitys = $('#ex2').val();
+                var button_action = $('input[name="button_action"]').val();
+                if(quantitys == 2){
+                    quantitys = 8;
+                }
+                if(quantitys == 3){
+                    quantitys = 12;
+                }
+                if(quantitys == 4){
+                    quantitys = 30;
+                }
+                if(quantitys == 1){
+                    quantitys = 4;
+                }
+                var checkboxs = 0;
+                /*if($('.auto_subscription_promocode').prop('checked') == true){
+                    checkboxs = 1;
+                }
+                var auto_subscription = checkboxs;*/
+                $.ajax({
+                    type: "POST", //Метод отправки
+                    url: "/subscription/update-promocode", //путь до php фаила отправителя
+                    data: {
+                        'user_id':user_id,
+//                        'id':subscription_id,
+                        '_token':$_token,
+                        'current_quantity':quantitys,
+                        'total_quantity':quantitys,
+                        'price':price,
+                        'button_action':button_action
                     },
                     success: function(data) {
                         var alert_class = '';
