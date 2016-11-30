@@ -28,6 +28,7 @@ class UserController extends Controller
         $has_next_subscription = false;
         $user = Auth::user();
         $time_to_pay = null;
+        $next_subscription = null;
         $subscriptions = $user->subscriptions()->where('end_subscription', '>', Carbon::now())->first();
         $late_invoice = $user->invoices()->where('is_paid', '0')
             ->where('title', '!=', 'Продление подписки')->first();
@@ -44,6 +45,11 @@ class UserController extends Controller
                 ->where('start_subscription', $subscriptions->end_subscription)->first();
 
             if(isset($next_subscription)) {
+//                header('Content-Type: text/html; charset=utf-8');
+//                echo "<pre>";
+//                var_dump($next_subscription);
+//                echo "</pre>";
+//                die();
                 $has_next_subscription = true;
                 $paid_next_sudscription = $next_subscription->invoices()
                             ->where('last_pay_day', $next_subscription->start_subscription)
@@ -80,12 +86,14 @@ class UserController extends Controller
             return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts,
                                     'subscription' => $subscriptions, 'long_promocode' => $long_promocode,
                                     'current_quantity' => $current_quantity, 'invoices' => $invoices, 'time_to_pay' => $time_to_pay,
-                                    'has_next_subscription' => $has_next_subscription, 'is_paid_next_subscription' => $is_paid_next_subscription]);
+                                    'has_next_subscription' => $has_next_subscription, 'is_paid_next_subscription' => $is_paid_next_subscription,
+                                    'next_subscription' => $next_subscription]);
 
         }
         return view('account', ['orders' => $orders, 'user' => $user, 'adresses' => $adresses, 'listProducts' => $listProducts,
                                 'subscription' => $subscriptions, 'time_to_pay' => $time_to_pay, 'invoices' => $invoices,
-                                'has_next_subscription' => $has_next_subscription, 'is_paid_next_subscription' => $is_paid_next_subscription]);
+                                'has_next_subscription' => $has_next_subscription, 'is_paid_next_subscription' => $is_paid_next_subscription,
+                                'next_subscription' => $next_subscription]);
     }
     
     public function changeInfo(Request $request)
