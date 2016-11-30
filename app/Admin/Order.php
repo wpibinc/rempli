@@ -49,6 +49,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
                     }
                 }),
                 AdminColumn::text('total_cash')->setLabel('Сумма, с которой нужна сдача')->setWidth('200px'),
+                AdminColumn::text('delivery_cost')->setLabel('Стоимость доставки')->setWidth('100px'),
             ]
         );
 
@@ -90,6 +91,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
             AdminFormElement::view('misc.over8kg')->setData(['order' => $order, 'haveSubs'=>$haveSubs]),
             AdminFormElement::text('name', 'Имя'),
             AdminFormElement::text('total_cash', 'Сумма, с которой нужна сдача'),
+            AdminFormElement::text('delivery_cost', 'Стоимость доставки'),
             AdminFormElement::text('phone', 'Телефон'),
             AdminFormElement::text('address', 'Адрес'),
             AdminFormElement::text('house', 'Дом'),
