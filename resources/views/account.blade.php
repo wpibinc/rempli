@@ -310,7 +310,7 @@
             </div>
             <div class='rules wrapper-acaunt'>Правила</div>
             <div class='orders lists wrapper-acaunt '>
-                @if(isset($subscription) && $subscription)
+                @if((\Auth::user()&&\Auth::user()->isAdmin())||(isset($subscription) && $subscription))
                 <ul class='shops'>
                     <li class="{{ session('shop')=='Av'||!session('shop') ? 'active' : '' }}"><a href='my-account?section=order-list&shop=Av'>Азбука Вкуса</a></li>
                     <li class="{{ session('shop')=='La' ? 'active' : '' }}"><a href='my-account?section=order-list&shop=La'>La Maree</a></li>
