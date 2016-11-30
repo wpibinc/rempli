@@ -50,7 +50,6 @@ $( "iframe" ).attr({
   src: "https://money.yandex.ru/embed/small.xml?account=410012075316731&quickpay=small&any-card-payment-type=on&button-text=02&button-size=l&button-color=white&targets=ExpFood.ru&default-sum="+payFinal+"&successURL=http://rempli.ru/success?order="+orderId,
 });
 
-
     //28.11 fix
     $(document).ready(function() {
       $( "#discPay" ).html( '- 0 <span class="payRub"> рублей </span>' );
