@@ -19,6 +19,21 @@ class OrderController extends BaseController
             $user = Auth::user();
             $order['user_id'] = $user->id;
             $order['shop'] = session('shop')?session('shop'):'Av';
+            $orderDate = new Carbon($order['date']);
+            switch($order['shop']){
+                case 'Me': 
+                    $workHours = [12, 23];
+                    break;
+                case 'La': 
+                    $workHours = [12, 23];
+                    break;
+                default: 
+                    $workHours = [10, 23];
+                    break;
+            }
+            if($orderDate->hour<$workHours[0]||$orderDate->hour>=$workHours[1]){
+                return ['message' => "Доставка осуществляется с".$workHours[0].".00 до ".$workHours[1].".00", 'success' => false];
+            }
             $items = request()->only('items');
             if(!empty($adressChecked)){
                 $adress = Adress::find($adressChecked);
@@ -38,7 +53,7 @@ class OrderController extends BaseController
             $order= Order::create($order);
             $order->items()->createMany($items['items']);
     
-            return ['orderId' => $order->id];
+            return ['orderId' => $order->id, 'success' => true];
             die();
         }
         $user = Auth::user();

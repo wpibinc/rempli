@@ -271,7 +271,13 @@ $(document).ready(function() {
 				}
 			),
 			success: function (data) {
-                            window.location.href = "/payment?order="+data.orderId;
+                            if(data.success){
+                                window.location.href = "/payment?order="+data.orderId;
+                            }else{
+                                if(data.message){
+                                    $(".error.time").text(data.message);
+                                }
+                            }
 			},
 			error: function (xhr, textStatus, thrownError) {
 				alert(thrownError);

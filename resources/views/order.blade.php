@@ -148,17 +148,16 @@
                     @else
                         <input required type="text" name="order-date" class="order-date" />
                     @endif
-
+                    <span class="error time"></span>
 
 
                     <script type="text/javascript">
-                        $('.order-date').datetimepicker();
-//                        function date() {
-//                            var d = new Date();
-//                            var h = d.getHours() + 1;
-//                            var m = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
-//                            document.write('<b>' + h + ':' + m + '</b>');
-//                        } date();
+                        
+                        var minDate = new Date();
+                        $('.order-date').datetimepicker({
+                            startDate: minDate,
+                        });
+                        
                     </script>
                     <p class="help-block text-danger"></p>
                 </div>
