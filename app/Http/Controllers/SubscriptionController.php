@@ -14,6 +14,7 @@ class SubscriptionController extends Controller
 {
     public function update(Request $request)
     {
+        //Покупка Дополнительных Доставок
         if($request->input_dop == 1) {
             $subscription = Subscription::find($request->id);
             $subscription->extra_deliveries_total += $request->dop_quantity;
@@ -48,11 +49,15 @@ class SubscriptionController extends Controller
             return response()->json(['status' => true, 'msg' => 'Дополнительные доставки успешно куплены.']);
         }
 
+        //Изменение числа доставок в будущей подписке
         $last_subscription = Subscription::where('user_id', $request->user_id)
 //                ->where('is_free', '0')
                 ->orderBy('end_subscription', 'desc')->first();
 
         if($last_subscription->start_subscription > Carbon::now()) {
+            if($last_subscription->created_at != $last_subscription->updated_at) {
+                return response()->json(['status' => false, 'msg' => 'Вы не можете изменять условия подписки более одного раза.']);
+            }
             $invoice = $last_subscription->invoices()->where('last_pay_day', $last_subscription->start_subscription)->first();
             if(!$invoice->is_paid) {
                 $last_subscription->current_quantity = $request->current_quantity;
