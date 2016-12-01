@@ -44,13 +44,31 @@ class OrderController extends BaseController
         $user = Auth::user();
         $date = Carbon::now('Europe/Moscow');
         $orderNow = true;
-        if($date->hour >= 20){
-            $orderNow = false;
-        }
+        
         $shop = session('shop');
-        $orderDate = substr($date->addHour(), 0, -3);
+        
+        switch($shop){
+            case 'Me':$orderDate = substr($date->addHours(3), 0, -3);
+                $date->subHours(3);
+                if($date->hour >= 20||$date->hour<9){
+                    $orderNow = false;
+                }
+                break;
+            case 'La': $orderDate = substr($date->addHours(3), 0, -3);
+                $date->subHours(3);
+                if($date->hour >= 20||$date->hour<10){
+                    $orderNow = false;
+                }
+                break;
+            default : $orderDate = substr($date->addHour(), 0, -3);
+                $date->subHour();
+                if($date->hour >= 22||$date->hour<9){
+                    $orderNow = false;
+                }
+                break;
+        }
         if($shop == 'Me'){
-            $orderDate = substr($date->addHours(3), 0, -3);
+            
         }
         return view('order', [
             'user' => $user, 
