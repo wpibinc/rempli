@@ -68,7 +68,7 @@ class UserController extends Controller
                 }
             }
         }
-        $orders = Order::where('user_id', $user->id)->simplePaginate(15);
+        $orders = Order::where('user_id', $user->id)->orderBy('created_at', 'DESC')->simplePaginate(15);
         $shop = session('shop')?session('shop'):'Av';
         $listProducts = ListProduct::where('user_id', $user->id)
                 ->where('shop', $shop)
@@ -172,7 +172,8 @@ class UserController extends Controller
             foreach($items as $item){
                 $item->getRelations();
                 if($item->product){
-                    $output .= '<div class="item"><div class="info"><span class="title">'.$item->product->product_name.'</span><span class="count">'.$item->count.' шт</span><spav class="price">'.$item->product->price.'</span></div><div class="img"><img src="'.$item->product->img.'"></div></div>';
+                    $img = $item->product->img?$item->product->img:$item->product->image;
+                    $output .= '<div class="item"><div class="info"><span class="title">'.$item->product->product_name.'</span><span class="count">'.$item->count.' шт</span><spav class="price">'.$item->product->price.'</span></div><div class="img"><img src="'.$img.'"></div></div>';
                     
                 }
                 if($item->avproduct){

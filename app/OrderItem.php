@@ -17,7 +17,14 @@ class OrderItem extends Model
 
     public function product()
     {
-        return $this->hasOne('App\Product', 'id', 'objectId');
+        $shop = $this->order->shop;
+        switch($shop){
+            case 'Me': return $this->hasOne('App\MeProduct', 'id', 'objectId');
+                break;
+            case 'La': return $this->hasOne('App\LaProduct', 'id', 'objectId');
+                break;
+            default: return $this->hasOne('App\Product', 'id', 'objectId');
+        }
     }
 
     public function avproduct()
