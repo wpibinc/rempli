@@ -55,9 +55,6 @@ class SubscriptionController extends Controller
                 ->orderBy('end_subscription', 'desc')->first();
 
         if($last_subscription->start_subscription > Carbon::now()) {
-            if($last_subscription->created_at != $last_subscription->updated_at) {
-                return response()->json(['status' => false, 'msg' => 'Вы не можете изменять условия подписки более одного раза.']);
-            }
             $invoice = $last_subscription->invoices()->where('last_pay_day', $last_subscription->start_subscription)->first();
             if(!$invoice->is_paid) {
                 $last_subscription->current_quantity = $request->current_quantity;
