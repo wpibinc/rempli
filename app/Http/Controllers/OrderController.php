@@ -167,21 +167,21 @@ class OrderController extends BaseController
 //            return ['ok'];
 //        }
 
-//        $apiId = 'BAFD72FC-2E9F-6C9F-77BF-4F2BDEEBD21F';
-//
-//        $client = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
-//        $phone = '89645805819';
-//        $text1 = "$name. Сумма заказа $cost руб.";
-//        $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text1);
-//        $client->smsSend($sms);
-//
-//        $client2 = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
-//        $userPhone = $user->phone;
-//        $replace = [' ', '+7', '-', '(', ')'];
-//        $userPhone = '8'.str_replace($replace, '', $userPhone);
-//        $text2 = 'Ваш заказ на сумму '.$cost.' рублей принят. В ближайшее время мы свяжемся с Вами для подтверждения';
-//        $sms2 = new \Zelenin\SmsRu\Entity\Sms($userPhone, $text2);
-//        $client2->smsSend($sms2);
+        $apiId = 'BAFD72FC-2E9F-6C9F-77BF-4F2BDEEBD21F';
+
+        $client = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
+        $phone = '89645805819';
+        $text1 = "$name. Сумма заказа $cost руб.";
+        $sms = new \Zelenin\SmsRu\Entity\Sms($phone, $text1);
+        $client->smsSend($sms);
+
+        $client2 = new \Zelenin\SmsRu\Api(new \Zelenin\SmsRu\Auth\ApiIdAuth($apiId));
+        $userPhone = $user->phone;
+        $replace = [' ', '+7', '-', '(', ')'];
+        $userPhone = '8'.str_replace($replace, '', $userPhone);
+        $text2 = 'Ваш заказ на сумму '.$cost.' рублей принят. В ближайшее время мы свяжемся с Вами для подтверждения';
+        $sms2 = new \Zelenin\SmsRu\Entity\Sms($userPhone, $text2);
+        $client2->smsSend($sms2);
 
         session(['orderSuccess' => true]);
         return redirect('/');
