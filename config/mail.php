@@ -54,8 +54,7 @@ return [
     | used globally for all e-mails that are sent by your application.
     |
     */
-
-    'from' => ['address' => 'snow.johnsnow2017@yandex.ru', 'name' => 'Admin'],
+    'from' => ['address' => env('MAIL_FROM_ADDRESS', null), 'name' => env('MAIL_FROM_NAME', null)],
 
     /*
     |--------------------------------------------------------------------------
