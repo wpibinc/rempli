@@ -70,7 +70,7 @@
 <div class="popup-oplata-false-bg"></div>
 <header class="header">
     <div class="topline col-md-12">
-        <a href="/" class="logo"><img src="img/first.png" alt="rempli"></a>
+        <a href="/" class="logo"><img src="/img/first.png" alt="rempli"></a>
         @if((\Auth::user()&&\Auth::user()->isAdmin())||(isset($subscription) && $subscription))
 
         <form id='change-shop-form' action="/" method="get">
@@ -94,7 +94,7 @@
         </form>
         @endif
         <a href="#" id="dd_btn">
-            <button class="cart-btn"><img src="img/cart.png">Корзина <span id="cart-number">0</span></button>
+            <button class="cart-btn"><img src="/img/cart.png">Корзина <span id="cart-number">0</span></button>
         </a>
         @if(Auth::user())
 <!--            <a href="/logout" class="login">Выход </a>-->
@@ -210,9 +210,9 @@
 
 
 <footer class="col-md-12 col-xs-12 col-sm-12 navbar-bottom">
-    <a href="#" class="logo col-md-1 col-sm-3 col-xs-4"><img src="img/first.png" alt="rempli"></a>
+    <a href="#" class="logo col-md-1 col-sm-3 col-xs-4"><img src="/img/first.png" alt="rempli"></a>
     <div class="col-md-10 col-sm-6 col-xs-4 text-center"><span class="footer-copy">{{ Config('rempli.copyright') }}</span> </div>
-    <a href="#" class="col-md-1 col-sm-3 col-xs-4"><img src="img/av5.png" alt="rempli"></a>
+    <a href="#" class="col-md-1 col-sm-3 col-xs-4"><img src="/img/av5.png" alt="rempli"></a>
 </footer>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/cart.js"></script>
