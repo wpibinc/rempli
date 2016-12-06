@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME', 'rempli'),
+    'username' => env('MAIL_USERNAME', 'snow.johnsnow2017@yandex.ru'),
 
     /*
     |--------------------------------------------------------------------------
