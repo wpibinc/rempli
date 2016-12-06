@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.yandex.ua'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT', 465),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     | used globally for all e-mails that are sent by your application.
     |
     */
-    'from' => ['address' => env('MAIL_FROM_ADDRESS', null), 'name' => env('MAIL_FROM_NAME', null)],
+    'from' => ['address' => env('MAIL_FROM_ADDRESS', 'snow.johnsnow2017@yandex.ru'), 'name' => env('MAIL_FROM_NAME', 'rempli')],
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => env('MAIL_USERNAME', 'rempli'),
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env('MAIL_PASSWORD', 'winteriscomming'),
 
     /*
     |--------------------------------------------------------------------------
