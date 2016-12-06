@@ -174,7 +174,8 @@ class UserController extends Controller
                 $item->getRelations();
                 if($item->product){
                     $img = $item->product->img?$item->product->img:$item->product->image;
-                    $output .= '<div class="item"><div class="info"><span class="title">'.$item->product->product_name.'</span><span class="count">'.$item->count.' шт</span><spav class="price">'.$item->product->price.'</span></div><div class="img"><img src="'.$img.'"></div></div>';
+                    $name = $item->product->product_name?$item->product->product_name:$item->product->name;
+                    $output .= '<div class="item"><div class="info"><span class="title">'.$name.'</span><span class="count">'.$item->count.' шт</span><spav class="price">'.$item->product->price.'</span></div><div class="img"><img src="'.$img.'"></div></div>';
                     
                 }
                 if($item->avproduct){
